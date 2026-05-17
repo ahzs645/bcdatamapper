@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+.env
+.env.local
+.env.*.local
+*.log
+__pycache__/
+*.py[cod]
+build/
+dist/
+public/data/census/variables/
+public/data/bc-assessment/
+public/data/canue/bc/annual/*.csv
+public/data/canue/bc/parquet-experiment/
+healthspace_response.html
+healthspace_debug.html
