@@ -12,6 +12,38 @@ scripts, writes app-ready outputs to:
 
 Set `PGMAPS_ROOT=/path/to/PGMaps` to target a different PGMaps checkout.
 
+## Scraper Catalog
+
+These commands are run from this repo, or through PGMaps' delegated `npm run`
+commands. Unless noted otherwise, outputs are written into the target PGMaps
+checkout under `public/data`.
+
+| Area | Commands | Source | Main outputs |
+| --- | --- | --- | --- |
+| City of Prince George base layers | `citypg:sync` | City of Prince George ArcGIS services | `public/data/citypg/` |
+| ICBC crashes | `icbc:sync` | ICBC Tableau crash workbook/data endpoints | `public/data/icbc/` |
+| Heat and shade | `heat-shade:sync` | CityPG tree, park, forest, facility, and Landsat-related sources | `public/data/heat-shade/` |
+| BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
+| BC freshwater watersheds | `watersheds:sync`, `watersheds:dev` | BC Freshwater Atlas / watershed geospatial sources | `public/data/boundaries/BCFWA/` |
+| BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
+| BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
+| BC drought | `drought:sync`, `drought:canonical` | BC drought region/status feeds | `public/data/drought/` |
+| BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
+| BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
+| Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
+| CIMD | `cimd:sync` | Canadian Index of Multiple Deprivation data joined to local census boundaries | `public/data/cimd/` |
+| CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:app-catalog`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
+| Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
+| BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `public/data/bc-assessment/` |
+| Northern Health food inspection data | `food-health:refresh`, `food-health:geocode` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `public/data/restaurants.json` |
+| Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap` | CityPG layers, ICBC crashes, transit stops, and supplemental walkability inputs | `public/data/walkability/` |
+
+Scraper-related documentation lives in `docs/`:
+
+- CANUE source inventory, map-layer plans, and preview images.
+- DriveBC event normalization and strict bridge definitions.
+- BC River Forecast Centre flood-advisory normalization and strict bridge definitions.
+
 ## CANUE BC Extracts
 
 CANUE archives should stay outside the repo. The sync script reads the local Google Drive
