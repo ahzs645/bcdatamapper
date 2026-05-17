@@ -2,7 +2,13 @@
 set -euo pipefail
 
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-pgmaps_root="${PGMAPS_ROOT:-${repo_dir}/../PGMaps}"
+if [[ -n "${PGMAPS_ROOT:-}" ]]; then
+  pgmaps_root="$PGMAPS_ROOT"
+elif [[ -f "${repo_dir}/../../package.json" ]] && grep -q '"name": "pgmaps"' "${repo_dir}/../../package.json"; then
+  pgmaps_root="${repo_dir}/../.."
+else
+  pgmaps_root="${repo_dir}/../PGMaps"
+fi
 
 if [[ $# -lt 1 ]]; then
   echo "Usage: $0 <command> [args...]" >&2
