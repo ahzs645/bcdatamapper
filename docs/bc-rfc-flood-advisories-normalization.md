@@ -2,7 +2,7 @@
 
 Source pipeline: `npm run flood:sync`
 
-Primary script: `datascrapers/sync-bc-rfc-flood-advisories.mjs`
+Primary script: `datascrapers/bc/flood/sync-bc-rfc-flood-advisories.mjs`
 
 Outputs:
 
@@ -17,7 +17,7 @@ Outputs:
 The BC River Forecast Centre does not expose a complete public archive index for `/warnings/advisories/`; directory listing is blocked. The sync process therefore uses multiple reproducible discovery methods:
 
 1. Current warning index: `https://bcrfc.env.gov.bc.ca/warnings/index.htm`
-2. Maintained seed file: `datascrapers/flood-advisory-seeds.txt`
+2. Maintained seed file: `datascrapers/bc/flood/flood-advisory-seeds.txt`
 3. Legacy numbered probes: `flood_N.htm`, `flood_NNN.htm`
 4. Legacy year-number probes: `flood_YYYY_NNN.htm`
 5. Internet Archive CDX patterns for old BC RFC advisory URLs
@@ -158,7 +158,7 @@ npm run flood:sync
 If new advisories are discovered manually or through search, add them to:
 
 ```text
-datascrapers/flood-advisory-seeds.txt
+datascrapers/bc/flood/flood-advisory-seeds.txt
 ```
 
 Then rerun `npm run flood:sync`. The script dedupes advisories by issued timestamp and normalized title while preserving duplicate source URLs in `duplicateUrls`.

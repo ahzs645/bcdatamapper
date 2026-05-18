@@ -4,8 +4,8 @@ Merge BC Assessment parcel geometries with property data from CSVs,
 then spatial-join each property to configured study-area boundaries.
 
 Input:
-  - datascrapers/bc-assessment-source/prince_george_parcels.geojson  (30K parcel polygons)
-  - datascrapers/bc-assessment-source/prince_george_full.csv          (assessment + detail data)
+  - datascrapers/bc/assessment/source/prince_george_parcels.geojson  (30K parcel polygons)
+  - datascrapers/bc/assessment/source/prince_george_full.csv          (assessment + detail data)
   - public/data/census/prince_george_{ct,da,db}.geo.json         (census boundaries)
   - public/data/boundaries/*                                     (health, school, regional, watershed boundaries)
 
@@ -28,7 +28,7 @@ from shapely.strtree import STRtree
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.environ.get("PGMAPS_ROOT", os.path.dirname(SCRIPT_DIR)))
 
-SOURCE_DIR = os.path.join(SCRIPT_DIR, "bc-assessment-source")
+SOURCE_DIR = os.path.join(SCRIPT_DIR, "source")
 
 GEOJSON_PATH = os.path.join(SOURCE_DIR, "prince_george_parcels.geojson")
 CSV_PATH = os.path.join(SOURCE_DIR, "prince_george_full.csv")

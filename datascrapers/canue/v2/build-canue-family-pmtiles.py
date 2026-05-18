@@ -78,7 +78,7 @@ class SourceMatch:
 
 
 def load_v1_module():
-    path = Path(__file__).with_name("build-canue-map-layer.py")
+    path = Path(__file__).parent.parent / "build-canue-map-layer.py"
     spec = importlib.util.spec_from_file_location("canue_map_layer", path)
     if spec is None or spec.loader is None:
         raise SystemExit(f"Could not load {path}")

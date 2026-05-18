@@ -32,7 +32,7 @@ checkout under `public/data`.
 | BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
 | CIMD | `cimd:sync` | Canadian Index of Multiple Deprivation data joined to local census boundaries | `public/data/cimd/` |
-| CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:app-catalog`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
+| CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
 | Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
 | BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `public/data/bc-assessment/` |
 | Northern Health food inspection data | `food-health:refresh`, `food-health:geocode` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `public/data/restaurants.json` |
@@ -73,12 +73,12 @@ available year from each annual archive. Override the source or year selection w
 
 ```bash
 PG_CANUE_DIR="/path/to/Canue" npm run canue:bc:sync
-node datascrapers/sync-canue-bc.mjs --years 2016,2019,2021
-node datascrapers/sync-canue-bc.mjs --all-years
-node datascrapers/sync-canue-bc.mjs --all-years --cadence both --source "/path/to/2026 pull"
-node datascrapers/sync-canue-bc.mjs --all-years --cadence monthly --gzip true --source "/path/to/2026 pull"
-node datascrapers/sync-canue-bc.mjs --all-years --cadence both --include "pm25dal*,aqsmk_*"
-node datascrapers/sync-canue-bc.mjs --boundary-path none
+node datascrapers/canue/sync-canue-bc.mjs --years 2016,2019,2021
+node datascrapers/canue/sync-canue-bc.mjs --all-years
+node datascrapers/canue/sync-canue-bc.mjs --all-years --cadence both --source "/path/to/2026 pull"
+node datascrapers/canue/sync-canue-bc.mjs --all-years --cadence monthly --gzip true --source "/path/to/2026 pull"
+node datascrapers/canue/sync-canue-bc.mjs --all-years --cadence both --include "pm25dal*,aqsmk_*"
+node datascrapers/canue/sync-canue-bc.mjs --boundary-path none
 ```
 
 The uncompressed generated CSVs under `public/data/canue/bc/annual/` are local
@@ -95,16 +95,16 @@ refreshed from the current `bcassessment.ca` ArcGIS layer for Prince George
 jurisdiction `226`.
 
 ```bash
-pip install -r datascrapers/bc-assessment-requirements.txt
+pip install -r datascrapers/bc/assessment/requirements.txt
 npm run bc-assessment:build
 npm run bc-assessment:refresh
 ```
 
-The refresh command updates `datascrapers/bc-assessment-source/prince_george_parcels.geojson`
+The refresh command updates `datascrapers/bc/assessment/source/prince_george_parcels.geojson`
 and then rebuilds `public/data/bc-assessment/parcels.geojson`. It converts Esri
 polygon rings into valid GeoJSON `Polygon`/`MultiPolygon` geometries and applies
 a Shapely validity repair fallback for self-intersections. The detail CSV remains
-`datascrapers/bc-assessment-source/prince_george_full.csv`; the live map layer does not
+`datascrapers/bc/assessment/source/prince_george_full.csv`; the live map layer does not
 include every detail field used by the app.
 
 ## Food Safety Data

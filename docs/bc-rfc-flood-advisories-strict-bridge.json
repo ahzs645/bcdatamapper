@@ -3,7 +3,7 @@
   "title": "BC River Forecast Centre Flood Advisories Bridge",
   "version": 1,
   "generatedFrom": {
-    "script": "datascrapers/sync-bc-rfc-flood-advisories.mjs",
+    "script": "datascrapers/bc/flood/sync-bc-rfc-flood-advisories.mjs",
     "command": "npm run flood:sync",
     "primaryOutput": "public/data/flood/advisories.json",
     "manifest": "public/data/flood/manifest.json"

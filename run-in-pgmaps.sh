@@ -27,5 +27,6 @@ for arg in "$@"; do
   esac
 done
 
+export PGMAPS_ROOT="$pgmaps_root"
 cd "$pgmaps_root"
 exec "${resolved[@]}"

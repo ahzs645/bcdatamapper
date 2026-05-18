@@ -25,7 +25,7 @@ from shapely.geometry import GeometryCollection, MultiPolygon, Polygon, mapping
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.environ.get("PGMAPS_ROOT", os.path.dirname(SCRIPT_DIR)))
-SOURCE_DIR = os.path.join(SCRIPT_DIR, "bc-assessment-source")
+SOURCE_DIR = os.path.join(SCRIPT_DIR, "source")
 DEFAULT_OUTPUT = os.path.join(SOURCE_DIR, "prince_george_parcels.geojson")
 BUILD_SCRIPT = os.path.join(SCRIPT_DIR, "build-bc-assessment.py")
 

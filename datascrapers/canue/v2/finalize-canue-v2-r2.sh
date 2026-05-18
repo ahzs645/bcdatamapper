@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 OUTPUT_DIR="${OUTPUT_DIR:-/Volumes/Main/canue-pmtiles-bc-v2}"
 PLAN="${PLAN:-docs/canue-map-layer-plan-bc.json}"
 V1_OUTPUT_DIR="${V1_OUTPUT_DIR:-/Volumes/Main/canue-pmtiles-bc}"
@@ -9,14 +11,14 @@ R2_BUCKET="${R2_BUCKET:-maps}"
 R2_PREFIX="${R2_PREFIX:-canue/pmtiles-v2}"
 AWS_PROFILE="${AWS_PROFILE:-r2}"
 
-python3 datascrapers/build-canue-v2-app-catalog.py \
+python3 "$SCRIPT_DIR/build-canue-v2-app-catalog.py" \
   --output-dir "$OUTPUT_DIR" \
   --plan "$PLAN" \
   --v1-output-dir "$V1_OUTPUT_DIR" \
   --view bc \
   --mode grid
 
-python3 datascrapers/validate-canue-v2-catalog.py \
+python3 "$SCRIPT_DIR/validate-canue-v2-catalog.py" \
   --catalog "$OUTPUT_DIR/canue-bc-grid-v2-app-catalog.json" \
   --output-dir "$OUTPUT_DIR" \
   --inspect-tiles

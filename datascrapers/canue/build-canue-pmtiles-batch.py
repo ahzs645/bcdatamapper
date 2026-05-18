@@ -193,7 +193,7 @@ def build_layer(layer: dict, args: argparse.Namespace) -> dict:
 
     command = [
         sys.executable,
-        "datascrapers/build-canue-map-layer.py",
+        str(Path(__file__).with_name("build-canue-map-layer.py")),
         "--source-dir", args.source_dir,
         "--dataset", layer["dataset"],
         "--year", str(layer["year"]),

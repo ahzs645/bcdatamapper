@@ -3,7 +3,7 @@
 Process raw census all_vectors data into compact per-category data files
 for the PGMaps web application.
 
-Reads from: datascrapers/census-source/
+Reads from: datascrapers/census/source/
 Writes to:  public/data/census/variables/
 
 Output structure:
@@ -22,9 +22,9 @@ from pathlib import Path
 # Paths
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = Path(os.environ.get("PGMAPS_ROOT", SCRIPT_DIR.parent)).resolve()
-SOURCE_DIR = SCRIPT_DIR / "census-source"
+SOURCE_DIR = SCRIPT_DIR / "source"
 OUTPUT_DIR = PROJECT_ROOT / "public" / "data" / "census" / "variables"
-CATEGORIES_FILE = SCRIPT_DIR / "census_categories.json"
+CATEGORIES_FILE = SCRIPT_DIR / "categories.json"
 
 LEVELS = ["cd", "csd", "ct", "da", "db"]
 LEVEL_CSV_FILES = {
