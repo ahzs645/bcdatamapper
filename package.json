@@ -19,6 +19,8 @@
     "range-tenures:sync": "./run-in-pgmaps.sh node datascrapers/bc/tenures/sync-bc-range-tenures.mjs",
     "mineral-tenures:sync": "./run-in-pgmaps.sh node datascrapers/bc/tenures/sync-bc-mineral-tenures.mjs",
     "wars:sync": "./run-in-pgmaps.sh python3 datascrapers/bc/wars/sync-bc-wars.py",
+    "cell-coverage:sync": "./run-in-pgmaps.sh node datascrapers/cell-coverage/sync-cell-coverage.mjs",
+    "network-availability:sync": "./run-in-pgmaps.sh node datascrapers/network-availability/sync-network-availability.mjs",
     "cimd:sync": "./run-in-pgmaps.sh node datascrapers/cimd/sync-cimd.mjs",
     "canue:bc:sync": "./run-in-pgmaps.sh node datascrapers/canue/sync-canue-bc.mjs",
     "canue:bc:sync:all-years": "./run-in-pgmaps.sh node datascrapers/canue/sync-canue-bc.mjs --all-years true",

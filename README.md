@@ -31,6 +31,8 @@ checkout under `public/data`.
 | BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
 | BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
+| Canada cell coverage tile sources | `cell-coverage:sync` | Rogers, TELUS, Bell, Videotron, and Freedom Mobile public coverage maps | `public/data/cell-coverage/manifest.json` |
+| Canada network availability | `network-availability:sync` | CRTC, NRCan, ISED, and carrier coverage-map API findings | `public/data/network-availability/manifest.json` |
 | CIMD | `cimd:sync` | Canadian Index of Multiple Deprivation data joined to local census boundaries | `public/data/cimd/` |
 | CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
 | Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
@@ -43,6 +45,45 @@ Scraper-related documentation lives in `docs/`:
 - CANUE source inventory, map-layer plans, and preview images.
 - DriveBC event normalization and strict bridge definitions.
 - BC River Forecast Centre flood-advisory normalization and strict bridge definitions.
+- Canada network availability source inventory and carrier vector/raster findings.
+
+## Canada Network Availability
+
+Use `network-availability:sync` for the vector-first inventory shown in the PGMaps
+MISC Network tab. It does not bulk-download the source archives; it records direct
+download/API URLs, HTTP size/date metadata, geometry type, and usage notes.
+
+```bash
+npm run network-availability:sync
+```
+
+The best map-availability sources are CRTC/NRCan vector packages, not most
+carrier web maps:
+
+| Dataset | Direct source | Size | Format |
+| --- | --- | ---: | --- |
+| 5G Coverage | `https://web.crtc.gc.ca/cartovista/5GOverYearsYE2024_Src/5GOverYears_DL_V1.zip` | 2.5 MB | KML + MapInfo polygons |
+| LTE Coverage | `https://web.crtc.gc.ca/cartovista/LTEOverTheYearsYE2024_Src/LTEOverTheYears_DL_V1.zip` | 9.2 MB | KML + MapInfo polygons |
+| LTE Providers | `https://web.crtc.gc.ca/cartovista/LTEProviderCountYE2024_Src/LTEProviderCount_DL_V1.zip` | 2.4 MB | KML + MapInfo polygons |
+| LTE Road Coverage | `https://web.crtc.gc.ca/cartovista/RoadsWithAndWithoutLTE_src/LTERoadsYE2024.zip` | 23.8 MB | KML + MapInfo lines |
+
+Supporting sources:
+
+- CRTC mobile/broadband availability CSV ZIP:
+  `https://applications.crtc.gc.ca/OpenData/CASP/COMMUNICATION%20MONITORING%20REPORTS/Telecommunications%20Overview/English/data-mobile-and-broadband-availability.zip`.
+- NRCan/Open Canada Wireless Data Network FGDB:
+  `https://ftp.maps.canada.ca/pub/nrcan_rncan/Geographical-maps_Carte-geographique/Wireless_Data_Network-Reseau_de_donnees_sans_fil/AtlasofCanada_Communications_AtlasduCanada.gdb.zip`.
+- NRCan Esri REST layer:
+  `https://maps-cartes.services.geo.ca/server_serveur/rest/services/NRCan/Wireless_Data_Network_Reseau_donnees_sans_fil/MapServer/0`.
+- ISED terrestrial spectrum licence site data:
+  `https://www.ic.gc.ca/engineering/SMS_TAFL_Files/Site_Data_Extract_FX.zip`.
+
+Carrier API finding: TELUS exposes public CARTO MVT coverage tiles that can be
+converted to GeoJSON/PMTiles for TELUS-specific coverage. Rogers, Bell,
+Videotron, and Freedom public maps expose raster PNG tiles in the inspected apps,
+not clean bulk vector coverage polygons. For those carriers, use CRTC/NRCan for
+national vector availability and keep carrier pages as source links or raster tile
+metadata unless approximate raster tracing is explicitly acceptable.
 
 ## CANUE BC Extracts
 
