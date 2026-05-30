@@ -1,0 +1,278 @@
+import { pathToFileURL } from 'node:url'
+import { countBy, fetchJson, OUTPUT_ROOT, slug, writeJson } from './lib/shared.mjs'
+
+export const CITYPG_BUSINESS_LAYER =
+  'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/Business_License/FeatureServer/0'
+
+export const OVERPASS_URL = 'https://overpass-api.de/api/interpreter'
+
+const OSM_POI_QUERY = `[out:json][timeout:45];
+area["name"="Prince George"]["boundary"="administrative"]->.a;
+(
+  nwr(area.a)[shop];
+  nwr(area.a)[amenity~"^(restaurant|cafe|fast_food|bank|pharmacy|post_office|library|fuel|marketplace|clinic|dentist|doctors|pub|bar)$"];
+  nwr(area.a)[office];
+  nwr(area.a)[craft];
+);
+out tags center qt;`
+
+async function fetchBusinessLicences() {
+  const all = []
+  let offset = 0
+  const pageSize = 1000
+
+  while (true) {
+    const params = new URLSearchParams({
+      where: '1=1',
+      outFields: 'LicenceNumber,DateFrom,DateTo,TradeName,LicenceDesc,LicenceCategory,Unit,Address,StreeName',
+      returnGeometry: 'false',
+      f: 'json',
+      resultRecordCount: String(pageSize),
+      resultOffset: String(offset),
+    })
+    const data = await fetchJson(`${CITYPG_BUSINESS_LAYER}/query?${params.toString()}`)
+    const features = data.features ?? []
+    all.push(...features.map((feature) => feature.attributes ?? {}))
+    if (features.length < pageSize) break
+    offset += features.length
+  }
+
+  return all
+}
+
+async function fetchOsmPois() {
+  const body = new URLSearchParams({ data: OSM_POI_QUERY })
+  const data = await fetchJson(OVERPASS_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body,
+  })
+  return data.elements ?? []
+}
+
+function normalizeBusinessName(value) {
+  return slug(value)
+    .replace(/\b(ltd|limited|inc|corp|corporation|co|company|the|canada|bc|b-c)\b/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function classifyBusiness(row) {
+  const text = `${row.TradeName ?? ''} ${row.LicenceDesc ?? ''} ${row.LicenceCategory ?? ''}`.toLowerCase()
+  const category = String(row.LicenceCategory ?? '').toLowerCase()
+  const desc = String(row.LicenceDesc ?? '').toLowerCase()
+
+  if (/\bout of town\b|home business/.test(category)) {
+    return { category: 'excluded_non_access_poi', healthyFood: false, retailServices: false, confidence: 'low' }
+  }
+
+  if (/\b(grocery|supermarket|farmers? market|produce|greengrocer|health food|food market)\b/.test(text)) {
+    return { category: 'healthy_food_outlet', healthyFood: true, retailServices: true, confidence: 'medium' }
+  }
+
+  if (/\b(convenience store|pharmacy|retail|restaurant|coffee|cafe|deli|bank|financial|salon|barber|laund|library|medical|dental|travel agency|hotel|motel)\b/.test(text)) {
+    return { category: 'retail_service', healthyFood: false, retailServices: true, confidence: 'medium' }
+  }
+
+  if (/commercial retail|commercial service|banks and other financial|restaurant/.test(category)) {
+    return { category: 'retail_service_candidate', healthyFood: false, retailServices: true, confidence: 'low' }
+  }
+
+  if (/warehouse|wholesale|manufacturing|contractor|transportation depot|truck|rail terminal|industrial|storage/.test(desc) || /warehousing|wholesale|manufacturing|contractor/.test(category)) {
+    return { category: 'excluded_industrial_business', healthyFood: false, retailServices: false, confidence: 'medium' }
+  }
+
+  return { category: 'unclassified_business', healthyFood: false, retailServices: false, confidence: 'low' }
+}
+
+function classifyOsm(tags) {
+  const shop = tags.shop
+  const amenity = tags.amenity
+  const office = tags.office
+  const craft = tags.craft
+
+  if (['supermarket', 'greengrocer', 'health_food'].includes(shop) || amenity === 'marketplace') {
+    return { category: 'healthy_food_outlet', healthyFood: true, retailServices: true, confidence: 'high' }
+  }
+  if (['convenience', 'bakery', 'butcher', 'seafood', 'deli', 'department_store'].includes(shop)) {
+    return { category: 'food_or_household_retail', healthyFood: false, retailServices: true, confidence: 'high' }
+  }
+  if (shop || craft || office || ['restaurant', 'cafe', 'fast_food', 'bank', 'pharmacy', 'post_office', 'library', 'fuel', 'clinic', 'dentist', 'doctors', 'pub', 'bar'].includes(amenity)) {
+    return { category: 'retail_service', healthyFood: false, retailServices: true, confidence: 'high' }
+  }
+  return { category: 'unclassified_osm_poi', healthyFood: false, retailServices: false, confidence: 'low' }
+}
+
+function addressText(row) {
+  return [row.Unit, row.Address, row.StreeName].filter((part) => part != null && part !== '').join(' ')
+}
+
+function findBusinessMatches(osmFeature, businessRowsByName) {
+  const normalized = normalizeBusinessName(osmFeature.properties.name)
+  if (!normalized) return []
+  const exact = businessRowsByName.get(normalized) ?? []
+  if (exact.length) return exact
+
+  const tokens = normalized.split('-').filter((token) => token.length > 2)
+  if (!tokens.length) return []
+  const candidates = []
+  for (const [key, rows] of businessRowsByName) {
+    const keyTokens = key.split('-')
+    const overlap = tokens.filter((token) => keyTokens.includes(token)).length
+    if (overlap >= Math.min(2, tokens.length)) candidates.push(...rows)
+  }
+  return candidates.slice(0, 5)
+}
+
+function buildOsmFeature(element, index, businessRowsByName) {
+  const tags = element.tags ?? {}
+  const latitude = element.lat ?? element.center?.lat
+  const longitude = element.lon ?? element.center?.lon
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null
+
+  const classification = classifyOsm(tags)
+  const properties = {
+    id: `osm-${element.type}-${element.id}`,
+    source: 'openstreetmap_overpass',
+    name: tags.name ?? `${tags.shop ?? tags.amenity ?? tags.office ?? tags.craft ?? 'POI'} ${index + 1}`,
+    category: classification.category,
+    healthyFoodOutlet: classification.healthyFood,
+    retailService: classification.retailServices,
+    classificationConfidence: classification.confidence,
+    osmType: element.type,
+    osmId: element.id,
+    osmTags: tags,
+  }
+  const feature = {
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [longitude, latitude] },
+    properties,
+  }
+  const cityMatches = findBusinessMatches(feature, businessRowsByName)
+  if (cityMatches.length) {
+    feature.properties.citypgBusinessMatches = cityMatches.map((row) => ({
+      licenceNumber: row.LicenceNumber,
+      tradeName: row.TradeName,
+      licenceDescription: row.LicenceDesc,
+      licenceCategory: row.LicenceCategory,
+      address: addressText(row),
+      classification: classifyBusiness(row),
+    }))
+  }
+  return feature
+}
+
+function buildBusinessCandidate(row, index) {
+  const classification = classifyBusiness(row)
+  return {
+    id: `citypg-business-${row.LicenceNumber || index}`,
+    source: 'citypg_business_licence',
+    name: row.TradeName,
+    address: addressText(row),
+    licenceNumber: row.LicenceNumber,
+    licenceDescription: row.LicenceDesc,
+    licenceCategory: row.LicenceCategory,
+    dateFrom: row.DateFrom,
+    dateTo: row.DateTo,
+    ...classification,
+  }
+}
+
+export async function buildBusinessPois() {
+  const businessRows = await fetchBusinessLicences()
+  const osmElements = await fetchOsmPois()
+  const businessRowsByName = new Map()
+  const businessCandidates = businessRows.map(buildBusinessCandidate)
+
+  for (const row of businessRows) {
+    const key = normalizeBusinessName(row.TradeName)
+    if (!key) continue
+    businessRowsByName.set(key, [...(businessRowsByName.get(key) ?? []), row])
+  }
+
+  const features = osmElements
+    .map((element, index) => buildOsmFeature(element, index, businessRowsByName))
+    .filter(Boolean)
+
+  const matchedLicenceNumbers = new Set(
+    features.flatMap((feature) =>
+      (feature.properties.citypgBusinessMatches ?? []).map((match) => match.licenceNumber).filter(Boolean),
+    ),
+  )
+  const usefulBusinessCandidates = businessCandidates.filter(
+    (candidate) =>
+      candidate.healthyFood ||
+      candidate.retailServices ||
+      ['healthy_food_outlet', 'retail_service', 'retail_service_candidate', 'food_or_household_retail'].includes(
+        candidate.category,
+      ),
+  )
+
+  return {
+    collection: {
+      type: 'FeatureCollection',
+      features,
+    },
+    businessLicencesAll: businessCandidates,
+    businessCandidates: usefulBusinessCandidates,
+    sourceStats: {
+      citypgBusinessLicence: {
+        url: CITYPG_BUSINESS_LAYER,
+        totalRows: businessRows.length,
+        usefulCandidateRows: usefulBusinessCandidates.length,
+        matchedToOsmByName: matchedLicenceNumbers.size,
+      },
+      openStreetMapOverpass: {
+        url: OVERPASS_URL,
+        totalElements: osmElements.length,
+        mappedPointFeatures: features.length,
+      },
+    },
+  }
+}
+
+export async function syncCityPgBusiness() {
+  const business = await buildBusinessPois()
+  await writeJson(`${OUTPUT_ROOT}/business_pois.geojson`, business.collection)
+  await writeJson(`${OUTPUT_ROOT}/business_licences_all.json`, business.businessLicencesAll)
+  await writeJson(`${OUTPUT_ROOT}/business_candidates.json`, business.businessCandidates)
+  await writeJson(`${OUTPUT_ROOT}/business_manifest.json`, {
+    generatedAt: new Date().toISOString(),
+    coverage: 'Prince George, BC',
+    outputs: {
+      businessPois: '/data/healthyplan-pg/business_pois.geojson',
+      businessLicencesAll: '/data/healthyplan-pg/business_licences_all.json',
+      businessCandidates: '/data/healthyplan-pg/business_candidates.json',
+    },
+    businessPois: {
+      ...business.sourceStats,
+      featureCount: business.collection.features.length,
+      categoryCounts: countBy(business.collection.features, (feature) => feature.properties.category),
+      healthyFoodOutletCount: business.collection.features.filter((feature) => feature.properties.healthyFoodOutlet)
+        .length,
+      retailServiceCount: business.collection.features.filter((feature) => feature.properties.retailService).length,
+      note: 'OSM supplies point geometry/class tags. CityPG business licences supply authoritative local inventory and are bridged by normalized name where possible. All CityPG rows are preserved in business_licences_all.json; likely HealthyPlan-relevant rows are also copied to business_candidates.json for geocoding/audit.',
+    },
+    licenses: [
+      {
+        source: 'City of Prince George Business License',
+        license: 'City of Prince George Open Government Licence / source item terms',
+      },
+      {
+        source: 'OpenStreetMap Overpass',
+        license: 'Open Database Licence; attribution and derivative-database handling required',
+      },
+    ],
+  })
+  console.log(`Business POIs: ${business.collection.features.length}`)
+  console.log(`CityPG business licences: ${business.businessLicencesAll.length}`)
+  console.log(`Business candidates: ${business.businessCandidates.length}`)
+  return business
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  syncCityPgBusiness().catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+}

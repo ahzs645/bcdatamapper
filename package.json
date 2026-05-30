@@ -46,6 +46,9 @@
     "bc-assessment:refresh": "./run-in-pgmaps.sh python3 datascrapers/bc/assessment/refresh-bc-assessment.py",
     "food-health:refresh": "./run-in-pgmaps.sh python3 datascrapers/food-health/fetch_incremental.py --city \"Prince George\" --output public/data/restaurants.json --delay 5",
     "food-health:geocode": "./run-in-pgmaps.sh python3 datascrapers/food-health/geocode_restaurants.py --file public/data/restaurants.json --delay 1.5",
+    "healthyplan-pg:sync": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-healthyplan-pg.mjs",
+    "healthyplan-pg:sync:education": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-education.mjs",
+    "healthyplan-pg:sync:citypg-business": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-citypg-business.mjs",
     "walkability:build": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-web.mjs",
     "walkability:import-supplements": "./run-in-pgmaps.sh node datascrapers/walkability/import-walkability-supplements.mjs",
     "walkability:build-grid-heatmap": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-grid-heatmap.mjs"
