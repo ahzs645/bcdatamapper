@@ -46,6 +46,7 @@
     "bc-assessment:refresh": "./run-in-pgmaps.sh python3 datascrapers/bc/assessment/refresh-bc-assessment.py",
     "food-health:refresh": "./run-in-pgmaps.sh python3 datascrapers/food-health/fetch_incremental.py --city \"Prince George\" --output public/data/restaurants.json --delay 5",
     "food-health:geocode": "./run-in-pgmaps.sh python3 datascrapers/food-health/geocode_restaurants.py --file public/data/restaurants.json --delay 1.5",
+    "food-health:bc-geocoder-check": "./run-in-pgmaps.sh node datascrapers/food-health/check-bc-geocoder.mjs",
     "healthyplan-pg:sync": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-healthyplan-pg.mjs",
     "healthyplan-pg:sync:education": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-education.mjs",
     "healthyplan-pg:sync:citypg-business": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-citypg-business.mjs",

@@ -1,12 +1,18 @@
-import { readFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
+import {
+  bcAddressQuery,
+  bcGeocodeFeatureProperties,
+  BC_ADDRESS_GEOCODER_URL,
+  geocodeBcAddressQueries,
+  isAcceptedBcGeocode,
+  normalizeBcAddress,
+} from '../bc/geocoder/bc-address-geocoder.mjs'
 import { countBy, fetchJson, OUTPUT_ROOT, slug, writeJson } from './lib/shared.mjs'
 
 export const CITYPG_BUSINESS_LAYER =
   'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/Business_License/FeatureServer/0'
 
 export const OVERPASS_URL = 'https://overpass-api.de/api/interpreter'
-const BC_GEOCODER_URL = 'https://geocoder.api.gov.bc.ca/addresses.json'
 const BC_GEOCODER_CACHE = `${OUTPUT_ROOT}/business_bc_geocode_cache.json`
 const BC_GEOCODER_DELAY_MS = Number(process.env.BC_GEOCODER_DELAY_MS ?? 75)
 const BC_GEOCODER_MIN_SCORE = Number(process.env.BC_GEOCODER_MIN_SCORE ?? 75)
@@ -55,12 +61,6 @@ async function fetchOsmPois() {
   return data.elements ?? []
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
-
 function normalizeBusinessName(value) {
   return slug(value)
     .replace(/\b(ltd|limited|inc|corp|corporation|co|company|the|canada|bc|b-c)\b/g, '')
@@ -69,20 +69,7 @@ function normalizeBusinessName(value) {
 }
 
 function normalizeAddress(value) {
-  return String(value ?? '')
-    .toLowerCase()
-    .replace(/\b(avenue)\b/g, 'ave')
-    .replace(/\b(street)\b/g, 'st')
-    .replace(/\b(road)\b/g, 'rd')
-    .replace(/\b(boulevard)\b/g, 'blvd')
-    .replace(/\b(highway)\b/g, 'hwy')
-    .replace(/\b(north)\b/g, 'n')
-    .replace(/\b(south)\b/g, 's')
-    .replace(/\b(east)\b/g, 'e')
-    .replace(/\b(west)\b/g, 'w')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
+  return normalizeBcAddress(value)
 }
 
 function osmAddressText(tags) {
@@ -281,71 +268,24 @@ function buildOsmLocationMatches(businessCandidates, osmFeatures) {
   }
 }
 
-async function readJsonIfExists(filePath, fallback) {
-  try {
-    return JSON.parse(await readFile(filePath, 'utf8'))
-  } catch (error) {
-    if (error?.code === 'ENOENT') return fallback
-    throw error
-  }
-}
-
 function geocoderQueryForBusiness(business) {
-  const address = String(business.address ?? '').trim()
-  if (!address) return ''
-  return `${address}, Prince George, BC`
-}
-
-async function geocodeWithBcAddressGeocoder(query) {
-  const params = new URLSearchParams({
-    addressString: query,
-    locationDescriptor: 'accessPoint',
-    maxResults: '1',
-    minScore: String(BC_GEOCODER_MIN_SCORE),
-    outputSRS: '4326',
-    brief: 'false',
-    echo: 'true',
-  })
-  const data = await fetchJson(`${BC_GEOCODER_URL}?${params.toString()}`)
-  const feature = data.features?.[0]
-  if (!feature?.geometry?.coordinates || !feature?.properties) {
-    return {
-      query,
-      status: 'not_found',
-      geocodedAt: new Date().toISOString(),
-    }
-  }
-  return {
-    query,
-    status: 'matched',
-    geocodedAt: new Date().toISOString(),
-    geometry: {
-      type: 'Point',
-      coordinates: feature.geometry.coordinates,
-    },
-    properties: feature.properties,
-  }
+  return bcAddressQuery(business.address)
 }
 
 async function buildBcGeocodedLocations(businessCandidates) {
-  const cache = await readJsonIfExists(BC_GEOCODER_CACHE, {})
   const uniqueQueries = [...new Set(businessCandidates.map(geocoderQueryForBusiness).filter(Boolean))]
-  let requested = 0
-
-  for (const query of uniqueQueries) {
-    if (cache[query]) continue
-    cache[query] = await geocodeWithBcAddressGeocoder(query)
-    requested += 1
-    if (BC_GEOCODER_DELAY_MS > 0) await sleep(BC_GEOCODER_DELAY_MS)
-  }
+  const geocoded = await geocodeBcAddressQueries(uniqueQueries, {
+    cachePath: BC_GEOCODER_CACHE,
+    delayMs: BC_GEOCODER_DELAY_MS,
+    minScore: BC_GEOCODER_MIN_SCORE,
+  })
 
   const features = []
   for (const business of businessCandidates) {
     const query = geocoderQueryForBusiness(business)
-    const match = cache[query]
+    const match = geocoded.cache[query]
     const score = Number(match?.properties?.score ?? 0)
-    const locality = String(match?.properties?.localityName ?? '').toLowerCase()
-    if (match?.status !== 'matched' || score < BC_GEOCODER_MIN_SCORE || locality !== 'prince george') continue
+    if (!isAcceptedBcGeocode(match, { minScore: BC_GEOCODER_MIN_SCORE })) continue
     features.push({
       type: 'Feature',
       geometry: match.geometry,
@@ -354,25 +294,15 @@ async function buildBcGeocodedLocations(businessCandidates) {
         locationSource: 'bc_address_geocoder',
         locationConfidence: score >= 95 ? 'high' : 'medium',
         locationMatchMethod: 'address_geocode',
-        geocodeQuery: query,
-        geocodeScore: score,
-        geocodeMatchPrecision: match.properties.matchPrecision,
-        geocodePrecisionPoints: match.properties.precisionPoints,
-        geocodeFullAddress: match.properties.fullAddress,
-        geocodeStreetAddress: match.properties.streetAddress,
-        geocodeLocalityName: match.properties.localityName,
-        geocodePositionalAccuracy: match.properties.locationPositionalAccuracy,
-        geocodeSiteId: match.properties.siteID,
-        geocodeIsOfficial: match.properties.isOfficial,
-        geocodeFaults: match.properties.faults ?? [],
+        ...bcGeocodeFeatureProperties(match),
       },
     })
   }
 
   return {
-    cache,
-    requested,
-    uniqueQueryCount: uniqueQueries.length,
+    cache: geocoded.cache,
+    requested: geocoded.requested,
+    uniqueQueryCount: geocoded.uniqueQueryCount,
     collection: {
       type: 'FeatureCollection',
       features,
@@ -436,7 +366,7 @@ export async function buildBusinessPois() {
         mappedPointFeatures: features.length,
       },
       bcAddressGeocoder: {
-        url: BC_GEOCODER_URL,
+        url: BC_ADDRESS_GEOCODER_URL,
         uniqueAddressQueries: businessBcGeocodedLocations.uniqueQueryCount,
         newRequestsThisRun: businessBcGeocodedLocations.requested,
         minScore: BC_GEOCODER_MIN_SCORE,
