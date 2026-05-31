@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import { countBy, fetchJson, OUTPUT_ROOT, slug, writeJson } from './lib/shared.mjs'
 
@@ -5,6 +6,10 @@ export const CITYPG_BUSINESS_LAYER =
   'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/Business_License/FeatureServer/0'
 
 export const OVERPASS_URL = 'https://overpass-api.de/api/interpreter'
+const BC_GEOCODER_URL = 'https://geocoder.api.gov.bc.ca/addresses.json'
+const BC_GEOCODER_CACHE = `${OUTPUT_ROOT}/business_bc_geocode_cache.json`
+const BC_GEOCODER_DELAY_MS = Number(process.env.BC_GEOCODER_DELAY_MS ?? 75)
+const BC_GEOCODER_MIN_SCORE = Number(process.env.BC_GEOCODER_MIN_SCORE ?? 75)
 
 const OSM_POI_QUERY = `[out:json][timeout:45];
 area["name"="Prince George"]["boundary"="administrative"]->.a;
@@ -48,6 +53,12 @@ async function fetchOsmPois() {
     body,
   })
   return data.elements ?? []
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
 }
 
 function normalizeBusinessName(value) {
@@ -270,6 +281,105 @@ function buildOsmLocationMatches(businessCandidates, osmFeatures) {
   }
 }
 
+async function readJsonIfExists(filePath, fallback) {
+  try {
+    return JSON.parse(await readFile(filePath, 'utf8'))
+  } catch (error) {
+    if (error?.code === 'ENOENT') return fallback
+    throw error
+  }
+}
+
+function geocoderQueryForBusiness(business) {
+  const address = String(business.address ?? '').trim()
+  if (!address) return ''
+  return `${address}, Prince George, BC`
+}
+
+async function geocodeWithBcAddressGeocoder(query) {
+  const params = new URLSearchParams({
+    addressString: query,
+    locationDescriptor: 'accessPoint',
+    maxResults: '1',
+    minScore: String(BC_GEOCODER_MIN_SCORE),
+    outputSRS: '4326',
+    brief: 'false',
+    echo: 'true',
+  })
+  const data = await fetchJson(`${BC_GEOCODER_URL}?${params.toString()}`)
+  const feature = data.features?.[0]
+  if (!feature?.geometry?.coordinates || !feature?.properties) {
+    return {
+      query,
+      status: 'not_found',
+      geocodedAt: new Date().toISOString(),
+    }
+  }
+  return {
+    query,
+    status: 'matched',
+    geocodedAt: new Date().toISOString(),
+    geometry: {
+      type: 'Point',
+      coordinates: feature.geometry.coordinates,
+    },
+    properties: feature.properties,
+  }
+}
+
+async function buildBcGeocodedLocations(businessCandidates) {
+  const cache = await readJsonIfExists(BC_GEOCODER_CACHE, {})
+  const uniqueQueries = [...new Set(businessCandidates.map(geocoderQueryForBusiness).filter(Boolean))]
+  let requested = 0
+
+  for (const query of uniqueQueries) {
+    if (cache[query]) continue
+    cache[query] = await geocodeWithBcAddressGeocoder(query)
+    requested += 1
+    if (BC_GEOCODER_DELAY_MS > 0) await sleep(BC_GEOCODER_DELAY_MS)
+  }
+
+  const features = []
+  for (const business of businessCandidates) {
+    const query = geocoderQueryForBusiness(business)
+    const match = cache[query]
+    const score = Number(match?.properties?.score ?? 0)
+    const locality = String(match?.properties?.localityName ?? '').toLowerCase()
+    if (match?.status !== 'matched' || score < BC_GEOCODER_MIN_SCORE || locality !== 'prince george') continue
+    features.push({
+      type: 'Feature',
+      geometry: match.geometry,
+      properties: {
+        ...business,
+        locationSource: 'bc_address_geocoder',
+        locationConfidence: score >= 95 ? 'high' : 'medium',
+        locationMatchMethod: 'address_geocode',
+        geocodeQuery: query,
+        geocodeScore: score,
+        geocodeMatchPrecision: match.properties.matchPrecision,
+        geocodePrecisionPoints: match.properties.precisionPoints,
+        geocodeFullAddress: match.properties.fullAddress,
+        geocodeStreetAddress: match.properties.streetAddress,
+        geocodeLocalityName: match.properties.localityName,
+        geocodePositionalAccuracy: match.properties.locationPositionalAccuracy,
+        geocodeSiteId: match.properties.siteID,
+        geocodeIsOfficial: match.properties.isOfficial,
+        geocodeFaults: match.properties.faults ?? [],
+      },
+    })
+  }
+
+  return {
+    cache,
+    requested,
+    uniqueQueryCount: uniqueQueries.length,
+    collection: {
+      type: 'FeatureCollection',
+      features,
+    },
+  }
+}
+
 export async function buildBusinessPois() {
   const businessRows = await fetchBusinessLicences()
   const osmElements = await fetchOsmPois()
@@ -286,6 +396,7 @@ export async function buildBusinessPois() {
     .map((element, index) => buildOsmFeature(element, index, businessRowsByName))
     .filter(Boolean)
   const businessOsmLocations = buildOsmLocationMatches(businessCandidates, features)
+  const businessBcGeocodedLocations = await buildBcGeocodedLocations(businessCandidates)
 
   const matchedLicenceNumbers = new Set(
     features.flatMap((feature) =>
@@ -309,6 +420,7 @@ export async function buildBusinessPois() {
     businessLicencesAll: businessCandidates,
     businessCandidates: usefulBusinessCandidates,
     businessOsmLocations,
+    businessBcGeocodedLocations,
     sourceStats: {
       citypgBusinessLicence: {
         url: CITYPG_BUSINESS_LAYER,
@@ -316,11 +428,19 @@ export async function buildBusinessPois() {
         usefulCandidateRows: usefulBusinessCandidates.length,
         matchedToOsmByName: matchedLicenceNumbers.size,
         locatedByOsmNameOrAddress: businessOsmLocations.features.length,
+        locatedByBcAddressGeocoder: businessBcGeocodedLocations.collection.features.length,
       },
       openStreetMapOverpass: {
         url: OVERPASS_URL,
         totalElements: osmElements.length,
         mappedPointFeatures: features.length,
+      },
+      bcAddressGeocoder: {
+        url: BC_GEOCODER_URL,
+        uniqueAddressQueries: businessBcGeocodedLocations.uniqueQueryCount,
+        newRequestsThisRun: businessBcGeocodedLocations.requested,
+        minScore: BC_GEOCODER_MIN_SCORE,
+        delayMs: BC_GEOCODER_DELAY_MS,
       },
     },
   }
@@ -330,6 +450,11 @@ export async function syncCityPgBusiness() {
   const business = await buildBusinessPois()
   await writeJson(`${OUTPUT_ROOT}/business_pois.geojson`, business.collection)
   await writeJson(`${OUTPUT_ROOT}/business_licences_osm_locations.geojson`, business.businessOsmLocations)
+  await writeJson(
+    `${OUTPUT_ROOT}/business_licences_bc_geocoded.geojson`,
+    business.businessBcGeocodedLocations.collection,
+  )
+  await writeJson(BC_GEOCODER_CACHE, business.businessBcGeocodedLocations.cache)
   await writeJson(`${OUTPUT_ROOT}/business_licences_all.json`, business.businessLicencesAll)
   await writeJson(`${OUTPUT_ROOT}/business_candidates.json`, business.businessCandidates)
   await writeJson(`${OUTPUT_ROOT}/business_manifest.json`, {
@@ -338,6 +463,7 @@ export async function syncCityPgBusiness() {
     outputs: {
       businessPois: '/data/healthyplan-pg/business_pois.geojson',
       businessLicencesOsmLocations: '/data/healthyplan-pg/business_licences_osm_locations.geojson',
+      businessLicencesBcGeocoded: '/data/healthyplan-pg/business_licences_bc_geocoded.geojson',
       businessLicencesAll: '/data/healthyplan-pg/business_licences_all.json',
       businessCandidates: '/data/healthyplan-pg/business_candidates.json',
     },
@@ -359,11 +485,19 @@ export async function syncCityPgBusiness() {
         source: 'OpenStreetMap Overpass',
         license: 'Open Database Licence; attribution and derivative-database handling required',
       },
+      {
+        source: 'BC Address Geocoder',
+        license: 'Open Government Licence - British Columbia',
+      },
     ],
   })
   console.log(`Business POIs: ${business.collection.features.length}`)
   console.log(`CityPG business licences: ${business.businessLicencesAll.length}`)
   console.log(`CityPG business licences located by OSM: ${business.businessOsmLocations.features.length}`)
+  console.log(
+    `CityPG business licences located by BC Address Geocoder: ${business.businessBcGeocodedLocations.collection.features.length}`,
+  )
+  console.log(`BC Address Geocoder new requests: ${business.businessBcGeocodedLocations.requested}`)
   console.log(`Business candidates: ${business.businessCandidates.length}`)
   return business
 }

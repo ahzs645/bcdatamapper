@@ -13,6 +13,7 @@ async function main() {
       educationFacilities: '/data/healthyplan-pg/education_facilities.geojson',
       businessPois: '/data/healthyplan-pg/business_pois.geojson',
       businessLicencesOsmLocations: '/data/healthyplan-pg/business_licences_osm_locations.geojson',
+      businessLicencesBcGeocoded: '/data/healthyplan-pg/business_licences_bc_geocoded.geojson',
       businessLicencesAll: '/data/healthyplan-pg/business_licences_all.json',
       businessCandidates: '/data/healthyplan-pg/business_candidates.json',
     },
@@ -42,6 +43,10 @@ async function main() {
       {
         source: 'OpenStreetMap Overpass',
         license: 'Open Database Licence; attribution and derivative-database handling required',
+      },
+      {
+        source: 'BC Address Geocoder',
+        license: 'Open Government Licence - British Columbia',
       },
     ],
   })
