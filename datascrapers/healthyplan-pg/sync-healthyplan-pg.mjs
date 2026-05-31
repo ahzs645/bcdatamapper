@@ -12,6 +12,7 @@ async function main() {
     outputs: {
       educationFacilities: '/data/healthyplan-pg/education_facilities.geojson',
       businessPois: '/data/healthyplan-pg/business_pois.geojson',
+      businessLicencesOsmLocations: '/data/healthyplan-pg/business_licences_osm_locations.geojson',
       businessLicencesAll: '/data/healthyplan-pg/business_licences_all.json',
       businessCandidates: '/data/healthyplan-pg/business_candidates.json',
     },

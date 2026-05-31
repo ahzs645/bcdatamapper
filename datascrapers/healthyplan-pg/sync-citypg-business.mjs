@@ -57,6 +57,30 @@ function normalizeBusinessName(value) {
     .replace(/^-|-$/g, '')
 }
 
+function normalizeAddress(value) {
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/\b(avenue)\b/g, 'ave')
+    .replace(/\b(street)\b/g, 'st')
+    .replace(/\b(road)\b/g, 'rd')
+    .replace(/\b(boulevard)\b/g, 'blvd')
+    .replace(/\b(highway)\b/g, 'hwy')
+    .replace(/\b(north)\b/g, 'n')
+    .replace(/\b(south)\b/g, 's')
+    .replace(/\b(east)\b/g, 'e')
+    .replace(/\b(west)\b/g, 'w')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function osmAddressText(tags) {
+  if (tags['addr:full']) return tags['addr:full']
+  return [tags['addr:unit'], tags['addr:housenumber'], tags['addr:street']]
+    .filter((part) => part != null && part !== '')
+    .join(' ')
+}
+
 function classifyBusiness(row) {
   const text = `${row.TradeName ?? ''} ${row.LicenceDesc ?? ''} ${row.LicenceCategory ?? ''}`.toLowerCase()
   const category = String(row.LicenceCategory ?? '').toLowerCase()
@@ -135,6 +159,7 @@ function buildOsmFeature(element, index, businessRowsByName) {
     id: `osm-${element.type}-${element.id}`,
     source: 'openstreetmap_overpass',
     name: tags.name ?? `${tags.shop ?? tags.amenity ?? tags.office ?? tags.craft ?? 'POI'} ${index + 1}`,
+    address: osmAddressText(tags),
     category: classification.category,
     healthyFoodOutlet: classification.healthyFood,
     retailService: classification.retailServices,
@@ -178,6 +203,73 @@ function buildBusinessCandidate(row, index) {
   }
 }
 
+function buildOsmLocationMatches(businessCandidates, osmFeatures) {
+  const osmByName = new Map()
+  const osmByAddress = new Map()
+
+  for (const feature of osmFeatures) {
+    const nameKey = normalizeBusinessName(feature.properties.name)
+    const addressKey = normalizeAddress(feature.properties.address)
+    if (nameKey) osmByName.set(nameKey, [...(osmByName.get(nameKey) ?? []), feature])
+    if (addressKey) osmByAddress.set(addressKey, [...(osmByAddress.get(addressKey) ?? []), feature])
+  }
+
+  const matchedFeatures = []
+  const matchedLicenceNumbers = new Set()
+
+  for (const business of businessCandidates) {
+    const nameKey = normalizeBusinessName(business.name)
+    const addressKey = normalizeAddress(business.address)
+    const nameMatches = nameKey ? osmByName.get(nameKey) ?? [] : []
+    const addressMatches = addressKey ? osmByAddress.get(addressKey) ?? [] : []
+    const candidates = new Map()
+
+    for (const feature of nameMatches) {
+      candidates.set(feature.properties.id, {
+        feature,
+        matchMethod: 'exact_name',
+        locationConfidence: 'medium',
+        score: 75,
+      })
+    }
+
+    for (const feature of addressMatches) {
+      const existing = candidates.get(feature.properties.id)
+      candidates.set(feature.properties.id, {
+        feature,
+        matchMethod: existing ? 'exact_name_and_address' : 'exact_address',
+        locationConfidence: existing ? 'high' : 'medium',
+        score: existing ? 100 : 85,
+      })
+    }
+
+    const best = [...candidates.values()].sort((a, b) => b.score - a.score)[0]
+    if (!best || matchedLicenceNumbers.has(business.licenceNumber)) continue
+
+    matchedLicenceNumbers.add(business.licenceNumber)
+    matchedFeatures.push({
+      type: 'Feature',
+      geometry: best.feature.geometry,
+      properties: {
+        ...business,
+        locationSource: 'openstreetmap_overpass',
+        locationConfidence: best.locationConfidence,
+        locationMatchMethod: best.matchMethod,
+        matchedOsmId: best.feature.properties.osmId,
+        matchedOsmType: best.feature.properties.osmType,
+        matchedOsmName: best.feature.properties.name,
+        matchedOsmAddress: best.feature.properties.address,
+        matchedOsmTags: best.feature.properties.osmTags,
+      },
+    })
+  }
+
+  return {
+    type: 'FeatureCollection',
+    features: matchedFeatures,
+  }
+}
+
 export async function buildBusinessPois() {
   const businessRows = await fetchBusinessLicences()
   const osmElements = await fetchOsmPois()
@@ -193,6 +285,7 @@ export async function buildBusinessPois() {
   const features = osmElements
     .map((element, index) => buildOsmFeature(element, index, businessRowsByName))
     .filter(Boolean)
+  const businessOsmLocations = buildOsmLocationMatches(businessCandidates, features)
 
   const matchedLicenceNumbers = new Set(
     features.flatMap((feature) =>
@@ -215,12 +308,14 @@ export async function buildBusinessPois() {
     },
     businessLicencesAll: businessCandidates,
     businessCandidates: usefulBusinessCandidates,
+    businessOsmLocations,
     sourceStats: {
       citypgBusinessLicence: {
         url: CITYPG_BUSINESS_LAYER,
         totalRows: businessRows.length,
         usefulCandidateRows: usefulBusinessCandidates.length,
         matchedToOsmByName: matchedLicenceNumbers.size,
+        locatedByOsmNameOrAddress: businessOsmLocations.features.length,
       },
       openStreetMapOverpass: {
         url: OVERPASS_URL,
@@ -234,6 +329,7 @@ export async function buildBusinessPois() {
 export async function syncCityPgBusiness() {
   const business = await buildBusinessPois()
   await writeJson(`${OUTPUT_ROOT}/business_pois.geojson`, business.collection)
+  await writeJson(`${OUTPUT_ROOT}/business_licences_osm_locations.geojson`, business.businessOsmLocations)
   await writeJson(`${OUTPUT_ROOT}/business_licences_all.json`, business.businessLicencesAll)
   await writeJson(`${OUTPUT_ROOT}/business_candidates.json`, business.businessCandidates)
   await writeJson(`${OUTPUT_ROOT}/business_manifest.json`, {
@@ -241,6 +337,7 @@ export async function syncCityPgBusiness() {
     coverage: 'Prince George, BC',
     outputs: {
       businessPois: '/data/healthyplan-pg/business_pois.geojson',
+      businessLicencesOsmLocations: '/data/healthyplan-pg/business_licences_osm_locations.geojson',
       businessLicencesAll: '/data/healthyplan-pg/business_licences_all.json',
       businessCandidates: '/data/healthyplan-pg/business_candidates.json',
     },
@@ -266,6 +363,7 @@ export async function syncCityPgBusiness() {
   })
   console.log(`Business POIs: ${business.collection.features.length}`)
   console.log(`CityPG business licences: ${business.businessLicencesAll.length}`)
+  console.log(`CityPG business licences located by OSM: ${business.businessOsmLocations.features.length}`)
   console.log(`Business candidates: ${business.businessCandidates.length}`)
   return business
 }
