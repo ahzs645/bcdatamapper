@@ -23,7 +23,7 @@ FAMILY_LABELS = {
     "greenness": "Greenness and Vegetation",
     "built-environment": "Built Environment",
     "neighborhood": "Neighborhood Context",
-    "other": "Other CANUE Layers",
+    "other": "Night-time Lights",
 }
 
 FAMILY_ORDER = {
