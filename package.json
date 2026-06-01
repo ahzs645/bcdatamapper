@@ -12,6 +12,7 @@
     "watersheds:dev": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/build-dev-bc-fwa-watersheds.mjs",
     "nr-admin:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-nr-admin.mjs",
     "uwr:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-uwr.mjs",
+    "indigenous:sync": "./run-in-pgmaps.sh node datascrapers/bc/indigenous/sync-bc-indigenous-sources.mjs",
     "drought:sync": "./run-in-pgmaps.sh node datascrapers/bc/drought/sync-bc-drought.mjs",
     "drought:canonical": "./run-in-pgmaps.sh node datascrapers/bc/drought/build-bc-drought-canonical.mjs",
     "flood:sync": "./run-in-pgmaps.sh node datascrapers/bc/flood/sync-bc-rfc-flood-advisories.mjs",

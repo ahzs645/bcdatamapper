@@ -27,6 +27,7 @@ checkout under `public/data`.
 | BC freshwater watersheds | `watersheds:sync`, `watersheds:dev` | BC Freshwater Atlas / watershed geospatial sources | `public/data/boundaries/BCFWA/` |
 | BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
 | BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
+| Indigenous acknowledgement support sources | `indigenous:sync` | BC CAD/PIP metadata, BCGW First Nation community/treaty layers, BC reserve admin boundaries, and Canada First Nations Location | `public/data/indigenous/` |
 | BC drought | `drought:sync`, `drought:canonical` | BC drought region/status feeds | `public/data/drought/` |
 | BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
 | BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
