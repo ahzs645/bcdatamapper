@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-06-01T19:16:26.592Z",
+  "notes": [
+    "CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application, not boundary geometry.",
+    "Automated layers are supporting context only. They do not determine Indigenous title, traditional territory, or acknowledgement wording.",
+    "Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use and are ignored by git; rerun npm run indigenous:sync to rebuild them from source services."
+  ],
+  "automated": [
+    {
+      "id": "first_nation_community_locations",
+      "title": "First Nation Community Locations",
+      "output": "/data/indigenous/first_nation_community_locations.geojson",
+      "featureCount": 208,
+      "access": "automated",
+      "source": "BC Geographic Warehouse WFS",
+      "sourceLayer": "WHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP",
+      "sourceUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP&outputFormat=json&srsName=EPSG%3A4326&maxFeatures=50000",
+      "generalized": false,
+      "simplifyToleranceDegrees": null,
+      "caveat": "Approximate community/office locations and administrative reference data. Not a traditional territory or acknowledgement boundary layer."
+    },
+    {
+      "id": "first_nations_treaty_areas",
+      "title": "First Nations Treaty Areas",
+      "output": "/data/indigenous/first_nations_treaty_areas.geojson",
+      "featureCount": 69,
+      "access": "automated",
+      "source": "BC Geographic Warehouse WFS",
+      "sourceLayer": "WHSE_LEGAL_ADMIN_BOUNDARIES.FNT_TREATY_AREA_SP",
+      "sourceUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.FNT_TREATY_AREA_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.FNT_TREATY_AREA_SP&outputFormat=json&srsName=EPSG%3A4326&maxFeatures=50000",
+      "generalized": true,
+      "simplifyToleranceDegrees": 0.0002,
+      "caveat": "Treaty-defined legal/admin geography where available. Not a comprehensive traditional territory layer."
+    },
+    {
+      "id": "first_nations_treaty_lands",
+      "title": "First Nations Treaty Lands",
+      "output": "/data/indigenous/first_nations_treaty_lands.geojson",
+      "featureCount": 148,
+      "access": "automated",
+      "source": "BC ArcGIS REST service",
+      "sourceUrl": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/19",
+      "generalized": true,
+      "simplifyToleranceDegrees": 0.0002,
+      "caveat": "Treaty land polygons where official treaty data is available. Not a comprehensive traditional territory layer."
+    },
+    {
+      "id": "indian_reserves_band_names",
+      "title": "Indian Reserves & Band Names - Administrative Boundaries",
+      "output": "/data/indigenous/indian_reserves_band_names.geojson",
+      "featureCount": 1687,
+      "access": "automated",
+      "source": "BC ArcGIS REST service",
+      "sourceUrl": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/mpcm/bcgwpub/MapServer/34",
+      "generalized": true,
+      "simplifyToleranceDegrees": 0.0002,
+      "caveat": "Reserve and band-name administrative geography. Not traditional territory or acknowledgement wording."
+    },
+    {
+      "id": "canada_first_nations_location",
+      "title": "First Nations Location",
+      "output": "/data/indigenous/canada_first_nations_location.geojson",
+      "featureCount": 638,
+      "access": "automated",
+      "source": "Government of Canada ArcGIS REST service",
+      "sourceUrl": "https://geo.sac-isc.gc.ca/geomatics/rest/services/Donnees_Ouvertes-Open_Data/Premiere_Nation_First_Nation/MapServer/0",
+      "generalized": false,
+      "simplifyToleranceDegrees": null,
+      "caveat": "National First Nation point/name reference from ISC/CIRNAC. Points represent community/admin locations, not territory or acknowledgement boundaries."
+    }
+  ],
+  "manual": [
+    {
+      "id": "cad_pip_consultation_areas",
+      "title": "Profiles of Indigenous Peoples (PIP): Consultation Areas - Public Map Service",
+      "packageId": "profiles-of-indigenous-peoples-pip-consultation-areas-public-map-service",
+      "url": "https://maps.gov.bc.ca/ess/hm/cadb/",
+      "access": "manual",
+      "caveat": "Access-only interactive CAD/PIP report workflow. Public records expose the launch app, not downloadable consultative-area boundary geometry.",
+      "sourcePackage": {
+        "id": "3ccd3081-92b8-4578-8dd1-89d85be0ee5e",
+        "name": "profiles-of-indigenous-peoples-pip-consultation-areas-public-map-service",
+        "title": "Profiles of Indigenous Peoples (PIP): Consultation Areas - Public Map Service",
+        "license": "Access Only",
+        "metadataModified": "2025-06-10T16:30:07.795349",
+        "resources": [
+          {
+            "name": "Launch CAD Public Map Application",
+            "format": "other",
+            "url": "https://maps.gov.bc.ca/ess/hm/cadb/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "first_peoples_map_bc",
+      "title": "First Peoples Map of B.C.",
+      "url": "https://maps.fpcc.ca/",
+      "access": "permission_required",
+      "caveat": "Community-contributed cultural, language, and place context. Do not scrape; request API/data permission from FPCC before automation.",
+      "sourcePackage": null
+    }
+  ]
+}

@@ -1,8 +1,11 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import simplify from '@turf/simplify'
+import { SNAPSHOT_DIR, copySnapshotToPublic } from './indigenous-snapshot.mjs'
 
-const OUTPUT_DIR = 'public/data/indigenous'
+// Write generated layers into the committed snapshot in the submodule, then copy them
+// into the PGMaps public/ dir. The snapshot is the version-controlled source of truth.
+const OUTPUT_DIR = SNAPSHOT_DIR
 const CKAN_BASE = 'https://catalogue.data.gov.bc.ca/api/3/action/package_show'
 const OPEN_CANADA_BASE = 'https://open.canada.ca/data/api/action/package_show'
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
@@ -319,7 +322,7 @@ async function main() {
     notes: [
       'CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application, not boundary geometry.',
       'Automated layers are supporting context only. They do not determine Indigenous title, traditional territory, or acknowledgement wording.',
-      'Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use and are ignored by git; rerun npm run indigenous:sync to rebuild them from source services.',
+      'Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot.',
     ],
     automated,
     manual,
@@ -327,6 +330,9 @@ async function main() {
 
   await writeFile(path.join(OUTPUT_DIR, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
   console.log(`manifest: wrote ${automated.length} automated sources and ${manual.length} manual sources`)
+
+  const { dest, files } = await copySnapshotToPublic()
+  console.log(`indigenous: copied ${files.length} snapshot file(s) to ${dest}`)
 }
 
 main().catch((error) => {
