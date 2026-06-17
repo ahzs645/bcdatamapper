@@ -34,6 +34,8 @@ checkout under `public/data`.
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
 | Canada cell coverage tile sources | `cell-coverage:sync` | Rogers, TELUS, Bell, Videotron, and Freedom Mobile public coverage maps | `public/data/cell-coverage/manifest.json` |
 | Canada network availability | `network-availability:sync` | CRTC, NRCan, ISED, and carrier coverage-map API findings | `public/data/network-availability/manifest.json` |
+| Native Land public metadata probe | `native-land:probe` | Native-Land.ca public map/search metadata | `data-sources/native-land/` |
+| Native Land API GeoJSON bundled snapshot | `native-land:geojson`, `native-land:copy` | Native Land Digital key-gated GeoJSON API | `datascrapers/native-land/snapshot/` and `public/data/native-land/` |
 | CIMD | `cimd:sync` | Canadian Index of Multiple Deprivation data joined to local census boundaries | `public/data/cimd/` |
 | CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
 | Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
@@ -47,6 +49,27 @@ Scraper-related documentation lives in `docs/`:
 - DriveBC event normalization and strict bridge definitions.
 - BC River Forecast Centre flood-advisory normalization and strict bridge definitions.
 - Canada network availability source inventory and carrier vector/raster findings.
+
+## Native Land Digital Snapshot
+
+PGMaps reads Native Land territory, language, and treaty polygons from the
+bundled bcdatamapper snapshot, not from the browser API. Copy the committed
+snapshot into the app with:
+
+```bash
+npm run native-land:copy
+```
+
+Refresh the snapshot only when you have an API key and permission for the
+intended use:
+
+```bash
+NATIVE_LAND_API_KEY='...' npm run native-land:geojson
+```
+
+The refresh command updates `datascrapers/native-land/snapshot/` and then copies
+the files to `public/data/native-land/` in the target PGMaps checkout. The public
+copy is generated and ignored by git.
 
 ## Canada Network Availability
 

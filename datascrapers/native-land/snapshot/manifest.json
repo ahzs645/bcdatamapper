@@ -1,0 +1,155 @@
+{
+  "generatedAt": "2026-06-17T15:49:04.752Z",
+  "title": "Native Land Digital API GeoJSON bundled snapshot",
+  "docsUrl": "https://api-docs.native-land.ca/full-geojsons",
+  "dataSovereigntyTreatyUrl": "https://api-docs.native-land.ca/data-sovereignty-treaty",
+  "caveat": "Bundled key-backed extract. Confirm Native Land Digital redistribution permission before publishing or sharing this snapshot outside approved uses.",
+  "categories": [
+    "territories",
+    "languages",
+    "treaties"
+  ],
+  "datasets": [
+    {
+      "category": "territories",
+      "output": "/data/native-land/territories.geojson",
+      "sourceUrl": "https://native-land.ca/api/polygons/geojson/territories?key=<redacted>",
+      "featureCount": 2057,
+      "geometryTypes": {
+        "MultiPolygon": 2057
+      },
+      "propertyKeys": [
+        "Name",
+        "Slug",
+        "color",
+        "description",
+        "id"
+      ],
+      "bounds": {
+        "west": -195.93531,
+        "south": -56.02359,
+        "east": 182.10777,
+        "north": 83.773341
+      },
+      "bytes": 3086639,
+      "gzipBytes": 1064977,
+      "sampleProperties": [
+        {
+          "id": 1,
+          "Slug": "%d9%81%d9%84%d8%b3%d8%b7%d9%8a%d9%86-palestine",
+          "Name": "فلسطين ",
+          "color": "#dcedc8",
+          "description": "https://native-land.ca/listings/territories/%d9%81%d9%84%d8%b3%d8%b7%d9%8a%d9%86-palestine"
+        },
+        {
+          "id": 2,
+          "Slug": "namarin",
+          "Name": "Ñamarin",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/territories/namarin"
+        },
+        {
+          "id": 52,
+          "Slug": "taribelang-bunda",
+          "Name": "Taribelang Bunda",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/territories/taribelang-bunda"
+        }
+      ]
+    },
+    {
+      "category": "languages",
+      "output": "/data/native-land/languages.geojson",
+      "sourceUrl": "https://native-land.ca/api/polygons/geojson/languages?key=<redacted>",
+      "featureCount": 1473,
+      "geometryTypes": {
+        "MultiPolygon": 1473
+      },
+      "propertyKeys": [
+        "Name",
+        "Slug",
+        "color",
+        "description",
+        "id"
+      ],
+      "bounds": {
+        "west": -188.56373,
+        "south": -56.033411,
+        "east": 182.00349,
+        "north": 83.910397
+      },
+      "bytes": 1560684,
+      "gzipBytes": 530815,
+      "sampleProperties": [
+        {
+          "id": 3,
+          "Slug": "hiwatahia-taino",
+          "Name": "Hiwatahia Taíno",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/languages/hiwatahia-taino"
+        },
+        {
+          "id": 4,
+          "Slug": "koko-dhawa",
+          "Name": "Koko Dhawa",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/languages/koko-dhawa"
+        },
+        {
+          "id": 5,
+          "Slug": "kokiny",
+          "Name": "Kokiny",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/languages/kokiny"
+        }
+      ]
+    },
+    {
+      "category": "treaties",
+      "output": "/data/native-land/treaties.geojson",
+      "sourceUrl": "https://native-land.ca/api/polygons/geojson/treaties?key=<redacted>",
+      "featureCount": 833,
+      "geometryTypes": {
+        "MultiPolygon": 833
+      },
+      "propertyKeys": [
+        "Name",
+        "Slug",
+        "color",
+        "description",
+        "id"
+      ],
+      "bounds": {
+        "west": -197.713071117,
+        "south": -51.598795542,
+        "east": 210.516050493,
+        "north": 83.29825
+      },
+      "bytes": 869865,
+      "gzipBytes": 279576,
+      "sampleProperties": [
+        {
+          "id": 101,
+          "Slug": "fort-bridger-treaty-1868",
+          "Name": "Fort Bridger Treaty, 1868",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/treaties/fort-bridger-treaty-1868"
+        },
+        {
+          "id": 142,
+          "Slug": "treaty-57-1847",
+          "Name": "Treaty 57, 1847",
+          "color": "#0e1b82",
+          "description": "https://native-land.ca/listings/treaties/treaty-57-1847"
+        },
+        {
+          "id": 1011,
+          "Slug": "cession-432",
+          "Name": "Cession 432",
+          "color": "#8CB065",
+          "description": "https://native-land.ca/listings/treaties/cession-432"
+        }
+      ]
+    }
+  ]
+}
