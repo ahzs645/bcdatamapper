@@ -14,6 +14,20 @@ const SIMPLIFY_TOLERANCE = 0.0002
 const CAD_PACKAGE_ID = 'profiles-of-indigenous-peoples-pip-consultation-areas-public-map-service'
 const COMMUNITY_PACKAGE_ID = 'first-nation-community-locations'
 const TREATY_AREA_PACKAGE_ID = 'first-nations-treaty-areas'
+const CAD_PUBLIC_APP_URL = 'https://maps.gov.bc.ca/ess/hm/cadb/'
+const CAD_OPERATIONAL_SERVICE_URL = 'https://maps.gov.bc.ca/arcserver/rest/services/mpcm/bcgw/MapServer'
+const CAD_LAYER_382_DYNAMIC_DEFINITION = {
+  id: 382,
+  source: {
+    type: 'dataLayer',
+    dataSource: {
+      type: 'table',
+      workspaceId: 'MPCM_ALL_PUB',
+      dataSourceName: 'WHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP',
+      gdbVersion: '',
+    },
+  },
+}
 
 const WFS_DATASETS = [
   {
@@ -56,6 +70,20 @@ const ARCGIS_DATASETS = [
   },
 ]
 
+const DYNAMIC_ARCGIS_DATASETS = [
+  {
+    id: 'cad_pip_layer_382_indian_reserves_band_names',
+    title: 'CAD/PIP layer 382 - Indian Reserves including Band Names',
+    packageId: CAD_PACKAGE_ID,
+    url: CAD_OPERATIONAL_SERVICE_URL,
+    sourceLayer: 'layers=show:382',
+    dynamicDefinition: CAD_LAYER_382_DYNAMIC_DEFINITION,
+    output: 'cad_pip_layer_382_indian_reserves_band_names.geojson',
+    simplify: true,
+    caveat: 'Pulled from the CAD/PIP operational MapServer dynamic layer 382 for offline use. The public CAD viewer resolves this layer to WHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP (Indian Reserves including Band Names). This is reserve/band-name administrative geography, not the hidden CAD consultation-area polygons or acknowledgement wording.',
+  },
+]
+
 const FEDERAL_ARCGIS_DATASETS = [
   {
     id: 'canada_first_nations_location',
@@ -72,9 +100,9 @@ const MANUAL_SOURCES = [
     id: 'cad_pip_consultation_areas',
     title: 'Profiles of Indigenous Peoples (PIP): Consultation Areas - Public Map Service',
     packageId: CAD_PACKAGE_ID,
-    url: 'https://maps.gov.bc.ca/ess/hm/cadb/',
+    url: CAD_PUBLIC_APP_URL,
     access: 'manual',
-    caveat: 'Access-only interactive CAD/PIP report workflow. Public records expose the launch app, not downloadable consultative-area boundary geometry.',
+    caveat: 'Access-only interactive CAD/PIP report workflow. The public app can return preliminary First Nation contact reports, but the consultation-area boundary geometry is not displayed or offered as a downloadable public layer.',
   },
   {
     id: 'first_peoples_map_bc',
@@ -230,6 +258,20 @@ function arcGisQueryUrl(dataset, offset) {
   return `${dataset.url}/query?${params.toString()}`
 }
 
+function dynamicArcGisQueryUrl(dataset, offset) {
+  const params = new URLSearchParams({
+    layer: JSON.stringify(dataset.dynamicDefinition),
+    where: '1=1',
+    outFields: '*',
+    outSR: '4326',
+    f: 'geojson',
+    resultRecordCount: '1000',
+    resultOffset: String(offset),
+    orderByFields: 'OBJECTID',
+  })
+  return `${dataset.url}/dynamicLayer/query?${params.toString()}`
+}
+
 async function syncArcGisDataset(dataset, options = {}) {
   const features = []
   let offset = 0
@@ -279,12 +321,65 @@ async function syncArcGisDataset(dataset, options = {}) {
   }
 }
 
+async function syncDynamicArcGisDataset(dataset, options = {}) {
+  const features = []
+  let offset = 0
+  let template = null
+  let exceededTransferLimit = true
+
+  while (exceededTransferLimit) {
+    const page = await fetchJson(dynamicArcGisQueryUrl(dataset, offset))
+    if (page.type !== 'FeatureCollection' || !Array.isArray(page.features)) {
+      throw new Error(`${dataset.title} did not return a GeoJSON FeatureCollection`)
+    }
+    if (!template) template = { ...page, features }
+    features.push(...page.features)
+    exceededTransferLimit = Boolean(page.exceededTransferLimit) && page.features.length > 0
+    offset += page.features.length
+  }
+
+  const outputFeatures = maybeSimplifyFeatures(features, dataset)
+  const collection = normalizeFeatureCollection(template ?? { type: 'FeatureCollection', features: outputFeatures }, {
+    id: dataset.id,
+    title: dataset.title,
+    source: options.source ?? 'BC ArcGIS REST dynamic layer query',
+    sourceUrl: dataset.url,
+    sourceLayer: dataset.sourceLayer,
+    sourcePackage: options.sourcePackage ?? null,
+    dynamicDefinition: dataset.dynamicDefinition,
+    generalized: Boolean(dataset.simplify),
+    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    caveat: dataset.caveat,
+    generatedAt: new Date().toISOString(),
+  })
+  collection.features = outputFeatures
+
+  const outputPath = path.join(OUTPUT_DIR, dataset.output)
+  await writeFile(outputPath, `${JSON.stringify(collection)}\n`)
+  console.log(`${dataset.title}: wrote ${collection.features.length} features to ${outputPath}`)
+
+  return {
+    id: dataset.id,
+    title: dataset.title,
+    output: `/data/indigenous/${dataset.output}`,
+    featureCount: collection.features.length,
+    access: 'automated',
+    source: collection.metadata.source,
+    sourceUrl: dataset.url,
+    sourceLayer: dataset.sourceLayer,
+    generalized: Boolean(dataset.simplify),
+    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    caveat: dataset.caveat,
+  }
+}
+
 async function main() {
   await mkdir(OUTPUT_DIR, { recursive: true })
 
   const packageIds = new Set([
     ...MANUAL_SOURCES.map((source) => source.packageId),
     ...WFS_DATASETS.map((source) => source.packageId),
+    ...DYNAMIC_ARCGIS_DATASETS.map((source) => source.packageId),
   ].filter(Boolean))
   const openCanadaPackageIds = new Set([
     ...FEDERAL_ARCGIS_DATASETS.map((source) => source.packageId),
@@ -305,6 +400,11 @@ async function main() {
   for (const dataset of ARCGIS_DATASETS) {
     automated.push(await syncArcGisDataset(dataset))
   }
+  for (const dataset of DYNAMIC_ARCGIS_DATASETS) {
+    automated.push(await syncDynamicArcGisDataset(dataset, {
+      sourcePackage: packageSummary(packages.get(dataset.packageId)),
+    }))
+  }
   for (const dataset of FEDERAL_ARCGIS_DATASETS) {
     automated.push(await syncArcGisDataset(dataset, {
       source: 'Government of Canada ArcGIS REST service',
@@ -320,7 +420,7 @@ async function main() {
   const manifest = {
     generatedAt: new Date().toISOString(),
     notes: [
-      'CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application, not boundary geometry.',
+      'CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application/report workflow, not downloadable consultation-area boundary geometry. The related ArcGIS MapServer dynamic layer 382 is bundled for offline use; the public CAD viewer resolves it to Indian reserves/band-name administrative geography, not consultation-area polygons.',
       'Automated layers are supporting context only. They do not determine Indigenous title, traditional territory, or acknowledgement wording.',
       'Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot.',
     ],

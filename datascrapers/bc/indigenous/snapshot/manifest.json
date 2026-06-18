@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-01T19:16:26.592Z",
+  "generatedAt": "2026-06-18T18:36:32.931Z",
   "notes": [
-    "CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application, not boundary geometry.",
+    "CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application/report workflow, not downloadable consultation-area boundary geometry. The related ArcGIS MapServer dynamic layer 382 is bundled for offline use; the public CAD viewer resolves it to Indian reserves/band-name administrative geography, not consultation-area polygons.",
     "Automated layers are supporting context only. They do not determine Indigenous title, traditional territory, or acknowledgement wording.",
-    "Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use and are ignored by git; rerun npm run indigenous:sync to rebuild them from source services."
+    "Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot."
   ],
   "automated": [
     {
@@ -57,6 +57,19 @@
       "caveat": "Reserve and band-name administrative geography. Not traditional territory or acknowledgement wording."
     },
     {
+      "id": "cad_pip_layer_382_indian_reserves_band_names",
+      "title": "CAD/PIP layer 382 - Indian Reserves including Band Names",
+      "output": "/data/indigenous/cad_pip_layer_382_indian_reserves_band_names.geojson",
+      "featureCount": 1687,
+      "access": "automated",
+      "source": "BC ArcGIS REST dynamic layer query",
+      "sourceUrl": "https://maps.gov.bc.ca/arcserver/rest/services/mpcm/bcgw/MapServer",
+      "sourceLayer": "layers=show:382",
+      "generalized": true,
+      "simplifyToleranceDegrees": 0.0002,
+      "caveat": "Pulled from the CAD/PIP operational MapServer dynamic layer 382 for offline use. The public CAD viewer resolves this layer to WHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP (Indian Reserves including Band Names). This is reserve/band-name administrative geography, not the hidden CAD consultation-area polygons or acknowledgement wording."
+    },
+    {
       "id": "canada_first_nations_location",
       "title": "First Nations Location",
       "output": "/data/indigenous/canada_first_nations_location.geojson",
@@ -76,7 +89,7 @@
       "packageId": "profiles-of-indigenous-peoples-pip-consultation-areas-public-map-service",
       "url": "https://maps.gov.bc.ca/ess/hm/cadb/",
       "access": "manual",
-      "caveat": "Access-only interactive CAD/PIP report workflow. Public records expose the launch app, not downloadable consultative-area boundary geometry.",
+      "caveat": "Access-only interactive CAD/PIP report workflow. The public app can return preliminary First Nation contact reports, but the consultation-area boundary geometry is not displayed or offered as a downloadable public layer.",
       "sourcePackage": {
         "id": "3ccd3081-92b8-4578-8dd1-89d85be0ee5e",
         "name": "profiles-of-indigenous-peoples-pip-consultation-areas-public-map-service",
