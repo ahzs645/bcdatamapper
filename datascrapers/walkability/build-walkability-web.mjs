@@ -1,10 +1,16 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import * as turf from '@turf/turf'
 
-const OUTPUT_DIR = 'public/data/walkability'
+const WALKABILITY_DIR = path.dirname(fileURLToPath(import.meta.url))
+const OUTPUT_DIR = path.join(WALKABILITY_DIR, 'output')
 const OUTPUT_GEOJSON = `${OUTPUT_DIR}/community_walkability.geojson`
 const OUTPUT_MANIFEST = `${OUTPUT_DIR}/manifest.json`
+
+function walkabilityUrl(filePath) {
+  return `/data/walkability/${path.relative(OUTPUT_DIR, filePath).split(path.sep).join('/')}`
+}
 
 const SOURCES = {
   communities: {
@@ -50,7 +56,7 @@ const SOURCES = {
   supplementalManifest: {
     label: 'Local Walkability supplemental manifest',
     url: 'local:/data/walkability/supplemental/manifest.json',
-    path: 'public/data/walkability/supplemental/manifest.json',
+    path: `${OUTPUT_DIR}/supplemental/manifest.json`,
   },
 }
 
@@ -312,7 +318,7 @@ async function main() {
   const manifest = {
     generatedAt: new Date().toISOString(),
     geography: 'City of Prince George community boundaries',
-    output: `/${OUTPUT_GEOJSON.replace(/^public\//, '')}`,
+    output: walkabilityUrl(OUTPUT_GEOJSON),
     sourcePolicy: 'Base variants are web-source-only recalculations from CityPG ArcGIS REST layers and ICBC public crash exports. The supplemented local variant additionally uses imported layers from the local Walkability reconstruction folder. The 2017 pedestrian-network study extraction is used to choose variant concepts and proximity-oriented metric families.',
     variants: VARIANTS,
     metrics: [

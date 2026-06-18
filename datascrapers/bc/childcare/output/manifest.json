@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-06-17T21:54:53.110Z",
+  "coverage": "Prince George, BC",
+  "outputs": {
+    "walkabilitySupplement": "/data/walkability/supplemental/bc_childcare_locations.geojson",
+    "walkabilitySource": "/data/walkability/source/data/supplemental/bc_childcare_locations.geojson"
+  },
+  "sources": {
+    "map": "https://maps.gov.bc.ca/ess/hm/ccf/",
+    "arcgisLayer": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/mpcm/bcgwpub/MapServer/700",
+    "metadata": "https://catalogue.data.gov.bc.ca/dataset/4cc207cc-ff03-44f8-8c5f-415af5224646",
+    "csvResource": "https://catalogue.data.gov.bc.ca/dataset/4cc207cc-ff03-44f8-8c5f-415af5224646/resource/9a9f14e1-03ea-4a11-936a-6e77b15eeb39/download/childcare_locations.csv"
+  },
+  "featureCount": 156,
+  "license": "Open Government Licence - British Columbia"
+}

@@ -1,9 +1,15 @@
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const OUTPUT_DIR = 'public/data/heat-shade'
-const PAGE_SIZE = 2000
+const HEAT_SHADE_DIR = path.dirname(fileURLToPath(import.meta.url))
+const CITYPG_HEAT_SHADE_SOURCE_DIR = path.join(HEAT_SHADE_DIR, '..', 'citypg', 'source', 'heat-shade')
+const OUTPUT_DIR = path.join(HEAT_SHADE_DIR, 'output')
 const DEFAULT_BBOX = [-123.7, 53.75, -122.45, 54.25]
+
+function heatShadeUrl(filePath) {
+  return `/data/heat-shade/${path.basename(filePath)}`
+}
 
 const CITYPG_LAYERS = [
   {
@@ -11,7 +17,7 @@ const CITYPG_LAYERS = [
     name: 'CityPG trees',
     kind: 'shadeVector',
     url: 'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/OpenData_ParkData/FeatureServer/0',
-    output: `${OUTPUT_DIR}/citypg_trees.geojson`,
+    file: 'citypg_trees.geojson',
     source: 'City of Prince George Open Data, OpenData_ParkData/FeatureServer/0',
   },
   {
@@ -19,7 +25,7 @@ const CITYPG_LAYERS = [
     name: 'CityPG park and open spaces',
     kind: 'shadeVector',
     url: 'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/OpenData_ParkData/FeatureServer/12',
-    output: `${OUTPUT_DIR}/citypg_park_open_spaces.geojson`,
+    file: 'citypg_park_open_spaces.geojson',
     source: 'City of Prince George Open Data, OpenData_ParkData/FeatureServer/12',
   },
   {
@@ -27,7 +33,7 @@ const CITYPG_LAYERS = [
     name: 'CityPG intact forest',
     kind: 'shadeVector',
     url: 'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/OpenData_Ecology/FeatureServer/2',
-    output: `${OUTPUT_DIR}/citypg_intact_forest.geojson`,
+    file: 'citypg_intact_forest.geojson',
     source: 'City of Prince George Open Data, OpenData_Ecology/FeatureServer/2',
   },
   {
@@ -35,7 +41,7 @@ const CITYPG_LAYERS = [
     name: 'CityPG community forests',
     kind: 'shadeVector',
     url: 'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/OpenData_OCPLanduse/FeatureServer/37',
-    output: `${OUTPUT_DIR}/citypg_community_forests.geojson`,
+    file: 'citypg_community_forests.geojson',
     source: 'City of Prince George Open Data, OpenData_OCPLanduse/FeatureServer/37',
   },
   {
@@ -43,7 +49,7 @@ const CITYPG_LAYERS = [
     name: 'CityPG OCP community facility',
     kind: 'coolingProxy',
     url: 'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/OpenData_OCPLanduse/FeatureServer/4',
-    output: `${OUTPUT_DIR}/citypg_community_facility.geojson`,
+    file: 'citypg_community_facility.geojson',
     source: 'City of Prince George Open Data, OpenData_OCPLanduse/FeatureServer/4',
   },
   {
@@ -51,7 +57,7 @@ const CITYPG_LAYERS = [
     name: 'CityPG response facilities',
     kind: 'coolingProxy',
     url: 'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/ResponseFacilities/FeatureServer/0',
-    output: `${OUTPUT_DIR}/citypg_response_facilities.geojson`,
+    file: 'citypg_response_facilities.geojson',
     source: 'City of Prince George ArcGIS, ResponseFacilities/FeatureServer/0',
   },
 ]
@@ -74,18 +80,6 @@ function parseBbox(value) {
     .split(',')
     .map((entry) => Number(entry.trim()))
   return parsed.length === 4 && parsed.every(Number.isFinite) ? parsed : DEFAULT_BBOX
-}
-
-function queryUrl(layerUrl, offset) {
-  const params = new URLSearchParams({
-    where: '1=1',
-    outFields: '*',
-    outSR: '4326',
-    f: 'geojson',
-    resultRecordCount: String(PAGE_SIZE),
-    resultOffset: String(offset),
-  })
-  return `${layerUrl}/query?${params.toString()}`
 }
 
 async function fetchJson(url, options) {
@@ -113,42 +107,24 @@ async function fetchJsonWithRetry(url, options, attempts = 3) {
   throw lastError
 }
 
-async function fetchLayer(dataset) {
-  const features = []
-  let offset = 0
-  let template = null
-
-  while (true) {
-    const geojson = await fetchJson(queryUrl(dataset.url, offset))
-    if (geojson.type !== 'FeatureCollection' || !Array.isArray(geojson.features)) {
-      throw new Error(`${dataset.name} did not return a GeoJSON FeatureCollection`)
-    }
-
-    if (!template) template = { ...geojson, features }
-    features.push(...geojson.features)
-    if (geojson.features.length < PAGE_SIZE) break
-    offset += PAGE_SIZE
-  }
-
-  return template ?? { type: 'FeatureCollection', features }
-}
-
-async function fetchCityPgLayers() {
+async function readCityPgSources() {
   const results = []
   for (const dataset of CITYPG_LAYERS) {
-    const geojson = await fetchLayer(dataset)
-    await mkdir(path.dirname(dataset.output), { recursive: true })
-    await writeFile(dataset.output, `${JSON.stringify(geojson)}\n`)
+    const sourcePath = path.join(CITYPG_HEAT_SHADE_SOURCE_DIR, dataset.file)
+    const geojson = JSON.parse(await readFile(sourcePath, 'utf8'))
+    if (geojson.type !== 'FeatureCollection' || !Array.isArray(geojson.features)) {
+      throw new Error(`${sourcePath} is not a GeoJSON FeatureCollection`)
+    }
     results.push({
       id: dataset.id,
       name: dataset.name,
       kind: dataset.kind,
       source: dataset.source,
       url: dataset.url,
-      output: dataset.output,
+      output: heatShadeUrl(sourcePath),
+      snapshotPath: `datascrapers/citypg/source/heat-shade/${dataset.file}`,
       featureCount: geojson.features.length,
     })
-    console.log(`${dataset.name}: wrote ${geojson.features.length} features to ${dataset.output}`)
   }
   return results
 }
@@ -223,7 +199,8 @@ async function fetchLandsatScenes({ years, bbox, maxCloud }) {
     kind: 'historicalNdviLst',
     source: 'Microsoft Planetary Computer STAC API, landsat-c2-l2',
     url: 'https://planetarycomputer.microsoft.com/api/stac/v1',
-    output,
+    output: heatShadeUrl(output),
+    path: heatShadeUrl(output),
     sceneCount: scenes.length,
     years,
     maxCloud,
@@ -240,7 +217,7 @@ async function main() {
   const maxCloud = Number(getArg('max-cloud', 30))
   const bbox = parseBbox(getArg('bbox', DEFAULT_BBOX.join(',')))
 
-  const vectorSources = await fetchCityPgLayers()
+  const vectorSources = await readCityPgSources()
   const landsatSource = await fetchLandsatScenes({ years, bbox, maxCloud })
   const manifest = {
     generatedAt: new Date().toISOString(),

@@ -8,6 +8,7 @@ __pycache__/
 *.py[cod]
 build/
 dist/
+tmp/
 public/data/census/variables/
 public/data/bc-assessment/
 public/data/canue/bc/annual/*.csv

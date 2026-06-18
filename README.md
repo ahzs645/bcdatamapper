@@ -12,22 +12,40 @@ scripts, writes app-ready outputs to:
 
 Set `PGMAPS_ROOT=/path/to/PGMaps` to target a different PGMaps checkout.
 
+Committed deploy snapshots for PGMaps live beside the source or scraper that owns
+them, usually as:
+
+```text
+datascrapers/<domain>/output
+```
+
+PGMaps assembles those outputs into its own `public/data` directory before local
+dev and GitHub Pages builds, so the browser-facing URLs remain `/data/...` while
+the bulky source-controlled data is owned by this submodule. Source snapshots and
+archives should stay near the scraper that owns them, for example
+`datascrapers/citypg/source/public_gis`, `datascrapers/walkability/source`,
+`datascrapers/transit/source`, `datascrapers/bc/flood/archive`,
+`data-sources/healthdata/*/output`, and `datascrapers/native-land/snapshot`.
+
 ## Scraper Catalog
 
 These commands are run from this repo, or through PGMaps' delegated `npm run`
-commands. Unless noted otherwise, outputs are written into the target PGMaps
-checkout under `public/data`.
+commands. Scraper-owned outputs should live under `datascrapers/*/output`,
+`datascrapers/*/source`, or `data-sources/*`; PGMaps assembles the browser-facing
+`public/data` tree from those outputs.
 
 | Area | Commands | Source | Main outputs |
 | --- | --- | --- | --- |
-| City of Prince George base layers | `citypg:sync` | City of Prince George ArcGIS services | `public/data/citypg/` |
+| City of Prince George base layers | `citypg:sync`, `citypg:business-licences:sync`, `citypg:heat-shade:sync` | City of Prince George ArcGIS services | `public/data/citypg/`, `datascrapers/citypg/source/business-licences/`, `datascrapers/citypg/source/heat-shade/` |
 | ICBC crashes | `icbc:sync` | ICBC Tableau crash workbook/data endpoints | `public/data/icbc/` |
-| Heat and shade | `heat-shade:sync` | CityPG tree, park, forest, facility, and Landsat-related sources | `public/data/heat-shade/` |
+| Heat and shade | `heat-shade:sync` | CityPG heat/shade snapshots plus Landsat metadata | `public/data/heat-shade/` |
 | BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
+| HealthyPlan PG | `healthyplan-pg:sync`, `healthyplan-pg:sync:education`, `healthyplan-pg:sync:citypg-business` | BC Data Catalogue education CSVs, CityPG-owned business licence snapshots, OSM Overpass, and BC Address Geocoder via shared mapping utilities | `datascrapers/healthyplan-pg/output/` |
 | BC freshwater watersheds | `watersheds:sync`, `watersheds:dev` | BC Freshwater Atlas / watershed geospatial sources | `public/data/boundaries/BCFWA/` |
 | BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
 | BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
 | Indigenous acknowledgement support sources | `indigenous:sync` | BC CAD/PIP metadata, BCGW First Nation community/treaty layers, BC reserve admin boundaries, and Canada First Nations Location | `public/data/indigenous/` |
+| BC child care map | `bc:childcare:sync` | DataBC Child Care Map Data ArcGIS layer used by the BC child care map | `datascrapers/bc/childcare/output/` |
 | BC drought | `drought:sync`, `drought:canonical` | BC drought region/status feeds | `public/data/drought/` |
 | BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
 | BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
@@ -40,8 +58,8 @@ checkout under `public/data`.
 | CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
 | Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
 | BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `public/data/bc-assessment/` |
-| Northern Health food inspection data | `food-health:refresh`, `food-health:geocode` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `public/data/restaurants.json` |
-| Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap` | CityPG layers, ICBC crashes, transit stops, and supplemental walkability inputs | `public/data/walkability/` |
+| Northern Health food inspection data | `food-health:refresh`, `food-health:geocode`, `food-health:bc-geocoder-check` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `datascrapers/food-health/output/`, `datascrapers/food-health/cache/` |
+| Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap` | CityPG layers, ICBC crashes, transit-owned stop snapshots, BC child care output, and supplemental walkability inputs | `public/data/walkability/` |
 
 Scraper-related documentation lives in `docs/`:
 
@@ -49,6 +67,10 @@ Scraper-related documentation lives in `docs/`:
 - DriveBC event normalization and strict bridge definitions.
 - BC River Forecast Centre flood-advisory normalization and strict bridge definitions.
 - Canada network availability source inventory and carrier vector/raster findings.
+
+Shared location helpers live under `datascrapers/bc/geocoder/`, including BC
+Address Geocoder query/cache/GeoJSON helpers, Overpass queries, OSM address
+extraction, and name/address matching.
 
 ## Native Land Digital Snapshot
 
@@ -184,11 +206,14 @@ npm run food-health:refresh
 npm run food-health:geocode
 ```
 
-The refresh command updates `public/data/restaurants.json` incrementally and saves progress after each restaurant. The geocode command fills missing coordinates in the same file.
+The refresh command updates `datascrapers/food-health/output/restaurants.json`
+incrementally and saves progress after each restaurant. The geocode command fills
+missing coordinates in the same file. PGMaps copies that output into
+`public/data/restaurants.json` during the app data sync.
 
 Manual restaurant categories and researched coordinates are kept outside the scraped file:
 
-- `public/data/restaurant-classifications.json`
-- `public/data/restaurant-location-overrides.json`
+- `datascrapers/food-health/output/restaurant-classifications.json`
+- `datascrapers/food-health/output/restaurant-location-overrides.json`
 
 The app merges both files at load time, so future scrape refreshes do not remove category or location corrections.

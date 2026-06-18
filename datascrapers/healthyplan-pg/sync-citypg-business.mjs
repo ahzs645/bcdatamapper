@@ -1,18 +1,28 @@
-import { pathToFileURL } from 'node:url'
+import { readFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import {
-  bcAddressQuery,
-  bcGeocodeFeatureProperties,
   BC_ADDRESS_GEOCODER_URL,
-  geocodeBcAddressQueries,
-  isAcceptedBcGeocode,
-  normalizeBcAddress,
+  buildBcGeocodedPointCollection,
+  fetchOverpassElements,
+  findRecordsByName,
+  indexRecordsByName,
+  matchRecordsToPointFeatures,
+  normalizePlaceName,
+  osmAddressText,
+  OVERPASS_URL,
+  overpassElementPoint,
 } from '../bc/geocoder/bc-address-geocoder.mjs'
-import { countBy, fetchJson, OUTPUT_ROOT, slug, writeJson } from './lib/shared.mjs'
+import { countBy, OUTPUT_ROOT, writeJson } from './lib/shared.mjs'
 
 export const CITYPG_BUSINESS_LAYER =
   'https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/Business_License/FeatureServer/0'
 
-export const OVERPASS_URL = 'https://overpass-api.de/api/interpreter'
+const HEALTHYPLAN_DIR = path.dirname(fileURLToPath(import.meta.url))
+const BCDATAMAPPER_ROOT = path.join(HEALTHYPLAN_DIR, '..', '..')
+const CITYPG_BUSINESS_LICENCES_PATH =
+  process.env.CITYPG_BUSINESS_LICENCES_PATH ??
+  path.join(HEALTHYPLAN_DIR, '..', 'citypg', 'source', 'business-licences', 'business_licences_detailed.json')
 const BC_GEOCODER_CACHE = `${OUTPUT_ROOT}/business_bc_geocode_cache.json`
 const BC_GEOCODER_DELAY_MS = Number(process.env.BC_GEOCODER_DELAY_MS ?? 75)
 const BC_GEOCODER_MIN_SCORE = Number(process.env.BC_GEOCODER_MIN_SCORE ?? 75)
@@ -27,56 +37,29 @@ area["name"="Prince George"]["boundary"="administrative"]->.a;
 );
 out tags center qt;`
 
-async function fetchBusinessLicences() {
-  const all = []
-  let offset = 0
-  const pageSize = 1000
+function sourcePath(filePath) {
+  return path.relative(BCDATAMAPPER_ROOT, filePath).split(path.sep).join('/')
+}
 
-  while (true) {
-    const params = new URLSearchParams({
-      where: '1=1',
-      outFields: 'LicenceNumber,DateFrom,DateTo,TradeName,LicenceDesc,LicenceCategory,Unit,Address,StreeName',
-      returnGeometry: 'false',
-      f: 'json',
-      resultRecordCount: String(pageSize),
-      resultOffset: String(offset),
-    })
-    const data = await fetchJson(`${CITYPG_BUSINESS_LAYER}/query?${params.toString()}`)
-    const features = data.features ?? []
-    all.push(...features.map((feature) => feature.attributes ?? {}))
-    if (features.length < pageSize) break
-    offset += features.length
+async function loadBusinessLicences() {
+  try {
+    return JSON.parse(await readFile(CITYPG_BUSINESS_LICENCES_PATH, 'utf8'))
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error
+    throw new Error(
+      `Missing CityPG detailed business licence snapshot at ${CITYPG_BUSINESS_LICENCES_PATH}. Run npm --prefix vendor/bcdatamapper run citypg:business-licences:sync first.`,
+    )
   }
-
-  return all
 }
 
 async function fetchOsmPois() {
-  const body = new URLSearchParams({ data: OSM_POI_QUERY })
-  const data = await fetchJson(OVERPASS_URL, {
-    method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    body,
-  })
-  return data.elements ?? []
+  return fetchOverpassElements(OSM_POI_QUERY)
 }
 
 function normalizeBusinessName(value) {
-  return slug(value)
-    .replace(/\b(ltd|limited|inc|corp|corporation|co|company|the|canada|bc|b-c)\b/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-}
-
-function normalizeAddress(value) {
-  return normalizeBcAddress(value)
-}
-
-function osmAddressText(tags) {
-  if (tags['addr:full']) return tags['addr:full']
-  return [tags['addr:unit'], tags['addr:housenumber'], tags['addr:street']]
-    .filter((part) => part != null && part !== '')
-    .join(' ')
+  return normalizePlaceName(value, {
+    stopWords: ['ltd', 'limited', 'inc', 'corp', 'corporation', 'co', 'company', 'the', 'canada', 'bc', 'b-c'],
+  })
 }
 
 function classifyBusiness(row) {
@@ -130,27 +113,15 @@ function addressText(row) {
 }
 
 function findBusinessMatches(osmFeature, businessRowsByName) {
-  const normalized = normalizeBusinessName(osmFeature.properties.name)
-  if (!normalized) return []
-  const exact = businessRowsByName.get(normalized) ?? []
-  if (exact.length) return exact
-
-  const tokens = normalized.split('-').filter((token) => token.length > 2)
-  if (!tokens.length) return []
-  const candidates = []
-  for (const [key, rows] of businessRowsByName) {
-    const keyTokens = key.split('-')
-    const overlap = tokens.filter((token) => keyTokens.includes(token)).length
-    if (overlap >= Math.min(2, tokens.length)) candidates.push(...rows)
-  }
-  return candidates.slice(0, 5)
+  return findRecordsByName(businessRowsByName, osmFeature.properties.name, {
+    stopWords: ['ltd', 'limited', 'inc', 'corp', 'corporation', 'co', 'company', 'the', 'canada', 'bc', 'b-c'],
+  })
 }
 
 function buildOsmFeature(element, index, businessRowsByName) {
   const tags = element.tags ?? {}
-  const latitude = element.lat ?? element.center?.lat
-  const longitude = element.lon ?? element.center?.lon
-  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null
+  const point = overpassElementPoint(element)
+  if (!point) return null
 
   const classification = classifyOsm(tags)
   const properties = {
@@ -168,7 +139,7 @@ function buildOsmFeature(element, index, businessRowsByName) {
   }
   const feature = {
     type: 'Feature',
-    geometry: { type: 'Point', coordinates: [longitude, latitude] },
+    geometry: { type: 'Point', coordinates: [point.longitude, point.latitude] },
     properties,
   }
   const cityMatches = findBusinessMatches(feature, businessRowsByName)
@@ -202,125 +173,48 @@ function buildBusinessCandidate(row, index) {
 }
 
 function buildOsmLocationMatches(businessCandidates, osmFeatures) {
-  const osmByName = new Map()
-  const osmByAddress = new Map()
-
-  for (const feature of osmFeatures) {
-    const nameKey = normalizeBusinessName(feature.properties.name)
-    const addressKey = normalizeAddress(feature.properties.address)
-    if (nameKey) osmByName.set(nameKey, [...(osmByName.get(nameKey) ?? []), feature])
-    if (addressKey) osmByAddress.set(addressKey, [...(osmByAddress.get(addressKey) ?? []), feature])
-  }
-
-  const matchedFeatures = []
-  const matchedLicenceNumbers = new Set()
-
-  for (const business of businessCandidates) {
-    const nameKey = normalizeBusinessName(business.name)
-    const addressKey = normalizeAddress(business.address)
-    const nameMatches = nameKey ? osmByName.get(nameKey) ?? [] : []
-    const addressMatches = addressKey ? osmByAddress.get(addressKey) ?? [] : []
-    const candidates = new Map()
-
-    for (const feature of nameMatches) {
-      candidates.set(feature.properties.id, {
-        feature,
-        matchMethod: 'exact_name',
-        locationConfidence: 'medium',
-        score: 75,
-      })
-    }
-
-    for (const feature of addressMatches) {
-      const existing = candidates.get(feature.properties.id)
-      candidates.set(feature.properties.id, {
-        feature,
-        matchMethod: existing ? 'exact_name_and_address' : 'exact_address',
-        locationConfidence: existing ? 'high' : 'medium',
-        score: existing ? 100 : 85,
-      })
-    }
-
-    const best = [...candidates.values()].sort((a, b) => b.score - a.score)[0]
-    if (!best || matchedLicenceNumbers.has(business.licenceNumber)) continue
-
-    matchedLicenceNumbers.add(business.licenceNumber)
-    matchedFeatures.push({
-      type: 'Feature',
-      geometry: best.feature.geometry,
-      properties: {
-        ...business,
-        locationSource: 'openstreetmap_overpass',
-        locationConfidence: best.locationConfidence,
-        locationMatchMethod: best.matchMethod,
-        matchedOsmId: best.feature.properties.osmId,
-        matchedOsmType: best.feature.properties.osmType,
-        matchedOsmName: best.feature.properties.name,
-        matchedOsmAddress: best.feature.properties.address,
-        matchedOsmTags: best.feature.properties.osmTags,
-      },
-    })
-  }
-
-  return {
-    type: 'FeatureCollection',
-    features: matchedFeatures,
-  }
-}
-
-function geocoderQueryForBusiness(business) {
-  return bcAddressQuery(business.address)
+  return matchRecordsToPointFeatures(businessCandidates, osmFeatures, {
+    getRecordId: (business) => business.licenceNumber,
+    normalizeName: normalizeBusinessName,
+    buildProperties: (business, best) => ({
+      ...business,
+      locationSource: 'openstreetmap_overpass',
+      locationConfidence: best.locationConfidence,
+      locationMatchMethod: best.matchMethod,
+      matchedOsmId: best.feature.properties.osmId,
+      matchedOsmType: best.feature.properties.osmType,
+      matchedOsmName: best.feature.properties.name,
+      matchedOsmAddress: best.feature.properties.address,
+      matchedOsmTags: best.feature.properties.osmTags,
+    }),
+  })
 }
 
 async function buildBcGeocodedLocations(businessCandidates) {
-  const uniqueQueries = [...new Set(businessCandidates.map(geocoderQueryForBusiness).filter(Boolean))]
-  const geocoded = await geocodeBcAddressQueries(uniqueQueries, {
+  return buildBcGeocodedPointCollection(businessCandidates, {
     cachePath: BC_GEOCODER_CACHE,
     delayMs: BC_GEOCODER_DELAY_MS,
     minScore: BC_GEOCODER_MIN_SCORE,
-  })
-
-  const features = []
-  for (const business of businessCandidates) {
-    const query = geocoderQueryForBusiness(business)
-    const match = geocoded.cache[query]
-    const score = Number(match?.properties?.score ?? 0)
-    if (!isAcceptedBcGeocode(match, { minScore: BC_GEOCODER_MIN_SCORE })) continue
-    features.push({
-      type: 'Feature',
-      geometry: match.geometry,
-      properties: {
+    getAddress: (business) => business.address,
+    buildProperties: (business, match) => {
+      const score = Number(match?.properties?.score ?? 0)
+      return {
         ...business,
         locationSource: 'bc_address_geocoder',
         locationConfidence: score >= 95 ? 'high' : 'medium',
         locationMatchMethod: 'address_geocode',
-        ...bcGeocodeFeatureProperties(match),
-      },
-    })
-  }
-
-  return {
-    cache: geocoded.cache,
-    requested: geocoded.requested,
-    uniqueQueryCount: geocoded.uniqueQueryCount,
-    collection: {
-      type: 'FeatureCollection',
-      features,
+      }
     },
-  }
+  })
 }
 
 export async function buildBusinessPois() {
-  const businessRows = await fetchBusinessLicences()
+  const businessRows = await loadBusinessLicences()
   const osmElements = await fetchOsmPois()
-  const businessRowsByName = new Map()
   const businessCandidates = businessRows.map(buildBusinessCandidate)
-
-  for (const row of businessRows) {
-    const key = normalizeBusinessName(row.TradeName)
-    if (!key) continue
-    businessRowsByName.set(key, [...(businessRowsByName.get(key) ?? []), row])
-  }
+  const businessRowsByName = indexRecordsByName(businessRows, (row) => row.TradeName, {
+    stopWords: ['ltd', 'limited', 'inc', 'corp', 'corporation', 'co', 'company', 'the', 'canada', 'bc', 'b-c'],
+  })
 
   const features = osmElements
     .map((element, index) => buildOsmFeature(element, index, businessRowsByName))
@@ -354,6 +248,7 @@ export async function buildBusinessPois() {
     sourceStats: {
       citypgBusinessLicence: {
         url: CITYPG_BUSINESS_LAYER,
+        snapshotPath: sourcePath(CITYPG_BUSINESS_LICENCES_PATH),
         totalRows: businessRows.length,
         usefulCandidateRows: usefulBusinessCandidates.length,
         matchedToOsmByName: matchedLicenceNumbers.size,

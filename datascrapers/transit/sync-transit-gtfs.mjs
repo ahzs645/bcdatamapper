@@ -2,14 +2,18 @@ import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 
+const TRANSIT_DIR = path.dirname(fileURLToPath(import.meta.url))
+const BCDATAMAPPER_DIR = path.join(TRANSIT_DIR, '..', '..')
 const GTFS_URL =
   process.env.PG_GTFS_URL || 'https://bct.tmix.se/Tmix.Cap.TdExport.WebApi/gtfs/?operatorIds=22'
-const SUMMARY_OUTPUT = 'public/data/transit/prince_george_gtfs_summary.json'
-const ROUTES_OUTPUT = 'public/data/transit/prince_george_gtfs_routes.geojson'
-const SEGMENTS_OUTPUT = 'public/data/transit/prince_george_gtfs_route_segments.geojson'
-const BUNDLES_OUTPUT = 'public/data/transit/prince_george_gtfs_route_bundles.geojson'
-const ROADS_OUTPUT = 'public/data/citypg/roads.geojson'
+const SUMMARY_OUTPUT = path.join(TRANSIT_DIR, 'output', 'prince_george_gtfs_summary.json')
+const ROUTES_OUTPUT = path.join(TRANSIT_DIR, 'output', 'prince_george_gtfs_routes.geojson')
+const SEGMENTS_OUTPUT = path.join(TRANSIT_DIR, 'output', 'prince_george_gtfs_route_segments.geojson')
+const BUNDLES_OUTPUT = path.join(TRANSIT_DIR, 'output', 'prince_george_gtfs_route_bundles.geojson')
+const STOPS_SOURCE_OUTPUT = path.join(TRANSIT_DIR, 'source', 'bc_transit_pg_stops.geojson')
+const ROADS_OUTPUT = path.join(BCDATAMAPPER_DIR, 'datascrapers', 'citypg', 'output', 'roads.geojson')
 const ROAD_LAYER_URL =
   'https://gishub.princegeorge.ca/server/rest/services/GroupMapServices/Transportation_Infrastructure/MapServer/37'
 const PAGE_SIZE = 2000
@@ -62,40 +66,177 @@ zip_path = sys.argv[1]
 roads_path = sys.argv[2]
 with zipfile.ZipFile(zip_path) as z:
     def rows(name):
+        if name not in z.namelist():
+            return []
         with z.open(name) as f:
             return list(csv.DictReader((line.decode('utf-8-sig') for line in f)))
 
     routes = rows('routes.txt')
     trips = rows('trips.txt')
+    stops = rows('stops.txt')
     shapes = rows('shapes.txt')
     stop_times = rows('stop_times.txt')
+    calendar = rows('calendar.txt')
 
-events = defaultdict(int)
-first = {}
-last = {}
+weekday_service_ids = {
+    (row.get('service_id') or '').strip()
+    for row in calendar
+    if any((row.get(day) or '').strip() == '1' for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
+}
+if not weekday_service_ids:
+    weekday_service_ids = {(row.get('service_id') or '').strip() for row in trips if (row.get('service_id') or '').strip()}
+
+events_by_service = defaultdict(lambda: defaultdict(int))
+first_by_service = defaultdict(dict)
+last_by_service = defaultdict(dict)
+route_by_trip = {}
+service_by_trip = {}
+route_short_by_id = {}
+routes_by_stop = defaultdict(set)
+for row in routes:
+    route_id = (row.get('route_id') or '').strip()
+    if route_id:
+        route_short_by_id[route_id] = (row.get('route_short_name') or route_id.replace('-PRG', '')).strip()
+
+for row in trips:
+    trip_id = (row.get('trip_id') or '').strip()
+    route_id = (row.get('route_id') or '').strip()
+    service_id = (row.get('service_id') or '').strip()
+    if trip_id and route_id:
+        route_by_trip[trip_id] = route_id
+    if trip_id and service_id:
+        service_by_trip[trip_id] = service_id
+
 for row in stop_times:
     stop_id = (row.get('stop_id') or '').strip()
     time = (row.get('arrival_time') or row.get('departure_time') or '').strip()
-    if not stop_id or ':' not in time:
+    trip_id = (row.get('trip_id') or '').strip()
+    route_id = route_by_trip.get(trip_id)
+    service_id = service_by_trip.get(trip_id)
+    if stop_id and route_id:
+        routes_by_stop[stop_id].add(route_short_by_id.get(route_id, route_id))
+    if not stop_id or not service_id or service_id not in weekday_service_ids or ':' not in time:
         continue
     parts = time.split(':')
     try:
         seconds = int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
     except Exception:
         continue
-    events[stop_id] += 1
-    first[stop_id] = min(first.get(stop_id, seconds), seconds)
-    last[stop_id] = max(last.get(stop_id, seconds), seconds)
+    events_by_service[stop_id][service_id] += 1
+    first_by_service[stop_id][service_id] = min(first_by_service[stop_id].get(service_id, seconds), seconds)
+    last_by_service[stop_id][service_id] = max(last_by_service[stop_id].get(service_id, seconds), seconds)
+
+def busiest_weekday(stop_id):
+    service_counts = events_by_service.get(stop_id, {})
+    if not service_counts:
+        return '', 0, 0
+    service_id, count = max(service_counts.items(), key=lambda item: (item[1], item[0]))
+    span = max(0, (last_by_service[stop_id][service_id] - first_by_service[stop_id][service_id]) / 3600)
+    return service_id, count, span
 
 summary = []
-for stop_id, count in events.items():
-    span = max(0, (last[stop_id] - first[stop_id]) / 3600)
+for stop_id in sorted(events_by_service):
+    service_id, count, span = busiest_weekday(stop_id)
     summary.append({
         'stopId': stop_id,
         'weekdayTrips': count,
         'serviceSpanHours': round(span, 2),
     })
 summary.sort(key=lambda item: item['stopId'])
+
+def frequency_band(count):
+    if count >= 37:
+        return 5
+    if count >= 29:
+        return 4
+    if count >= 20:
+        return 3
+    if count >= 15:
+        return 2
+    return 1
+
+def route_sort_key(value):
+    return (int(value), value) if value.isdigit() else (9999, value)
+
+def to_utm10_nad83(lon, lat):
+    # EPSG:26910 is NAD83 / UTM zone 10N. WGS84 GTFS coordinates are close
+    # enough for these source helper fields; GeoJSON geometry remains lon/lat.
+    a = 6378137.0
+    f = 1 / 298.257222101
+    e2 = f * (2 - f)
+    ep2 = e2 / (1 - e2)
+    k0 = 0.9996
+    lon0 = math.radians(-123)
+    lat_rad = math.radians(lat)
+    lon_rad = math.radians(lon)
+    sin_lat = math.sin(lat_rad)
+    cos_lat = math.cos(lat_rad)
+    tan_lat = math.tan(lat_rad)
+    n = a / math.sqrt(1 - e2 * sin_lat * sin_lat)
+    t = tan_lat * tan_lat
+    c = ep2 * cos_lat * cos_lat
+    aa = cos_lat * (lon_rad - lon0)
+    m = a * (
+        (1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 ** 3 / 256) * lat_rad
+        - (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 ** 3 / 1024) * math.sin(2 * lat_rad)
+        + (15 * e2 * e2 / 256 + 45 * e2 ** 3 / 1024) * math.sin(4 * lat_rad)
+        - (35 * e2 ** 3 / 3072) * math.sin(6 * lat_rad)
+    )
+    easting = k0 * n * (
+        aa
+        + (1 - t + c) * aa ** 3 / 6
+        + (5 - 18 * t + t * t + 72 * c - 58 * ep2) * aa ** 5 / 120
+    ) + 500000
+    northing = k0 * (
+        m
+        + n * tan_lat * (
+            aa * aa / 2
+            + (5 - t + 9 * c + 4 * c * c) * aa ** 4 / 24
+            + (61 - 58 * t + t * t + 600 * c - 330 * ep2) * aa ** 6 / 720
+        )
+    )
+    return easting, northing
+
+stop_features = []
+for row in stops:
+    stop_id = (row.get('stop_id') or '').strip()
+    try:
+        lat = float(row.get('stop_lat') or '')
+        lon = float(row.get('stop_lon') or '')
+    except Exception:
+        continue
+    if not stop_id or not math.isfinite(lat) or not math.isfinite(lon):
+        continue
+    route_names = sorted(routes_by_stop.get(stop_id, set()), key=route_sort_key)
+    _, trips_per_busiest_weekday, _ = busiest_weekday(stop_id)
+    x_26910, y_26910 = to_utm10_nad83(lon, lat)
+    stop_features.append({
+        'type': 'Feature',
+        'geometry': {'type': 'Point', 'coordinates': [lon, lat]},
+        'properties': {
+            'stop_id': stop_id,
+            'stop_name': (row.get('stop_name') or '').strip(),
+            'stop_code': (row.get('stop_code') or stop_id).strip(),
+            'lon': lon,
+            'lat': lat,
+            'x_26910': x_26910,
+            'y_26910': y_26910,
+            'trips_per_busiest_weekday': trips_per_busiest_weekday,
+            'frequency_band': frequency_band(trips_per_busiest_weekday),
+            'route_count': len(route_names),
+            'routes': ','.join(route_names),
+        },
+    })
+stop_features.sort(key=lambda feature: (
+    -feature['properties']['trips_per_busiest_weekday'],
+    feature['properties']['stop_id'],
+))
+stops_geojson = {
+    'type': 'FeatureCollection',
+    'name': 'bc_transit_pg_stops',
+    'crs': {'type': 'name', 'properties': {'name': 'EPSG:4326'}},
+    'features': stop_features,
+}
 
 route_by_id = {}
 for row in routes:
@@ -561,20 +702,23 @@ bundle_features.sort(key=lambda feature: (
 ))
 bundles_geojson = {'type': 'FeatureCollection', 'features': bundle_features}
 
-print(json.dumps({'summary': summary, 'routes': routes_geojson, 'segments': segments_geojson, 'bundles': bundles_geojson}, separators=(',', ':')))
+print(json.dumps({'summary': summary, 'stops': stops_geojson, 'routes': routes_geojson, 'segments': segments_geojson, 'bundles': bundles_geojson}, separators=(',', ':')))
 `
 
   const result = spawnSync('python3', ['-c', python, zipPath, roadsPath], { encoding: 'utf8', maxBuffer: 50 * 1024 * 1024 })
   if (result.status !== 0) throw new Error(result.stderr || 'Failed to parse GTFS feed')
   const payload = JSON.parse(result.stdout)
   await mkdir(path.dirname(SUMMARY_OUTPUT), { recursive: true })
+  await mkdir(path.dirname(STOPS_SOURCE_OUTPUT), { recursive: true })
   await writeFile(SUMMARY_OUTPUT, `${JSON.stringify(payload.summary)}\n`)
+  await writeFile(STOPS_SOURCE_OUTPUT, `${JSON.stringify(payload.stops)}\n`)
   await writeFile(ROUTES_OUTPUT, `${JSON.stringify(payload.routes)}\n`)
   await writeFile(SEGMENTS_OUTPUT, `${JSON.stringify(payload.segments)}\n`)
   await writeFile(BUNDLES_OUTPUT, `${JSON.stringify(payload.bundles)}\n`)
   await mkdir(path.dirname(ROADS_OUTPUT), { recursive: true })
   await writeFile(ROADS_OUTPUT, `${JSON.stringify(roadsGeojson)}\n`)
   console.log(`GTFS summary: wrote ${SUMMARY_OUTPUT}`)
+  console.log(`GTFS stops: wrote ${payload.stops.features.length} features to ${STOPS_SOURCE_OUTPUT}`)
   console.log(`GTFS routes: wrote ${ROUTES_OUTPUT}`)
   console.log(`GTFS route segments: wrote ${SEGMENTS_OUTPUT}`)
   console.log(`GTFS route bundles: wrote ${BUNDLES_OUTPUT}`)

@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
-import { pathToFileURL } from 'node:url'
+import path from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import {
   bcAddressQuery,
   bcGeocodeFeatureProperties,
@@ -10,9 +11,10 @@ import {
 } from '../bc/geocoder/bc-address-geocoder.mjs'
 import { writeJson } from '../healthyplan-pg/lib/shared.mjs'
 
-const DEFAULT_RESTAURANTS = 'public/data/restaurants.json'
-const DEFAULT_OUTPUT = 'public/data/food-health/restaurants_bc_geocoder_check.json'
-const DEFAULT_CACHE = 'public/data/food-health/restaurants_bc_geocode_cache.json'
+const FOOD_HEALTH_DIR = path.dirname(fileURLToPath(import.meta.url))
+const DEFAULT_RESTAURANTS = path.join(FOOD_HEALTH_DIR, 'output', 'restaurants.json')
+const DEFAULT_OUTPUT = path.join(FOOD_HEALTH_DIR, 'output', 'geocoding', 'restaurants_bc_geocoder_check.json')
+const DEFAULT_CACHE = path.join(FOOD_HEALTH_DIR, 'cache', 'restaurants_bc_geocode_cache.json')
 const DELAY_MS = Number(process.env.BC_GEOCODER_DELAY_MS ?? 75)
 const MIN_SCORE = Number(process.env.BC_GEOCODER_MIN_SCORE ?? 75)
 

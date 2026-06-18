@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-06-17T23:14:45.872Z",
+  "source": {
+    "name": "City of Prince George Business License",
+    "url": "https://services2.arcgis.com/CnkB6jCzAsyli34z/arcgis/rest/services/Business_License/FeatureServer/0",
+    "fields": [
+      "LicenceNumber",
+      "DateFrom",
+      "DateTo",
+      "TradeName",
+      "LicenceDesc",
+      "LicenceCategory",
+      "Unit",
+      "Address",
+      "StreeName"
+    ]
+  },
+  "outputs": {
+    "businessLicencesDetailed": "source/business-licences/business_licences_detailed.json"
+  },
+  "rowCount": 3239
+}

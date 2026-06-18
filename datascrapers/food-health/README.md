@@ -16,7 +16,7 @@ pip install -r datascrapers/food-health/requirements.txt
 npm run food-health:refresh
 ```
 
-This runs the incremental scraper for Prince George and writes directly to `public/data/restaurants.json`. The scraper resumes from existing records and saves progress after each restaurant.
+This runs the incremental scraper for Prince George and writes to `datascrapers/food-health/output/restaurants.json`. The scraper resumes from existing records and saves progress after each restaurant.
 
 ## Geocode Missing Restaurant Coordinates
 
@@ -24,14 +24,14 @@ This runs the incremental scraper for Prince George and writes directly to `publ
 npm run food-health:geocode
 ```
 
-This uses OpenStreetMap Nominatim, skips restaurants that already have coordinates, and saves progress back to `public/data/restaurants.json`.
+This uses OpenStreetMap Nominatim, skips restaurants that already have coordinates, and saves progress back to `datascrapers/food-health/output/restaurants.json`.
 
 ## Useful Direct Commands
 
 ```bash
 python3 datascrapers/food-health/healthspace_pg_restaurants.py --list-cities
-python3 datascrapers/food-health/fetch_incremental.py --city "Prince George" --output public/data/restaurants.json --delay 5
-python3 datascrapers/food-health/geocode_restaurants.py --file public/data/restaurants.json --delay 1.5
+python3 datascrapers/food-health/fetch_incremental.py --city "Prince George" --output datascrapers/food-health/output/restaurants.json --delay 5
+python3 datascrapers/food-health/geocode_restaurants.py --file datascrapers/food-health/output/restaurants.json --delay 1.5
 ```
 
 The HealthSpace scraper writes `healthspace_response.html` and `healthspace_debug.html` while debugging parser responses; those files are ignored by git.

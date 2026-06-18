@@ -1,7 +1,10 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-export const OUTPUT_ROOT = 'public/data/healthyplan-pg'
+const HEALTHYPLAN_DIR = path.dirname(fileURLToPath(import.meta.url))
+
+export const OUTPUT_ROOT = path.join(HEALTHYPLAN_DIR, '..', 'output')
 export const PG_CITY = 'prince george'
 
 export function splitCsvLine(line) {

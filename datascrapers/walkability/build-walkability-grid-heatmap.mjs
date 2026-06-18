@@ -1,18 +1,36 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import 'jsts/dist/jsts.min.js'
 
 const jsts = globalThis.jsts
 const jstsReader = new jsts.io.GeoJSONReader()
 const jstsWriter = new jsts.io.GeoJSONWriter()
 
-const SOURCE_ROOT = process.env.WALKABILITY_SOURCE_ROOT ?? 'public/data/walkability/source'
-const GIS_DIR = `${SOURCE_ROOT}/data/public_gis`
+const WALKABILITY_DIR = path.dirname(fileURLToPath(import.meta.url))
+const BCDATAMAPPER_DIR = path.join(WALKABILITY_DIR, '..', '..')
+const SOURCE_ROOT = process.env.WALKABILITY_SOURCE_ROOT ?? path.join(WALKABILITY_DIR, 'source')
+const GIS_DIR = process.env.CITYPG_PUBLIC_GIS_DIR ?? path.join(WALKABILITY_DIR, '..', 'citypg', 'source', 'public_gis')
+const TRANSIT_SOURCE_DIR = process.env.TRANSIT_SOURCE_DIR ?? path.join(WALKABILITY_DIR, '..', 'transit', 'source')
+const BC_CHILDCARE_GEOJSON =
+  process.env.BC_CHILDCARE_GEOJSON ??
+  path.join(WALKABILITY_DIR, '..', 'bc', 'childcare', 'output', 'bc_childcare_locations.geojson')
 const SUPP_DIR = `${SOURCE_ROOT}/data/supplemental`
-const OUTPUT_DIR = 'public/data/walkability/heatmap'
+const OUTPUT_DIR = path.join(WALKABILITY_DIR, 'output', 'heatmap')
 const OUTPUT_GRID = `${OUTPUT_DIR}/citywide_mi_grid.json`
 const OUTPUT_MANIFEST = `${OUTPUT_DIR}/manifest.json`
 const CELL_M = 30
 const NODATA = 0
+
+function scraperPath(filePath) {
+  if (path.isAbsolute(filePath) && filePath.startsWith(BCDATAMAPPER_DIR)) {
+    return path.relative(BCDATAMAPPER_DIR, filePath).split(path.sep).join('/')
+  }
+  if (path.isAbsolute(filePath) && filePath.startsWith(WALKABILITY_DIR)) {
+    return `datascrapers/walkability/${path.relative(WALKABILITY_DIR, filePath).split(path.sep).join('/')}`
+  }
+  return filePath
+}
 
 const PROX = [[400, 1], [250, 2], [100, 2]]
 const BAND_COLORS = {
@@ -63,9 +81,9 @@ const LAYERS = {
   poi_supplement: { source: 'geojson', file: `${SOURCE_ROOT}/mobility_reconstruction/missing_poi_supplement.geojson` },
   osm_crossings: { source: 'geojson', file: `${SUPP_DIR}/osm_crossings.geojson` },
   report_crosswalks: { source: 'geojson', file: `${SUPP_DIR}/report_class3_crosswalks_geocoded.geojson` },
-  bc_childcare: { source: 'geojson', file: `${SUPP_DIR}/bc_childcare_locations.geojson` },
-  intercity_bus: { source: 'geojson', file: `${SUPP_DIR}/intercity_bus_stops.geojson` },
-  gtfs_stops: { source: 'geojson', file: `${SUPP_DIR}/bc_transit_pg_stops.geojson` },
+  bc_childcare: { source: 'geojson', file: BC_CHILDCARE_GEOJSON },
+  intercity_bus: { source: 'geojson', file: `${TRANSIT_SOURCE_DIR}/intercity_bus_stops.geojson` },
+  gtfs_stops: { source: 'geojson', file: `${TRANSIT_SOURCE_DIR}/bc_transit_pg_stops.geojson` },
   census_da_age: { source: 'geojson', file: `${SUPP_DIR}/census_da_age.geojson` },
 }
 
@@ -621,7 +639,7 @@ async function main() {
     defaultVariant: 'report_fidelity',
     variants,
     grids,
-    sourceRoot: SOURCE_ROOT,
+    sourceRoot: scraperPath(SOURCE_ROOT),
     caveats: [
       'Grid cells are scored citywide inside the Prince George community-boundary union and are not restricted to sidewalk, walkway, or trail assets.',
       'The scoring logic is ported to an all-JS Node/JSTS projected metre-grid rebuild from the local reconstruction factor definitions and repo-local source layers.',

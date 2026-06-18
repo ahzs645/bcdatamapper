@@ -1,8 +1,15 @@
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const SOURCE_ROOT = '/Users/ahmadjalil/Downloads/Walkability'
-const OUTPUT_ROOT = 'public/data/walkability'
+const WALKABILITY_DIR = path.dirname(fileURLToPath(import.meta.url))
+const BCDATAMAPPER_DIR = path.join(WALKABILITY_DIR, '..', '..')
+const SOURCE_ROOT = process.env.WALKABILITY_SOURCE_ROOT ?? path.join(WALKABILITY_DIR, 'source')
+const TRANSIT_SOURCE_DIR = process.env.TRANSIT_SOURCE_DIR ?? path.join(WALKABILITY_DIR, '..', 'transit', 'source')
+const BC_CHILDCARE_GEOJSON =
+  process.env.BC_CHILDCARE_GEOJSON ??
+  path.join(WALKABILITY_DIR, '..', 'bc', 'childcare', 'output', 'bc_childcare_locations.geojson')
+const OUTPUT_ROOT = path.join(WALKABILITY_DIR, 'output')
 const SUPPLEMENTAL_OUTPUT = `${OUTPUT_ROOT}/supplemental`
 const ASSET_OUTPUT = `${OUTPUT_ROOT}/assets`
 const HEATMAP_OUTPUT = `${OUTPUT_ROOT}/heatmap`
@@ -23,13 +30,13 @@ const DIRECT_GEOJSON = [
   {
     id: 'bc_childcare_locations',
     label: 'BC childcare locations',
-    source: `${SOURCE_ROOT}/data/supplemental/bc_childcare_locations.geojson`,
+    source: BC_CHILDCARE_GEOJSON,
     output: `${SUPPLEMENTAL_OUTPUT}/bc_childcare_locations.geojson`,
   },
   {
     id: 'intercity_bus_stops',
     label: 'Intercity bus stops',
-    source: `${SOURCE_ROOT}/data/supplemental/intercity_bus_stops.geojson`,
+    source: `${TRANSIT_SOURCE_DIR}/intercity_bus_stops.geojson`,
     output: `${SUPPLEMENTAL_OUTPUT}/intercity_bus_stops.geojson`,
   },
   {
@@ -119,6 +126,20 @@ function parseMaybeNumber(value) {
   if (value == null || value === '') return value
   const numeric = Number(value)
   return Number.isFinite(numeric) ? numeric : value
+}
+
+function walkabilityUrl(filePath) {
+  return `/data/walkability/${path.relative(OUTPUT_ROOT, filePath).split(path.sep).join('/')}`
+}
+
+function scraperPath(filePath) {
+  if (path.isAbsolute(filePath) && filePath.startsWith(BCDATAMAPPER_DIR)) {
+    return path.relative(BCDATAMAPPER_DIR, filePath).split(path.sep).join('/')
+  }
+  if (path.isAbsolute(filePath) && filePath.startsWith(WALKABILITY_DIR)) {
+    return `datascrapers/walkability/${path.relative(WALKABILITY_DIR, filePath).split(path.sep).join('/')}`
+  }
+  return filePath
 }
 
 async function readGeoJson(filePath) {
@@ -288,8 +309,8 @@ async function main() {
     copiedGeojson.push({
       id: file.id,
       label: file.label,
-      path: `/${file.output.replace(/^public\//, '')}`,
-      sourcePath: file.source,
+      path: walkabilityUrl(file.output),
+      sourcePath: scraperPath(file.source),
       featureCount: data.features.length,
     })
   }
@@ -301,8 +322,8 @@ async function main() {
     copiedTables.push({
       id: file.id,
       label: file.label,
-      path: `/${file.output.replace(/^public\//, '')}`,
-      sourcePath: file.source,
+      path: walkabilityUrl(file.output),
+      sourcePath: scraperPath(file.source),
       rowCount,
     })
   }
@@ -318,7 +339,7 @@ async function main() {
     await copyFile(source, output)
     heatmapVariants.push({
       ...variant,
-      path: `/${output.replace(/^public\//, '')}`,
+      path: walkabilityUrl(output),
     })
   }
 
@@ -326,14 +347,14 @@ async function main() {
   const heatmapManifest = {
     ...existingHeatmapManifest,
     generatedAt: new Date().toISOString(),
-    sourceRoot: SOURCE_ROOT,
+    sourceRoot: scraperPath(SOURCE_ROOT),
     defaultLayer: existingHeatmapManifest?.citywideGrid ? 'citywideGrid' : 'assetBinned',
     assetBinned: assetHeatmap,
     cellSizeM: heatmapSourceSummary.cell_size_m,
     defaultVariant: existingHeatmapManifest?.citywideGrid?.defaultVariant ?? 'asset_binned',
     coordinates: HEATMAP_IMAGE_COORDINATES,
     variants: heatmapVariants,
-    sourceSummaryPath: HEATMAP_SOURCE_SUMMARY,
+    sourceSummaryPath: scraperPath(HEATMAP_SOURCE_SUMMARY),
     caveats: [
       'The default layer is a Node-generated binned asset layer built from imported mobility-index tables and repo-local geometry, not a census/community aggregation.',
       'The PNG raster overlays are retained as reconstruction reference variants and are not used for the default calculation layer.',
@@ -345,7 +366,7 @@ async function main() {
 
   const manifest = {
     generatedAt: new Date().toISOString(),
-    sourceRoot: SOURCE_ROOT,
+    sourceRoot: scraperPath(SOURCE_ROOT),
     copiedGeojson,
     copiedTables,
     joinedAssets: {
