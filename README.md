@@ -52,6 +52,8 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
 | Canada cell coverage tile sources | `cell-coverage:sync` | Rogers, TELUS, Bell, Videotron, and Freedom Mobile public coverage maps | `public/data/cell-coverage/manifest.json` |
 | Canada network availability | `network-availability:sync` | CRTC, NRCan, ISED, and carrier coverage-map API findings | `public/data/network-availability/manifest.json` |
+| ECCC forecast zones | `npm run aqmap:forecast-zones` from PGMaps | ECCC public standard forecast zones API | `datascrapers/eccc/output/forecast-zones.geojson` and generated `public/data/aqmap/forecast-zones.geojson` |
+| DriveBC historical events | Manual/source archive | DriveBC historical event CSV exports | `data-sources/drivebc/historical/` |
 | Native Land public metadata probe | `native-land:probe` | Native-Land.ca public map/search metadata | `data-sources/native-land/` |
 | Native Land API GeoJSON bundled snapshot | `native-land:geojson`, `native-land:copy` | Native Land Digital key-gated GeoJSON API | `datascrapers/native-land/snapshot/` and `public/data/native-land/` |
 | CIMD | `cimd:sync` | Canadian Index of Multiple Deprivation data joined to local census boundaries | `public/data/cimd/` |
@@ -71,6 +73,14 @@ Scraper-related documentation lives in `docs/`:
 Shared location helpers live under `datascrapers/bc/geocoder/`, including BC
 Address Geocoder query/cache/GeoJSON helpers, Overpass queries, OSM address
 extraction, and name/address matching.
+
+## DriveBC Historical Events
+
+The canonical historical archive is the yearly `csv.gz` files in
+`data-sources/drivebc/historical/`. These are already strongly compressed while
+remaining transparent source exports. Database or Parquet forms should be treated
+as generated derivatives for query performance and kept out of git unless there
+is a specific app-serving contract for them.
 
 ## Native Land Digital Snapshot
 

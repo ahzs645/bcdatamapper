@@ -15,3 +15,11 @@ public/data/canue/bc/annual/*.csv
 public/data/canue/bc/parquet-experiment/
 healthspace_response.html
 healthspace_debug.html
+
+# Generated source inventories can exceed GitHub's blob size limits.
+data-sources/drivebc/historical/schema-inventory.json
+data-sources/drivebc/historical/*.sqlite
+data-sources/drivebc/historical/*.sqlite.gz
+data-sources/drivebc/historical/*.db
+data-sources/drivebc/historical/*.db.gz
+data-sources/drivebc/historical/*.parquet
