@@ -52,7 +52,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
 | Canada cell coverage tile sources | `cell-coverage:sync` | Rogers, TELUS, Bell, Videotron, and Freedom Mobile public coverage maps | `public/data/cell-coverage/manifest.json` |
 | Canada network availability | `network-availability:sync` | CRTC, NRCan, ISED, and carrier coverage-map API findings | `public/data/network-availability/manifest.json` |
-| ECCC forecast zones | `npm run aqmap:forecast-zones` from PGMaps | ECCC public standard forecast zones API | `datascrapers/eccc/output/forecast-zones.geojson` and generated `public/data/aqmap/forecast-zones.geojson` |
+| ECCC AQMap support layers | `npm run aqmap:forecast-zones` from PGMaps; `node scripts/build-aqmap-pm25-example.mjs` from PGMaps | ECCC public standard forecast zones API and GeoMet RAQDPS PM2.5 WCS | `datascrapers/eccc/output/forecast-zones.geojson`, `datascrapers/eccc/output/modelled-pm25-example.geojson.gz`, and generated `public/data/aqmap/` |
 | DriveBC historical events | Manual/source archive | DriveBC historical event CSV exports | `data-sources/drivebc/historical/` |
 | Native Land public metadata probe | `native-land:probe` | Native-Land.ca public map/search metadata | `data-sources/native-land/` |
 | Native Land API GeoJSON bundled snapshot | `native-land:geojson`, `native-land:copy` | Native Land Digital key-gated GeoJSON API | `datascrapers/native-land/snapshot/` and `public/data/native-land/` |
