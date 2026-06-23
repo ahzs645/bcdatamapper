@@ -63,6 +63,7 @@
     "healthyplan-pg:sync:citypg-business": "npm run citypg:business-licences:sync && ./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-citypg-business.mjs",
     "walkability:build": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-web.mjs",
     "walkability:import-supplements": "./run-in-pgmaps.sh node datascrapers/walkability/import-walkability-supplements.mjs",
+    "eccc:pm25-snapshot": "./run-in-pgmaps.sh node datascrapers/eccc/build-aqmap-pm25-snapshot.mjs",
     "walkability:build-grid-heatmap": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-grid-heatmap.mjs"
   },
   "dependencies": {
