@@ -1,62 +1,152 @@
 {
-  "generatedAt": "2026-05-26T04:22:07.329Z",
+  "generatedAt": "2026-06-23T20:27:22.384Z",
   "title": "Canada network availability vector sources",
-  "description": "Vector-first source inventory for Canadian mobile network availability. CRTC/NRCan sources provide national coverage geometry; ISED provides licensed site points; most carrier public maps expose raster tiles only.",
+  "description": "Vector-first source inventory and app-ready CRTC CartoVista snapshots for Canadian mobile network availability. The CRTC NPAS CartoVista LTE/5G layers are already dissolved multipart polygons, which render as connected coverage regions; the NRCan layer is retained as a source reference but is grid/cell-like.",
   "coverage": "Canada",
-  "license": "CRTC/NRCan Open Canada sources use the Open Government Licence - Canada; carrier and ISED sources are source-dependent and require attribution/terms review before redistribution.",
-  "recommendedUse": "Use CRTC 5G/LTE/LTE-provider/road-coverage ZIPs or the NRCan FGDB/Esri service for app map availability. Use ISED site points as infrastructure context. Use carrier tile metadata only where a source is raster-only.",
+  "sourcePageUrl": "https://crtc.gc.ca/eng/television/services/geo.htm",
+  "cartovistaAppUrl": "https://crtc.gc.ca/cartovista/Alert_En/",
+  "cartovistaConfigUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/NPAS_2022BY_Config.xml",
+  "license": "CRTC/NRCan/Open Canada sources use Government of Canada public data terms; carrier and ISED sources are source-dependent and require attribution/terms review before redistribution.",
+  "recommendedUse": "Use crtc-wireless-coverage-current.geojson.gz for PGMaps wireless coverage rendering. Use the per-layer CartoVista snapshots for broadcast and road overlays. Use historical CRTC over-years ZIPs when a year slider is needed.",
+  "historicalCoverage": "Yes. The CRTC over-years packages expose 5G coverage for 2020-2024 and LTE coverage for 2013-2024. The NPAS CartoVista map itself uses the current YE2024 LTE/5G coverage layers.",
   "datasets": [
     {
-      "id": "crtc-5g-coverage",
-      "title": "5G Coverage",
+      "id": "crtc-npas-cartovista-shapefile",
+      "title": "CRTC NPAS map shapefile bundle",
       "source": "CRTC",
-      "category": "coverage",
+      "category": "source-bundle",
+      "geometry": "mixed",
+      "formats": [
+        "Shapefile ZIP"
+      ],
+      "url": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "notes": "Official downloadable GIS package for the CRTC NPAS map. Includes current 5G Coverage, LTE Coverage, road coverage, broadcast contours, and station/service-provider points.",
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-npas-cartovista-kml",
+      "title": "CRTC NPAS map KML bundle",
+      "source": "CRTC",
+      "category": "source-bundle",
+      "geometry": "mixed",
+      "formats": [
+        "KML ZIP"
+      ],
+      "url": "https://crtc.gc.ca/cartovista/Alert_Src/Kml_En.zip",
+      "notes": "Official KML package for the CRTC NPAS map.",
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 22341464,
+        "lastModified": "Fri, 12 Dec 2025 15:56:17 GMT",
+        "etag": "\"b1379cd97f6bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-npas-cartovista-tab",
+      "title": "CRTC NPAS map MapInfo TAB bundle",
+      "source": "CRTC",
+      "category": "source-bundle",
+      "geometry": "mixed",
+      "formats": [
+        "MapInfo TAB ZIP"
+      ],
+      "url": "https://crtc.gc.ca/cartovista/Alert_Src/Tab_En.zip",
+      "notes": "Official MapInfo TAB package for the CRTC NPAS map.",
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 19922651,
+        "lastModified": "Fri, 12 Dec 2025 16:00:01 GMT",
+        "etag": "\"e4773f5f806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-5g-over-years-2024",
+      "title": "5G coverage over years to 2024",
+      "source": "CRTC",
+      "category": "historical-coverage",
       "geometry": "polygon",
       "formats": [
-        "KML",
-        "MapInfo TAB"
+        "KML ZIP",
+        "MapInfo TAB ZIP"
       ],
       "url": "https://web.crtc.gc.ca/cartovista/5GOverYearsYE2024_Src/5GOverYears_DL_V1.zip",
-      "notes": "National vector polygons for 5G coverage by reporting year.",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "notes": "Historical CRTC 5G coverage package discovered from the CRTC CartoVista source inventory. Contains KML and MapInfo files for 2020-2024.",
       "http": {
         "ok": true,
         "status": 200,
         "contentType": "application/x-zip-compressed",
         "contentLength": 2518233,
         "lastModified": "Mon, 24 Nov 2025 21:27:50 GMT",
-        "etag": "\"265802f895ddc1:0\""
+        "etag": "\"265802f895ddc1:0\"",
+        "corsAllowOrigin": null
       }
     },
     {
-      "id": "crtc-lte-coverage",
-      "title": "LTE Coverage",
+      "id": "crtc-lte-over-years-2024",
+      "title": "LTE coverage over years to 2024",
       "source": "CRTC",
-      "category": "coverage",
+      "category": "historical-coverage",
       "geometry": "polygon",
       "formats": [
-        "KML",
-        "MapInfo TAB"
+        "KML ZIP",
+        "MapInfo TAB ZIP"
       ],
       "url": "https://web.crtc.gc.ca/cartovista/LTEOverTheYearsYE2024_Src/LTEOverTheYears_DL_V1.zip",
-      "notes": "National vector polygons for LTE coverage by reporting year.",
+      "years": [
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "notes": "Historical CRTC LTE coverage package discovered from the CRTC CartoVista source inventory. Contains KML and MapInfo files for 2013-2024.",
       "http": {
         "ok": true,
         "status": 200,
         "contentType": "application/x-zip-compressed",
         "contentLength": 9153464,
         "lastModified": "Mon, 24 Nov 2025 21:33:35 GMT",
-        "etag": "\"84e67fd895ddc1:0\""
+        "etag": "\"84e67fd895ddc1:0\"",
+        "corsAllowOrigin": null
       }
     },
     {
-      "id": "crtc-lte-providers",
-      "title": "LTE Providers",
+      "id": "crtc-lte-providers-2024",
+      "title": "LTE provider-count coverage to 2024",
       "source": "CRTC",
       "category": "provider-count",
       "geometry": "polygon",
       "formats": [
-        "KML",
-        "MapInfo TAB"
+        "KML ZIP",
+        "MapInfo TAB ZIP"
       ],
       "url": "https://web.crtc.gc.ca/cartovista/LTEProviderCountYE2024_Src/LTEProviderCount_DL_V1.zip",
       "notes": "National vector polygons with LTE network/provider count. This does not identify individual provider names.",
@@ -66,18 +156,19 @@
         "contentType": "application/x-zip-compressed",
         "contentLength": 2381145,
         "lastModified": "Mon, 24 Nov 2025 21:31:20 GMT",
-        "etag": "\"d5fad6ac895ddc1:0\""
+        "etag": "\"d5fad6ac895ddc1:0\"",
+        "corsAllowOrigin": null
       }
     },
     {
-      "id": "crtc-lte-road-coverage",
-      "title": "LTE Road Coverage",
+      "id": "crtc-lte-road-coverage-2024",
+      "title": "LTE road coverage to 2024",
       "source": "CRTC",
       "category": "road-coverage",
       "geometry": "line",
       "formats": [
-        "KML",
-        "MapInfo TAB"
+        "KML ZIP",
+        "MapInfo TAB ZIP"
       ],
       "url": "https://web.crtc.gc.ca/cartovista/RoadsWithAndWithoutLTE_src/LTERoadsYE2024.zip",
       "notes": "National vector road line coverage with LTE and non-LTE road classes.",
@@ -87,7 +178,8 @@
         "contentType": "application/x-zip-compressed",
         "contentLength": 23813557,
         "lastModified": "Mon, 27 Oct 2025 16:01:24 GMT",
-        "etag": "\"19302df25a47dc1:0\""
+        "etag": "\"19302df25a47dc1:0\"",
+        "corsAllowOrigin": null
       }
     },
     {
@@ -107,7 +199,8 @@
         "contentType": "application/x-zip-compressed",
         "contentLength": 32317554,
         "lastModified": "Tue, 12 May 2026 15:32:23 GMT",
-        "etag": "\"2eb7d48724e2dc1:0\""
+        "etag": "\"2eb7d48724e2dc1:0\"",
+        "corsAllowOrigin": null
       }
     },
     {
@@ -122,14 +215,15 @@
       "url": "https://ftp.maps.canada.ca/pub/nrcan_rncan/Geographical-maps_Carte-geographique/Wireless_Data_Network-Reseau_de_donnees_sans_fil/AtlasofCanada_Communications_AtlasduCanada.gdb.zip",
       "apiUrl": "https://maps-cartes.services.geo.ca/server_serveur/rest/services/NRCan/Wireless_Data_Network_Reseau_donnees_sans_fil/MapServer/0",
       "expectedContentLength": 10943606,
-      "notes": "Open Canada/NRCan hosted vector layer derived from CRTC wireless data network reporting.",
+      "notes": "Open Canada/NRCan hosted layer derived from CRTC wireless data reporting. This is grid/cell-like and less suitable than the dissolved CRTC NPAS LTE/5G layers for the PGMaps coverage overlay.",
       "http": {
         "ok": true,
         "status": 200,
         "contentType": "application/zip",
         "contentLength": 10943606,
         "lastModified": "Tue, 24 Mar 2026 18:17:41 GMT",
-        "etag": "\"a6fc76-64dc92abc1b40\""
+        "etag": "\"a6fc76-64dc92abc1b40\"",
+        "corsAllowOrigin": null
       }
     },
     {
@@ -148,9 +242,472 @@
         "ok": true,
         "status": 200,
         "contentType": "application/zip",
-        "contentLength": 56536273,
-        "lastModified": "Wed, 06 May 2026 15:12:50 GMT",
-        "etag": "\"35eacd1-6512798d60080\""
+        "contentLength": 55789734,
+        "lastModified": "Tue, 02 Jun 2026 17:29:09 GMT",
+        "etag": "\"35348a6-65348a60ec340\"",
+        "corsAllowOrigin": "*"
+      }
+    }
+  ],
+  "cartovistaResources": [
+    {
+      "id": "crtc-wireless-coverage-current",
+      "title": "CRTC dissolved LTE and 5G wireless coverage",
+      "source": "CRTC",
+      "category": "coverage",
+      "geometry": "mixed polygon",
+      "formats": [
+        "GeoJSON gzip"
+      ],
+      "path": "crtc-wireless-coverage-current.geojson.gz",
+      "years": [
+        2024
+      ],
+      "featureCount": 2,
+      "rawBytes": 6140484,
+      "gzipBytes": 969230,
+      "notes": "App-ready local snapshot combining the CRTC CartoVista _5G_YE2024 and LTE_YE2024 dissolved multipart polygons. This is the preferred PGMaps network overlay source."
+    },
+    {
+      "id": "crtc-5g-coverage-current",
+      "title": "5G coverage",
+      "technology": "5G",
+      "category": "coverage",
+      "fileName": "_5G_YE2024.json",
+      "shapefileName": "5G Coverage",
+      "outputName": "crtc-5g-coverage-current.geojson.gz",
+      "year": 2024,
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/_5G_YE2024.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-5g-coverage-current.geojson.gz",
+      "geometry": "MultiPolygon",
+      "featureCount": 1,
+      "bbox": [
+        -133.512477,
+        41.728718,
+        -52.42351,
+        59.283558
+      ],
+      "rawBytes": 2352252,
+      "gzipBytes": 371571,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-lte-coverage-current",
+      "title": "LTE coverage",
+      "technology": "LTE",
+      "category": "coverage",
+      "fileName": "LTE_YE2024.json",
+      "shapefileName": "LTE Coverage",
+      "outputName": "crtc-lte-coverage-current.geojson.gz",
+      "year": 2024,
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/LTE_YE2024.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-lte-coverage-current.geojson.gz",
+      "geometry": "MultiPolygon",
+      "featureCount": 1,
+      "bbox": [
+        -141.068317,
+        41.54885300000001,
+        -52.189825,
+        76.478668
+      ],
+      "rawBytes": 3788303,
+      "gzipBytes": 597618,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-major-roads-with-lte-5g",
+      "title": "Major roads with LTE or 5G",
+      "technology": "LTE/5G",
+      "category": "road-coverage",
+      "fileName": "LTE_Roads_comp_rev_02.json",
+      "shapefileName": "Major roads with LTE or 5G",
+      "outputName": "crtc-major-roads-with-lte-5g.geojson.gz",
+      "year": 2024,
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/LTE_Roads_comp_rev_02.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-major-roads-with-lte-5g.geojson.gz",
+      "geometry": "LineString",
+      "featureCount": 157175,
+      "bbox": [
+        -140.981573,
+        42.066417,
+        -52.688399,
+        68.363502
+      ],
+      "rawBytes": 91280851,
+      "gzipBytes": 14484824,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-major-roads-without-lte-5g",
+      "title": "Major roads without LTE and 5G",
+      "technology": "No LTE/5G",
+      "category": "road-coverage",
+      "fileName": "Non_LTE_Roads_comp_rev_01.json",
+      "shapefileName": "Major roads without LTE and 5G",
+      "outputName": "crtc-major-roads-without-lte-5g.geojson.gz",
+      "year": 2024,
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/Non_LTE_Roads_comp_rev_01.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-major-roads-without-lte-5g.geojson.gz",
+      "geometry": "LineString",
+      "featureCount": 6527,
+      "bbox": [
+        -141,
+        44.915819,
+        -52.916387,
+        68.306971
+      ],
+      "rawBytes": 6720135,
+      "gzipBytes": 1434054,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-broadcasting-distribution-undertakings",
+      "title": "Broadcasting distribution undertakings",
+      "category": "broadcast-provider",
+      "fileName": "BroadcastingDistributionUndertakings_2.json",
+      "shapefileName": "Broadcasting Distribution Undertakings",
+      "outputName": "crtc-broadcasting-distribution-undertakings.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/BroadcastingDistributionUndertakings_2.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-broadcasting-distribution-undertakings.geojson.gz",
+      "geometry": "Point",
+      "featureCount": 349,
+      "bbox": [
+        -135.0568,
+        42.05,
+        -52.7126,
+        62.454
+      ],
+      "rawBytes": 133387,
+      "gzipBytes": 8117,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-dtv-contours",
+      "title": "DTV contours",
+      "category": "broadcast-contour",
+      "fileName": "DTVContours.json",
+      "shapefileName": "DTV Contours",
+      "outputName": "crtc-dtv-contours.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/DTVContours.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-dtv-contours.geojson.gz",
+      "geometry": "Polygon",
+      "featureCount": 210,
+      "bbox": [
+        -125.803948,
+        41.540896,
+        -51.731866000000004,
+        62.902928
+      ],
+      "rawBytes": 1930862,
+      "gzipBytes": 669348,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-tv-contours",
+      "title": "TV contours",
+      "category": "broadcast-contour",
+      "fileName": "TVContours.json",
+      "shapefileName": "TV Contours",
+      "outputName": "crtc-tv-contours.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/TVContours.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-tv-contours.geojson.gz",
+      "geometry": "Polygon",
+      "featureCount": 28,
+      "bbox": [
+        -131.615037,
+        44.627474,
+        -60.524654999999996,
+        56.474456
+      ],
+      "rawBytes": 273830,
+      "gzipBytes": 89293,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-fm-contours",
+      "title": "FM contours",
+      "category": "broadcast-contour",
+      "fileName": "FMContours_3.json",
+      "shapefileName": "FM Contours",
+      "outputName": "crtc-fm-contours.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/FMContours_3.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-fm-contours.geojson.gz",
+      "geometry": "Polygon",
+      "featureCount": 2019,
+      "bbox": [
+        -139.955452,
+        41.518952,
+        -51.580487,
+        74.768144
+      ],
+      "rawBytes": 19078516,
+      "gzipBytes": 6091571,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-am-contours-night",
+      "title": "AM contours night",
+      "category": "broadcast-contour",
+      "fileName": "AMContoursNight.json",
+      "shapefileName": "AM Contours (Night)",
+      "outputName": "crtc-am-contours-night.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/AMContoursNight.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-am-contours-night.geojson.gz",
+      "geometry": "Polygon",
+      "featureCount": 175,
+      "bbox": [
+        -140.950881,
+        41.408727,
+        -50.259016,
+        68.681402
+      ],
+      "rawBytes": 1669908,
+      "gzipBytes": 522412,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-am-contours-day",
+      "title": "AM contours day",
+      "category": "broadcast-contour",
+      "fileName": "AMContoursDay.json",
+      "shapefileName": "AM Contours (Day)",
+      "outputName": "crtc-am-contours-day.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/AMContoursDay.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-am-contours-day.geojson.gz",
+      "geometry": "Polygon",
+      "featureCount": 176,
+      "bbox": [
+        -140.950881,
+        41.115803,
+        -50.16281,
+        68.681402
+      ],
+      "rawBytes": 1679316,
+      "gzipBytes": 531682,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-dtv-stations",
+      "title": "DTV stations",
+      "category": "broadcast-station",
+      "fileName": "DTVStations.json",
+      "shapefileName": "DTV Stations",
+      "outputName": "crtc-dtv-stations.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/DTVStations.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-dtv-stations.geojson.gz",
+      "geometry": "Point",
+      "featureCount": 210,
+      "bbox": [
+        -125.24944400000001,
+        42.061389,
+        -52.713333,
+        62.446667
+      ],
+      "rawBytes": 67073,
+      "gzipBytes": 4476,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-tv-stations",
+      "title": "TV stations",
+      "category": "broadcast-station",
+      "fileName": "TVStations.json",
+      "shapefileName": "TV Stations",
+      "outputName": "crtc-tv-stations.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/TVStations.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-tv-stations.geojson.gz",
+      "geometry": "Point",
+      "featureCount": 28,
+      "bbox": [
+        -130.314444,
+        45.203333,
+        -61.01499999999999,
+        56.279167
+      ],
+      "rawBytes": 8732,
+      "gzipBytes": 1014,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-fm-radio-stations",
+      "title": "FM radio stations",
+      "category": "broadcast-station",
+      "fileName": "FMRadioStations_2.json",
+      "shapefileName": "FM Radio Stations",
+      "outputName": "crtc-fm-radio-stations.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/FMRadioStations_2.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-fm-radio-stations.geojson.gz",
+      "geometry": "Point",
+      "featureCount": 2023,
+      "bbox": [
+        -140.87900000000002,
+        42.0097,
+        -52.69890000000001,
+        74.6989
+      ],
+      "rawBytes": 687627,
+      "gzipBytes": 45454,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
+      }
+    },
+    {
+      "id": "crtc-am-radio-stations",
+      "title": "AM radio stations",
+      "category": "broadcast-station",
+      "fileName": "AMRadioStations_2_1.json",
+      "shapefileName": "AM Radio Stations",
+      "outputName": "crtc-am-radio-stations.geojson.gz",
+      "sourceUrl": "https://crtc.gc.ca/cartovista/Alert_En/map/AMRadioStations_2_1.json",
+      "shapefileSourceUrl": "https://crtc.gc.ca/cartovista/Alert_Src/Shape_En.zip",
+      "path": "crtc-am-radio-stations.geojson.gz",
+      "geometry": "Point",
+      "featureCount": 176,
+      "bbox": [
+        -140.885278,
+        42.056944,
+        -52.752778,
+        68.626667
+      ],
+      "rawBytes": 59159,
+      "gzipBytes": 4737,
+      "sourceBundleRawBytes": 31430196,
+      "http": {
+        "ok": true,
+        "status": 200,
+        "contentType": "application/x-zip-compressed",
+        "contentLength": 31430196,
+        "lastModified": "Fri, 12 Dec 2025 15:58:28 GMT",
+        "etag": "\"a5553828806bdc1:0\"",
+        "corsAllowOrigin": null
       }
     }
   ],
