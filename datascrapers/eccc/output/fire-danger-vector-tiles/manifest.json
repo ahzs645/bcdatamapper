@@ -1,0 +1,8 @@
+{
+  "source": "CWFIS WFS public:fdr_current_shp",
+  "generatedAt": "2026-06-23T14:41:35.144Z",
+  "minZoom": 5,
+  "maxZoom": 5,
+  "tileCount": 39,
+  "note": "Tiles are gzip GeoJSON clipped to Web Mercator tile bounds."
+}
