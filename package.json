@@ -32,6 +32,7 @@
     "network-availability:sync": "./run-in-pgmaps.sh node datascrapers/network-availability/sync-network-availability.mjs",
     "network:bell:sync": "./run-in-pgmaps.sh node datascrapers/network/bell/sync-bell-coverage.mjs",
     "network:rogers:probe": "./run-in-pgmaps.sh node datascrapers/network/rogers/probe-rogers-coverage.mjs",
+    "network:rogers:derive": "./run-in-pgmaps.sh node datascrapers/network/rogers/build-rogers-derived-layers.mjs",
     "network:rogers:sync": "./run-in-pgmaps.sh node datascrapers/network/rogers/sync-rogers-coverage.mjs",
     "network:telus:sync": "./run-in-pgmaps.sh node datascrapers/network/telus/sync-telus-coverage.mjs",
     "native-land:probe": "./run-in-pgmaps.sh node datascrapers/native-land/probe-native-land-metadata.mjs",

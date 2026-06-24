@@ -37,6 +37,7 @@ separate vector export elsewhere.
 ```bash
 npm run network:rogers:probe
 npm run network:rogers:sync
+npm run network:rogers:derive
 ```
 
 Useful options:
@@ -125,6 +126,9 @@ Candidate tiles per layer: 7,808.
 
 ```text
 layer      source zooms   pulled zooms   saved tiles   png bytes
+4g5g-only  1-18           3-8            448           4.36 MB
+5g-only    1-18           3-8            448           3.96 MB
+5g+ only   1-18           3-8            357           1.40 MB
 4g5g       1-18           3-8            2,582         11.17 MB
 4g         1-18           3-8            2,582         10.10 MB
 3g         1-18           3-8            2,546         9.50 MB
@@ -133,7 +137,15 @@ nbiot      1-18           3-8            2,475         9.44 MB
 comp_sat   1-18           3-8            3,046         12.07 MB
 ```
 
-Total saved: 15,793 PNG tiles, 62.17 MB of PNG bytes, 0 failed requests.
+Raw pulled source tiles: 15,793 PNG tiles, 62.17 MB of PNG bytes, 0 failed
+requests.
+
+The public Rogers `4g5g` style is not pure 5G. Its own legend contains 5G+,
+5G, and 4G LTE. The local `4g5g-only` layer is the recommended dev-map layer:
+it is derived by subtracting the matching `4g` PNG tile from each `4g5g` PNG
+tile and dropping non-red artifacts. The scraper can also emit `5g-only` and
+`5g-plus-only`, but those are kept as diagnostic layers rather than surfaced in
+the dev map by default.
 
 ## Limits
 
