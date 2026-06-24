@@ -137,9 +137,11 @@ Supporting sources:
 Carrier API finding: TELUS exposes public CARTO MVT coverage tiles that can be
 converted to GeoJSON/PMTiles for TELUS-specific coverage. Rogers, Bell,
 Videotron, and Freedom public maps expose raster PNG tiles in the inspected apps,
-not clean bulk vector coverage polygons. For those carriers, use CRTC/NRCan for
-national vector availability and keep carrier pages as source links or raster tile
-metadata unless approximate raster tracing is explicitly acceptable.
+not clean bulk vector coverage polygons. Bell now has an explicit experimental
+pipeline at `datascrapers/network/bell/` that downloads the public PNG coverage
+tiles and polygonizes non-transparent pixels into approximate GeoJSON. Use
+CRTC/NRCan for official national vector availability, and treat raster-traced
+carrier outputs as approximate comparison layers.
 
 ## CANUE BC Extracts
 

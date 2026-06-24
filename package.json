@@ -30,6 +30,9 @@
     "cell-coverage:sync": "./run-in-pgmaps.sh node datascrapers/cell-coverage/sync-cell-coverage.mjs",
     "ev-charging:sync": "./run-in-pgmaps.sh node datascrapers/ev-charging/sync-ev-charging.mjs",
     "network-availability:sync": "./run-in-pgmaps.sh node datascrapers/network-availability/sync-network-availability.mjs",
+    "network:bell:sync": "./run-in-pgmaps.sh node datascrapers/network/bell/sync-bell-coverage.mjs",
+    "network:rogers:probe": "./run-in-pgmaps.sh node datascrapers/network/rogers/probe-rogers-coverage.mjs",
+    "network:rogers:sync": "./run-in-pgmaps.sh node datascrapers/network/rogers/sync-rogers-coverage.mjs",
     "network:telus:sync": "./run-in-pgmaps.sh node datascrapers/network/telus/sync-telus-coverage.mjs",
     "native-land:probe": "./run-in-pgmaps.sh node datascrapers/native-land/probe-native-land-metadata.mjs",
     "native-land:geojson": "./run-in-pgmaps.sh node datascrapers/native-land/sync-native-land-api-geojson.mjs",
@@ -62,6 +65,8 @@
     "healthyplan-pg:sync": "npm run citypg:business-licences:sync && ./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-healthyplan-pg.mjs",
     "healthyplan-pg:sync:education": "./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-education.mjs",
     "healthyplan-pg:sync:citypg-business": "npm run citypg:business-licences:sync && ./run-in-pgmaps.sh node datascrapers/healthyplan-pg/sync-citypg-business.mjs",
+    "health:statcan-odhf": "./run-in-pgmaps.sh python3 data-sources/healthdata/statcan_odhf/scrape_statcan_odhf.py",
+    "health:place-registry": "cd data-sources/healthdata/health_place_registry && python3 build_health_place_registry.py --sync --export-geojson --export-sites-geojson",
     "walkability:build": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-web.mjs",
     "walkability:import-supplements": "./run-in-pgmaps.sh node datascrapers/walkability/import-walkability-supplements.mjs",
     "eccc:pm25-snapshot": "./run-in-pgmaps.sh node datascrapers/eccc/build-aqmap-pm25-snapshot.mjs",
@@ -77,6 +82,7 @@
     "@turf/turf": "^6.5.0",
     "pbf": "^4.0.1",
     "pmtiles": "^4.4.1",
+    "pngjs": "^7.0.0",
     "rbush": "^4.0.1",
     "shpjs": "^6.2.0"
   }

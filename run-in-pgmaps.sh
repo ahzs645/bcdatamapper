@@ -18,7 +18,7 @@ fi
 resolved=()
 for arg in "$@"; do
   case "$arg" in
-    datascrapers/*|docs/*)
+    datascrapers/*|data-sources/*|docs/*)
       resolved+=("${repo_dir}/${arg}")
       ;;
     *)
