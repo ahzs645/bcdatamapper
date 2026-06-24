@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-23T20:27:22.384Z",
+  "generatedAt": "2026-06-23T21:58:02.787Z",
   "title": "Canada network availability vector sources",
   "description": "Vector-first source inventory and app-ready CRTC CartoVista snapshots for Canadian mobile network availability. The CRTC NPAS CartoVista LTE/5G layers are already dissolved multipart polygons, which render as connected coverage regions; the NRCan layer is retained as a source reference but is grid/cell-like.",
   "coverage": "Canada",
@@ -264,8 +264,8 @@
         2024
       ],
       "featureCount": 2,
-      "rawBytes": 6140484,
-      "gzipBytes": 969230,
+      "rawBytes": 6140373,
+      "gzipBytes": 969004,
       "notes": "App-ready local snapshot combining the CRTC CartoVista _5G_YE2024 and LTE_YE2024 dissolved multipart polygons. This is the preferred PGMaps network overlay source."
     },
     {
@@ -288,8 +288,8 @@
         -52.42351,
         59.283558
       ],
-      "rawBytes": 2352252,
-      "gzipBytes": 371571,
+      "rawBytes": 2352201,
+      "gzipBytes": 371463,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,
@@ -321,8 +321,8 @@
         -52.189825,
         76.478668
       ],
-      "rawBytes": 3788303,
-      "gzipBytes": 597618,
+      "rawBytes": 3788243,
+      "gzipBytes": 597464,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,
@@ -449,8 +449,8 @@
         -51.731866000000004,
         62.902928
       ],
-      "rawBytes": 1930862,
-      "gzipBytes": 669348,
+      "rawBytes": 1919396,
+      "gzipBytes": 664715,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,
@@ -480,8 +480,8 @@
         -60.524654999999996,
         56.474456
       ],
-      "rawBytes": 273830,
-      "gzipBytes": 89293,
+      "rawBytes": 272274,
+      "gzipBytes": 88668,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,
@@ -511,8 +511,8 @@
         -51.580487,
         74.768144
       ],
-      "rawBytes": 19078516,
-      "gzipBytes": 6091571,
+      "rawBytes": 18966038,
+      "gzipBytes": 6048623,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,
@@ -542,8 +542,8 @@
         -50.259016,
         68.681402
       ],
-      "rawBytes": 1669908,
-      "gzipBytes": 522412,
+      "rawBytes": 1659957,
+      "gzipBytes": 518615,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,
@@ -573,8 +573,8 @@
         -50.16281,
         68.681402
       ],
-      "rawBytes": 1679316,
-      "gzipBytes": 531682,
+      "rawBytes": 1669331,
+      "gzipBytes": 527773,
       "sourceBundleRawBytes": 31430196,
       "http": {
         "ok": true,

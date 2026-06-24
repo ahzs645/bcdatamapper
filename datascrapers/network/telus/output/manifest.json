@@ -1,0 +1,244 @@
+{
+  "generatedAt": "2026-06-24T00:04:20.744Z",
+  "sourcePageUrl": "https://www.telus.com/en/mobility/network/coverage-map",
+  "outputDir": "/Users/ahmadjalil/github/PGMaps/vendor/bcdatamapper/datascrapers/network/telus/output",
+  "requested": {
+    "minZoom": 0,
+    "maxZoom": 5,
+    "concurrency": 1,
+    "delayMs": 500,
+    "retries": 3,
+    "retryDelayMs": 10000,
+    "layers": [
+      "telus-lte",
+      "telus-lte-advanced",
+      "telus-5g",
+      "telus-5g-3500",
+      "telus-hspa",
+      "telus-lte-m"
+    ]
+  },
+  "notes": [
+    "TELUS exposes coverage as CARTO/deck.gl MVT vector tiles behind the public coverage-map app.",
+    "Direct terminal HTTP requests are Cloudflare-blocked in this environment, so this scraper uses a normal Chrome page session and fetches tile URLs inside that page context.",
+    "Raw MVT files are preserved for later comparison/conversion rather than dissolved to GeoJSON here."
+  ],
+  "layers": [
+    {
+      "id": "telus-lte",
+      "label": "LTE",
+      "name": "cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-tileset-1779912989",
+      "cache": "1779913921257",
+      "tilejsonUrl": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset?format=tilejson&name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-tileset-1779912989&cache=1779913921257&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "tileTemplate": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset/{z}/{x}/{y}?name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-tileset-1779912989&partition=0_12_443_1453_736_1526_3999_1&formatTiles=mvt&cache=1779913921257&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -141.001567,
+        41.67655599999999,
+        -52.35013500000001,
+        74.76167
+      ],
+      "vectorLayers": [
+        {
+          "id": "default",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {},
+          "geometry_type": "Polygon"
+        }
+      ],
+      "candidateTilesAtRequestedZooms": 95,
+      "candidateTilesAtNativeZooms": 1064976,
+      "savedTiles": 0,
+      "skippedExistingTiles": 67,
+      "emptyTiles": 28,
+      "failedTiles": 0,
+      "bytes": 0,
+      "failures": [],
+      "previousRun": {
+        "savedTiles": 98,
+        "bytes": 18311335
+      }
+    },
+    {
+      "id": "telus-lte-advanced",
+      "label": "LTE Advanced",
+      "name": "cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-advanced-tileset-1779912963",
+      "cache": "1779913618111",
+      "tilejsonUrl": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset?format=tilejson&name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-advanced-tileset-1779912963&cache=1779913618111&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "tileTemplate": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset/{z}/{x}/{y}?name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-advanced-tileset-1779912963&partition=0_12_457_1453_815_1526_3999_1&formatTiles=mvt&cache=1779913618111&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -139.753532,
+        41.676301,
+        -52.350289,
+        72.819697
+      ],
+      "vectorLayers": [
+        {
+          "id": "default",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {},
+          "geometry_type": "Polygon"
+        }
+      ],
+      "candidateTilesAtRequestedZooms": 81,
+      "candidateTilesAtNativeZooms": 945707,
+      "savedTiles": 54,
+      "skippedExistingTiles": 0,
+      "emptyTiles": 27,
+      "failedTiles": 0,
+      "bytes": 11379771,
+      "failures": [],
+      "previousRun": null
+    },
+    {
+      "id": "telus-5g",
+      "label": "5G",
+      "name": "cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-5g-tileset-1779912967",
+      "cache": "1779913884618",
+      "tilejsonUrl": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset?format=tilejson&name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-5g-tileset-1779912967&cache=1779913884618&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "tileTemplate": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset/{z}/{x}/{y}?name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-5g-tileset-1779912967&partition=0_12_505_1451_1094_1525_3999_1&formatTiles=mvt&cache=1779913884618&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -135.577998,
+        41.74069300000001,
+        -52.55420000000001,
+        63.900676
+      ],
+      "vectorLayers": [
+        {
+          "id": "default",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {},
+          "geometry_type": "Polygon"
+        }
+      ],
+      "candidateTilesAtRequestedZooms": 53,
+      "candidateTilesAtNativeZooms": 544767,
+      "savedTiles": 36,
+      "skippedExistingTiles": 0,
+      "emptyTiles": 17,
+      "failedTiles": 0,
+      "bytes": 17695668,
+      "failures": [],
+      "previousRun": null
+    },
+    {
+      "id": "telus-5g-3500",
+      "label": "5G+ / 3500 MHz",
+      "name": "cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-5g-3500-tileset-1779912930",
+      "cache": "1779913381741",
+      "tilejsonUrl": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset?format=tilejson&name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-5g-3500-tileset-1779912930&cache=1779913381741&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "tileTemplate": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset/{z}/{x}/{y}?name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-5g-3500-tileset-1779912930&partition=0_12_564_1450_1215_1522_3999_1&formatTiles=mvt&cache=1779913381741&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -130.349733,
+        41.909876000000004,
+        -52.60562199999999,
+        58.85374600000001
+      ],
+      "vectorLayers": [
+        {
+          "id": "default",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {},
+          "geometry_type": "Polygon"
+        }
+      ],
+      "candidateTilesAtRequestedZooms": 38,
+      "candidateTilesAtNativeZooms": 363643,
+      "savedTiles": 28,
+      "skippedExistingTiles": 0,
+      "emptyTiles": 10,
+      "failedTiles": 0,
+      "bytes": 2986651,
+      "failures": [],
+      "previousRun": null
+    },
+    {
+      "id": "telus-hspa",
+      "label": "HSPA+",
+      "name": "cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-hspa-tileset-1776278219",
+      "cache": "1776278953170",
+      "tilejsonUrl": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset?format=tilejson&name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-hspa-tileset-1776278219&cache=1776278953170&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "tileTemplate": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset/{z}/{x}/{y}?name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-hspa-tileset-1776278219&partition=0_12_443_1453_736_1526_3999_1&formatTiles=mvt&cache=1776278953170&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -141.001567,
+        41.676556,
+        -52.350187000000005,
+        74.76167
+      ],
+      "vectorLayers": [
+        {
+          "id": "default",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {},
+          "geometry_type": "Polygon"
+        }
+      ],
+      "candidateTilesAtRequestedZooms": 95,
+      "candidateTilesAtNativeZooms": 1064976,
+      "savedTiles": 69,
+      "skippedExistingTiles": 0,
+      "emptyTiles": 26,
+      "failedTiles": 0,
+      "bytes": 12056485,
+      "failures": [],
+      "previousRun": null
+    },
+    {
+      "id": "telus-lte-m",
+      "label": "LTE-M / IoT",
+      "name": "cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-m-tileset-1779912967",
+      "cache": "1779913623017",
+      "tilejsonUrl": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset?format=tilejson&name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-m-tileset-1779912967&cache=1779913623017&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "tileTemplate": "https://www.telus.com/network/tools/coverage-map/api/carto/v3/maps/public-coverage-map/tileset/{z}/{x}/{y}?name=cto-cartobackend-pr-d23fd8.public_telus_coverage_map_pr.coverage-lte-m-tileset-1779912967&partition=0_12_443_1453_736_1526_3999_1&formatTiles=mvt&cache=1779913623017&v=3.4&client=deck-gl-carto&deckglVersion=9.1.2",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -141.001567,
+        41.676556,
+        -52.34984000000001,
+        74.76167
+      ],
+      "vectorLayers": [
+        {
+          "id": "default",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {},
+          "geometry_type": "Polygon"
+        }
+      ],
+      "candidateTilesAtRequestedZooms": 95,
+      "candidateTilesAtNativeZooms": 1064976,
+      "savedTiles": 67,
+      "skippedExistingTiles": 0,
+      "emptyTiles": 28,
+      "failedTiles": 0,
+      "bytes": 13887287,
+      "failures": [],
+      "previousRun": null
+    }
+  ],
+  "totals": {
+    "candidateTilesAtRequestedZooms": 457,
+    "candidateTilesAtNativeZooms": 5049045,
+    "savedTiles": 254,
+    "skippedExistingTiles": 67,
+    "emptyTiles": 136,
+    "failedTiles": 0,
+    "bytes": 58005862
+  }
+}

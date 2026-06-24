@@ -455,6 +455,85 @@ function closeLonLatRing(ring) {
   return [...ring, first]
 }
 
+function ringCentroid(points) {
+  let x = 0
+  let y = 0
+  let count = 0
+  const end = points.length > 1 && points[0][0] === points.at(-1)?.[0] && points[0][1] === points.at(-1)?.[1]
+    ? points.length - 1
+    : points.length
+  for (let i = 0; i < end; i += 1) {
+    x += points[i][0]
+    y += points[i][1]
+    count += 1
+  }
+  return count > 0 ? [x / count, y / count] : points[0]
+}
+
+function normalizeRingTopology(geometry) {
+  if (geometry.type !== 'Polygon' && geometry.type !== 'MultiPolygon') return geometry
+  const sourcePolygons = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates
+  const rings = []
+
+  for (const polygon of sourcePolygons) {
+    for (const ring of polygon) {
+      const closed = closeLonLatRing(ring)
+      const area = Math.abs(ringArea(closed))
+      if (closed.length < 4 || area === 0) continue
+      rings.push({
+        ring: closed,
+        area,
+        bbox: bboxForPoints(closed),
+        point: ringCentroid(closed),
+        parent: -1,
+        depth: 0,
+      })
+    }
+  }
+
+  for (const [index, ring] of rings.entries()) {
+    let parent = null
+    for (const [candidateIndex, candidate] of rings.entries()) {
+      if (candidateIndex === index || candidate.area <= ring.area) continue
+      if (!bboxContains(candidate.bbox, ring.point)) continue
+      if (!pointInRing(ring.point, candidate.ring)) continue
+      if (!parent || candidate.area < parent.area) parent = { ...candidate, index: candidateIndex }
+    }
+    ring.parent = parent?.index ?? -1
+  }
+
+  function depthOf(index, seen = new Set()) {
+    const ring = rings[index]
+    if (!ring || ring.parent === -1 || seen.has(index)) return 0
+    seen.add(index)
+    return depthOf(ring.parent, seen) + 1
+  }
+  for (const [index, ring] of rings.entries()) ring.depth = depthOf(index)
+
+  const polygons = []
+  const polygonByRingIndex = new Map()
+  for (const [index, ring] of rings.entries()) {
+    if (ring.depth % 2 !== 0) continue
+    const polygon = [ring.ring]
+    polygonByRingIndex.set(index, polygon)
+    polygons.push(polygon)
+  }
+
+  for (const ring of rings) {
+    if (ring.depth % 2 === 0) continue
+    let ancestorIndex = ring.parent
+    while (ancestorIndex !== -1 && rings[ancestorIndex]?.depth % 2 !== 0) {
+      ancestorIndex = rings[ancestorIndex]?.parent ?? -1
+    }
+    const polygon = polygonByRingIndex.get(ancestorIndex)
+    if (polygon) polygon.push(ring.ring)
+  }
+
+  return polygons.length === 1
+    ? { type: 'Polygon', coordinates: polygons[0] }
+    : { type: 'MultiPolygon', coordinates: polygons }
+}
+
 function decodePolygonGeometry(rings) {
   const decoded = rings
     .map((ring, index) => {
@@ -607,7 +686,7 @@ function normalizeShapefileCollection(layer, sourceCollection) {
       .filter((feature) => feature.geometry)
       .map((feature, index) => ({
         type: 'Feature',
-        geometry: feature.geometry,
+        geometry: normalizeRingTopology(feature.geometry),
         properties: {
           ...(feature.properties ?? {}),
           id: feature.properties?.UniqueID ?? feature.properties?.id ?? String(index + 1),

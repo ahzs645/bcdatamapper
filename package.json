@@ -30,6 +30,7 @@
     "cell-coverage:sync": "./run-in-pgmaps.sh node datascrapers/cell-coverage/sync-cell-coverage.mjs",
     "ev-charging:sync": "./run-in-pgmaps.sh node datascrapers/ev-charging/sync-ev-charging.mjs",
     "network-availability:sync": "./run-in-pgmaps.sh node datascrapers/network-availability/sync-network-availability.mjs",
+    "network:telus:sync": "./run-in-pgmaps.sh node datascrapers/network/telus/sync-telus-coverage.mjs",
     "native-land:probe": "./run-in-pgmaps.sh node datascrapers/native-land/probe-native-land-metadata.mjs",
     "native-land:geojson": "./run-in-pgmaps.sh node datascrapers/native-land/sync-native-land-api-geojson.mjs",
     "native-land:copy": "./run-in-pgmaps.sh node datascrapers/native-land/copy-native-land-snapshot.mjs",
