@@ -30,6 +30,7 @@
     "cell-coverage:sync": "./run-in-pgmaps.sh node datascrapers/cell-coverage/sync-cell-coverage.mjs",
     "ev-charging:sync": "./run-in-pgmaps.sh node datascrapers/ev-charging/sync-ev-charging.mjs",
     "network-availability:sync": "./run-in-pgmaps.sh node datascrapers/network-availability/sync-network-availability.mjs",
+    "open-litter-map:sync": "./run-in-pgmaps.sh node datascrapers/open-litter-map/sync-open-litter-map-pg.mjs",
     "network:bell:sync": "./run-in-pgmaps.sh node datascrapers/network/bell/sync-bell-coverage.mjs",
     "network:rogers:probe": "./run-in-pgmaps.sh node datascrapers/network/rogers/probe-rogers-coverage.mjs",
     "network:rogers:derive": "./run-in-pgmaps.sh node datascrapers/network/rogers/build-rogers-derived-layers.mjs",

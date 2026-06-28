@@ -1,0 +1,803 @@
+{
+  "source": "OpenLitterMap",
+  "sourcePage": "https://openlittermap.com/global?lat=53.894055&lon=-122.766838&zoom=12.00",
+  "sourceApi": "https://openlittermap.com/api/points",
+  "dedication": "This Prince George litter map is dedicated to the memory of Frank Ogiamien, whose OpenLitterMap contributions make up much of the local record.",
+  "sourceLicense": "OpenLitterMap public map data; verify current reuse terms before redistribution.",
+  "coverage": "OpenLitterMap points inside the City of Prince George community-boundary union.",
+  "generatedAt": "2026-06-28T06:46:52.297Z",
+  "boundarySource": "datascrapers/citypg/output/community_boundaries.geojson",
+  "bbox": [
+    -122.89948775254892,
+    53.81259985505991,
+    -122.60453520831432,
+    54.04169762545366
+  ],
+  "requestedZoom": 15,
+  "rows": 18981,
+  "sourceRows": 19503,
+  "uniqueRows": 19503,
+  "totalLitter": 29524,
+  "pickedUpRecords": 18978,
+  "verifiedRecords": 18981,
+  "dateStart": "2019-03-21T07:30:10.000Z",
+  "dateEnd": "2024-07-06T07:34:02.000Z",
+  "yearStart": 2019,
+  "yearEnd": 2024,
+  "categories": [
+    {
+      "name": "smoking",
+      "count": 4613,
+      "litter": 12366
+    },
+    {
+      "name": "food",
+      "count": 4864,
+      "litter": 6826
+    },
+    {
+      "name": "softdrinks",
+      "count": 3157,
+      "litter": 4480
+    },
+    {
+      "name": "coffee",
+      "count": 1387,
+      "litter": 2038
+    },
+    {
+      "name": "other",
+      "count": 1173,
+      "litter": 1562
+    },
+    {
+      "name": "alcohol",
+      "count": 587,
+      "litter": 744
+    },
+    {
+      "name": "sanitary",
+      "count": 436,
+      "litter": 643
+    },
+    {
+      "name": "marine",
+      "count": 297,
+      "litter": 526
+    },
+    {
+      "name": "industrial",
+      "count": 48,
+      "litter": 67
+    }
+  ],
+  "objects": [
+    {
+      "name": "butts",
+      "count": 3774,
+      "litter": 11279
+    },
+    {
+      "name": "packaging",
+      "count": 2863,
+      "litter": 4168
+    },
+    {
+      "name": "cup",
+      "count": 2132,
+      "litter": 3099
+    },
+    {
+      "name": "lid",
+      "count": 1645,
+      "litter": 2600
+    },
+    {
+      "name": "wrapper",
+      "count": 1363,
+      "litter": 1979
+    },
+    {
+      "name": "straws",
+      "count": 611,
+      "litter": 1134
+    },
+    {
+      "name": "cigarette_box",
+      "count": 522,
+      "litter": 707
+    },
+    {
+      "name": "plasticBags",
+      "count": 525,
+      "litter": 682
+    },
+    {
+      "name": "napkins",
+      "count": 294,
+      "litter": 474
+    },
+    {
+      "name": "packet",
+      "count": 315,
+      "litter": 461
+    },
+    {
+      "name": "beer_can",
+      "count": 348,
+      "litter": 404
+    },
+    {
+      "name": "other",
+      "count": 237,
+      "litter": 357
+    },
+    {
+      "name": "crisp_small",
+      "count": 228,
+      "litter": 351
+    },
+    {
+      "name": "facemask",
+      "count": 175,
+      "litter": 284
+    },
+    {
+      "name": "cutlery",
+      "count": 179,
+      "litter": 258
+    },
+    {
+      "name": "clothing",
+      "count": 176,
+      "litter": 253
+    },
+    {
+      "name": "plastic",
+      "count": 219,
+      "litter": 250
+    },
+    {
+      "name": "mediumplastics",
+      "count": 160,
+      "litter": 250
+    },
+    {
+      "name": "soda_can",
+      "count": 116,
+      "litter": 170
+    },
+    {
+      "name": "water_bottle",
+      "count": 113,
+      "litter": 154
+    },
+    {
+      "name": "filters",
+      "count": 59,
+      "litter": 139
+    },
+    {
+      "name": "microplastics",
+      "count": 45,
+      "litter": 122
+    },
+    {
+      "name": "wetwipes",
+      "count": 95,
+      "litter": 116
+    },
+    {
+      "name": "styrofoam",
+      "count": 54,
+      "litter": 110
+    },
+    {
+      "name": "tinfoil",
+      "count": 62,
+      "litter": 101
+    },
+    {
+      "name": "brokenglass",
+      "count": 59,
+      "litter": 100
+    },
+    {
+      "name": "six_pack_rings",
+      "count": 67,
+      "litter": 98
+    },
+    {
+      "name": "gloves",
+      "count": 79,
+      "litter": 92
+    },
+    {
+      "name": "randomLitter",
+      "count": 24,
+      "litter": 68
+    },
+    {
+      "name": "spirits_bottle",
+      "count": 56,
+      "litter": 66
+    },
+    {
+      "name": "fizzy_bottle",
+      "count": 55,
+      "litter": 66
+    },
+    {
+      "name": "batteries",
+      "count": 40,
+      "litter": 64
+    },
+    {
+      "name": "label",
+      "count": 36,
+      "litter": 64
+    },
+    {
+      "name": "crisp_large",
+      "count": 41,
+      "litter": 61
+    },
+    {
+      "name": "cableTie",
+      "count": 39,
+      "litter": 59
+    },
+    {
+      "name": "lighters",
+      "count": 40,
+      "litter": 56
+    },
+    {
+      "name": "paper",
+      "count": 25,
+      "litter": 51
+    },
+    {
+      "name": "juice_pouch",
+      "count": 38,
+      "litter": 50
+    },
+    {
+      "name": "straw_packaging",
+      "count": 37,
+      "litter": 50
+    },
+    {
+      "name": "energy_can",
+      "count": 49,
+      "litter": 49
+    },
+    {
+      "name": "metal",
+      "count": 38,
+      "litter": 42
+    },
+    {
+      "name": "tape",
+      "count": 25,
+      "litter": 37
+    },
+    {
+      "name": "sports_bottle",
+      "count": 27,
+      "litter": 31
+    },
+    {
+      "name": "vapeOil",
+      "count": 18,
+      "litter": 22
+    },
+    {
+      "name": "vapePen",
+      "count": 14,
+      "litter": 22
+    },
+    {
+      "name": "milk_bottle",
+      "count": 18,
+      "litter": 21
+    },
+    {
+      "name": "bottletops",
+      "count": 8,
+      "litter": 21
+    },
+    {
+      "name": "juice_carton",
+      "count": 11,
+      "litter": 18
+    },
+    {
+      "name": "rope",
+      "count": 16,
+      "litter": 17
+    },
+    {
+      "name": "balloons",
+      "count": 11,
+      "litter": 17
+    },
+    {
+      "name": "deodorant_can",
+      "count": 8,
+      "litter": 17
+    },
+    {
+      "name": "gum",
+      "count": 7,
+      "litter": 17
+    },
+    {
+      "name": "glass_jar",
+      "count": 10,
+      "litter": 16
+    },
+    {
+      "name": "pizza_box",
+      "count": 14,
+      "litter": 15
+    },
+    {
+      "name": "juice_bottle",
+      "count": 14,
+      "litter": 14
+    },
+    {
+      "name": "menstrual",
+      "count": 6,
+      "litter": 14
+    },
+    {
+      "name": "milk_carton",
+      "count": 12,
+      "litter": 13
+    },
+    {
+      "name": "bottle",
+      "count": 6,
+      "litter": 13
+    },
+    {
+      "name": "condoms",
+      "count": 6,
+      "litter": 12
+    },
+    {
+      "name": "plate",
+      "count": 8,
+      "litter": 11
+    },
+    {
+      "name": "beer_bottle",
+      "count": 10,
+      "litter": 10
+    },
+    {
+      "name": "washingUp",
+      "count": 10,
+      "litter": 10
+    },
+    {
+      "name": "earSwabs",
+      "count": 2,
+      "litter": 9
+    },
+    {
+      "name": "tyre",
+      "count": 6,
+      "litter": 7
+    },
+    {
+      "name": "pullRing",
+      "count": 4,
+      "litter": 7
+    },
+    {
+      "name": "chemical",
+      "count": 5,
+      "litter": 5
+    },
+    {
+      "name": "elec_small",
+      "count": 5,
+      "litter": 5
+    },
+    {
+      "name": "books",
+      "count": 4,
+      "litter": 4
+    },
+    {
+      "name": "macroplastics",
+      "count": 3,
+      "litter": 3
+    },
+    {
+      "name": "sanitiser",
+      "count": 2,
+      "litter": 3
+    },
+    {
+      "name": "icedTea_can",
+      "count": 1,
+      "litter": 3
+    },
+    {
+      "name": "bag",
+      "count": 2,
+      "litter": 2
+    },
+    {
+      "name": "shotgun_cartridges",
+      "count": 2,
+      "litter": 2
+    },
+    {
+      "name": "tobaccopouch",
+      "count": 2,
+      "litter": 2
+    },
+    {
+      "name": "hair_tie",
+      "count": 1,
+      "litter": 2
+    },
+    {
+      "name": "iceTea_bottle",
+      "count": 1,
+      "litter": 2
+    },
+    {
+      "name": "bagsLitter",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "elec_large",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "fishing_nets",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "glass",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "magazine",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "oil",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "posters",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "toothbrush",
+      "count": 1,
+      "litter": 1
+    }
+  ],
+  "materials": [
+    {
+      "name": "plastic",
+      "count": 13650,
+      "litter": 23551
+    },
+    {
+      "name": "paper",
+      "count": 7990,
+      "litter": 17061
+    },
+    {
+      "name": "aluminium",
+      "count": 682,
+      "litter": 851
+    },
+    {
+      "name": "cardboard",
+      "count": 575,
+      "litter": 774
+    },
+    {
+      "name": "polystyrene",
+      "count": 332,
+      "litter": 349
+    },
+    {
+      "name": "metal",
+      "count": 241,
+      "litter": 299
+    },
+    {
+      "name": "glass",
+      "count": 160,
+      "litter": 195
+    },
+    {
+      "name": "rubber",
+      "count": 103,
+      "litter": 121
+    },
+    {
+      "name": "foil",
+      "count": 49,
+      "litter": 68
+    },
+    {
+      "name": "latex",
+      "count": 36,
+      "litter": 37
+    },
+    {
+      "name": "wood",
+      "count": 27,
+      "litter": 30
+    },
+    {
+      "name": "nylon",
+      "count": 21,
+      "litter": 22
+    },
+    {
+      "name": "polyethylene",
+      "count": 9,
+      "litter": 9
+    },
+    {
+      "name": "cotton",
+      "count": 2,
+      "litter": 9
+    },
+    {
+      "name": "iron_or_steel",
+      "count": 3,
+      "litter": 3
+    },
+    {
+      "name": "fiberglass",
+      "count": 2,
+      "litter": 3
+    },
+    {
+      "name": "polymer",
+      "count": 2,
+      "litter": 2
+    },
+    {
+      "name": "copper",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "pvc",
+      "count": 1,
+      "litter": 1
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Frank Ogiamien",
+      "username": null,
+      "team": "Beautiful British Columbia",
+      "flag": "ca",
+      "count": 18975,
+      "litter": 29510
+    },
+    {
+      "name": "Unknown",
+      "username": null,
+      "team": null,
+      "flag": null,
+      "count": 3,
+      "litter": 8
+    },
+    {
+      "name": "Russ Martin 87",
+      "username": "Russ Martin 87",
+      "team": null,
+      "flag": "ca",
+      "count": 3,
+      "litter": 6
+    }
+  ],
+  "years": [
+    {
+      "name": "2019",
+      "count": 10,
+      "litter": 15
+    },
+    {
+      "name": "2020",
+      "count": 2,
+      "litter": 2
+    },
+    {
+      "name": "2022",
+      "count": 6750,
+      "litter": 10029
+    },
+    {
+      "name": "2023",
+      "count": 10851,
+      "litter": 13143
+    },
+    {
+      "name": "2024",
+      "count": 1368,
+      "litter": 6335
+    }
+  ],
+  "months": [
+    {
+      "name": "2019-03",
+      "count": 3,
+      "litter": 8
+    },
+    {
+      "name": "2019-04",
+      "count": 7,
+      "litter": 7
+    },
+    {
+      "name": "2020-06",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "2020-08",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "2022-04",
+      "count": 313,
+      "litter": 507
+    },
+    {
+      "name": "2022-05",
+      "count": 935,
+      "litter": 1858
+    },
+    {
+      "name": "2022-06",
+      "count": 1553,
+      "litter": 2415
+    },
+    {
+      "name": "2022-07",
+      "count": 1660,
+      "litter": 2088
+    },
+    {
+      "name": "2022-08",
+      "count": 1214,
+      "litter": 1696
+    },
+    {
+      "name": "2022-09",
+      "count": 692,
+      "litter": 947
+    },
+    {
+      "name": "2022-10",
+      "count": 381,
+      "litter": 516
+    },
+    {
+      "name": "2022-12",
+      "count": 2,
+      "litter": 2
+    },
+    {
+      "name": "2023-01",
+      "count": 45,
+      "litter": 47
+    },
+    {
+      "name": "2023-02",
+      "count": 1,
+      "litter": 1
+    },
+    {
+      "name": "2023-03",
+      "count": 713,
+      "litter": 774
+    },
+    {
+      "name": "2023-04",
+      "count": 3292,
+      "litter": 3568
+    },
+    {
+      "name": "2023-05",
+      "count": 1328,
+      "litter": 1396
+    },
+    {
+      "name": "2023-06",
+      "count": 1883,
+      "litter": 2973
+    },
+    {
+      "name": "2023-07",
+      "count": 976,
+      "litter": 1265
+    },
+    {
+      "name": "2023-08",
+      "count": 1028,
+      "litter": 1176
+    },
+    {
+      "name": "2023-09",
+      "count": 1206,
+      "litter": 1521
+    },
+    {
+      "name": "2023-10",
+      "count": 379,
+      "litter": 422
+    },
+    {
+      "name": "2024-04",
+      "count": 100,
+      "litter": 377
+    },
+    {
+      "name": "2024-05",
+      "count": 380,
+      "litter": 2022
+    },
+    {
+      "name": "2024-06",
+      "count": 577,
+      "litter": 2825
+    },
+    {
+      "name": "2024-07",
+      "count": 311,
+      "litter": 1111
+    }
+  ],
+  "geojson": null,
+  "geojsonGzip": "/data/open-litter-map/open_litter_map_pg.geojson.gz",
+  "hexGeojson": null,
+  "hexGeojsonGzip": null,
+  "hexComputedClientSide": true,
+  "hexSizeM": 350,
+  "rawBytes": 36130494,
+  "gzipBytes": 1028478,
+  "hexRawBytes": null,
+  "hexGzipBytes": null,
+  "fields": [
+    "sourceId",
+    "datetime",
+    "year",
+    "month",
+    "categoryNames",
+    "objectNames",
+    "materialNames",
+    "customTags",
+    "litterCount",
+    "pickedUp",
+    "verified",
+    "name",
+    "team"
+  ]
+}
