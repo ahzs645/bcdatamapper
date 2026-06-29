@@ -28,5 +28,8 @@ data-sources/drivebc/historical/*.parquet
 # The app uses the native vector snapshot and archived raster tiles instead.
 datascrapers/eccc/output/modelled-pm25-vector-tiles/
 
+# Generated BC DB boundary chunks are large and should be published to object storage.
+datascrapers/census/output/bc-db-chunks/
+
 # Generated TELUS network vector tiles are local scraper output.
 datascrapers/network/telus/output/tiles/
