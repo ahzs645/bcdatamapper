@@ -1,0 +1,384 @@
+#!/usr/bin/env node
+/* global Buffer, URLSearchParams, console, fetch, process */
+
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { gzipSync } from 'node:zlib'
+import { fileURLToPath } from 'node:url'
+import * as turf from '@turf/turf'
+
+const SERVICE_BASE = 'https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer'
+const DA_LAYER_ID = 12
+const BC_PRUID = '59'
+const FETCH_PAGE_SIZE = 500
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const censusDir = __dirname
+const tmpDir = path.join(censusDir, 'tmp')
+const defaultSourcePath = path.join(tmpDir, 'bc-da-source.geojson')
+const outputDir = path.join(censusDir, 'output', 'bc-da-simplified')
+
+const DEFAULT_LODS = [
+  {
+    id: 'overview',
+    label: 'Overview',
+    tolerance: 0.001,
+    minZoom: 0,
+    maxZoom: 8.5,
+  },
+  {
+    id: 'medium',
+    label: 'Medium',
+    tolerance: 0.0002,
+    minZoom: 8.5,
+    maxZoom: 24,
+  },
+]
+
+function parseArgs(argv) {
+  const options = {
+    source: '',
+    tolerance: 0.0002,
+    lods: DEFAULT_LODS,
+    gridCols: 6,
+    gridRows: 5,
+  }
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index]
+    const [key, inlineValue] = arg.split('=')
+    const nextValue = inlineValue ?? argv[index + 1]
+
+    if (key === '--source') {
+      options.source = nextValue
+      if (inlineValue == null) index += 1
+    } else if (key === '--tolerance') {
+      options.tolerance = Number(nextValue)
+      options.lods = [{
+        id: 'medium',
+        label: 'Medium',
+        tolerance: options.tolerance,
+        minZoom: 0,
+        maxZoom: 24,
+      }]
+      if (inlineValue == null) index += 1
+    } else if (key === '--lods') {
+      options.lods = parseLods(nextValue)
+      if (inlineValue == null) index += 1
+    } else if (key === '--grid-cols') {
+      options.gridCols = Number.parseInt(nextValue, 10)
+      if (inlineValue == null) index += 1
+    } else if (key === '--grid-rows') {
+      options.gridRows = Number.parseInt(nextValue, 10)
+      if (inlineValue == null) index += 1
+    }
+  }
+
+  if (options.lods.some((lod) => !Number.isFinite(lod.tolerance) || lod.tolerance <= 0)) {
+    throw new Error('Every LOD tolerance must be a positive number')
+  }
+  if (!Number.isInteger(options.gridCols) || options.gridCols < 1) {
+    throw new Error('--grid-cols must be a positive integer')
+  }
+  if (!Number.isInteger(options.gridRows) || options.gridRows < 1) {
+    throw new Error('--grid-rows must be a positive integer')
+  }
+
+  return options
+}
+
+function parseLods(value) {
+  if (!value) return DEFAULT_LODS
+
+  const lods = String(value).split(',').map((entry) => {
+    const [id, toleranceRaw, minZoomRaw = '0', maxZoomRaw = '24'] = entry.split(':')
+    const normalizedId = String(id ?? '').trim()
+    const tolerance = Number(toleranceRaw)
+    const minZoom = Number(minZoomRaw)
+    const maxZoom = Number(maxZoomRaw)
+    if (!normalizedId) {
+      throw new Error(`Invalid LOD entry "${entry}": missing id`)
+    }
+    if (!Number.isFinite(tolerance) || tolerance <= 0) {
+      throw new Error(`Invalid LOD entry "${entry}": bad tolerance`)
+    }
+    if (!Number.isFinite(minZoom) || !Number.isFinite(maxZoom) || maxZoom <= minZoom) {
+      throw new Error(`Invalid LOD entry "${entry}": bad zoom range`)
+    }
+
+    return {
+      id: normalizedId,
+      label: normalizedId.charAt(0).toUpperCase() + normalizedId.slice(1),
+      tolerance,
+      minZoom,
+      maxZoom,
+    }
+  })
+
+  return lods.sort((a, b) => a.minZoom - b.minZoom)
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url)
+  if (!response.ok) {
+    const body = await response.text()
+    throw new Error(`Request failed (${response.status}) for ${url}\n${body.slice(0, 500)}`)
+  }
+  return response.json()
+}
+
+async function fetchBcDaSource() {
+  const idParams = new URLSearchParams({
+    where: `PRUID='${BC_PRUID}'`,
+    returnIdsOnly: 'true',
+    f: 'json',
+  })
+  const idJson = await fetchJson(`${SERVICE_BASE}/${DA_LAYER_ID}/query?${idParams.toString()}`)
+  const objectIds = Array.isArray(idJson.objectIds) ? idJson.objectIds : []
+  objectIds.sort((a, b) => Number(a) - Number(b))
+
+  const features = []
+  for (let offset = 0; offset < objectIds.length; offset += FETCH_PAGE_SIZE) {
+    const ids = objectIds.slice(offset, offset + FETCH_PAGE_SIZE)
+    const params = new URLSearchParams({
+      objectIds: ids.join(','),
+      outFields: '*',
+      returnGeometry: 'true',
+      outSR: '4326',
+      f: 'geojson',
+    })
+    const json = await fetchJson(`${SERVICE_BASE}/${DA_LAYER_ID}/query?${params.toString()}`)
+    features.push(...(Array.isArray(json.features) ? json.features : []))
+    console.log(`Fetched ${features.length.toLocaleString()} / ${objectIds.length.toLocaleString()} BC DA features`)
+  }
+
+  return {
+    type: 'FeatureCollection',
+    features,
+  }
+}
+
+async function loadSource(sourcePath) {
+  if (sourcePath) {
+    return JSON.parse(await fs.readFile(path.resolve(sourcePath), 'utf8'))
+  }
+
+  try {
+    return JSON.parse(await fs.readFile(defaultSourcePath, 'utf8'))
+  } catch {
+    await fs.mkdir(tmpDir, { recursive: true })
+    const source = await fetchBcDaSource()
+    await fs.writeFile(defaultSourcePath, JSON.stringify(source))
+    return source
+  }
+}
+
+function toNumber(value) {
+  if (value == null) return null
+  const parsed = Number.parseFloat(String(value).replace(/,/g, '').trim())
+  return Number.isFinite(parsed) ? parsed : null
+}
+
+function countCoordinates(geometry) {
+  if (!geometry) return 0
+  if (geometry.type === 'Point') return 1
+  if (geometry.type === 'MultiPoint' || geometry.type === 'LineString') return geometry.coordinates.length
+  if (geometry.type === 'MultiLineString' || geometry.type === 'Polygon') {
+    return geometry.coordinates.reduce((sum, ring) => sum + ring.length, 0)
+  }
+  if (geometry.type === 'MultiPolygon') {
+    return geometry.coordinates.reduce((sum, polygon) => (
+      sum + polygon.reduce((ringSum, ring) => ringSum + ring.length, 0)
+    ), 0)
+  }
+  return 0
+}
+
+function byteStats(json) {
+  const text = JSON.stringify(json)
+  return {
+    rawBytes: Buffer.byteLength(text),
+    gzipBytes: gzipSync(text).byteLength,
+    text,
+  }
+}
+
+function normalizeFeature(rawFeature, tolerance, lodId) {
+  if (!rawFeature?.geometry || (rawFeature.geometry.type !== 'Polygon' && rawFeature.geometry.type !== 'MultiPolygon')) {
+    return null
+  }
+
+  const simplified = turf.simplify(rawFeature, {
+    tolerance,
+    highQuality: false,
+    mutate: false,
+  })
+
+  if (!simplified.geometry || (simplified.geometry.type !== 'Polygon' && simplified.geometry.type !== 'MultiPolygon')) {
+    return null
+  }
+
+  const properties = simplified.properties ?? {}
+  const daUid = String(properties.DAUID ?? properties.id ?? rawFeature.id ?? '').trim()
+  if (!daUid) return null
+
+  const areaKm2 = turf.area(simplified) / 1_000_000
+  simplified.properties = {
+    id: daUid,
+    boundaryCode: daUid,
+    boundaryName: `DA ${daUid}`,
+    boundarySource: 'census',
+    boundaryLevel: 'bcDaSimplified',
+    boundaryDetail: lodId,
+    DAUID: daUid,
+    DGUID: properties.DGUID ?? null,
+    PRUID: properties.PRUID ?? BC_PRUID,
+    CDUID: properties.CDUID ?? null,
+    CSDUID: properties.CSDUID ?? null,
+    CTUID: properties.CTUID ?? null,
+    LANDAREA: toNumber(properties.LANDAREA),
+    areaKm2: Number.isFinite(areaKm2) && areaKm2 > 0 ? areaKm2 : 0,
+  }
+
+  return simplified
+}
+
+function createChunks(features, gridCols, gridRows) {
+  const provinceBbox = turf.bbox({
+    type: 'FeatureCollection',
+    features,
+  })
+  const [west, south, east, north] = provinceBbox
+  const cellWidth = (east - west) / gridCols
+  const cellHeight = (north - south) / gridRows
+  const chunks = new Map()
+
+  for (const feature of features) {
+    const featureBbox = turf.bbox(feature)
+    const centerLon = (featureBbox[0] + featureBbox[2]) / 2
+    const centerLat = (featureBbox[1] + featureBbox[3]) / 2
+    const col = Math.max(0, Math.min(gridCols - 1, Math.floor((centerLon - west) / cellWidth)))
+    const row = Math.max(0, Math.min(gridRows - 1, Math.floor((centerLat - south) / cellHeight)))
+    const id = `r${row}-c${col}`
+
+    const chunk = chunks.get(id) ?? {
+      id,
+      row,
+      col,
+      bbox: [featureBbox[0], featureBbox[1], featureBbox[2], featureBbox[3]],
+      features: [],
+    }
+
+    chunk.bbox = [
+      Math.min(chunk.bbox[0], featureBbox[0]),
+      Math.min(chunk.bbox[1], featureBbox[1]),
+      Math.max(chunk.bbox[2], featureBbox[2]),
+      Math.max(chunk.bbox[3], featureBbox[3]),
+    ]
+    chunk.features.push(feature)
+    chunks.set(id, chunk)
+  }
+
+  return [...chunks.values()].sort((a, b) => a.row - b.row || a.col - b.col)
+}
+
+async function writeLod(sourceFeatures, lod, gridCols, gridRows) {
+  console.log(`Building ${lod.id} LOD at tolerance ${lod.tolerance}`)
+  const features = sourceFeatures
+    .map((feature) => normalizeFeature(feature, lod.tolerance, lod.id))
+    .filter(Boolean)
+    .sort((a, b) => String(a.properties?.DAUID ?? '').localeCompare(String(b.properties?.DAUID ?? '')))
+
+  const chunksDir = path.join(outputDir, 'chunks', lod.id)
+  await fs.mkdir(chunksDir, { recursive: true })
+
+  const chunks = createChunks(features, gridCols, gridRows)
+  const chunkManifest = []
+  let rawBytes = 0
+  let gzipBytes = 0
+
+  for (const chunk of chunks) {
+    const collection = {
+      type: 'FeatureCollection',
+      features: chunk.features,
+    }
+    const stats = byteStats(collection)
+    rawBytes += stats.rawBytes
+    gzipBytes += stats.gzipBytes
+
+    const fileName = `bc-da-${chunk.id}.geojson`
+    await fs.writeFile(path.join(chunksDir, fileName), stats.text)
+    chunkManifest.push({
+      id: chunk.id,
+      path: `chunks/${lod.id}/${fileName}`,
+      bbox: chunk.bbox,
+      featureCount: chunk.features.length,
+      rawBytes: stats.rawBytes,
+      gzipBytes: stats.gzipBytes,
+    })
+  }
+
+  console.log(`  ${features.length.toLocaleString()} features, ${chunks.length.toLocaleString()} chunks`)
+  console.log(`  Raw: ${(rawBytes / 1024 / 1024).toFixed(2)} MiB`)
+  console.log(`  Gzip: ${(gzipBytes / 1024 / 1024).toFixed(2)} MiB`)
+
+  return {
+    id: lod.id,
+    label: lod.label,
+    tolerance: lod.tolerance,
+    minZoom: lod.minZoom,
+    maxZoom: lod.maxZoom,
+    features: features.length,
+    coordinateCount: features.reduce((sum, feature) => sum + countCoordinates(feature.geometry), 0),
+    rawBytes,
+    gzipBytes,
+    chunks: chunkManifest,
+  }
+}
+
+async function main() {
+  const options = parseArgs(process.argv.slice(2))
+  const source = await loadSource(options.source)
+  const sourceFeatures = Array.isArray(source.features) ? source.features : []
+  console.log(`Loaded ${sourceFeatures.length.toLocaleString()} BC DA source features`)
+
+  await fs.rm(outputDir, { recursive: true, force: true })
+  await fs.mkdir(outputDir, { recursive: true })
+  const levels = []
+
+  for (const lod of options.lods) {
+    levels.push(await writeLod(sourceFeatures, lod, options.gridCols, options.gridRows))
+  }
+
+  const defaultLevel = levels[levels.length - 1]
+
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    source: {
+      name: 'Statistics Canada 2021 Cartographic Boundary File - Dissemination Areas',
+      service: `${SERVICE_BASE}/${DA_LAYER_ID}`,
+      where: `PRUID='${BC_PRUID}'`,
+    },
+    tolerance: defaultLevel.tolerance,
+    grid: {
+      cols: options.gridCols,
+      rows: options.gridRows,
+    },
+    features: defaultLevel.features,
+    coordinateCount: defaultLevel.coordinateCount,
+    rawBytes: defaultLevel.rawBytes,
+    gzipBytes: defaultLevel.gzipBytes,
+    chunks: defaultLevel.chunks,
+    levels,
+  }
+
+  await fs.writeFile(path.join(outputDir, 'manifest.json'), JSON.stringify(manifest, null, 2))
+
+  console.log(`Wrote ${levels.length.toLocaleString()} BC DA LOD level(s)`)
+  console.log(`Output: ${path.relative(process.cwd(), outputDir)}`)
+}
+
+main().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})
