@@ -1,0 +1,950 @@
+{
+  "generatedAt": "2026-06-29T18:48:00.134Z",
+  "title": "Environmental burden source inventory",
+  "description": "Source inventory and size probes for candidate CalEnviroScreen/BCEnviroScreen burden scrapers. This is intentionally not a bulk download.",
+  "datasets": [
+    {
+      "id": "npri-bulk",
+      "title": "NPRI releases, disposals, transfers, and facility locations",
+      "coverage": "Canada; filter to BC / Prince George downstream",
+      "recommendedUse": "Toxic-release and facility-location scraper.",
+      "notes": null,
+      "packages": [
+        {
+          "id": "40e01423-7728-429c-ac9d-2954385ccdfb",
+          "name": "40e01423-7728-429c-ac9d-2954385ccdfb",
+          "title": "Bulk data files for all years – releases, disposals, transfers and facility locations",
+          "license": "Open Government Licence - Canada",
+          "metadataModified": "2026-05-01T19:42:23.015730",
+          "catalogueUrl": "https://open.canada.ca/data/en/dataset/40e01423-7728-429c-ac9d-2954385ccdfb"
+        }
+      ],
+      "recordCount": null,
+      "knownBytes": 697303040,
+      "estimatedBytes": null,
+      "totalBytes": 697303040,
+      "sizeLabel": "697 MB",
+      "sizeSummary": "697 MB",
+      "sizeNote": null,
+      "probes": {},
+      "resources": [
+        {
+          "id": "npri-inrp-commentscommentaires-1997-present",
+          "name": "NPRI-INRP_CommentsCommentaires_1997-present.csv",
+          "format": "CSV",
+          "url": "https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_CommentsCommentaires_1997-present.csv",
+          "sizeBytes": 163577856,
+          "sizeLabel": "164 MB",
+          "lastModified": "2026-04-08",
+          "probe": {
+            "source": "ECCC path_contents API",
+            "path": "substances/plansreports/reporting-facilities-pollutant-release-and-transfer-data/bulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations/NPRI-INRP_CommentsCommentaires_1997-present.csv"
+          }
+        },
+        {
+          "id": "npri-inrp-disposalseliminations-1993-present",
+          "name": "NPRI-INRP_DisposalsEliminations_1993-present.csv",
+          "format": "CSV",
+          "url": "https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_DisposalsEliminations_1993-present.csv",
+          "sizeBytes": 52428800,
+          "sizeLabel": "52 MB",
+          "lastModified": "2026-04-08",
+          "probe": {
+            "source": "ECCC path_contents API",
+            "path": "substances/plansreports/reporting-facilities-pollutant-release-and-transfer-data/bulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations/NPRI-INRP_DisposalsEliminations_1993-present.csv"
+          }
+        },
+        {
+          "id": "npri-inrp-disposalseliminations-transferstransferts-1993-present",
+          "name": "NPRI-INRP_DisposalsEliminations_TransfersTransferts_1993-present.csv",
+          "format": "CSV",
+          "url": "https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_DisposalsEliminations_TransfersTransferts_1993-present.csv",
+          "sizeBytes": 74448896,
+          "sizeLabel": "74 MB",
+          "lastModified": "2026-04-08",
+          "probe": {
+            "source": "ECCC path_contents API",
+            "path": "substances/plansreports/reporting-facilities-pollutant-release-and-transfer-data/bulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations/NPRI-INRP_DisposalsEliminations_TransfersTransferts_1993-present.csv"
+          }
+        },
+        {
+          "id": "npri-inrp-geolocationsgeolocalisation-1993-present",
+          "name": "NPRI-INRP_GeolocationsGeolocalisation_1993-present.csv",
+          "format": "CSV",
+          "url": "https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_GeolocationsGeolocalisation_1993-present.csv",
+          "sizeBytes": 13631488,
+          "sizeLabel": "14 MB",
+          "lastModified": "2026-04-08",
+          "probe": {
+            "source": "ECCC path_contents API",
+            "path": "substances/plansreports/reporting-facilities-pollutant-release-and-transfer-data/bulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations/NPRI-INRP_GeolocationsGeolocalisation_1993-present.csv"
+          }
+        },
+        {
+          "id": "npri-inrp-releasesrejets-1993-present",
+          "name": "NPRI-INRP_ReleasesRejets_1993-present.csv",
+          "format": "CSV",
+          "url": "https://data-donnees.az.ec.gc.ca/api/file?path=%2Fsubstances%2Fplansreports%2Freporting-facilities-pollutant-release-and-transfer-data%2Fbulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations%2FNPRI-INRP_ReleasesRejets_1993-present.csv",
+          "sizeBytes": 393216000,
+          "sizeLabel": "393 MB",
+          "lastModified": "2026-04-08",
+          "probe": {
+            "source": "ECCC path_contents API",
+            "path": "substances/plansreports/reporting-facilities-pollutant-release-and-transfer-data/bulk-data-files-for-all-years-releases-disposals-transfers-and-facility-locations/NPRI-INRP_ReleasesRejets_1993-present.csv"
+          }
+        }
+      ]
+    },
+    {
+      "id": "federal-contaminated-sites",
+      "title": "Federal Contaminated Sites Inventory",
+      "coverage": "Canada; filter to BC / Prince George downstream",
+      "recommendedUse": "Federal cleanup-site inventory. Parse XML ZIP when host allows download.",
+      "notes": "The official ZIP host may reject non-browser probes from this environment; keep size as unknown unless the downloader succeeds.",
+      "packages": [
+        {
+          "id": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "name": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "title": "Federal Contaminated Sites Inventory",
+          "license": "Open Government Licence - Canada",
+          "metadataModified": "2022-02-22T18:09:05.451788",
+          "catalogueUrl": "https://open.canada.ca/data/en/dataset/1d42f7b9-1549-40aa-8ac6-0e0302ff2902"
+        }
+      ],
+      "recordCount": null,
+      "knownBytes": 1041332,
+      "estimatedBytes": null,
+      "totalBytes": 1041332,
+      "sizeLabel": "1.0 MB",
+      "sizeSummary": "Unknown data ZIP; 1.0 MB support files",
+      "sizeNote": null,
+      "probes": {},
+      "resources": [
+        {
+          "id": "e1b7912c-f71a-4b80-aeb0-8dde1a7084f0",
+          "name": "Federal Contaminated Sites Inventory Dataset",
+          "format": "XML",
+          "url": "https://map-carte.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf.zip",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "dataset",
+          "packageId": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "packageTitle": "Federal Contaminated Sites Inventory",
+          "sizeBytes": null,
+          "probe": {
+            "ok": false,
+            "status": null,
+            "finalUrl": "https://map-carte.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf.zip",
+            "contentLength": null,
+            "contentType": null,
+            "lastModified": null,
+            "note": "fetch failed"
+          },
+          "sizeLabel": null
+        },
+        {
+          "id": "ac307d2c-fb3e-4921-9427-42f339ab6e80",
+          "name": "Data Dictionary",
+          "format": "RTF",
+          "url": "https://www.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf-eng.rtf",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "guide",
+          "packageId": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "packageTitle": "Federal Contaminated Sites Inventory",
+          "sizeBytes": 448966,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf-eng.rtf",
+            "contentLength": 448966,
+            "contentType": "application/rtf",
+            "lastModified": "Fri, 29 May 2026 01:10:08 GMT",
+            "note": null
+          },
+          "sizeLabel": "449 KB"
+        },
+        {
+          "id": "26e54392-6232-407e-a0b3-e96deaaa0792",
+          "name": "Data Dictionary",
+          "format": "RTF",
+          "url": "https://www.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf-fra.rtf",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "guide",
+          "packageId": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "packageTitle": "Federal Contaminated Sites Inventory",
+          "sizeBytes": 592366,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf-fra.rtf",
+            "contentLength": 592366,
+            "contentType": "application/rtf",
+            "lastModified": "Fri, 29 May 2026 01:10:08 GMT",
+            "note": null
+          },
+          "sizeLabel": "592 KB"
+        },
+        {
+          "id": "687f1eea-fb6c-498a-8597-15e70263de37",
+          "name": "Federal Contaminated Sites Inventory - Open Datasets",
+          "format": "HTML",
+          "url": "https://www.tbs-sct.gc.ca/fcsi-rscf/opendata-eng.aspx",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "website",
+          "packageId": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "packageTitle": "Federal Contaminated Sites Inventory",
+          "sizeLabel": null
+        },
+        {
+          "id": "0c7fd1f0-4cd1-41ed-a82c-b735e4e4b4f6",
+          "name": "Federal Contaminated Sites Inventory - Open Datasets",
+          "format": "HTML",
+          "url": "https://www.tbs-sct.gc.ca/fcsi-rscf/opendata-fra.aspx",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "website",
+          "packageId": "1d42f7b9-1549-40aa-8ac6-0e0302ff2902",
+          "packageTitle": "Federal Contaminated Sites Inventory",
+          "sizeLabel": null
+        }
+      ]
+    },
+    {
+      "id": "bc-waste-discharge-authorizations",
+      "title": "BC Waste Discharge Authorizations",
+      "coverage": "British Columbia",
+      "recommendedUse": "Industrial/waste authorization proxy; direct XLSX resources are small enough to poll.",
+      "notes": null,
+      "packages": [
+        {
+          "id": "0e2c73a2-f1d8-4ecb-8606-933207d78dcc",
+          "name": "waste-discharge-authorizations-all-authorizations",
+          "title": "Waste Discharge Authorizations - All Authorizations",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-04-24T16:27:36.092022",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/waste-discharge-authorizations-all-authorizations"
+        },
+        {
+          "id": "59cb688a-7c99-4c6a-81d3-560b49b67786",
+          "name": "waste-discharge-authorizations-all-discharges",
+          "title": "Waste Discharge Authorizations - All Discharges",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-04-24T16:27:04.611990",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/waste-discharge-authorizations-all-discharges"
+        }
+      ],
+      "recordCount": null,
+      "knownBytes": 3975280,
+      "estimatedBytes": null,
+      "totalBytes": 3975280,
+      "sizeLabel": "4.0 MB",
+      "sizeSummary": "4.0 MB",
+      "sizeNote": null,
+      "probes": {},
+      "resources": [
+        {
+          "id": "2df19af9-e652-4074-81bf-70db7b9e6618",
+          "name": "all-authorizations.xlsx",
+          "format": "xlsx",
+          "url": "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_authorizations.xlsx",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "data",
+          "packageId": "0e2c73a2-f1d8-4ecb-8606-933207d78dcc",
+          "packageTitle": "Waste Discharge Authorizations - All Authorizations",
+          "sizeBytes": 1719358,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_authorizations.xlsx",
+            "contentLength": 1719358,
+            "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8",
+            "lastModified": "Mon, 20 Apr 2026 19:50:42 GMT",
+            "note": "Counted response bytes from a safe GET probe."
+          },
+          "sizeLabel": "1.7 MB"
+        },
+        {
+          "id": "8a8daa16-438f-4cee-82b2-7c2166671823",
+          "name": "Find an authorization document ",
+          "format": "other",
+          "url": "https://j200.gov.bc.ca/pub/ams/Default.aspx?PossePresentation=DocumentSearch",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "na",
+          "packageId": "0e2c73a2-f1d8-4ecb-8606-933207d78dcc",
+          "packageTitle": "Waste Discharge Authorizations - All Authorizations",
+          "sizeLabel": null
+        },
+        {
+          "id": "09d03020-852a-4c1c-82ef-9b9babb9224e",
+          "name": "all-discharges.xlsx",
+          "format": "xlsx",
+          "url": "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_discharges.xlsx",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "data",
+          "packageId": "59cb688a-7c99-4c6a-81d3-560b49b67786",
+          "packageTitle": "Waste Discharge Authorizations - All Discharges",
+          "sizeBytes": 2255922,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www2.gov.bc.ca/assets/gov/environment/waste-management/waste-discharge-authorization/datamart/all_ams_discharges.xlsx",
+            "contentLength": 2255922,
+            "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8",
+            "lastModified": "Mon, 20 Apr 2026 19:50:27 GMT",
+            "note": "Counted response bytes from a safe GET probe."
+          },
+          "sizeLabel": "2.3 MB"
+        },
+        {
+          "id": "a267fa5c-477b-400b-8cee-9e68d22daa43",
+          "name": "Find an authorization document ",
+          "format": "other",
+          "url": "https://j200.gov.bc.ca/pub/ams/Default.aspx?PossePresentation=DocumentSearch",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "na",
+          "packageId": "59cb688a-7c99-4c6a-81d3-560b49b67786",
+          "packageTitle": "Waste Discharge Authorizations - All Discharges",
+          "sizeLabel": null
+        }
+      ]
+    },
+    {
+      "id": "bc-groundwater-wells",
+      "title": "BC groundwater wells and observation-well levels",
+      "coverage": "British Columbia",
+      "recommendedUse": "Groundwater well density/proximity and observation-well trend context.",
+      "notes": null,
+      "packages": [
+        {
+          "id": "e4731a85-ffca-4112-8caf-cb0a96905778",
+          "name": "groundwater-wells",
+          "title": "Groundwater Wells",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-06-27T12:43:35.217870",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/groundwater-wells"
+        },
+        {
+          "id": "57c55f10-cf8e-40bb-aae0-2eff311f1685",
+          "name": "provincial-groundwater-observation-well-network-groundwater-levels-data",
+          "title": "Provincial Groundwater Observation Well Network - Groundwater Levels data",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2024-03-27T23:27:31.686605",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/provincial-groundwater-observation-well-network-groundwater-levels-data"
+        }
+      ],
+      "recordCount": 130369,
+      "knownBytes": 144131895,
+      "estimatedBytes": 200652623,
+      "totalBytes": 344784518,
+      "sizeLabel": "345 MB",
+      "sizeSummary": "144 MB CSV + ~201 MB spatial estimate = ~345 MB",
+      "sizeNote": null,
+      "probes": {
+        "arcgis": {
+          "layerUrl": "https://maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_water_management/MapServer/13",
+          "totalWells": 130369,
+          "observationWells": 521,
+          "sampleEstimate": {
+            "sampleFeatureCount": 1000,
+            "sampleBytes": 1539113,
+            "estimatedBytes": 200652623,
+            "method": "Estimated from first ArcGIS GeoJSON page with all fields and geometry."
+          }
+        }
+      },
+      "resources": [
+        {
+          "id": "2a1df0bc-cc3d-4e2d-8b76-1ad67526afdc",
+          "name": "BC Geographic Warehouse Custom Download",
+          "format": "multiple",
+          "url": null,
+          "catalogueSizeBytes": null,
+          "lastModified": "2026-06-27T03:48:41",
+          "resourceType": "data",
+          "packageId": "e4731a85-ffca-4112-8caf-cb0a96905778",
+          "packageTitle": "Groundwater Wells",
+          "sizeLabel": null
+        },
+        {
+          "id": "c9b8b97f-1dfc-4558-bf10-713df749a7e0",
+          "name": "WMS getCapabilities request",
+          "format": "wms",
+          "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_WRBC_SVW/ows?service=WMS&request=GetCapabilities",
+          "catalogueSizeBytes": null,
+          "lastModified": "2026-06-27T03:48:41",
+          "resourceType": "data",
+          "packageId": "e4731a85-ffca-4112-8caf-cb0a96905778",
+          "packageTitle": "Groundwater Wells",
+          "sizeLabel": null
+        },
+        {
+          "id": "137a8af9-960f-4cd4-aa23-a6735118534b",
+          "name": "Download KML Ground Overlay file",
+          "format": "kml",
+          "url": "https://openmaps.gov.bc.ca/kml/geo/layers/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_WRBC_SVW_loader.kml",
+          "catalogueSizeBytes": null,
+          "lastModified": "2026-06-27T03:48:41",
+          "resourceType": "data",
+          "packageId": "e4731a85-ffca-4112-8caf-cb0a96905778",
+          "packageTitle": "Groundwater Wells",
+          "sizeBytes": 28,
+          "probe": {
+            "ok": false,
+            "status": 404,
+            "finalUrl": "https://openmaps.gov.bc.ca/kml/geo/layers/WHSE_WATER_MANAGEMENT.GW_WATER_WELLS_WRBC_SVW_loader.kml",
+            "contentLength": 28,
+            "contentType": "application/json; charset=utf-8",
+            "lastModified": null,
+            "note": "HEAD probe did not return a successful status."
+          },
+          "sizeLabel": "28 B"
+        },
+        {
+          "id": "f425e49e-690c-45dc-b65a-c133656d430f",
+          "name": "ArcGIS Online (AGO) Feature Service",
+          "format": "arcgis_rest",
+          "url": "https://governmentofbc.maps.arcgis.com/home/item.html?id=5c9e688f1a954a9e80415a1eeceacd19",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "data",
+          "packageId": "e4731a85-ffca-4112-8caf-cb0a96905778",
+          "packageTitle": "Groundwater Wells",
+          "sizeLabel": null
+        },
+        {
+          "id": "caa18e44-c1a3-490f-a467-f2352bd8d382",
+          "name": "ObservationWellDataAll_DailyMean.csv (17 MB)",
+          "format": "csv",
+          "url": "https://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/ObservationWellDataAll_DailyMean.csv",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "data",
+          "packageId": "57c55f10-cf8e-40bb-aae0-2eff311f1685",
+          "packageTitle": "Provincial Groundwater Observation Well Network - Groundwater Levels data",
+          "sizeBytes": 45302753,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/ObservationWellDataAll_DailyMean.csv",
+            "contentLength": 45302753,
+            "contentType": "text/csv",
+            "lastModified": "Mon, 29 Jun 2026 17:17:57 GMT",
+            "note": null
+          },
+          "sizeLabel": "45 MB"
+        },
+        {
+          "id": "a77e0aea-1216-470a-a00f-1f75e3c8432a",
+          "name": "ObservationWellDataPast1years_Hourly.csv (51 MB)",
+          "format": "csv",
+          "url": "https://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/ObservationWellDataPast1years_Hourly.csv",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "data",
+          "packageId": "57c55f10-cf8e-40bb-aae0-2eff311f1685",
+          "packageTitle": "Provincial Groundwater Observation Well Network - Groundwater Levels data",
+          "sizeBytes": 98829114,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/ObservationWellDataPast1years_Hourly.csv",
+            "contentLength": 98829114,
+            "contentType": "text/csv",
+            "lastModified": "Mon, 29 Jun 2026 17:17:57 GMT",
+            "note": null
+          },
+          "sizeLabel": "99 MB"
+        },
+        {
+          "id": "43398efb-5646-4dcc-bf61-1f6def0a7c63",
+          "name": "Groundwater Observation Well Data",
+          "format": "csv",
+          "url": "https://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/",
+          "catalogueSizeBytes": null,
+          "lastModified": null,
+          "resourceType": "data",
+          "packageId": "57c55f10-cf8e-40bb-aae0-2eff311f1685",
+          "packageTitle": "Provincial Groundwater Observation Well Network - Groundwater Levels data",
+          "sizeBytes": null,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/",
+            "contentLength": null,
+            "contentType": "text/html;charset=ISO-8859-1",
+            "lastModified": null,
+            "note": null
+          },
+          "sizeLabel": null
+        }
+      ]
+    },
+    {
+      "id": "bc-ems-enmods-water-quality",
+      "title": "BC EMS / EnMoDS water quality results and locations",
+      "coverage": "British Columbia",
+      "recommendedUse": "Ambient water quality result scraper; derive exceedances against objectives/guidelines downstream.",
+      "notes": "EMS is historical/legacy; EnMoDS is the current source family.",
+      "packages": [
+        {
+          "id": "949f2233-9612-4b06-92a9-903e817da659",
+          "name": "bc-environmental-monitoring-system-results",
+          "title": "BC Environmental Monitoring System Results",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-04-17T16:19:15.369311",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/bc-environmental-monitoring-system-results"
+        },
+        {
+          "id": "83a585fe-effb-48bd-8a03-d35db4eeb1bb",
+          "name": "bc-environmental-monitoring-data-system-results",
+          "title": "BC Environmental Monitoring Data System (EnMoDS) Results",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-05-28T19:00:13.825181",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/bc-environmental-monitoring-data-system-results"
+        },
+        {
+          "id": "f60fa4b5-e3d0-44ad-b5d8-778d29764e34",
+          "name": "environmental-monitoring-data-system-enmods-spatial-sampling-locations",
+          "title": "Environmental Monitoring Data System (EnMoDS) Spatial Sampling Locations",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-05-28T19:01:22.723317",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/environmental-monitoring-data-system-enmods-spatial-sampling-locations"
+        }
+      ],
+      "recordCount": null,
+      "knownBytes": 20695539008,
+      "estimatedBytes": null,
+      "totalBytes": 20695539008,
+      "sizeLabel": "21 GB",
+      "sizeSummary": "EnMoDS 3.4 GB; EMS raw CSV alternatives 16 GB / zipped alternatives 1.4 GB",
+      "sizeNote": null,
+      "probes": {},
+      "resources": [
+        {
+          "id": "ems-sample-results-4yr-current-expanded",
+          "name": "ems_sample_results_4yr_current_expanded.csv",
+          "label": "ems_sample_results_4..>",
+          "format": "CSV",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_4yr_current_expanded.csv",
+          "sizeBytes": 2400000000,
+          "sizeLabel": "2.4 GB",
+          "lastModified": "2026-06-29 05:21",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-4yr-current-expanded",
+          "name": "ems_sample_results_4yr_current_expanded.zip",
+          "label": "ems_sample_results_4..>",
+          "format": "ZIP",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_4yr_current_expanded.zip",
+          "sizeBytes": 131000000,
+          "sizeLabel": "131 MB",
+          "lastModified": "2026-06-29 05:22",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-current-expanded",
+          "name": "ems_sample_results_current_expanded.csv",
+          "label": "ems_sample_results_c..>",
+          "format": "CSV",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_current_expanded.csv",
+          "sizeBytes": 724000000,
+          "sizeLabel": "724 MB",
+          "lastModified": "2026-06-29 03:39",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-current",
+          "name": "ems_sample_results_current.csv",
+          "label": "ems_sample_results_c..>",
+          "format": "CSV",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_current.csv",
+          "sizeBytes": 465000000,
+          "sizeLabel": "465 MB",
+          "lastModified": "2026-06-29 03:33",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-expanded-all-nitrate-1109",
+          "name": "ems_sample_results_expanded_all_nitrate_1109.csv",
+          "label": "ems_sample_results_e..>",
+          "format": "CSV",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_expanded_all_nitrate_1109.csv",
+          "sizeBytes": 111000000,
+          "sizeLabel": "111 MB",
+          "lastModified": "2026-06-29 04:46",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-historic-expanded",
+          "name": "ems_sample_results_historic_expanded.csv",
+          "label": "ems_sample_results_h..>",
+          "format": "CSV",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_historic_expanded.csv",
+          "sizeBytes": 7500000000,
+          "sizeLabel": "7.5 GB",
+          "lastModified": "2026-06-29 05:26",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-historic-expanded",
+          "name": "ems_sample_results_historic_expanded.zip",
+          "label": "ems_sample_results_h..>",
+          "format": "ZIP",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_historic_expanded.zip",
+          "sizeBytes": 1000000000,
+          "sizeLabel": "1.0 GB",
+          "lastModified": "2026-06-29 05:32",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-historic",
+          "name": "ems_sample_results_historic.csv",
+          "label": "ems_sample_results_h..>",
+          "format": "CSV",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_historic.csv",
+          "sizeBytes": 4700000000,
+          "sizeLabel": "4.7 GB",
+          "lastModified": "2026-06-29 04:10",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "ems-sample-results-historic",
+          "name": "ems_sample_results_historic.zip",
+          "label": "ems_sample_results_h..>",
+          "format": "ZIP",
+          "url": "https://pub.data.gov.bc.ca/datasets/949f2233-9612-4b06-92a9-903e817da659/ems_sample_results_historic.zip",
+          "sizeBytes": 285000000,
+          "sizeLabel": "285 MB",
+          "lastModified": "2026-06-29 04:12",
+          "probe": {
+            "source": "BC pub.data.gov.bc.ca Apache directory index"
+          }
+        },
+        {
+          "id": "enmods-current-results",
+          "name": "Current EnMoDS Results - last two years",
+          "format": "CSV.GZ",
+          "url": "https://coms.api.gov.bc.ca/api/v1/object/84ed1220-bd51-40a8-9f29-d916144e2dfe",
+          "sizeBytes": 328096179,
+          "lastModified": "Mon, 29 Jun 2026 06:45:17 GMT",
+          "probe": {
+            "ok": true,
+            "status": 206,
+            "finalUrl": "https://nrs.objectstore.gov.bc.ca/enmods/Data_Catalogue/this_yr.csv.gz?...",
+            "contentRange": "bytes 0-0/328096179",
+            "contentLength": 328096179,
+            "contentType": "application/octet-stream",
+            "lastModified": "Mon, 29 Jun 2026 06:45:17 GMT"
+          },
+          "sizeLabel": "328 MB"
+        },
+        {
+          "id": "enmods-previous-2-to-5-years",
+          "name": "EnMoDS Sample Results - previous 2-5 years",
+          "format": "CSV.GZ",
+          "url": "https://coms.api.gov.bc.ca/api/v1/object/6edecb56-d06a-4b2e-9ab0-48584eba3df0",
+          "sizeBytes": 646429167,
+          "lastModified": "Mon, 29 Jun 2026 06:45:37 GMT",
+          "probe": {
+            "ok": true,
+            "status": 206,
+            "finalUrl": "https://nrs.objectstore.gov.bc.ca/enmods/Data_Catalogue/two_to_five_yr.csv.gz?...",
+            "contentRange": "bytes 0-0/646429167",
+            "contentLength": 646429167,
+            "contentType": "application/octet-stream",
+            "lastModified": "Mon, 29 Jun 2026 06:45:37 GMT"
+          },
+          "sizeLabel": "646 MB"
+        },
+        {
+          "id": "enmods-previous-5-to-10-years",
+          "name": "EnMoDS Sample Results - previous 5-10 years",
+          "format": "CSV.GZ",
+          "url": "https://coms.api.gov.bc.ca/api/v1/object/55e77e5a-ea9d-41e3-ab98-473fafabb0d6",
+          "sizeBytes": 674138715,
+          "lastModified": "Mon, 29 Jun 2026 06:45:56 GMT",
+          "probe": {
+            "ok": true,
+            "status": 206,
+            "finalUrl": "https://nrs.objectstore.gov.bc.ca/enmods/Data_Catalogue/five_to_ten_yr.csv.gz?...",
+            "contentRange": "bytes 0-0/674138715",
+            "contentLength": 674138715,
+            "contentType": "application/octet-stream",
+            "lastModified": "Mon, 29 Jun 2026 06:45:56 GMT"
+          },
+          "sizeLabel": "674 MB"
+        },
+        {
+          "id": "enmods-historic-results",
+          "name": "EnMoDS Sample Results - historic older than 10 years",
+          "format": "CSV.GZ",
+          "url": "https://coms.api.gov.bc.ca/api/v1/object/d88adc20-297e-4585-8de9-76a6342dd8e7",
+          "sizeBytes": 1712817091,
+          "lastModified": "Mon, 29 Jun 2026 06:46:42 GMT",
+          "probe": {
+            "ok": true,
+            "status": 206,
+            "finalUrl": "https://nrs.objectstore.gov.bc.ca/enmods/Data_Catalogue/historic.csv.gz?...",
+            "contentRange": "bytes 0-0/1712817091",
+            "contentLength": 1712817091,
+            "contentType": "application/octet-stream",
+            "lastModified": "Mon, 29 Jun 2026 06:46:42 GMT"
+          },
+          "sizeLabel": "1.7 GB"
+        },
+        {
+          "id": "enmods-sampling-locations-csv",
+          "name": "EnMoDS Sampling Locations CSV",
+          "format": "CSV",
+          "url": "https://coms.api.gov.bc.ca/api/v1/object/e4e1829d-c1a1-4932-b275-de6e423a6d71",
+          "sizeBytes": 7387776,
+          "lastModified": "Mon, 29 Jun 2026 09:00:37 GMT",
+          "probe": {
+            "ok": true,
+            "status": 206,
+            "finalUrl": "https://nrs.objectstore.gov.bc.ca/enmods/Data_Catalogue/sampling_locations.csv?...",
+            "contentRange": "bytes 0-0/7387776",
+            "contentLength": 7387776,
+            "contentType": "text/csv",
+            "lastModified": "Mon, 29 Jun 2026 09:00:37 GMT"
+          },
+          "sizeLabel": "7.4 MB"
+        },
+        {
+          "id": "enmods-sampling-locations-gpkg",
+          "name": "EnMoDS Sampling Locations GeoPackage",
+          "format": "GPKG",
+          "url": "https://coms.api.gov.bc.ca/api/v1/object/cf9aa27e-e5fa-48a6-b4c8-30146e1fc95e",
+          "sizeBytes": 10670080,
+          "lastModified": "Mon, 29 Jun 2026 09:00:37 GMT",
+          "probe": {
+            "ok": true,
+            "status": 206,
+            "finalUrl": "https://nrs.objectstore.gov.bc.ca/enmods/Data_Catalogue/sampling_locations.gpkg?...",
+            "contentRange": "bytes 0-0/10670080",
+            "contentLength": 10670080,
+            "contentType": "application/x-sqlite3",
+            "lastModified": "Mon, 29 Jun 2026 09:00:37 GMT"
+          },
+          "sizeLabel": "11 MB"
+        }
+      ]
+    },
+    {
+      "id": "bc-water-quality-objectives",
+      "title": "BC Water Quality Objectives Reports - Index",
+      "coverage": "British Columbia",
+      "recommendedUse": "Spatial report index and objective-document links for exceedance logic.",
+      "notes": null,
+      "packages": [
+        {
+          "id": "1f962187-7686-4247-b060-dd8f9a3777d9",
+          "name": "water-quality-objectives-reports-index",
+          "title": "Water Quality Objectives Reports - Index",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2026-06-27T12:43:50.471259",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/water-quality-objectives-reports-index"
+        }
+      ],
+      "recordCount": 82,
+      "knownBytes": 53430371,
+      "estimatedBytes": null,
+      "totalBytes": 53430371,
+      "sizeLabel": "53 MB",
+      "sizeSummary": "53 MB",
+      "sizeNote": null,
+      "probes": {
+        "wfs": {
+          "typeName": "WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP",
+          "recordCount": 82,
+          "geojsonUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP&outputFormat=json&srsName=EPSG%3A4326",
+          "geojsonBytes": 53430371,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP&outputFormat=json&srsName=EPSG%3A4326",
+            "contentLength": 53430371,
+            "contentType": "application/json;charset=UTF-8",
+            "lastModified": null,
+            "note": "Counted response bytes from a safe GET probe."
+          }
+        }
+      },
+      "resources": [
+        {
+          "id": "d62ee381-9a0a-480e-80ce-5f8e0218212a",
+          "name": "BC Geographic Warehouse Custom Download",
+          "format": "multiple",
+          "url": null,
+          "catalogueSizeBytes": null,
+          "lastModified": "2026-06-27T01:27:37",
+          "resourceType": "data",
+          "packageId": "1f962187-7686-4247-b060-dd8f9a3777d9",
+          "packageTitle": "Water Quality Objectives Reports - Index",
+          "sizeLabel": null
+        },
+        {
+          "id": "42a184c8-06fd-45a1-aa00-b48a8e020c60",
+          "name": "WMS getCapabilities request",
+          "format": "wms",
+          "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP/ows?service=WMS&request=GetCapabilities",
+          "catalogueSizeBytes": null,
+          "lastModified": "2026-06-27T01:27:37",
+          "resourceType": "data",
+          "packageId": "1f962187-7686-4247-b060-dd8f9a3777d9",
+          "packageTitle": "Water Quality Objectives Reports - Index",
+          "sizeLabel": null
+        },
+        {
+          "id": "c11c0086-b9f7-4955-8ac2-1fc931af6a69",
+          "name": "Download KML Ground Overlay file",
+          "format": "kml",
+          "url": "https://openmaps.gov.bc.ca/kml/geo/layers/WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP_loader.kml",
+          "catalogueSizeBytes": null,
+          "lastModified": "2026-06-27T01:27:37",
+          "resourceType": "data",
+          "packageId": "1f962187-7686-4247-b060-dd8f9a3777d9",
+          "packageTitle": "Water Quality Objectives Reports - Index",
+          "sizeLabel": null
+        },
+        {
+          "id": "bc-water-quality-objectives-wfs-geojson",
+          "name": "WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP WFS GeoJSON",
+          "format": "GeoJSON",
+          "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP&outputFormat=json&srsName=EPSG%3A4326",
+          "sizeBytes": 53430371,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_WATER_MANAGEMENT.WQ_WQO_RPT_INDEX_SP&outputFormat=json&srsName=EPSG%3A4326",
+            "contentLength": 53430371,
+            "contentType": "application/json;charset=UTF-8",
+            "lastModified": null,
+            "note": "Counted response bytes from a safe GET probe."
+          },
+          "sizeLabel": "53 MB"
+        }
+      ]
+    },
+    {
+      "id": "bc-historical-floodplains",
+      "title": "Mapped Floodplains in BC (Historical)",
+      "coverage": "British Columbia",
+      "recommendedUse": "Historical floodplain polygon burden/exposure layer.",
+      "notes": null,
+      "packages": [
+        {
+          "id": "cdf4900e-90c0-449f-beea-43b669bd76a8",
+          "name": "mapped-floodplains-in-bc-historical",
+          "title": "Mapped Floodplains in BC (Historical)",
+          "license": "Open Government Licence - British Columbia",
+          "metadataModified": "2023-06-29T14:22:19.159127",
+          "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/mapped-floodplains-in-bc-historical"
+        }
+      ],
+      "recordCount": 133,
+      "knownBytes": 8907607,
+      "estimatedBytes": null,
+      "totalBytes": 8907607,
+      "sizeLabel": "8.9 MB",
+      "sizeSummary": "8.9 MB",
+      "sizeNote": null,
+      "probes": {
+        "wfs": {
+          "typeName": "WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW",
+          "recordCount": 133,
+          "geojsonUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW&outputFormat=json&srsName=EPSG%3A4326",
+          "geojsonBytes": 8907607,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW&outputFormat=json&srsName=EPSG%3A4326",
+            "contentLength": 8907607,
+            "contentType": "application/json;charset=UTF-8",
+            "lastModified": null,
+            "note": "Counted response bytes from a safe GET probe."
+          }
+        }
+      },
+      "resources": [
+        {
+          "id": "12b14039-3a2b-435b-bccc-90f99a09955a",
+          "name": "BC Geographic Warehouse Custom Download",
+          "format": "multiple",
+          "url": null,
+          "catalogueSizeBytes": null,
+          "lastModified": "2022-10-07T18:43:17",
+          "resourceType": "data",
+          "packageId": "cdf4900e-90c0-449f-beea-43b669bd76a8",
+          "packageTitle": "Mapped Floodplains in BC (Historical)",
+          "sizeLabel": null
+        },
+        {
+          "id": "66f3e94c-1a92-496e-a663-c45dbe0b54f7",
+          "name": "WMS getCapabilities request",
+          "format": "wms",
+          "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW/ows?service=WMS&request=GetCapabilities",
+          "catalogueSizeBytes": null,
+          "lastModified": "2022-10-07T18:43:17",
+          "resourceType": "data",
+          "packageId": "cdf4900e-90c0-449f-beea-43b669bd76a8",
+          "packageTitle": "Mapped Floodplains in BC (Historical)",
+          "sizeLabel": null
+        },
+        {
+          "id": "90b7e50b-02c4-4fe8-bcf0-bee3a2f10f71",
+          "name": "Download KML Ground Overlay file",
+          "format": "kml",
+          "url": "https://openmaps.gov.bc.ca/kml/geo/layers/WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW_loader.kml",
+          "catalogueSizeBytes": null,
+          "lastModified": "2022-10-07T18:43:17",
+          "resourceType": "data",
+          "packageId": "cdf4900e-90c0-449f-beea-43b669bd76a8",
+          "packageTitle": "Mapped Floodplains in BC (Historical)",
+          "sizeLabel": null
+        },
+        {
+          "id": "bc-historical-floodplains-wfs-geojson",
+          "name": "WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW WFS GeoJSON",
+          "format": "GeoJSON",
+          "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW&outputFormat=json&srsName=EPSG%3A4326",
+          "sizeBytes": 8907607,
+          "probe": {
+            "ok": true,
+            "status": 200,
+            "finalUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_BASEMAPPING.CWB_FLOODPLAINS_BC_AREA_SVW&outputFormat=json&srsName=EPSG%3A4326",
+            "contentLength": 8907607,
+            "contentType": "application/json;charset=UTF-8",
+            "lastModified": null,
+            "note": "Counted response bytes from a safe GET probe."
+          },
+          "sizeLabel": "8.9 MB"
+        }
+      ]
+    }
+  ]
+}

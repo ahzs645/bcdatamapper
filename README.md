@@ -48,6 +48,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | BC child care map | `bc:childcare:sync` | DataBC Child Care Map Data ArcGIS layer used by the BC child care map | `datascrapers/bc/childcare/output/` |
 | BC drought | `drought:sync`, `drought:canonical` | BC drought region/status feeds | `public/data/drought/` |
 | BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
+| Environmental burden source inventory | `environmental-burden:inventory` | Open Canada, BC Data Catalogue, ECCC Data Mart, DataBC WFS/ArcGIS, and COMS object storage probes for NPRI, contaminated sites, waste authorizations, groundwater, water quality, and floodplains | `datascrapers/environmental-burden/output/` |
 | BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
 | Canada cell coverage tile sources | `cell-coverage:sync` | Rogers, TELUS, Bell, Videotron, and Freedom Mobile public coverage maps | `public/data/cell-coverage/manifest.json` |
@@ -73,6 +74,27 @@ Scraper-related documentation lives in `docs/`:
 Shared location helpers live under `datascrapers/bc/geocoder/`, including BC
 Address Geocoder query/cache/GeoJSON helpers, Overpass queries, OSM address
 extraction, and name/address matching.
+
+## Environmental Burden Source Inventory
+
+Use `environmental-burden:inventory` before building the full burden scrapers.
+It records current catalogue resources, licences, byte-size probes, feature
+counts, and usage notes for the high-value EnviroScreen inputs without bulk
+downloading the large EMS/EnMoDS source files.
+
+```bash
+npm run environmental-burden:inventory
+```
+
+The command writes `datascrapers/environmental-burden/output/manifest.json` and
+`datascrapers/environmental-burden/output/source-size-summary.md`. As of the
+latest probe, NPRI is about 697 MB, BC waste authorizations are about 4 MB,
+groundwater wells plus observation-well CSVs are about 345 MB including a
+sampled spatial estimate, EnMoDS is about 3.4 GB, EMS raw CSV alternatives are
+about 16 GB, the Water Quality Objectives WFS GeoJSON is about 53 MB, and
+historical floodplains are about 9 MB. The Federal Contaminated Sites data ZIP
+does not expose a reliable byte size from this environment; only the support
+files were measurable.
 
 ## DriveBC Historical Events
 
