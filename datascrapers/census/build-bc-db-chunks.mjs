@@ -5,6 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
+import * as turf from '@turf/turf'
 import shp from 'shpjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -19,6 +20,35 @@ const DEFAULT_RAW_ARCHIVE = path.join(
 const DEFAULT_CROSSWALK = path.join(censusDir, 'output/bc_db_population_chsa_crosswalk.json')
 const DEFAULT_OUTPUT = path.join(censusDir, 'output/bc-db-chunks')
 
+function defaultLods(minZoom) {
+  return [
+    {
+      id: 'overview',
+      label: 'Overview',
+      tolerance: 0.002,
+      minZoom: 7,
+      maxZoom: 8.5,
+      detailProperties: false,
+    },
+    {
+      id: 'medium',
+      label: 'Medium',
+      tolerance: 0.0007,
+      minZoom: 8.5,
+      maxZoom: minZoom,
+      detailProperties: false,
+    },
+    {
+      id: 'full',
+      label: 'Full DB detail',
+      tolerance: 0,
+      minZoom,
+      maxZoom: 24,
+      detailProperties: true,
+    },
+  ]
+}
+
 function readArgs(argv) {
   const args = {
     rawArchive: DEFAULT_RAW_ARCHIVE,
@@ -27,6 +57,7 @@ function readArgs(argv) {
     cols: 32,
     rows: 24,
     minZoom: 9,
+    lods: null,
     chunkUrlBase: '',
   }
 
@@ -54,6 +85,9 @@ function readArgs(argv) {
     } else if (key === '--min-zoom') {
       args.minZoom = Number(next)
       if (consumeNext) index += 1
+    } else if (key === '--lods') {
+      args.lods = parseLods(next)
+      if (consumeNext) index += 1
     } else if (key === '--chunk-url-base') {
       args.chunkUrlBase = String(next ?? '').replace(/\/+$/u, '')
       if (consumeNext) index += 1
@@ -66,7 +100,8 @@ Options:
   --output <dir>           Output directory for manifest.json and chunks/
   --cols <n>               Chunk grid columns (default: 32)
   --rows <n>               Chunk grid rows (default: 24)
-  --min-zoom <n>           Minimum map zoom before clients load DB chunks (default: 9)
+  --min-zoom <n>           Minimum map zoom for full-detail DB chunks when --lods is omitted (default: 9)
+  --lods <spec>            Comma-separated id:tolerance:minZoom:maxZoom entries (default: overview,medium,full)
   --chunk-url-base <url>   Optional absolute base URL for manifest chunk paths, e.g. an R2/CDN prefix
 `)
       process.exit(0)
@@ -78,7 +113,41 @@ Options:
   if (!Number.isFinite(args.cols) || args.cols <= 0) throw new Error('--cols must be a positive number')
   if (!Number.isFinite(args.rows) || args.rows <= 0) throw new Error('--rows must be a positive number')
   if (!Number.isFinite(args.minZoom) || args.minZoom < 0) throw new Error('--min-zoom must be a non-negative number')
+  args.lods ??= defaultLods(args.minZoom)
+  if (args.lods.some((lod) => !Number.isFinite(lod.tolerance) || lod.tolerance < 0)) {
+    throw new Error('Every LOD tolerance must be a non-negative number')
+  }
+  if (args.lods.some((lod) => !Number.isFinite(lod.minZoom) || !Number.isFinite(lod.maxZoom) || lod.maxZoom <= lod.minZoom)) {
+    throw new Error('Every LOD must have a valid zoom range')
+  }
   return args
+}
+
+function parseLods(value) {
+  if (!value) return null
+  return String(value)
+    .split(',')
+    .map((entry) => {
+      const [idRaw, toleranceRaw, minZoomRaw = '0', maxZoomRaw = '24'] = entry.split(':')
+      const id = String(idRaw ?? '').trim()
+      const tolerance = Number(toleranceRaw)
+      const minZoom = Number(minZoomRaw)
+      const maxZoom = Number(maxZoomRaw)
+      if (!id) throw new Error(`Invalid LOD entry "${entry}": missing id`)
+      if (!Number.isFinite(tolerance) || tolerance < 0) throw new Error(`Invalid LOD entry "${entry}": bad tolerance`)
+      if (!Number.isFinite(minZoom) || !Number.isFinite(maxZoom) || maxZoom <= minZoom) {
+        throw new Error(`Invalid LOD entry "${entry}": bad zoom range`)
+      }
+      return {
+        id,
+        label: id === 'full' ? 'Full DB detail' : id.charAt(0).toUpperCase() + id.slice(1),
+        tolerance,
+        minZoom,
+        maxZoom,
+        detailProperties: tolerance === 0,
+      }
+    })
+    .sort((a, b) => a.minZoom - b.minZoom)
 }
 
 function assertFile(filePath) {
@@ -131,14 +200,16 @@ function compactObject(value) {
 function cleanProperties(feature, recordByDb) {
   const dbuid = String(feature.properties?.DBUID ?? '').trim()
   const record = recordByDb.get(dbuid) ?? {}
+  const name = `DB ${dbuid}`
+  const areaSqKm = record.areaSqKm ?? Number(feature.properties?.LANDAREA ?? 0)
   return compactObject({
     id: dbuid,
-    name: `DB ${dbuid}`,
+    name,
     level: 'db',
     population: record.population ?? 0,
     households: record.households ?? 0,
     dwellings: record.dwellings ?? 0,
-    areaSqKm: record.areaSqKm ?? Number(feature.properties?.LANDAREA ?? 0),
+    areaSqKm,
     populationDensity: record.populationDensity ?? 0,
     parentCdId: record.cdId ?? feature.properties?.CDUID,
     parentCsdId: record.csdId ?? feature.properties?.CSDUID,
@@ -160,9 +231,111 @@ function cleanProperties(feature, recordByDb) {
   })
 }
 
-function manifestChunkPath(filename, chunkUrlBase) {
-  if (!chunkUrlBase) return `chunks/${filename}`
-  return `${chunkUrlBase}/chunks/${filename}`
+function lodProperties(properties, detailProperties) {
+  if (detailProperties) return properties
+  return compactObject({
+    id: properties.id,
+    name: properties.name,
+    level: 'db',
+    areaSqKm: properties.areaSqKm,
+  })
+}
+
+function simplifyFeature(feature, lod) {
+  const properties = lodProperties(feature.properties, lod.detailProperties)
+  const sourceFeature = {
+    type: 'Feature',
+    geometry: feature.geometry,
+    properties,
+  }
+  const simplified = lod.tolerance > 0
+    ? turf.simplify(sourceFeature, { tolerance: lod.tolerance, highQuality: false, mutate: false })
+    : sourceFeature
+  if (!simplified.geometry || (simplified.geometry.type !== 'Polygon' && simplified.geometry.type !== 'MultiPolygon')) return null
+
+  const geometry = { ...simplified.geometry, coordinates: roundCoordinates(simplified.geometry.coordinates) }
+  const featureBbox = bboxForGeometry(geometry)
+  return {
+    type: 'Feature',
+    geometry,
+    properties,
+    bbox: featureBbox,
+  }
+}
+
+function manifestChunkPath(lodId, filename, chunkUrlBase) {
+  if (!chunkUrlBase) return `chunks/${lodId}/${filename}`
+  return `${chunkUrlBase}/chunks/${lodId}/${filename}`
+}
+
+function createChunks(features, layerBbox, cols, rows) {
+  const layerWidth = layerBbox[2] - layerBbox[0]
+  const layerHeight = layerBbox[3] - layerBbox[1]
+  const buckets = new Map()
+
+  features.forEach((feature) => {
+    const centerLng = (feature.bbox[0] + feature.bbox[2]) / 2
+    const centerLat = (feature.bbox[1] + feature.bbox[3]) / 2
+    const col = Math.max(0, Math.min(cols - 1, Math.floor(((centerLng - layerBbox[0]) / layerWidth) * cols)))
+    const row = Math.max(0, Math.min(rows - 1, Math.floor(((centerLat - layerBbox[1]) / layerHeight) * rows)))
+    const id = `r${row}-c${col}`
+    if (!buckets.has(id)) buckets.set(id, { id, row, col, features: [], bbox: [Infinity, Infinity, -Infinity, -Infinity] })
+    const bucket = buckets.get(id)
+    bucket.features.push(feature)
+    extendBbox(bucket.bbox, feature.bbox)
+  })
+
+  return [...buckets.values()].sort((a, b) => a.row - b.row || a.col - b.col)
+}
+
+function writeLod(args, sourceFeatures, sourceLayerBbox, lod) {
+  console.log(`Building ${lod.id} LOD at tolerance ${lod.tolerance}`)
+  const features = sourceFeatures.map((feature) => simplifyFeature(feature, lod)).filter(Boolean)
+  const chunksDir = path.join(args.output, 'chunks', lod.id)
+  fs.mkdirSync(chunksDir, { recursive: true })
+
+  const chunks = []
+  let rawBytes = 0
+  let gzipBytes = 0
+  const coordinateCount = features.reduce((sum, feature) => sum + countCoords(feature.geometry.coordinates), 0)
+
+  for (const bucket of createChunks(features, sourceLayerBbox, args.cols, args.rows)) {
+    const filename = `bc-db-${bucket.id}.geojson`
+    const featureCollection = {
+      type: 'FeatureCollection',
+      features: bucket.features.map(({ bbox: _bbox, ...feature }) => feature),
+    }
+    const json = JSON.stringify(featureCollection)
+    fs.writeFileSync(path.join(chunksDir, filename), json)
+    const rawChunkBytes = Buffer.byteLength(json)
+    const gzipChunkBytes = gzipSync(json).length
+    rawBytes += rawChunkBytes
+    gzipBytes += gzipChunkBytes
+    chunks.push({
+      id: bucket.id,
+      path: manifestChunkPath(lod.id, filename, args.chunkUrlBase),
+      bbox: bucket.bbox.map((value) => Math.round(value * 1e6) / 1e6),
+      featureCount: bucket.features.length,
+      rawBytes: rawChunkBytes,
+      gzipBytes: gzipChunkBytes,
+    })
+  }
+
+  console.log(`  ${features.length.toLocaleString()} features, ${chunks.length.toLocaleString()} chunks`)
+  console.log(`  Raw ${(rawBytes / 1024 / 1024).toFixed(2)} MiB; gzip ${(gzipBytes / 1024 / 1024).toFixed(2)} MiB`)
+
+  return {
+    id: lod.id,
+    label: lod.label,
+    tolerance: lod.tolerance,
+    minZoom: lod.minZoom,
+    maxZoom: lod.maxZoom,
+    features: features.length,
+    coordinateCount,
+    rawBytes,
+    gzipBytes,
+    chunks,
+  }
 }
 
 async function main() {
@@ -172,7 +345,7 @@ async function main() {
   assertFile(args.crosswalk)
 
   fs.rmSync(args.output, { recursive: true, force: true })
-  fs.mkdirSync(path.join(args.output, 'chunks'), { recursive: true })
+  fs.mkdirSync(args.output, { recursive: true })
 
   const tempZip = path.join(args.output, '.tmp-db21.zip')
   execFileSync('zip', [
@@ -204,49 +377,8 @@ async function main() {
 
   const layerBbox = [Infinity, Infinity, -Infinity, -Infinity]
   prepared.forEach((feature) => extendBbox(layerBbox, feature.bbox))
-  const layerWidth = layerBbox[2] - layerBbox[0]
-  const layerHeight = layerBbox[3] - layerBbox[1]
-
-  const buckets = new Map()
-  prepared.forEach((feature) => {
-    const centerLng = (feature.bbox[0] + feature.bbox[2]) / 2
-    const centerLat = (feature.bbox[1] + feature.bbox[3]) / 2
-    const col = Math.max(0, Math.min(args.cols - 1, Math.floor(((centerLng - layerBbox[0]) / layerWidth) * args.cols)))
-    const row = Math.max(0, Math.min(args.rows - 1, Math.floor(((centerLat - layerBbox[1]) / layerHeight) * args.rows)))
-    const id = `r${row}-c${col}`
-    if (!buckets.has(id)) buckets.set(id, { id, row, col, features: [], bbox: [Infinity, Infinity, -Infinity, -Infinity] })
-    const bucket = buckets.get(id)
-    bucket.features.push(feature)
-    extendBbox(bucket.bbox, feature.bbox)
-  })
-
-  const chunks = []
-  let rawBytesTotal = 0
-  let gzipBytesTotal = 0
-  const coordinateCount = prepared.reduce((sum, feature) => sum + countCoords(feature.geometry.coordinates), 0)
-
-  for (const bucket of [...buckets.values()].sort((a, b) => a.row - b.row || a.col - b.col)) {
-    const filename = `bc-db-${bucket.id}.geojson`
-    const relativePath = path.join('chunks', filename)
-    const featureCollection = {
-      type: 'FeatureCollection',
-      features: bucket.features.map(({ bbox: _bbox, ...feature }) => feature),
-    }
-    const json = JSON.stringify(featureCollection)
-    fs.writeFileSync(path.join(args.output, relativePath), json)
-    const rawBytes = Buffer.byteLength(json)
-    const gzipBytes = gzipSync(json).length
-    rawBytesTotal += rawBytes
-    gzipBytesTotal += gzipBytes
-    chunks.push({
-      id: bucket.id,
-      path: manifestChunkPath(filename, args.chunkUrlBase),
-      bbox: bucket.bbox.map((value) => Math.round(value * 1e6) / 1e6),
-      featureCount: bucket.features.length,
-      rawBytes,
-      gzipBytes,
-    })
-  }
+  const levels = args.lods.map((lod) => writeLod(args, prepared, layerBbox, lod))
+  const defaultLevel = levels[levels.length - 1]
 
   const manifest = {
     generatedAt: new Date().toISOString(),
@@ -257,32 +389,21 @@ async function main() {
       chunkUrlBase: args.chunkUrlBase || null,
     },
     grid: { cols: args.cols, rows: args.rows },
-    features: prepared.length,
-    coordinateCount,
-    rawBytes: rawBytesTotal,
-    gzipBytes: gzipBytesTotal,
-    levels: [{
-      id: 'full',
-      label: 'Full DB detail (zoomed)',
-      tolerance: 0,
-      minZoom: args.minZoom,
-      maxZoom: 24,
-      features: prepared.length,
-      coordinateCount,
-      rawBytes: rawBytesTotal,
-      gzipBytes: gzipBytesTotal,
-      chunks,
-    }],
-    chunks,
+    features: defaultLevel.features,
+    coordinateCount: defaultLevel.coordinateCount,
+    rawBytes: defaultLevel.rawBytes,
+    gzipBytes: defaultLevel.gzipBytes,
+    levels,
+    chunks: defaultLevel.chunks,
   }
 
   fs.writeFileSync(path.join(args.output, 'manifest.json'), JSON.stringify(manifest))
 
-  const largest = [...chunks].sort((a, b) => b.rawBytes - a.rawBytes)[0]
-  console.log(`Wrote ${prepared.length.toLocaleString()} DB features to ${chunks.length.toLocaleString()} chunks`)
-  console.log(`Raw ${(rawBytesTotal / 1024 / 1024).toFixed(2)} MiB; gzip ${(gzipBytesTotal / 1024 / 1024).toFixed(2)} MiB`)
+  const largest = [...defaultLevel.chunks].sort((a, b) => b.rawBytes - a.rawBytes)[0]
+  console.log(`Wrote ${levels.length.toLocaleString()} DB LOD level(s)`)
+  console.log(`Full detail raw ${(defaultLevel.rawBytes / 1024 / 1024).toFixed(2)} MiB; gzip ${(defaultLevel.gzipBytes / 1024 / 1024).toFixed(2)} MiB`)
   if (largest) {
-    console.log(`Largest chunk ${largest.id}: ${largest.featureCount.toLocaleString()} features, ${(largest.rawBytes / 1024 / 1024).toFixed(2)} MiB raw`)
+    console.log(`Largest full-detail chunk ${largest.id}: ${largest.featureCount.toLocaleString()} features, ${(largest.rawBytes / 1024 / 1024).toFixed(2)} MiB raw`)
   }
 }
 
