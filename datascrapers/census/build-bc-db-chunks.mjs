@@ -271,6 +271,7 @@ async function main() {
       coordinateCount,
       rawBytes: rawBytesTotal,
       gzipBytes: gzipBytesTotal,
+      chunks,
     }],
     chunks,
   }
