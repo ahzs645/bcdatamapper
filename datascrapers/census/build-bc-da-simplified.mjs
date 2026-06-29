@@ -9,13 +9,41 @@ import * as turf from '@turf/turf'
 
 const SERVICE_BASE = 'https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer'
 const DA_LAYER_ID = 12
+const PARENT_LAYER_DEFS = [
+  {
+    level: 'cd',
+    label: 'Census Division',
+    layerId: 4,
+    idKey: 'CDUID',
+    nameKey: 'CDNAME',
+    typeKey: 'CDTYPE',
+  },
+  {
+    level: 'csd',
+    label: 'Census Subdivision',
+    layerId: 9,
+    idKey: 'CSDUID',
+    nameKey: 'CSDNAME',
+    typeKey: 'CSDTYPE',
+  },
+  {
+    level: 'ct',
+    label: 'Census Tract',
+    layerId: 11,
+    idKey: 'CTUID',
+    nameKey: 'CTNAME',
+    typeKey: null,
+  },
+]
 const BC_PRUID = '59'
 const FETCH_PAGE_SIZE = 500
+const PARENT_FETCH_PAGE_SIZE = 25
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const censusDir = __dirname
 const tmpDir = path.join(censusDir, 'tmp')
 const defaultSourcePath = path.join(tmpDir, 'bc-da-source.geojson')
+const defaultParentsPath = path.join(tmpDir, 'bc-census-parent-boundaries.geojson')
 const outputDir = path.join(censusDir, 'output', 'bc-da-simplified')
 
 const DEFAULT_LODS = [
@@ -158,6 +186,73 @@ async function fetchBcDaSource() {
   }
 }
 
+async function queryLayerGeoJson(layerId, where, batchSize = FETCH_PAGE_SIZE) {
+  const idParams = new URLSearchParams({
+    where,
+    returnIdsOnly: 'true',
+    f: 'json',
+  })
+  const idJson = await fetchJson(`${SERVICE_BASE}/${layerId}/query?${idParams.toString()}`)
+  const objectIds = Array.isArray(idJson.objectIds) ? idJson.objectIds : []
+  objectIds.sort((a, b) => Number(a) - Number(b))
+
+  const features = []
+  for (let offset = 0; offset < objectIds.length; offset += batchSize) {
+    const ids = objectIds.slice(offset, offset + batchSize)
+    features.push(...await queryLayerObjectIds(layerId, ids))
+  }
+
+  return {
+    type: 'FeatureCollection',
+    features,
+  }
+}
+
+async function queryLayerObjectIds(layerId, objectIds) {
+  return queryLayerObjectIdsWithOptions(layerId, objectIds, {})
+}
+
+async function queryLayerObjectIdsWithOptions(layerId, objectIds, extraParams) {
+  const params = new URLSearchParams({
+    objectIds: objectIds.join(','),
+    outFields: '*',
+    returnGeometry: 'true',
+    outSR: '4326',
+    f: 'geojson',
+  })
+  Object.entries(extraParams).forEach(([key, value]) => params.set(key, String(value)))
+
+  try {
+    const json = await fetchJson(`${SERVICE_BASE}/${layerId}/query?${params.toString()}`)
+    return Array.isArray(json.features) ? json.features : []
+  } catch (error) {
+    if (objectIds.length === 1 && !extraParams.maxAllowableOffset) {
+      return queryLayerObjectIdsWithOptions(layerId, objectIds, {
+        maxAllowableOffset: 0.001,
+        geometryPrecision: 6,
+      })
+    }
+    if (objectIds.length <= 1) throw error
+    const midpoint = Math.ceil(objectIds.length / 2)
+    const [left, right] = await Promise.all([
+      queryLayerObjectIds(layerId, objectIds.slice(0, midpoint)),
+      queryLayerObjectIds(layerId, objectIds.slice(midpoint)),
+    ])
+    return [...left, ...right]
+  }
+}
+
+async function fetchParentBoundaries() {
+  const entries = await Promise.all(PARENT_LAYER_DEFS.map(async (definition) => {
+    console.log(`Fetching BC ${definition.label} boundaries...`)
+    const collection = await queryLayerGeoJson(definition.layerId, `PRUID='${BC_PRUID}'`, PARENT_FETCH_PAGE_SIZE)
+    console.log(`  ${collection.features.length.toLocaleString()} ${definition.level.toUpperCase()} features`)
+    return [definition.level, collection]
+  }))
+
+  return Object.fromEntries(entries)
+}
+
 async function loadSource(sourcePath) {
   if (sourcePath) {
     return JSON.parse(await fs.readFile(path.resolve(sourcePath), 'utf8'))
@@ -170,6 +265,17 @@ async function loadSource(sourcePath) {
     const source = await fetchBcDaSource()
     await fs.writeFile(defaultSourcePath, JSON.stringify(source))
     return source
+  }
+}
+
+async function loadParentBoundaries() {
+  try {
+    return JSON.parse(await fs.readFile(defaultParentsPath, 'utf8'))
+  } catch {
+    await fs.mkdir(tmpDir, { recursive: true })
+    const parents = await fetchParentBoundaries()
+    await fs.writeFile(defaultParentsPath, JSON.stringify(parents))
+    return parents
   }
 }
 
@@ -203,7 +309,102 @@ function byteStats(json) {
   }
 }
 
-function normalizeFeature(rawFeature, tolerance, lodId) {
+function bboxContainsPoint(bboxValue, point) {
+  const [lon, lat] = point.geometry.coordinates
+  return lon >= bboxValue[0] && lon <= bboxValue[2] && lat >= bboxValue[1] && lat <= bboxValue[3]
+}
+
+function bboxesOverlap(a, b) {
+  return a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3] && a[3] >= b[1]
+}
+
+function createParentRecord(rawFeature, definition) {
+  if (!rawFeature?.geometry || (rawFeature.geometry.type !== 'Polygon' && rawFeature.geometry.type !== 'MultiPolygon')) {
+    return null
+  }
+
+  const properties = rawFeature.properties ?? {}
+  const id = String(properties[definition.idKey] ?? '').trim()
+  if (!id) return null
+  const name = String(properties[definition.nameKey] ?? id).trim() || id
+  const type = definition.typeKey ? String(properties[definition.typeKey] ?? '').trim() || null : null
+  const landArea = toNumber(properties.LANDAREA)
+
+  return {
+    id,
+    name,
+    type,
+    level: definition.level,
+    dguid: properties.DGUID ?? null,
+    landArea,
+    feature: rawFeature,
+    bbox: turf.bbox(rawFeature),
+  }
+}
+
+function createParentIndex(parentBoundaries) {
+  return Object.fromEntries(PARENT_LAYER_DEFS.map((definition) => {
+    const collection = parentBoundaries[definition.level]
+    const records = (Array.isArray(collection?.features) ? collection.features : [])
+      .map((feature) => createParentRecord(feature, definition))
+      .filter(Boolean)
+    return [definition.level, records]
+  }))
+}
+
+function findContainingParent(point, feature, parentRecords) {
+  const candidates = parentRecords.filter((record) => bboxContainsPoint(record.bbox, point))
+  for (const record of candidates) {
+    if (turf.booleanPointInPolygon(point, record.feature, { ignoreBoundary: false })) {
+      return record
+    }
+  }
+
+  const featureBbox = turf.bbox(feature)
+  const intersecting = parentRecords.filter((record) => bboxesOverlap(record.bbox, featureBbox))
+  for (const record of intersecting) {
+    try {
+      if (turf.booleanIntersects(feature, record.feature)) return record
+    } catch {
+      // Fall through to the next candidate.
+    }
+  }
+
+  return null
+}
+
+function createDaHierarchy(sourceFeatures, parentIndex) {
+  const hierarchyByDaUid = new Map()
+  let missingCd = 0
+  let missingCsd = 0
+  let missingCt = 0
+
+  for (const feature of sourceFeatures) {
+    if (!feature?.geometry) continue
+    const daUid = String(feature.properties?.DAUID ?? feature.properties?.id ?? feature.id ?? '').trim()
+    if (!daUid) continue
+
+    const point = turf.pointOnFeature(feature)
+    const cd = findContainingParent(point, feature, parentIndex.cd ?? [])
+    const csd = findContainingParent(point, feature, parentIndex.csd ?? [])
+    const ct = findContainingParent(point, feature, parentIndex.ct ?? [])
+
+    if (!cd) missingCd += 1
+    if (!csd) missingCsd += 1
+    if (!ct) missingCt += 1
+
+    hierarchyByDaUid.set(daUid, { cd, csd, ct })
+  }
+
+  console.log(`Hierarchy join: ${hierarchyByDaUid.size.toLocaleString()} DA features`)
+  console.log(`  Missing CD: ${missingCd.toLocaleString()}`)
+  console.log(`  Missing CSD: ${missingCsd.toLocaleString()}`)
+  console.log(`  Missing CT: ${missingCt.toLocaleString()} (expected outside tracted areas)`)
+
+  return hierarchyByDaUid
+}
+
+function normalizeFeature(rawFeature, tolerance, lodId, hierarchyByDaUid) {
   if (!rawFeature?.geometry || (rawFeature.geometry.type !== 'Polygon' && rawFeature.geometry.type !== 'MultiPolygon')) {
     return null
   }
@@ -222,6 +423,7 @@ function normalizeFeature(rawFeature, tolerance, lodId) {
   const daUid = String(properties.DAUID ?? properties.id ?? rawFeature.id ?? '').trim()
   if (!daUid) return null
 
+  const hierarchy = hierarchyByDaUid.get(daUid) ?? {}
   const areaKm2 = turf.area(simplified) / 1_000_000
   simplified.properties = {
     id: daUid,
@@ -233,9 +435,20 @@ function normalizeFeature(rawFeature, tolerance, lodId) {
     DAUID: daUid,
     DGUID: properties.DGUID ?? null,
     PRUID: properties.PRUID ?? BC_PRUID,
-    CDUID: properties.CDUID ?? null,
-    CSDUID: properties.CSDUID ?? null,
-    CTUID: properties.CTUID ?? null,
+    CDUID: hierarchy.cd?.id ?? properties.CDUID ?? null,
+    CDNAME: hierarchy.cd?.name ?? properties.CDNAME ?? null,
+    CDTYPE: hierarchy.cd?.type ?? properties.CDTYPE ?? null,
+    CSDUID: hierarchy.csd?.id ?? properties.CSDUID ?? null,
+    CSDNAME: hierarchy.csd?.name ?? properties.CSDNAME ?? null,
+    CSDTYPE: hierarchy.csd?.type ?? properties.CSDTYPE ?? null,
+    CTUID: hierarchy.ct?.id ?? properties.CTUID ?? null,
+    CTNAME: hierarchy.ct?.name ?? properties.CTNAME ?? null,
+    parentCdId: hierarchy.cd?.id ?? null,
+    parentCdName: hierarchy.cd?.name ?? null,
+    parentCsdId: hierarchy.csd?.id ?? null,
+    parentCsdName: hierarchy.csd?.name ?? null,
+    parentCtId: hierarchy.ct?.id ?? null,
+    parentCtName: hierarchy.ct?.name ?? null,
     LANDAREA: toNumber(properties.LANDAREA),
     areaKm2: Number.isFinite(areaKm2) && areaKm2 > 0 ? areaKm2 : 0,
   }
@@ -282,10 +495,70 @@ function createChunks(features, gridCols, gridRows) {
   return [...chunks.values()].sort((a, b) => a.row - b.row || a.col - b.col)
 }
 
-async function writeLod(sourceFeatures, lod, gridCols, gridRows) {
+function normalizeParentBoundary(rawFeature, definition) {
+  const record = createParentRecord(rawFeature, definition)
+  if (!record) return null
+
+  const feature = turf.simplify(rawFeature, {
+    tolerance: definition.level === 'ct' ? 0.0002 : 0.0005,
+    highQuality: false,
+    mutate: false,
+  })
+  if (!feature.geometry || (feature.geometry.type !== 'Polygon' && feature.geometry.type !== 'MultiPolygon')) {
+    return null
+  }
+
+  const areaKm2 = turf.area(feature) / 1_000_000
+  feature.properties = {
+    id: record.id,
+    boundaryId: `census:${definition.level}:${record.id}`,
+    boundaryCode: record.id,
+    boundaryName: record.name,
+    boundarySource: 'census',
+    boundaryLevel: definition.level,
+    boundaryType: record.type,
+    DGUID: record.dguid,
+    LANDAREA: record.landArea,
+    areaKm2: Number.isFinite(areaKm2) && areaKm2 > 0 ? areaKm2 : 0,
+  }
+  return feature
+}
+
+async function writeParentBoundaries(parentBoundaries) {
+  const parentsDir = path.join(outputDir, 'parents')
+  await fs.mkdir(parentsDir, { recursive: true })
+  const manifestEntries = []
+
+  for (const definition of PARENT_LAYER_DEFS) {
+    const collection = parentBoundaries[definition.level]
+    const features = (Array.isArray(collection?.features) ? collection.features : [])
+      .map((feature) => normalizeParentBoundary(feature, definition))
+      .filter(Boolean)
+      .sort((a, b) => String(a.properties?.boundaryCode ?? '').localeCompare(String(b.properties?.boundaryCode ?? '')))
+    const output = {
+      type: 'FeatureCollection',
+      features,
+    }
+    const stats = byteStats(output)
+    const fileName = `${definition.level}.geojson`
+    await fs.writeFile(path.join(parentsDir, fileName), stats.text)
+    manifestEntries.push({
+      level: definition.level,
+      label: definition.label,
+      path: `parents/${fileName}`,
+      features: features.length,
+      rawBytes: stats.rawBytes,
+      gzipBytes: stats.gzipBytes,
+    })
+  }
+
+  return manifestEntries
+}
+
+async function writeLod(sourceFeatures, lod, gridCols, gridRows, hierarchyByDaUid) {
   console.log(`Building ${lod.id} LOD at tolerance ${lod.tolerance}`)
   const features = sourceFeatures
-    .map((feature) => normalizeFeature(feature, lod.tolerance, lod.id))
+    .map((feature) => normalizeFeature(feature, lod.tolerance, lod.id, hierarchyByDaUid))
     .filter(Boolean)
     .sort((a, b) => String(a.properties?.DAUID ?? '').localeCompare(String(b.properties?.DAUID ?? '')))
 
@@ -339,15 +612,19 @@ async function writeLod(sourceFeatures, lod, gridCols, gridRows) {
 async function main() {
   const options = parseArgs(process.argv.slice(2))
   const source = await loadSource(options.source)
+  const parentBoundaries = await loadParentBoundaries()
   const sourceFeatures = Array.isArray(source.features) ? source.features : []
   console.log(`Loaded ${sourceFeatures.length.toLocaleString()} BC DA source features`)
+  const parentIndex = createParentIndex(parentBoundaries)
+  const hierarchyByDaUid = createDaHierarchy(sourceFeatures, parentIndex)
 
   await fs.rm(outputDir, { recursive: true, force: true })
   await fs.mkdir(outputDir, { recursive: true })
+  const parentBoundaryManifest = await writeParentBoundaries(parentBoundaries)
   const levels = []
 
   for (const lod of options.lods) {
-    levels.push(await writeLod(sourceFeatures, lod, options.gridCols, options.gridRows))
+    levels.push(await writeLod(sourceFeatures, lod, options.gridCols, options.gridRows, hierarchyByDaUid))
   }
 
   const defaultLevel = levels[levels.length - 1]
@@ -370,6 +647,7 @@ async function main() {
     gzipBytes: defaultLevel.gzipBytes,
     chunks: defaultLevel.chunks,
     levels,
+    parentBoundaries: parentBoundaryManifest,
   }
 
   await fs.writeFile(path.join(outputDir, 'manifest.json'), JSON.stringify(manifest, null, 2))

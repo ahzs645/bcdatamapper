@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-29T16:57:55.758Z",
+  "generatedAt": "2026-06-29T19:28:58.857Z",
   "source": {
     "name": "Statistics Canada 2021 Cartographic Boundary File - Dissemination Areas",
     "service": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/12",
@@ -12,8 +12,8 @@
   },
   "features": 7848,
   "coordinateCount": 611750,
-  "rawBytes": 27642078,
-  "gzipBytes": 9126928,
+  "rawBytes": 29699955,
+  "gzipBytes": 9255587,
   "chunks": [
     {
       "id": "r0-c2",
@@ -25,8 +25,8 @@
         50.94601546288416
       ],
       "featureCount": 32,
-      "rawBytes": 1560428,
-      "gzipBytes": 570896
+      "rawBytes": 1568321,
+      "gzipBytes": 572177
     },
     {
       "id": "r0-c3",
@@ -38,8 +38,8 @@
         50.86350742191523
       ],
       "featureCount": 5140,
-      "rawBytes": 7621463,
-      "gzipBytes": 2105417
+      "rawBytes": 8982281,
+      "gzipBytes": 2174738
     },
     {
       "id": "r0-c4",
@@ -51,8 +51,8 @@
         50.86440916098597
       ],
       "featureCount": 1236,
-      "rawBytes": 2417662,
-      "gzipBytes": 712744
+      "rawBytes": 2741719,
+      "gzipBytes": 736801
     },
     {
       "id": "r0-c5",
@@ -64,8 +64,8 @@
         51.06606987021632
       ],
       "featureCount": 269,
-      "rawBytes": 1083849,
-      "gzipBytes": 346932
+      "rawBytes": 1150216,
+      "gzipBytes": 352399
     },
     {
       "id": "r1-c1",
@@ -77,8 +77,8 @@
         53.260782489577366
       ],
       "featureCount": 1,
-      "rawBytes": 1118054,
-      "gzipBytes": 412707
+      "rawBytes": 1118319,
+      "gzipBytes": 412847
     },
     {
       "id": "r1-c2",
@@ -90,8 +90,8 @@
         53.30903792636081
       ],
       "featureCount": 27,
-      "rawBytes": 2661253,
-      "gzipBytes": 985043
+      "rawBytes": 2667980,
+      "gzipBytes": 986069
     },
     {
       "id": "r1-c3",
@@ -103,8 +103,8 @@
         53.00075661978387
       ],
       "featureCount": 67,
-      "rawBytes": 2182781,
-      "gzipBytes": 816548
+      "rawBytes": 2198350,
+      "gzipBytes": 818615
     },
     {
       "id": "r1-c4",
@@ -116,8 +116,8 @@
         53.241662442155835
       ],
       "featureCount": 407,
-      "rawBytes": 1363835,
-      "gzipBytes": 436128
+      "rawBytes": 1468407,
+      "gzipBytes": 445511
     },
     {
       "id": "r1-c5",
@@ -129,8 +129,8 @@
         52.500244863036414
       ],
       "featureCount": 33,
-      "rawBytes": 245735,
-      "gzipBytes": 90813
+      "rawBytes": 253915,
+      "gzipBytes": 91700
     },
     {
       "id": "r2-c1",
@@ -142,8 +142,8 @@
         54.660408126107576
       ],
       "featureCount": 11,
-      "rawBytes": 679005,
-      "gzipBytes": 251530
+      "rawBytes": 681879,
+      "gzipBytes": 251872
     },
     {
       "id": "r2-c2",
@@ -155,8 +155,8 @@
         56.003184231610255
       ],
       "featureCount": 160,
-      "rawBytes": 4783255,
-      "gzipBytes": 1741277
+      "rawBytes": 4823491,
+      "gzipBytes": 1744885
     },
     {
       "id": "r2-c3",
@@ -168,8 +168,8 @@
         56.00010765976782
       ],
       "featureCount": 285,
-      "rawBytes": 823694,
-      "gzipBytes": 263840
+      "rawBytes": 899918,
+      "gzipBytes": 270110
     },
     {
       "id": "r2-c4",
@@ -181,8 +181,8 @@
         55.81057893165609
       ],
       "featureCount": 14,
-      "rawBytes": 228331,
-      "gzipBytes": 82830
+      "rawBytes": 231941,
+      "gzipBytes": 83677
     },
     {
       "id": "r3-c1",
@@ -194,8 +194,8 @@
         58.00055608269938
       ],
       "featureCount": 1,
-      "rawBytes": 10944,
-      "gzipBytes": 4863
+      "rawBytes": 11203,
+      "gzipBytes": 4964
     },
     {
       "id": "r3-c2",
@@ -207,8 +207,8 @@
         57.179510377877094
       ],
       "featureCount": 8,
-      "rawBytes": 342809,
-      "gzipBytes": 131498
+      "rawBytes": 344810,
+      "gzipBytes": 131966
     },
     {
       "id": "r3-c3",
@@ -220,8 +220,8 @@
         58.02710958278447
       ],
       "featureCount": 14,
-      "rawBytes": 78211,
-      "gzipBytes": 30752
+      "rawBytes": 81692,
+      "gzipBytes": 31375
     },
     {
       "id": "r3-c4",
@@ -233,8 +233,8 @@
         58.00141843954263
       ],
       "featureCount": 112,
-      "rawBytes": 307992,
-      "gzipBytes": 91618
+      "rawBytes": 335012,
+      "gzipBytes": 93256
     },
     {
       "id": "r4-c1",
@@ -246,8 +246,8 @@
         60.0000630741635
       ],
       "featureCount": 9,
-      "rawBytes": 69649,
-      "gzipBytes": 27639
+      "rawBytes": 71837,
+      "gzipBytes": 28031
     },
     {
       "id": "r4-c2",
@@ -259,8 +259,8 @@
         59.93976689084565
       ],
       "featureCount": 7,
-      "rawBytes": 8346,
-      "gzipBytes": 2729
+      "rawBytes": 10035,
+      "gzipBytes": 3043
     },
     {
       "id": "r4-c3",
@@ -272,8 +272,8 @@
         60.00003659219355
       ],
       "featureCount": 12,
-      "rawBytes": 37100,
-      "gzipBytes": 13873
+      "rawBytes": 40200,
+      "gzipBytes": 14124
     },
     {
       "id": "r4-c4",
@@ -285,8 +285,8 @@
         60.00006756592265
       ],
       "featureCount": 3,
-      "rawBytes": 17682,
-      "gzipBytes": 7251
+      "rawBytes": 18429,
+      "gzipBytes": 7427
     }
   ],
   "levels": [
@@ -298,8 +298,8 @@
       "maxZoom": 8.5,
       "features": 7848,
       "coordinateCount": 290422,
-      "rawBytes": 14805317,
-      "gzipBytes": 4477418,
+      "rawBytes": 16863194,
+      "gzipBytes": 4589996,
       "chunks": [
         {
           "id": "r0-c2",
@@ -311,8 +311,8 @@
             50.94608236553843
           ],
           "featureCount": 32,
-          "rawBytes": 824238,
-          "gzipBytes": 285270
+          "rawBytes": 832131,
+          "gzipBytes": 286601
         },
         {
           "id": "r0-c3",
@@ -324,8 +324,8 @@
             50.86350742191523
           ],
           "featureCount": 5140,
-          "rawBytes": 4799471,
-          "gzipBytes": 1156191
+          "rawBytes": 6160289,
+          "gzipBytes": 1216064
         },
         {
           "id": "r0-c4",
@@ -337,8 +337,8 @@
             50.86440916098597
           ],
           "featureCount": 1237,
-          "rawBytes": 1408426,
-          "gzipBytes": 382853
+          "rawBytes": 1732749,
+          "gzipBytes": 403341
         },
         {
           "id": "r0-c5",
@@ -350,8 +350,8 @@
             51.06606987021632
           ],
           "featureCount": 269,
-          "rawBytes": 558507,
-          "gzipBytes": 175526
+          "rawBytes": 624874,
+          "gzipBytes": 180083
         },
         {
           "id": "r1-c1",
@@ -363,8 +363,8 @@
             53.260658595334675
           ],
           "featureCount": 1,
-          "rawBytes": 538661,
-          "gzipBytes": 188635
+          "rawBytes": 538926,
+          "gzipBytes": 188774
         },
         {
           "id": "r1-c2",
@@ -376,8 +376,8 @@
             53.30903792636081
           ],
           "featureCount": 27,
-          "rawBytes": 1166223,
-          "gzipBytes": 409304
+          "rawBytes": 1172950,
+          "gzipBytes": 410160
         },
         {
           "id": "r1-c3",
@@ -389,8 +389,8 @@
             53.000653514959176
           ],
           "featureCount": 67,
-          "rawBytes": 989868,
-          "gzipBytes": 352629
+          "rawBytes": 1005437,
+          "gzipBytes": 354798
         },
         {
           "id": "r1-c4",
@@ -402,8 +402,8 @@
             53.241662442155835
           ],
           "featureCount": 406,
-          "rawBytes": 718996,
-          "gzipBytes": 223461
+          "rawBytes": 823302,
+          "gzipBytes": 232885
         },
         {
           "id": "r1-c5",
@@ -415,8 +415,8 @@
             52.5000202567733
           ],
           "featureCount": 33,
-          "rawBytes": 129601,
-          "gzipBytes": 48134
+          "rawBytes": 137781,
+          "gzipBytes": 48793
         },
         {
           "id": "r2-c1",
@@ -428,8 +428,8 @@
             54.660408126107576
           ],
           "featureCount": 11,
-          "rawBytes": 316710,
-          "gzipBytes": 111558
+          "rawBytes": 319584,
+          "gzipBytes": 111862
         },
         {
           "id": "r2-c2",
@@ -441,8 +441,8 @@
             56.002957584529106
           ],
           "featureCount": 160,
-          "rawBytes": 2306252,
-          "gzipBytes": 795406
+          "rawBytes": 2346488,
+          "gzipBytes": 798693
         },
         {
           "id": "r2-c3",
@@ -454,8 +454,8 @@
             56.00010765976782
           ],
           "featureCount": 285,
-          "rawBytes": 473583,
-          "gzipBytes": 145802
+          "rawBytes": 549807,
+          "gzipBytes": 151208
         },
         {
           "id": "r2-c4",
@@ -467,8 +467,8 @@
             55.81057893165609
           ],
           "featureCount": 14,
-          "rawBytes": 117503,
-          "gzipBytes": 42787
+          "rawBytes": 121113,
+          "gzipBytes": 43315
         },
         {
           "id": "r3-c1",
@@ -480,8 +480,8 @@
             58.00055608269938
           ],
           "featureCount": 1,
-          "rawBytes": 8793,
-          "gzipBytes": 3942
+          "rawBytes": 9052,
+          "gzipBytes": 4038
         },
         {
           "id": "r3-c2",
@@ -493,8 +493,8 @@
             57.179510377877094
           ],
           "featureCount": 8,
-          "rawBytes": 128895,
-          "gzipBytes": 49373
+          "rawBytes": 130896,
+          "gzipBytes": 49808
         },
         {
           "id": "r3-c3",
@@ -506,8 +506,8 @@
             58.02710958278447
           ],
           "featureCount": 14,
-          "rawBytes": 50993,
-          "gzipBytes": 19580
+          "rawBytes": 54474,
+          "gzipBytes": 20098
         },
         {
           "id": "r3-c4",
@@ -519,8 +519,8 @@
             58.00141843954263
           ],
           "featureCount": 112,
-          "rawBytes": 173872,
-          "gzipBytes": 49977
+          "rawBytes": 200892,
+          "gzipBytes": 51388
         },
         {
           "id": "r4-c1",
@@ -532,8 +532,8 @@
             60.0000630741635
           ],
           "featureCount": 9,
-          "rawBytes": 50444,
-          "gzipBytes": 20400
+          "rawBytes": 52632,
+          "gzipBytes": 20783
         },
         {
           "id": "r4-c2",
@@ -545,8 +545,8 @@
             59.93975048975205
           ],
           "featureCount": 7,
-          "rawBytes": 5750,
-          "gzipBytes": 1771
+          "rawBytes": 7439,
+          "gzipBytes": 2071
         },
         {
           "id": "r4-c3",
@@ -558,8 +558,8 @@
             60.00003659219355
           ],
           "featureCount": 12,
-          "rawBytes": 27370,
-          "gzipBytes": 10220
+          "rawBytes": 30470,
+          "gzipBytes": 10471
         },
         {
           "id": "r4-c4",
@@ -571,8 +571,8 @@
             60.00006756592265
           ],
           "featureCount": 3,
-          "rawBytes": 11161,
-          "gzipBytes": 4599
+          "rawBytes": 11908,
+          "gzipBytes": 4762
         }
       ]
     },
@@ -584,8 +584,8 @@
       "maxZoom": 24,
       "features": 7848,
       "coordinateCount": 611750,
-      "rawBytes": 27642078,
-      "gzipBytes": 9126928,
+      "rawBytes": 29699955,
+      "gzipBytes": 9255587,
       "chunks": [
         {
           "id": "r0-c2",
@@ -597,8 +597,8 @@
             50.94601546288416
           ],
           "featureCount": 32,
-          "rawBytes": 1560428,
-          "gzipBytes": 570896
+          "rawBytes": 1568321,
+          "gzipBytes": 572177
         },
         {
           "id": "r0-c3",
@@ -610,8 +610,8 @@
             50.86350742191523
           ],
           "featureCount": 5140,
-          "rawBytes": 7621463,
-          "gzipBytes": 2105417
+          "rawBytes": 8982281,
+          "gzipBytes": 2174738
         },
         {
           "id": "r0-c4",
@@ -623,8 +623,8 @@
             50.86440916098597
           ],
           "featureCount": 1236,
-          "rawBytes": 2417662,
-          "gzipBytes": 712744
+          "rawBytes": 2741719,
+          "gzipBytes": 736801
         },
         {
           "id": "r0-c5",
@@ -636,8 +636,8 @@
             51.06606987021632
           ],
           "featureCount": 269,
-          "rawBytes": 1083849,
-          "gzipBytes": 346932
+          "rawBytes": 1150216,
+          "gzipBytes": 352399
         },
         {
           "id": "r1-c1",
@@ -649,8 +649,8 @@
             53.260782489577366
           ],
           "featureCount": 1,
-          "rawBytes": 1118054,
-          "gzipBytes": 412707
+          "rawBytes": 1118319,
+          "gzipBytes": 412847
         },
         {
           "id": "r1-c2",
@@ -662,8 +662,8 @@
             53.30903792636081
           ],
           "featureCount": 27,
-          "rawBytes": 2661253,
-          "gzipBytes": 985043
+          "rawBytes": 2667980,
+          "gzipBytes": 986069
         },
         {
           "id": "r1-c3",
@@ -675,8 +675,8 @@
             53.00075661978387
           ],
           "featureCount": 67,
-          "rawBytes": 2182781,
-          "gzipBytes": 816548
+          "rawBytes": 2198350,
+          "gzipBytes": 818615
         },
         {
           "id": "r1-c4",
@@ -688,8 +688,8 @@
             53.241662442155835
           ],
           "featureCount": 407,
-          "rawBytes": 1363835,
-          "gzipBytes": 436128
+          "rawBytes": 1468407,
+          "gzipBytes": 445511
         },
         {
           "id": "r1-c5",
@@ -701,8 +701,8 @@
             52.500244863036414
           ],
           "featureCount": 33,
-          "rawBytes": 245735,
-          "gzipBytes": 90813
+          "rawBytes": 253915,
+          "gzipBytes": 91700
         },
         {
           "id": "r2-c1",
@@ -714,8 +714,8 @@
             54.660408126107576
           ],
           "featureCount": 11,
-          "rawBytes": 679005,
-          "gzipBytes": 251530
+          "rawBytes": 681879,
+          "gzipBytes": 251872
         },
         {
           "id": "r2-c2",
@@ -727,8 +727,8 @@
             56.003184231610255
           ],
           "featureCount": 160,
-          "rawBytes": 4783255,
-          "gzipBytes": 1741277
+          "rawBytes": 4823491,
+          "gzipBytes": 1744885
         },
         {
           "id": "r2-c3",
@@ -740,8 +740,8 @@
             56.00010765976782
           ],
           "featureCount": 285,
-          "rawBytes": 823694,
-          "gzipBytes": 263840
+          "rawBytes": 899918,
+          "gzipBytes": 270110
         },
         {
           "id": "r2-c4",
@@ -753,8 +753,8 @@
             55.81057893165609
           ],
           "featureCount": 14,
-          "rawBytes": 228331,
-          "gzipBytes": 82830
+          "rawBytes": 231941,
+          "gzipBytes": 83677
         },
         {
           "id": "r3-c1",
@@ -766,8 +766,8 @@
             58.00055608269938
           ],
           "featureCount": 1,
-          "rawBytes": 10944,
-          "gzipBytes": 4863
+          "rawBytes": 11203,
+          "gzipBytes": 4964
         },
         {
           "id": "r3-c2",
@@ -779,8 +779,8 @@
             57.179510377877094
           ],
           "featureCount": 8,
-          "rawBytes": 342809,
-          "gzipBytes": 131498
+          "rawBytes": 344810,
+          "gzipBytes": 131966
         },
         {
           "id": "r3-c3",
@@ -792,8 +792,8 @@
             58.02710958278447
           ],
           "featureCount": 14,
-          "rawBytes": 78211,
-          "gzipBytes": 30752
+          "rawBytes": 81692,
+          "gzipBytes": 31375
         },
         {
           "id": "r3-c4",
@@ -805,8 +805,8 @@
             58.00141843954263
           ],
           "featureCount": 112,
-          "rawBytes": 307992,
-          "gzipBytes": 91618
+          "rawBytes": 335012,
+          "gzipBytes": 93256
         },
         {
           "id": "r4-c1",
@@ -818,8 +818,8 @@
             60.0000630741635
           ],
           "featureCount": 9,
-          "rawBytes": 69649,
-          "gzipBytes": 27639
+          "rawBytes": 71837,
+          "gzipBytes": 28031
         },
         {
           "id": "r4-c2",
@@ -831,8 +831,8 @@
             59.93976689084565
           ],
           "featureCount": 7,
-          "rawBytes": 8346,
-          "gzipBytes": 2729
+          "rawBytes": 10035,
+          "gzipBytes": 3043
         },
         {
           "id": "r4-c3",
@@ -844,8 +844,8 @@
             60.00003659219355
           ],
           "featureCount": 12,
-          "rawBytes": 37100,
-          "gzipBytes": 13873
+          "rawBytes": 40200,
+          "gzipBytes": 14124
         },
         {
           "id": "r4-c4",
@@ -857,10 +857,36 @@
             60.00006756592265
           ],
           "featureCount": 3,
-          "rawBytes": 17682,
-          "gzipBytes": 7251
+          "rawBytes": 18429,
+          "gzipBytes": 7427
         }
       ]
+    }
+  ],
+  "parentBoundaries": [
+    {
+      "level": "cd",
+      "label": "Census Division",
+      "path": "parents/cd.geojson",
+      "features": 29,
+      "rawBytes": 8358718,
+      "gzipBytes": 2974019
+    },
+    {
+      "level": "csd",
+      "label": "Census Subdivision",
+      "path": "parents/csd.geojson",
+      "features": 751,
+      "rawBytes": 11960074,
+      "gzipBytes": 4318141
+    },
+    {
+      "level": "ct",
+      "label": "Census Tract",
+      "path": "parents/ct.geojson",
+      "features": 844,
+      "rawBytes": 1562126,
+      "gzipBytes": 460007
     }
   ]
 }
