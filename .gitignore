@@ -33,3 +33,8 @@ datascrapers/census/output/bc-db-chunks/
 
 # Generated TELUS network vector tiles are local scraper output.
 datascrapers/network/telus/output/tiles/
+
+# Generated BCEnviroScreen/raw-data rebuild outputs stay local and can be rebuilt.
+datascrapers/environmental-burden/output/
+datascrapers/health/bccdc-chronic-disease-tableau/output/
+datascrapers/health/phsa-community-health/output/
