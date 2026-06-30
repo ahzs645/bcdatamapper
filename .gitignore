@@ -36,5 +36,6 @@ datascrapers/network/telus/output/tiles/
 
 # Generated BCEnviroScreen/raw-data rebuild outputs stay local and can be rebuilt.
 datascrapers/environmental-burden/output/
+datascrapers/census/output/bcenviroscreen-census-lha/
 datascrapers/health/bccdc-chronic-disease-tableau/output/
 datascrapers/health/phsa-community-health/output/

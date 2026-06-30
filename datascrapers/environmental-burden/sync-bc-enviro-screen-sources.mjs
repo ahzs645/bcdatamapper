@@ -28,6 +28,7 @@ const WFS_SOURCES = [
     packageId: '63804e64-a4f3-4bc7-b1e3-5f736bbc3967',
     layer: 'WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW',
     geometryProperty: 'GEOMETRY',
+    sortBy: 'OBJECTID',
     expectedGeometry: 'Point',
     enviroScreenUse: 'Remediation/contaminated-site proximity or density.',
   },
@@ -37,6 +38,7 @@ const WFS_SOURCES = [
     packageId: '22c7cb44-1463-48f7-8e47-88857f207702',
     layer: 'WHSE_LAND_AND_NATURAL_RESOURCE.PROT_HISTORICAL_FIRE_POLYS_SP',
     geometryProperty: 'SHAPE',
+    sortBy: 'OBJECTID',
     expectedGeometry: 'Polygon',
     enviroScreenUse: 'Historical burned-area intersection and area summaries.',
   },
@@ -46,6 +48,7 @@ const WFS_SOURCES = [
     packageId: '67daf53d-e3bb-45ee-9121-8aa1193b7492',
     layer: 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_TMBR_PRCSSING_FAC_SV',
     geometryProperty: 'SHAPE',
+    sortBy: 'OBJECTID',
     expectedGeometry: 'Point',
     enviroScreenUse: 'Forestry mill proximity or facility counts.',
   },
@@ -55,6 +58,7 @@ const WFS_SOURCES = [
     packageId: '01e8a35e-35e3-4b48-93a7-b0d7c9705b62',
     layer: 'WHSE_MINERAL_TENURE.HSP_MJR_MINES_PERMTTD_AREAS_SP',
     geometryProperty: 'SHAPE',
+    sortBy: 'OBJECTID',
     expectedGeometry: 'Polygon',
     enviroScreenUse: 'Major mine permit-area intersection and area summaries.',
   },
@@ -64,6 +68,7 @@ const WFS_SOURCES = [
     packageId: '450a1faf-13e0-40c3-9fcf-8864b3714963',
     layer: 'WHSE_MINERAL_TENURE.OG_OIL_AND_GAS_FIELDS_SP',
     geometryProperty: 'GEOMETRY',
+    sortBy: 'OBJECTID',
     expectedGeometry: 'Polygon',
     enviroScreenUse: 'Oil/gas field intersection and area summaries.',
   },
@@ -118,6 +123,9 @@ const args = parseArgs(process.argv.slice(2))
 const count = Number(args.count ?? 5000)
 const includeRawDownloads = args['download-raw'] === 'true'
 const overwrite = args.overwrite === 'true'
+const scope = String(args.scope ?? 'prince-george').toLowerCase()
+const isProvinceScope = ['bc', 'all-bc', 'province', 'provincial'].includes(scope)
+const WFS_OUTPUT_DIR = isProvinceScope ? path.join(OUTPUT_DIR, 'full-bc') : OUTPUT_DIR
 
 function parseArgs(argv) {
   const parsed = {}
@@ -188,17 +196,14 @@ async function fetchBoundary() {
 }
 
 async function wfsHits(source) {
-  const text = await fetchText(
-    wfsUrl(source.layer, {
-      resultType: 'hits',
-      CQL_FILTER: bboxFilter(source, PRINCE_GEORGE_CITY.bbox),
-    }),
-  )
+  const params = { resultType: 'hits' }
+  if (!isProvinceScope) params.CQL_FILTER = bboxFilter(source, PRINCE_GEORGE_CITY.bbox)
+  const text = await fetchText(wfsUrl(source.layer, params))
   const matched = text.match(/numberMatched="([^"]+)"/)?.[1]
   return matched && matched !== 'unknown' ? Number(matched) : null
 }
 
-async function fetchWfsFeatures(source) {
+async function fetchWfsFeatures(source, totalFeatures = null) {
   const features = []
   let startIndex = 0
   for (;;) {
@@ -206,14 +211,14 @@ async function fetchWfsFeatures(source) {
       outputFormat: 'json',
       srsName: 'EPSG:4326',
       count,
-      CQL_FILTER: bboxFilter(source, PRINCE_GEORGE_CITY.bbox),
     }
+    if (!isProvinceScope) params.CQL_FILTER = bboxFilter(source, PRINCE_GEORGE_CITY.bbox)
+    if (source.sortBy) params.sortBy = source.sortBy
     if (startIndex > 0) params.startIndex = startIndex
-    const json = await fetchJson(
-      wfsUrl(source.layer, params),
-    )
+    const json = await fetchJson(wfsUrl(source.layer, params))
     features.push(...(json.features ?? []))
     if (!json.features?.length || json.features.length < count) break
+    if (totalFeatures !== null && features.length >= totalFeatures) break
     startIndex += count
   }
   return features
@@ -235,13 +240,17 @@ function filterToBoundary(features, boundaryFeature) {
 
 async function syncWfsSource(source, boundaryFeature) {
   console.log(`BC EnviroScreen: WFS ${source.id}`)
-  const [pkg, bboxCount, features] = await Promise.all([packageShow('bc', source.packageId), wfsHits(source), fetchWfsFeatures(source)])
-  const boundaryFeatures = filterToBoundary(features, boundaryFeature)
+  const [pkg, sourceFeatureCount] = await Promise.all([
+    packageShow('bc', source.packageId),
+    wfsHits(source),
+  ])
+  const features = await fetchWfsFeatures(source, sourceFeatureCount)
+  const outputFeatures = isProvinceScope ? features : filterToBoundary(features, boundaryFeature)
   const collection = {
     type: 'FeatureCollection',
     name: source.id,
-    bbox: PRINCE_GEORGE_CITY.bbox,
-    features: boundaryFeatures.map((feature) => ({
+    bbox: isProvinceScope ? undefined : PRINCE_GEORGE_CITY.bbox,
+    features: outputFeatures.map((feature) => ({
       ...feature,
       properties: {
         ...feature.properties,
@@ -251,13 +260,14 @@ async function syncWfsSource(source, boundaryFeature) {
     })),
   }
   const outputFile = `${source.id}.geojson`
-  await writeFile(path.join(OUTPUT_DIR, outputFile), `${JSON.stringify(collection)}\n`)
+  await writeFile(path.join(WFS_OUTPUT_DIR, outputFile), `${JSON.stringify(collection)}\n`)
   return {
     ...source,
     catalogUrl: `https://catalogue.data.gov.bc.ca/dataset/${pkg.name ?? source.packageId}`,
     packageTitle: pkg.title,
-    bboxFeatureCount: bboxCount,
-    princeGeorgeFeatureCount: boundaryFeatures.length,
+    sourceFeatureCount,
+    outputFeatureCount: outputFeatures.length,
+    scope: isProvinceScope ? 'bc' : 'prince-george',
     output: outputFile,
     wfs: {
       layer: source.layer,
@@ -266,7 +276,7 @@ async function syncWfsSource(source, boundaryFeature) {
       geojsonBboxUrl: wfsUrl(source.layer, {
         outputFormat: 'json',
         srsName: 'EPSG:4326',
-        CQL_FILTER: bboxFilter(source, PRINCE_GEORGE_CITY.bbox),
+        ...(isProvinceScope ? {} : { CQL_FILTER: bboxFilter(source, PRINCE_GEORGE_CITY.bbox) }),
       }),
     },
   }
@@ -310,7 +320,8 @@ async function probeResource(url) {
 }
 
 function fileNameForResource(source, resource) {
-  const extension = String(resource.format || 'bin').toLowerCase().replace(/[^a-z0-9]+/g, '') || 'bin'
+  const normalizedExtension = String(resource.format || 'bin').toLowerCase().replace(/[^a-z0-9]+/g, '') || 'bin'
+  const extension = normalizedExtension === 'fgdb' ? 'fgdb.zip' : normalizedExtension
   return `${source.id}-${String(resource.name || resource.id).toLowerCase().replace(/[^a-z0-9]+/g, '-')}.${extension}`
 }
 
@@ -351,9 +362,10 @@ async function syncRawSource(source) {
 
 async function main() {
   await mkdir(OUTPUT_DIR, { recursive: true })
+  await mkdir(WFS_OUTPUT_DIR, { recursive: true })
   if (includeRawDownloads) await mkdir(RAW_DIR, { recursive: true })
 
-  const boundaryFeature = await fetchBoundary()
+  const boundaryFeature = isProvinceScope ? null : await fetchBoundary()
   const wfsSources = []
   for (const source of WFS_SOURCES) {
     wfsSources.push(await syncWfsSource(source, boundaryFeature))
@@ -366,10 +378,20 @@ async function main() {
 
   const manifest = {
     generatedAt: new Date().toISOString(),
-    geography: PRINCE_GEORGE_CITY,
+    geography: isProvinceScope
+      ? {
+          id: 'province-british-columbia',
+          label: 'British Columbia',
+          scope: 'all BC features returned by each WFS layer',
+        }
+      : PRINCE_GEORGE_CITY,
     notes: [
-      'WFS outputs are bbox-filtered server-side, then filtered against the City of Prince George boundary locally.',
-      'Polygon and line geometries are retained whole when they intersect the city; area/length clipping should be done in downstream calculations.',
+      isProvinceScope
+        ? 'WFS outputs contain all BC features returned by each layer. LHA clipping/aggregation should be done downstream.'
+        : 'WFS outputs are bbox-filtered server-side, then filtered against the City of Prince George boundary locally.',
+      isProvinceScope
+        ? 'Polygon and line geometries are retained whole. Area/length clipping should be done in downstream calculations.'
+        : 'Polygon and line geometries are retained whole when they intersect the city; area/length clipping should be done in downstream calculations.',
       'Human Disturbance 2025 and Integrated Roads 2026 are FileGDB ZIP downloads, so downstream processing should use ogr2ogr/GDAL before clipping.',
       'EMS water exceedances require result streaming plus environmental guideline/objective joins; this manifest captures the raw inputs only.',
     ],
@@ -377,9 +399,9 @@ async function main() {
     rawSources,
   }
 
-  await writeFile(path.join(OUTPUT_DIR, 'metadata.json'), `${JSON.stringify(manifest, null, 2)}\n`)
-  await writeFile(path.join(OUTPUT_DIR, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
-  console.log(`BC EnviroScreen: wrote ${path.relative(process.cwd(), OUTPUT_DIR)}`)
+  await writeFile(path.join(WFS_OUTPUT_DIR, 'metadata.json'), `${JSON.stringify(manifest, null, 2)}\n`)
+  await writeFile(path.join(WFS_OUTPUT_DIR, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
+  console.log(`BC EnviroScreen: wrote ${path.relative(process.cwd(), WFS_OUTPUT_DIR)}`)
 }
 
 main().catch((error) => {

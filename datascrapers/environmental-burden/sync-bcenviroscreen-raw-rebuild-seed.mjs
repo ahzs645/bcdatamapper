@@ -21,6 +21,8 @@ const CANUE_BASE = 'https://data.map.ahmad.sh/canue'
 const args = parseArgs(process.argv.slice(2))
 const overwrite = args.overwrite === 'true'
 const downloadLarge = args['download-large'] === 'true'
+const largeIds = new Set(String(args['large-ids'] ?? '').split(',').map((value) => value.trim()).filter(Boolean))
+const largeResourcePattern = args['large-resource-pattern'] ? new RegExp(args['large-resource-pattern'], 'i') : null
 
 const CANUE_DOWNLOADS = [
   {
@@ -212,6 +214,11 @@ function slugify(value) {
     .replace(/^-+|-+$/g, '')
 }
 
+function resourceExtension(format) {
+  const normalized = String(format || 'bin').toLowerCase().replace(/[^a-z0-9]+/g, '') || 'bin'
+  return normalized === 'fgdb' ? 'fgdb.zip' : normalized
+}
+
 async function downloadFile(item, baseDir) {
   const outputPath = path.join(baseDir, item.output)
   if (!overwrite) {
@@ -303,8 +310,10 @@ async function maybeDownloadLargeResources(packageSummaries) {
 
   const largeItems = []
   for (const summary of packageSummaries) {
+    if (largeIds.size > 0 && !largeIds.has(summary.id)) continue
     if (summary.directLargeResources) {
       for (const resource of summary.directLargeResources) {
+        if (largeResourcePattern && !largeResourcePattern.test(resource.name)) continue
         largeItems.push({
           id: `${summary.id}-${slugify(resource.name)}`,
           group: summary.id,
@@ -319,11 +328,12 @@ async function maybeDownloadLargeResources(packageSummaries) {
       const format = String(resource.format ?? '').toLowerCase()
       if (!resource.url || !['fgdb', 'zip', 'csv'].includes(format)) continue
       if ((resource.sizeBytes ?? 0) > 0 && resource.sizeBytes <= 5_000_000) continue
+      if (largeResourcePattern && !largeResourcePattern.test(resource.name || resource.id || resource.url)) continue
       largeItems.push({
         id: `${summary.id}-${resource.id ?? slugify(resource.name)}`,
         group: summary.id,
         url: resource.url,
-        output: `${summary.id}/${slugify(resource.name || resource.id)}.${format || 'bin'}`,
+        output: `${summary.id}/${slugify(resource.name || resource.id)}.${resourceExtension(format)}`,
       })
     }
   }
