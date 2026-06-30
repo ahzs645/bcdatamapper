@@ -33,6 +33,7 @@ const keywordFilter = listArg(args.keywords, [])
 const overwrite = args.overwrite === 'true'
 const downloadAll = args['download-all'] === 'true'
 const downloadEnviroScreen = args['download-enviroscreen'] === 'true'
+const continueOnError = args['continue-on-error'] !== 'false'
 
 function parseArgs(argv) {
   const parsed = {}
@@ -148,6 +149,9 @@ function decodeCsvBuffer(buffer) {
   if (buffer.length >= 2 && buffer[0] === 0xfe && buffer[1] === 0xff) {
     throw new Error('Unsupported UTF-16BE CSV response')
   }
+  const sample = buffer.subarray(0, Math.min(buffer.length, 200))
+  const nullByteCount = sample.reduce((count, byte) => count + (byte === 0 ? 1 : 0), 0)
+  if (nullByteCount > sample.length / 4) return buffer.toString('utf16le').replace(/^\uFEFF/, '')
   return buffer.toString('utf8').replace(/^\uFEFF/, '')
 }
 
@@ -293,17 +297,24 @@ async function runDownloads(inventory, keywords) {
       continue
     }
 
-    console.log(`PHSA: download ${item.geoLevel} ${item.location.name} ${item.topic} (${item.indicatorCount})`)
-    const indicators = item.indicators.map((indicator) => ({ downloadValue: indicator.downloadValue }))
-    const csv = await downloadCsv({
-      geoLevel: item.geoLevel,
-      location: item.location,
-      topicName: item.topic,
-      indicators,
-    })
-    await writeFile(outputPath, csv)
-    results.push({ ...item, output: path.relative(OUTPUT_DIR, outputPath), skipped: false })
-    await sleep(delayMs)
+    try {
+      console.log(`PHSA: download ${item.geoLevel} ${item.location.name} ${item.topic} (${item.indicatorCount})`)
+      const indicators = item.indicators.map((indicator) => ({ downloadValue: indicator.downloadValue }))
+      const csv = await downloadCsv({
+        geoLevel: item.geoLevel,
+        location: item.location,
+        topicName: item.topic,
+        indicators,
+      })
+      await writeFile(outputPath, csv)
+      results.push({ ...item, output: path.relative(OUTPUT_DIR, outputPath), skipped: false })
+      await sleep(delayMs)
+    } catch (error) {
+      results.push({ ...item, output: path.relative(OUTPUT_DIR, outputPath), skipped: false, error: error.message })
+      if (!continueOnError) throw error
+      console.warn(`PHSA: failed ${item.geoLevel} ${item.location.name} ${item.topic}: ${error.message}`)
+      await sleep(delayMs)
+    }
   }
 
   await writeFile(path.join(OUTPUT_DIR, 'downloads-manifest.json'), `${JSON.stringify({ generatedAt: new Date().toISOString(), results }, null, 2)}\n`)
