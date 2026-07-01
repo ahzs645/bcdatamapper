@@ -353,6 +353,11 @@ def aggregate(records, assignments, lha_entries, config):
             row["renter_housing_burden_denominator"] = row.get("renter_housing_burden_denominator", 0) + renter_denominator
             row["renter_housing_burden_da_percent_sum"] = row.get("renter_housing_burden_da_percent_sum", 0) + renter_percent
             row["renter_housing_burden_da_percent_count"] = row.get("renter_housing_burden_da_percent_count", 0) + 1
+            for threshold in [20, 30, 50, 100]:
+                if renter_denominator >= threshold:
+                    prefix = f"renter_housing_burden_ge{threshold}"
+                    row[f"{prefix}_numerator"] = row.get(f"{prefix}_numerator", 0) + (renter_denominator * renter_percent / 100)
+                    row[f"{prefix}_denominator"] = row.get(f"{prefix}_denominator", 0) + renter_denominator
         owner_denominator = record.get("owner_housing_burden_denominator") or 0
         owner_percent = record.get("owner_housing_burden_percent_source")
         if owner_denominator and owner_percent is not None:
@@ -392,6 +397,13 @@ def aggregate(records, assignments, lha_entries, config):
             if row.get("renter_housing_burden_da_percent_count")
             else None
         )
+        for threshold in [20, 30, 50, 100]:
+            prefix = f"renter_housing_burden_ge{threshold}"
+            row[f"{prefix}_percent"] = (
+                round(row[f"{prefix}_numerator"] / row[f"{prefix}_denominator"] * 100, 3)
+                if row.get(f"{prefix}_denominator")
+                else None
+            )
         row["owner_housing_burden_percent"] = (
             round(row["owner_housing_burden_numerator"] / row["owner_housing_burden_denominator"] * 100, 3)
             if row.get("owner_housing_burden_denominator")

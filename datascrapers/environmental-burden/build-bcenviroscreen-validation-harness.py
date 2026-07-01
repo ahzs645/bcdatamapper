@@ -20,6 +20,7 @@ CANUE_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-canue-lha" / 
 CANUE_POSTAL_BASE = SCRIPT_DIR / "output" / "bc-enviro-screen" / "raw-rebuild-seed" / "compact" / "canue-postal-aggregates" / "bcHealth" / "lha"
 EMS_CANDIDATES_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-ems-lha" / "lha-water-quality-exceedance-candidates.csv"
 HEALTH_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-health-lha" / "lha-health-candidates.json"
+EI_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-ei-lha" / "lha-employment-insurance-candidates.json"
 DISTURBED_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-disturbed-lha" / "lha-disturbed-candidates.json"
 IFL_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-ifl-lha" / "lha-ifl-candidates.json"
 TRAFFIC_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-traffic-lha" / "lha-traffic-candidates.json"
@@ -94,6 +95,10 @@ INDICATOR_CANDIDATES = {
     ],
     "housing_burdened_renters": [
         ("census_2016", "renter_housing_burden_percent", "2016 tenant households spending 30%+ income on shelter, DA-estimated numerator"),
+        ("census_2016", "renter_housing_burden_ge50_percent", "2016 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 50 tenant households"),
+        ("census_2016", "renter_housing_burden_ge30_percent", "2016 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 30 tenant households"),
+        ("census_2016", "renter_housing_burden_ge20_percent", "2016 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 20 tenant households"),
+        ("census_2016", "renter_housing_burden_ge100_percent", "2016 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 100 tenant households"),
         ("census_2016", "owner_housing_burden_percent", "2016 owner households spending 30%+ income on shelter, DA-estimated numerator"),
         ("census_2016", "owner_renter_housing_burden_percent_from_split", "2016 owner+tenant shelter burden rebuilt from separate owner and renter percentage rows"),
         ("census_2016", "owner_renter_housing_burden_percent_mean", "2016 mean of owner and renter shelter-burden percentages"),
@@ -102,6 +107,10 @@ INDICATOR_CANDIDATES = {
         ("census_2016", "owner_housing_burden_da_percent_unweighted", "2016 unweighted mean of DA owner-household shelter-burden percentages"),
         ("census_2016", "housing_burden_percent", "2016 owner+tenant households spending 30%+ income on shelter"),
         ("census_2021", "renter_housing_burden_percent", "2021 tenant households spending 30%+ income on shelter, DA-estimated numerator"),
+        ("census_2021", "renter_housing_burden_ge50_percent", "2021 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 50 tenant households"),
+        ("census_2021", "renter_housing_burden_ge30_percent", "2021 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 30 tenant households"),
+        ("census_2021", "renter_housing_burden_ge20_percent", "2021 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 20 tenant households"),
+        ("census_2021", "renter_housing_burden_ge100_percent", "2021 tenant shelter burden using DA published percent rows, weighted by tenant households, excluding DAs with fewer than 100 tenant households"),
         ("census_2021", "owner_housing_burden_percent", "2021 owner households spending 30%+ income on shelter, DA-estimated numerator"),
         ("census_2021", "owner_renter_housing_burden_percent_from_split", "2021 owner+tenant shelter burden rebuilt from separate owner and renter percentage rows"),
         ("census_2021", "owner_renter_housing_burden_percent_mean", "2021 mean of owner and renter shelter-burden percentages"),
@@ -122,6 +131,7 @@ INDICATOR_CANDIDATES = {
         ("census_2021", "lico_all_da_percent_unweighted", "2021 unweighted mean of DA all-age LICO-AT prevalence percentages"),
         ("census_2021", "low_income_percent", "2021 LIM-AT low income, age 18-64"),
     ],
+    "employment_insurance_beneficiaries": [],
     "pm25": [
         ("canue_postal", "canue_postal_2012_pm25dal_a__pm25dal12_01", "CANUE portal postal-code LHA aggregate: PM2.5 v1 annual average, 2012, BC postal rows"),
         ("canue", "canue_2012_pm25dal_a__pm25dal12_01", "CANUE R2 bcHealth LHA aggregate: PM2.5 DAL 2012"),
@@ -152,6 +162,18 @@ INDICATOR_CANDIDATES = {
         ("traffic", "traffic_data_program_utv_aadt_km_per_sq_km", "Traffic Data Program UTV segments: MAP_RENDERING_AADT weighted by clipped segment length in km per LHA sq km"),
         ("traffic", "traffic_data_program_utv_segment_km_per_sq_km", "Traffic Data Program UTV segments: clipped segment km per LHA sq km"),
         ("traffic", "traffic_data_program_utv_segment_count", "Traffic Data Program UTV segment intersection count by LHA"),
+        ("traffic", "traffic_data_program_tmp_aadt_sum", "Traffic Data Program measurement points: sum of current TMP AADT values assigned to containing LHA"),
+        ("traffic", "traffic_data_program_tmp_aadt_max", "Traffic Data Program measurement points: maximum current TMP AADT value assigned to containing LHA"),
+        ("traffic", "traffic_data_program_tmp_point_count", "Traffic Data Program measurement points: count of TMP points assigned to containing LHA"),
+        ("traffic", "traffic_data_program_tmp_aadt_sum_per_sq_km", "Traffic Data Program measurement points: sum of current TMP AADT values per LHA sq km"),
+        ("traffic", "traffic_data_program_tmp_aadt_max_per_sq_km", "Traffic Data Program measurement points: maximum current TMP AADT value per LHA sq km"),
+        ("traffic", "traffic_data_program_tms_report_2018_lha_aadt_sum", "Traffic Data Program generated TMS site reports: sum of 2018 annual AADT values assigned to containing LHA"),
+        ("traffic", "traffic_data_program_tms_report_2018_lha_aadt_max", "Traffic Data Program generated TMS site reports: maximum 2018 annual AADT value assigned to containing LHA"),
+        ("traffic", "traffic_data_program_tms_report_2018_lha_site_count", "Traffic Data Program generated TMS site reports: count of sites with parsed 2018 annual AADT assigned to containing LHA"),
+        ("traffic", "traffic_data_program_tms_report_2018_lha_aadt_sum_per_sq_km", "Traffic Data Program generated TMS site reports: sum of 2018 annual AADT values per LHA sq km"),
+        ("traffic", "traffic_data_program_tms_report_2018_cd_aadt_sum", "Traffic Data Program generated TMS site reports: sum of 2018 annual AADT values by LHA primary Census Division"),
+        ("traffic", "traffic_data_program_tms_report_2018_cd_aadt_max", "Traffic Data Program generated TMS site reports: maximum 2018 annual AADT value by LHA primary Census Division"),
+        ("traffic", "traffic_data_program_tms_report_2018_cd_site_count", "Traffic Data Program generated TMS site reports: count of sites with parsed 2018 annual AADT by LHA primary Census Division"),
         ("spatial", "bcgw_digital_road_atlas_dpar_km_per_sq_km", "Diagnostic proxy only: Digital Road Atlas DPAR road density; units do not match Shiny traffic-density values"),
         ("spatial", "bcgw_digital_road_atlas_mpar_km_per_sq_km", "Diagnostic proxy only: Digital Road Atlas MPAR road density; units do not match Shiny traffic-density values"),
         ("spatial", "paper_dedup_linear_footprint_km_per_sq_km", "Diagnostic proxy only: de-duplicated road/linear-footprint density; units do not match Shiny traffic-density values"),
@@ -162,6 +184,148 @@ INDICATOR_CANDIDATES = {
         ("disturbed", "human_disturbance_2025_rep_point_area_percent", "Modern BC Human Disturbance 2025 proxy; representative-point area assignment, not paper-era exact source"),
     ],
 }
+
+for year in ["2014", "2015", "2016", "2017", "2018"]:
+    for detail_key, detail_label in [
+        ("all_types_of_income_benefits", "all types of income benefits"),
+        ("regular_benefits", "regular benefits"),
+        ("regular_benefits_without_declared_earnings", "regular benefits without declared earnings"),
+    ]:
+        for denominator in ["population", "labour_force", "age_15plus"]:
+            INDICATOR_CANDIDATES["employment_insurance_beneficiaries"].append(
+                (
+                    "ei",
+                    f"statcan_ei_{year}_{detail_key}_per_100_{denominator}",
+                    f"Statistics Canada 14-10-0323-01 CD annual average EI {detail_label}, both sexes age 15+, {year}, per 100 2016 CD {denominator.replace('_', ' ')}",
+                )
+            )
+
+for field, label in [
+    ("statcan_census_2016_ei_benefits_percent_with_amount_csd_weighted", "Statistics Canada 2016 Census 98-400-X2016119 CSD-weighted LHA percent age 15+ with any EI benefits"),
+    ("statcan_census_2016_ei_regular_benefits_percent_with_amount_csd_weighted", "Statistics Canada 2016 Census 98-400-X2016119 CSD-weighted LHA percent age 15+ with EI regular benefits"),
+    ("statcan_census_2016_ei_other_benefits_percent_with_amount_csd_weighted", "Statistics Canada 2016 Census 98-400-X2016119 CSD-weighted LHA percent age 15+ with EI other benefits"),
+    ("statcan_census_2016_government_transfers_percent_with_amount_csd_weighted", "Statistics Canada 2016 Census 98-400-X2016119 CSD-weighted LHA percent age 15+ with government transfers"),
+    ("statcan_census_2016_social_assistance_benefits_percent_with_amount_csd_weighted", "Statistics Canada 2016 Census 98-400-X2016119 CSD-weighted LHA percent age 15+ with social assistance benefits"),
+]:
+    INDICATOR_CANDIDATES["employment_insurance_beneficiaries"].append(("ei", field, label))
+
+for source_key, source_label in [
+    ("ei_benefits", "any EI benefits"),
+    ("ei_regular_benefits", "EI regular benefits"),
+    ("ei_other_benefits", "EI other benefits"),
+    ("social_assistance_benefits", "social assistance benefits"),
+]:
+    for denominator, denominator_label in [
+        ("population", "population"),
+        ("labour_force", "labour force"),
+        ("age_15plus", "age 15+ population"),
+    ]:
+        field = f"statcan_census_2016_{source_key}_estimated_with_amount_per_100_{denominator}_csd_weighted"
+        INDICATOR_CANDIDATES["employment_insurance_beneficiaries"].append(
+            (
+                "ei",
+                field,
+                f"Statistics Canada 2016 Census 98-400-X2016119 CSD-weighted LHA count with {source_label}, per 100 {denominator_label}",
+            )
+        )
+
+for field, label in [
+    ("phsa_chsa_social_employment_rate_15_2016", "PHSA Community Health CHSA Social & economic factors, Employment Rate (15+), population-weighted to LHA"),
+    ("phsa_chsa_social_sociodemographic_diversity_economic_dependency_dimention_quintile_all_ages_2022", "PHSA Community Health CHSA Social & economic factors, BCIMD economic dependency quintile, population-weighted to LHA"),
+    ("phsa_chsa_social_sociodemographic_diversity_situational_vulnerability_dimention_quintile_all_ages_2022", "PHSA Community Health CHSA Social & economic factors, BCIMD situational vulnerability quintile, population-weighted to LHA"),
+    ("phsa_chsa_social_physical_environment_percentage_of_people_15_commuting_to_work_by_other_means_2016", "PHSA Community Health CHSA Social & economic factors, commuting by other means, population-weighted to LHA"),
+]:
+    INDICATOR_CANDIDATES["employment_insurance_beneficiaries"].append(("ei", field, label))
+
+for variant, variant_label in [
+    ("all", "all parsed 2018 TMS annual AADT sites"),
+    ("active", "active parsed 2018 TMS annual AADT sites"),
+    ("permanent", "permanent core parsed 2018 TMS annual AADT sites"),
+    ("permanent_wim", "permanent core plus WIM parsed 2018 TMS annual AADT sites"),
+    ("short", "short core parsed 2018 TMS annual AADT sites"),
+    ("no_ramp_turn", "parsed 2018 TMS annual AADT sites excluding ramp and directional-turn descriptions"),
+    ("no_interchange_ramp_turn", "parsed 2018 TMS annual AADT sites excluding interchange, ramp, and directional-turn descriptions"),
+    ("segment_max_all", "max parsed 2018 TMS annual AADT per UTV segment, retaining unsegmented sites"),
+    ("segment_max_segment_only", "max parsed 2018 TMS annual AADT per UTV segment, excluding unsegmented sites"),
+    ("segment_max_no_ramp_turn", "max parsed 2018 TMS annual AADT per UTV segment after excluding ramp and directional-turn descriptions"),
+    (
+        "segment_max_no_interchange_ramp_turn",
+        "max parsed 2018 TMS annual AADT per UTV segment after excluding interchange, ramp, and directional-turn descriptions",
+    ),
+    ("segment_max_permanent", "max permanent-core parsed 2018 TMS annual AADT per UTV segment"),
+]:
+    for geography, geography_label in [("lha", "assigned to containing LHA"), ("cd", "by LHA primary Census Division")]:
+        for metric, metric_label in [
+            ("aadt_sum", "sum"),
+            ("aadt_max", "maximum"),
+            ("aadt_mean", "mean"),
+            ("aadt_median", "median"),
+            ("site_count", "site count"),
+        ]:
+            INDICATOR_CANDIDATES["traffic_density"].append(
+                (
+                    "traffic",
+                    f"traffic_data_program_tms_report_2018_{variant}_{geography}_{metric}",
+                    f"Traffic Data Program generated TMS site reports: {metric_label} of {variant_label} {geography_label}",
+                )
+            )
+    INDICATOR_CANDIDATES["traffic_density"].append(
+        (
+            "traffic",
+            f"traffic_data_program_tms_report_2018_{variant}_lha_aadt_sum_per_sq_km",
+            f"Traffic Data Program generated TMS site reports: sum of {variant_label} assigned to containing LHA per LHA sq km",
+        )
+    )
+
+for prefix, prefix_label in [
+    ("traffic_data_program_utv_report_2018_lha_intersection", "2018 UTV segment-report AADT intersecting each LHA"),
+    (
+        "traffic_data_program_utv_report_2018_lha_representative_point",
+        "2018 UTV segment-report AADT assigned to LHA by segment representative point",
+    ),
+    (
+        "traffic_data_program_utv_report_2018_cd_representative_point",
+        "2018 UTV segment-report AADT assigned by segment representative point to LHA primary Census Division",
+    ),
+    (
+        "traffic_data_program_utv_report_2018_cd_from_lha_intersection",
+        "2018 UTV segment-report AADT intersecting LHAs and summed to LHA primary Census Division",
+    ),
+]:
+    for metric, metric_label in [
+        ("aadt_sum", "sum"),
+        ("aadt_max", "maximum"),
+        ("aadt_mean", "mean"),
+        ("aadt_median", "median"),
+        ("segment_count", "segment count"),
+    ]:
+        INDICATOR_CANDIDATES["traffic_density"].append(
+            ("traffic", f"{prefix}_{metric}", f"Traffic Data Program generated UTV segment reports: {metric_label} of {prefix_label}")
+        )
+    if "_lha_" in prefix:
+        INDICATOR_CANDIDATES["traffic_density"].append(
+            (
+                "traffic",
+                f"{prefix}_aadt_sum_per_sq_km",
+                f"Traffic Data Program generated UTV segment reports: sum of {prefix_label} per LHA sq km",
+            )
+        )
+
+for field, label in [
+    (
+        "traffic_data_program_utv_report_2018_lha_intersection_aadt_km",
+        "Traffic Data Program generated UTV segment reports: 2018 AADT weighted by clipped segment km in each LHA",
+    ),
+    (
+        "traffic_data_program_utv_report_2018_cd_from_lha_intersection_aadt_km",
+        "Traffic Data Program generated UTV segment reports: 2018 AADT weighted by clipped segment km, summed to LHA primary Census Division",
+    ),
+    (
+        "traffic_data_program_utv_report_2018_cd_from_lha_intersection_lha_sum",
+        "Traffic Data Program generated UTV segment reports: LHA intersection sums aggregated to LHA primary Census Division",
+    ),
+]:
+    INDICATOR_CANDIDATES["traffic_density"].append(("traffic", field, label))
 
 
 def read_csv(path):
@@ -206,6 +370,7 @@ def load_sources():
         "canue_postal": {row["lha_name"]: row for row in canue_postal},
         "ems": {row["lha_name"]: row for row in ems},
         "health": {row["lha_name"]: row for row in read_json(HEALTH_PATH)} if HEALTH_PATH.exists() else {},
+        "ei": {row["lha_name"]: row for row in read_json(EI_PATH)} if EI_PATH.exists() else {},
         "disturbed": {row["lha_name"]: row for row in read_json(DISTURBED_PATH)} if DISTURBED_PATH.exists() else {},
         "ifl": {row["lha_name"]: row for row in read_json(IFL_PATH)} if IFL_PATH.exists() else {},
         "traffic": {row["lha_name"]: row for row in read_json(TRAFFIC_PATH)} if TRAFFIC_PATH.exists() else {},
@@ -234,11 +399,14 @@ def health_candidates(sources):
     for shiny_field, needles in mapping.items():
         for field in fields:
             if any(needle in field for needle in needles):
+                notes = "PHSA Community Health Atlas LHA candidate, ranked diagnostically against the Shiny LHA table"
+                if "rolling_mean" in field:
+                    notes = "Diagnostic derived PHSA rolling-window candidate; compared against Shiny but excluded from best-current source selection"
                 candidates[shiny_field].append(
                     (
                         "health",
                         field,
-                        "PHSA Community Health Atlas LHA candidate, ranked diagnostically against the Shiny LHA table",
+                        notes,
                     )
                 )
     return candidates
@@ -332,6 +500,10 @@ def choose_best(summary_rows):
         by_indicator[row["shiny_field"]].append(row)
     best = []
     for indicator, rows in sorted(by_indicator.items()):
+        if indicator == "hypertension":
+            source_rows = [row for row in rows if "rolling_mean" not in row["source_field"]]
+            if source_rows:
+                rows = source_rows
         max_rows = max(row["rows"] for row in rows)
         eligible = rows
         if max_rows >= 20:
@@ -433,6 +605,7 @@ def main():
                     "canue_postal": str(CANUE_POSTAL_BASE.relative_to(SCRIPT_DIR)),
                     "ems": str(EMS_CANDIDATES_PATH.relative_to(SCRIPT_DIR)),
                     "health": str(HEALTH_PATH.relative_to(SCRIPT_DIR)),
+                    "ei": str(EI_PATH.relative_to(SCRIPT_DIR)),
                     "traffic": str(TRAFFIC_PATH.relative_to(SCRIPT_DIR)),
                 },
                 "selection": "Best-current mapping is selected by lowest mean absolute difference against the Shiny LHA table. It is a diagnostic selection, not proof of source equivalence.",
