@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import csv
+import gzip
+import io
 import json
-import re
 import sys
 from collections import Counter
 from datetime import date, datetime, timezone
@@ -11,10 +12,16 @@ from urllib.request import Request, urlopen
 
 from openpyxl import load_workbook
 
-OUTPUT_DIR = Path("public/data/wars")
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
 SOURCE_PAGE = "https://www2.gov.bc.ca/gov/content/transportation/transportation-infrastructure/engineering-standards-guidelines/environmental-management/wildlife-management/wildlife-accident-reporting-system"
 SOURCE_LICENSE = "WARS Data Use Licence Agreement 2026"
 SOURCE_CITATION = "British Columbia Ministry of Transportation and Transit Wildlife Accident Reporting System, © 2025 Province of British Columbia. All rights reserved."
+
+# Ministry maintenance service areas 18 through 28 make up the Northern
+# Region. Filtering on this stable source field avoids the spelling and casing
+# variants present in Nearest.Town while covering the full highway corridors
+# around Quesnel, Prince George, Vanderhoof, Burns Lake, and Mackenzie.
+NORTHERN_REGION_SERVICE_AREAS = set(range(18, 29))
 
 SOURCE_FILES = [
     {
@@ -60,15 +67,6 @@ FIELDNAMES = [
     "dataSet",
     "sourceFile",
 ]
-
-
-def normalized_town(value):
-    return re.sub(r"[^A-Z0-9]+", "", str(value or "").upper())
-
-
-def is_prince_george_town(value):
-    town = normalized_town(value)
-    return town == "PG" or town.startswith("PRINCEGEORGE") or town.startswith("PRINCEGORGE")
 
 
 def clean_text(value):
@@ -119,10 +117,11 @@ def rows_from_workbook(path, source_file):
     index = {header: offset for offset, header in enumerate(headers)}
 
     for row in rows:
-        nearest_town = clean_text(row[index["Nearest.Town"]])
-        if not is_prince_george_town(nearest_town):
+        service_area = parse_number(row[index["Service.Area"]])
+        if service_area not in NORTHERN_REGION_SERVICE_AREAS:
             continue
 
+        nearest_town = clean_text(row[index["Nearest.Town"]])
         latitude = parse_number(row[index["Latitude"]])
         longitude = parse_number(row[index["Longitude"]])
         if latitude == "" or longitude == "":
@@ -140,7 +139,7 @@ def rows_from_workbook(path, source_file):
             "quantity": parse_number(row[index["Quantity"]]) or 1,
             "latitude": latitude,
             "longitude": longitude,
-            "serviceArea": parse_number(row[index["Service.Area"]]),
+            "serviceArea": service_area,
             "dataSet": clean_text(row[index["Data.Set"]]),
             "sourceFile": source_file["id"],
         }
@@ -179,6 +178,14 @@ def to_geojson(rows):
 
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    for stale_name in (
+        "prince_george_wildlife_accidents.csv",
+        "prince_george_wildlife_accidents.geojson",
+        "northern_region_wildlife_accidents.csv",
+        "northern_region_wildlife_accidents.geojson",
+    ):
+        (OUTPUT_DIR / stale_name).unlink(missing_ok=True)
+
     all_rows = []
     source_summaries = []
 
@@ -194,18 +201,20 @@ def main():
                 **source_file,
                 "rows": len(file_rows),
             })
-            print(f"{source_file['title']}: {len(file_rows)} Prince George rows")
+            print(f"{source_file['title']}: {len(file_rows)} Northern Region rows")
 
     all_rows.sort(key=lambda row: (int(row["year"] or 0), row["accidentDate"], row["id"]))
 
-    csv_path = OUTPUT_DIR / "prince_george_wildlife_accidents.csv"
-    with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=FIELDNAMES)
-        writer.writeheader()
-        writer.writerows(all_rows)
+    csv_buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(csv_buffer, fieldnames=FIELDNAMES)
+    writer.writeheader()
+    writer.writerows(all_rows)
+    csv_path = OUTPUT_DIR / "northern_region_wildlife_accidents.csv.gz"
+    csv_path.write_bytes(gzip.compress(csv_buffer.getvalue().encode("utf-8"), compresslevel=9, mtime=0))
 
-    geojson_path = OUTPUT_DIR / "prince_george_wildlife_accidents.geojson"
-    geojson_path.write_text(f"{json.dumps(to_geojson(all_rows), separators=(',', ':'))}\n", encoding="utf-8")
+    geojson_bytes = f"{json.dumps(to_geojson(all_rows), separators=(',', ':'))}\n".encode("utf-8")
+    geojson_path = OUTPUT_DIR / "northern_region_wildlife_accidents.geojson.gz"
+    geojson_path.write_bytes(gzip.compress(geojson_bytes, compresslevel=9, mtime=0))
 
     species_counts = Counter()
     year_counts = Counter()
@@ -222,10 +231,11 @@ def main():
         "sourcePage": SOURCE_PAGE,
         "sourceLicense": SOURCE_LICENSE,
         "sourceCitation": SOURCE_CITATION,
-        "coverage": "Prince George nearest-town WARS records with coordinates",
+        "coverage": "BC Ministry of Transportation and Transit Northern Region service areas 18-28 with coordinates",
+        "serviceAreas": sorted(NORTHERN_REGION_SERVICE_AREAS),
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "csv": "/data/wars/prince_george_wildlife_accidents.csv",
-        "geojson": "/data/wars/prince_george_wildlife_accidents.geojson",
+        "csv": "/data/wars/northern_region_wildlife_accidents.csv.gz",
+        "geojson": "/data/wars/northern_region_wildlife_accidents.geojson.gz",
         "rows": len(all_rows),
         "totalQuantity": total_quantity,
         "yearStart": years[0] if years else None,
