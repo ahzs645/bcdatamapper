@@ -20,6 +20,7 @@ const VECTOR_APP_PATH = path.join(APP_DIR, VECTOR_OUTPUT_NAME)
 const RASTER_VENDOR_DIR = path.join(VENDOR_DIR, RASTER_TILE_DIR_NAME)
 const RASTER_VENDOR_ARCHIVE_PATH = path.join(VENDOR_DIR, RASTER_TILE_ARCHIVE_NAME)
 const RASTER_APP_DIR = path.join(APP_DIR, RASTER_TILE_DIR_NAME)
+const TAR_ENV = { ...process.env, COPYFILE_DISABLE: '1' }
 
 const GEOMET_BASE_URL = 'https://geo.weather.gc.ca/geomet'
 const GEOMET_WMS_CAPABILITIES_URL = `${GEOMET_BASE_URL}?service=WMS&request=GetCapabilities&version=1.3.0`
@@ -156,12 +157,13 @@ async function buildRasterSnapshot(snapshot) {
     },
   })
   await execFileAsync('tar', [
+    '--no-xattrs',
     '-czf',
     RASTER_VENDOR_ARCHIVE_PATH,
     '-C',
     RASTER_VENDOR_DIR,
     '.',
-  ], { maxBuffer: 1024 * 1024 * 20 })
+  ], { env: TAR_ENV, maxBuffer: 1024 * 1024 * 20 })
   await rm(RASTER_VENDOR_DIR, { recursive: true, force: true })
   await rm(RASTER_APP_DIR, { recursive: true, force: true })
   await mkdir(RASTER_APP_DIR, { recursive: true })
@@ -170,7 +172,7 @@ async function buildRasterSnapshot(snapshot) {
     RASTER_VENDOR_ARCHIVE_PATH,
     '-C',
     RASTER_APP_DIR,
-  ], { maxBuffer: 1024 * 1024 * 20 })
+  ], { env: TAR_ENV, maxBuffer: 1024 * 1024 * 20 })
   return stats
 }
 
