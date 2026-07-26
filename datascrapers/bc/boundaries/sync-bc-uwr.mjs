@@ -1,8 +1,10 @@
 import { mkdir, writeFile } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import bboxClip from '@turf/bbox-clip'
 import simplify from '@turf/simplify'
 
-const OUTPUT_DIR = 'public/data/boundaries/BCUWR'
+const OUTPUT_DIR = join(dirname(fileURLToPath(import.meta.url)), 'output', 'BCUWR')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
 const PG_REGION_BBOX = [-125, 52.5, -120, 55.5]
 
@@ -43,9 +45,10 @@ function getWfsUrl(typeName) {
 function pickProperties(properties, keepFields, sourceLayer) {
   const uwrNumber = String(properties.UWR_NUMBER ?? '').trim()
   const unitNumber = String(properties.UWR_UNIT_NUMBER ?? '').trim()
-  const code = uwrNumber && unitNumber
-    ? `${uwrNumber}-${unitNumber}`
-    : String(properties.UNGULATE_WINTER_RANGE_ID ?? properties.OBJECTID ?? '').trim()
+  const code =
+    uwrNumber && unitNumber
+      ? `${uwrNumber}-${unitNumber}`
+      : String(properties.UNGULATE_WINTER_RANGE_ID ?? properties.OBJECTID ?? '').trim()
 
   const species = String(properties.SPECIES_1 ?? '').trim()
   const labelParts = [uwrNumber || code]
@@ -67,6 +70,38 @@ function pickProperties(properties, keepFields, sourceLayer) {
   return next
 }
 
+function isFinitePosition(position) {
+  return Array.isArray(position) && position.length >= 2 && Number.isFinite(position[0]) && Number.isFinite(position[1])
+}
+
+function isUsableRing(ring) {
+  if (!Array.isArray(ring) || ring.length < 4 || !ring.every(isFinitePosition)) return false
+
+  const first = ring[0]
+  const last = ring[ring.length - 1]
+  if (first[0] !== last[0] || first[1] !== last[1]) return false
+
+  return new Set(ring.slice(0, -1).map(([lon, lat]) => `${lon},${lat}`)).size >= 3
+}
+
+function isUsablePolygonCoordinates(coordinates) {
+  return Array.isArray(coordinates) && coordinates.length > 0 && coordinates.every(isUsableRing)
+}
+
+function isUsablePolygonGeometry(geometry) {
+  if (geometry?.type === 'Polygon') {
+    return isUsablePolygonCoordinates(geometry.coordinates)
+  }
+  if (geometry?.type === 'MultiPolygon') {
+    return (
+      Array.isArray(geometry.coordinates) &&
+      geometry.coordinates.length > 0 &&
+      geometry.coordinates.every(isUsablePolygonCoordinates)
+    )
+  }
+  return false
+}
+
 function normalizeFeature(feature, layer) {
   if (!feature.geometry || (feature.geometry.type !== 'Polygon' && feature.geometry.type !== 'MultiPolygon')) {
     return null
@@ -86,6 +121,12 @@ function normalizeFeature(feature, layer) {
     highQuality: false,
     mutate: true,
   })
+
+  // bboxClip can return empty Polygon/MultiPolygon coordinate arrays for
+  // features that the WFS bbox query includes but that do not actually
+  // intersect the viewport. Those shapes are invalid GeoJSON and crash
+  // MapLibre's worker while it indexes the source.
+  if (!isUsablePolygonGeometry(simplified.geometry)) return null
 
   return {
     type: 'Feature',
