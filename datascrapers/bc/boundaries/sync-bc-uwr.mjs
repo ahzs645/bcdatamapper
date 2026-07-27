@@ -1,6 +1,7 @@
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { gzipSync } from 'node:zlib'
 import bboxClip from '@turf/bbox-clip'
 import simplify from '@turf/simplify'
 
@@ -160,8 +161,19 @@ async function syncLayer(layer) {
     features,
   }
 
-  await writeFile(`${OUTPUT_DIR}/${layer.id}.geojson`, `${JSON.stringify(collection)}\n`)
-  console.log(`${layer.id}: wrote ${features.length} features`)
+  // Shipped gzipped: `useFetchData` sniffs the gzip magic bytes and inflates
+  // via DecompressionStream, so the app reads the `.gz` path directly.
+  const raw = Buffer.from(`${JSON.stringify(collection)}\n`, 'utf8')
+  const gz = gzipSync(raw, { level: 9 })
+  await writeFile(`${OUTPUT_DIR}/${layer.id}.geojson.gz`, gz)
+  // Drop the uncompressed sibling a previous run may have left behind, so the
+  // synced-to-public copy does not keep serving a stale plain file.
+  await rm(`${OUTPUT_DIR}/${layer.id}.geojson`, { force: true })
+
+  const mb = (bytes) => `${(bytes / 1048576).toFixed(2)} MB`
+  console.log(
+    `${layer.id}: wrote ${features.length} features (${mb(raw.byteLength)} raw -> ${mb(gz.byteLength)} gzip)`,
+  )
 }
 
 await mkdir(OUTPUT_DIR, { recursive: true })
