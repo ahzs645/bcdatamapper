@@ -7,7 +7,16 @@ import simplify from '@turf/simplify'
 
 const OUTPUT_DIR = join(dirname(fileURLToPath(import.meta.url)), 'output', 'BCUWR')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
-const PG_REGION_BBOX = [-125, 52.5, -120, 55.5]
+
+/**
+ * Province-wide extract: every UWR polygon in the BCGW, not a regional subset.
+ * Set this to `[west, south, east, north]` to go back to a clipped window —
+ * the WFS query, the per-feature clip and the emitted metadata all follow it.
+ */
+const REGION_BBOX = null
+
+/** The WFS caps a single GetFeature response, so results are paged. */
+const PAGE_SIZE = 10000
 
 const LAYER = {
   id: 'ungulate_winter_range',
@@ -28,19 +37,36 @@ const LAYER = {
   tolerance: 0.001,
 }
 
-function getWfsUrl(typeName) {
+function getWfsUrl(typeName, startIndex) {
   const params = new URLSearchParams({
     service: 'WFS',
-    version: '1.0.0',
+    version: '2.0.0',
     request: 'GetFeature',
-    typeName: `pub:${typeName}`,
+    typeNames: `pub:${typeName}`,
     outputFormat: 'json',
     srsName: 'EPSG:4326',
-    bbox: `${PG_REGION_BBOX.join(',')},EPSG:4326`,
-    maxFeatures: '20000',
+    count: String(PAGE_SIZE),
+    startIndex: String(startIndex),
   })
+  if (REGION_BBOX) params.set('bbox', `${REGION_BBOX.join(',')},EPSG:4326`)
 
   return `${WFS_BASE}/${typeName}/ows?${params.toString()}`
+}
+
+/** One page, with a short backoff so a single blip does not lose the whole run. */
+async function fetchPage(typeName, startIndex) {
+  let lastError
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    try {
+      const response = await fetch(getWfsUrl(typeName, startIndex))
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      return await response.json()
+    } catch (error) {
+      lastError = error
+      if (attempt < 4) await new Promise((resolve) => setTimeout(resolve, 3000 * attempt))
+    }
+  }
+  throw new Error(`Failed to fetch ${typeName} at startIndex ${startIndex}: ${lastError.message}`)
 }
 
 function pickProperties(properties, keepFields, sourceLayer) {
@@ -108,11 +134,13 @@ function normalizeFeature(feature, layer) {
     return null
   }
 
-  let clipped
-  try {
-    clipped = bboxClip(feature, PG_REGION_BBOX)
-  } catch {
-    return null
+  let clipped = feature
+  if (REGION_BBOX) {
+    try {
+      clipped = bboxClip(feature, REGION_BBOX)
+    } catch {
+      return null
+    }
   }
 
   if (!clipped.geometry) return null
@@ -138,15 +166,23 @@ function normalizeFeature(feature, layer) {
 }
 
 async function syncLayer(layer) {
-  const response = await fetch(getWfsUrl(layer.typeName))
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${layer.typeName}: ${response.status}`)
-  }
+  const features = []
+  let received = 0
 
-  const source = await response.json()
-  const features = source.features
-    .map((feature) => normalizeFeature(feature, layer))
-    .filter((feature) => feature && feature.properties.boundaryCode)
+  for (;;) {
+    const page = await fetchPage(layer.typeName, received)
+    const pageFeatures = page.features ?? []
+    if (pageFeatures.length === 0) break
+
+    for (const feature of pageFeatures) {
+      const normalized = normalizeFeature(feature, layer)
+      if (normalized && normalized.properties.boundaryCode) features.push(normalized)
+    }
+
+    received += pageFeatures.length
+    console.log(`  ${layer.id}: ${received} fetched, ${features.length} kept`)
+    if (pageFeatures.length < PAGE_SIZE) break
+  }
 
   const collection = {
     type: 'FeatureCollection',
@@ -154,8 +190,12 @@ async function syncLayer(layer) {
     metadata: {
       source: 'BC Geographic Warehouse',
       sourceLayer: layer.sourceLayer,
-      bbox: PG_REGION_BBOX,
-      clippedTo: 'Prince George regional viewport',
+      // `bbox`/`clippedTo` stay null for a province-wide extract so the app can
+      // tell "the whole layer" apart from "a window into it" and caveat honestly.
+      bbox: REGION_BBOX,
+      clippedTo: REGION_BBOX ? 'Prince George regional viewport' : null,
+      extent: REGION_BBOX ? 'regional subset' : 'Full British Columbia',
+      featureCount: features.length,
       generatedAt: new Date().toISOString(),
     },
     features,
