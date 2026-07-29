@@ -33,19 +33,34 @@ All three ZIP archives passed `unzip -tq`. Their checksums match the SHA-256
 values published in the object-store response metadata. The major-watershed
 WFS response contains 224 features in EPSG:4326.
 
-## Rebuild the province-wide assessment web snapshot
+## Rebuild the province-wide 50 metre web snapshots
 
 From the `bcdatamapper` repository:
 
 ```sh
-npm run watersheds:assessment-50m
+npm run watersheds:50m
 ```
 
-The builder first checks `BCFWA_SOURCE_DIR`, then the repository source folder,
-then the Google Drive archive location above. It reads `FWA_BC.zip` in place,
-extracts all 19,479 assessment watersheds, performs a shared-topology 50 metre
-simplification in EPSG:3005, reprojects to EPSG:4326, and writes the
-deterministic deployable artifact:
+The unified builder first checks `BCFWA_SOURCE_DIR`, then the repository source
+folder, then the Google Drive archive location above. It reads `FWA_BC.zip` in
+place and uses pinned Mapshaper `0.6.113` with two topology profiles:
+
+- `assessment` is a non-overlapping partition and uses shared-topology cleaning
+  before and after simplification.
+- `named` contains intentionally overlapping cumulative drainage polygons and
+  uses shared-topology simplification without overlap-removing cleaning.
+
+Both profiles simplify at 50 metres in EPSG:3005, reproject to EPSG:4326,
+validate feature IDs, geometry, coordinate reduction, and area change, then
+write deterministic gzip snapshots. The partition profile also rejects any
+post-repair overlap of 10 m² or more. Build both as above, or one at a time:
+
+```sh
+npm run watersheds:assessment-50m
+npm run watersheds:named-50m
+```
+
+The assessment output is:
 
 ```text
 datascrapers/bc/boundaries/output/BCFWA/assessment_watersheds_province_50m.geojson.gz
@@ -54,9 +69,36 @@ datascrapers/bc/boundaries/output/BCFWA/assessment_watersheds_province_50m.geojs
 The output retains assessment and watershed-group identifiers needed to reuse
 the same geometry for individual assessment and watershed-group views.
 
-For the source snapshot recorded above, the deterministic output contains
-19,479 features and is 13,065,464 bytes compressed, with SHA-256:
+For the source snapshot recorded above, the deterministic assessment output
+contains 19,479 features, expands to 56,019,865 bytes, and is 13,065,697 bytes
+compressed, with SHA-256:
 
 ```text
-4e8800fe6d0f49233b6b8802b1c382873cc15d7d7cf5bf3dee2365cd38acf0f8
+3ce375bf28c4e2c346def6a39d5f165e6405d04aab534ce9a2fc62a57533868d
+```
+
+The current assessment snapshot has no material overlaps. Its 13 microscopic
+post-repair slivers total 4.816466 m²; the largest is 1.772612 m².
+
+## Rebuild the province-wide named-watershed web snapshot
+
+The builder reads all 11,580 features from
+`FWA_NAMED_WATERSHEDS_POLY` and writes only the deterministic deployable
+artifact:
+
+```text
+datascrapers/bc/boundaries/output/BCFWA/named_watersheds_province_50m.geojson.gz
+```
+
+Named watersheds overlap and nest, so the unified builder deliberately omits
+the partition-cleaning passes for this profile. It retains the government
+name, identifiers, stream order, stream magnitude, area, and stable top-level
+feature IDs.
+
+For the source snapshot recorded above, the deterministic output contains
+11,580 features, expands to 35,347,601 bytes, and is 10,334,585 bytes
+compressed, with SHA-256:
+
+```text
+23c98186ab4d362aee0dc3bbc6af43b57dc79a6dfc3d30347bc092a3648b163f
 ```

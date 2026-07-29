@@ -41,8 +41,9 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | Heat and shade | `heat-shade:sync` | CityPG heat/shade snapshots plus Landsat metadata | `public/data/heat-shade/` |
 | BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
 | HealthyPlan PG | `healthyplan-pg:sync`, `healthyplan-pg:sync:education`, `healthyplan-pg:sync:citypg-business` | BC Data Catalogue education CSVs, CityPG-owned business licence snapshots, OSM Overpass, and BC Address Geocoder via shared mapping utilities | `datascrapers/healthyplan-pg/output/` |
-| BC freshwater watersheds | `watersheds:sync`, `watersheds:dev`, `watersheds:assessment-50m` | BC Freshwater Atlas / watershed geospatial sources | `public/data/boundaries/BCFWA/` |
+| BC freshwater watersheds | `watersheds:sync`, `watersheds:dev`, `watersheds:50m`, `watersheds:assessment-50m`, `watersheds:named-50m` | BC Freshwater Atlas / watershed geospatial sources | `datascrapers/bc/boundaries/output/BCFWA/` |
 | BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
+| BC Energy Regulator admin zones | `bcer-admin-zones:sync` | BCER Administrative Zones ArcGIS service | `datascrapers/bc/boundaries/output/BCER/admin_zones.geojson` |
 | BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
 | Indigenous acknowledgement support sources | `indigenous:sync` | BC CAD/PIP app and operational-service metadata, BCGW First Nation community/treaty layers, BC reserve admin boundaries, and Canada First Nations Location | `public/data/indigenous/` |
 | BC child care map | `bc:childcare:sync` | DataBC Child Care Map Data ArcGIS layer used by the BC child care map | `datascrapers/bc/childcare/output/` |

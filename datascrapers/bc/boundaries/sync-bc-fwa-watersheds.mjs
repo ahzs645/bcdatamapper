@@ -1,8 +1,11 @@
 import { mkdir, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import bboxClip from '@turf/bbox-clip'
 import simplify from '@turf/simplify'
 
-const OUTPUT_DIR = 'public/data/boundaries/BCFWA'
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
+const OUTPUT_DIR = path.join(SCRIPT_DIR, 'output', 'BCFWA')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
 const PG_REGION_BBOX = [-125, 52.5, -120, 55.5]
 
@@ -81,6 +84,48 @@ function pickProperties(properties, keepFields, codeField, nameField, sourceLaye
   return next
 }
 
+function isUsableRing(ring) {
+  return Array.isArray(ring) &&
+    ring.length >= 4 &&
+    ring.every((position) => (
+      Array.isArray(position) &&
+      position.length >= 2 &&
+      Number.isFinite(position[0]) &&
+      Number.isFinite(position[1])
+    ))
+}
+
+function cleanPolygonCoordinates(polygon) {
+  if (!Array.isArray(polygon) || !isUsableRing(polygon[0])) {
+    return null
+  }
+
+  return [
+    polygon[0],
+    ...polygon.slice(1).filter(isUsableRing),
+  ]
+}
+
+function cleanPolygonGeometry(geometry) {
+  if (!geometry) return null
+
+  if (geometry.type === 'Polygon') {
+    const coordinates = cleanPolygonCoordinates(geometry.coordinates)
+    return coordinates ? { ...geometry, coordinates } : null
+  }
+
+  if (geometry.type === 'MultiPolygon') {
+    const coordinates = Array.isArray(geometry.coordinates)
+      ? geometry.coordinates
+        .map(cleanPolygonCoordinates)
+        .filter((polygon) => polygon !== null)
+      : []
+    return coordinates.length > 0 ? { ...geometry, coordinates } : null
+  }
+
+  return null
+}
+
 function normalizeFeature(feature, layer) {
   if (!feature.geometry || (feature.geometry.type !== 'Polygon' && feature.geometry.type !== 'MultiPolygon')) {
     return null
@@ -93,7 +138,9 @@ function normalizeFeature(feature, layer) {
     return null
   }
 
-  if (!clipped.geometry) return null
+  const clippedGeometry = cleanPolygonGeometry(clipped.geometry)
+  if (!clippedGeometry) return null
+  clipped.geometry = clippedGeometry
 
   const simplified = simplify(clipped, {
     tolerance: layer.tolerance,
@@ -101,11 +148,14 @@ function normalizeFeature(feature, layer) {
     mutate: true,
   })
 
+  const simplifiedGeometry = cleanPolygonGeometry(simplified.geometry)
+  if (!simplifiedGeometry) return null
+
   return {
     type: 'Feature',
     id: feature.id,
     properties: pickProperties(feature.properties ?? {}, layer.keepFields, layer.codeField, layer.nameField, layer.sourceLayer),
-    geometry: simplified.geometry,
+    geometry: simplifiedGeometry,
   }
 }
 
@@ -137,7 +187,18 @@ async function syncLayer(layer) {
   console.log(`${layer.id}: wrote ${features.length} features`)
 }
 
+const requestedLayerId = process.argv
+  .find((argument) => argument.startsWith('--layer='))
+  ?.slice('--layer='.length)
+const selectedLayers = requestedLayerId
+  ? LAYERS.filter((layer) => layer.id === requestedLayerId)
+  : LAYERS
+
+if (requestedLayerId && selectedLayers.length === 0) {
+  throw new Error(`Unknown FWA layer "${requestedLayerId}"`)
+}
+
 await mkdir(OUTPUT_DIR, { recursive: true })
-for (const layer of LAYERS) {
+for (const layer of selectedLayers) {
   await syncLayer(layer)
 }
