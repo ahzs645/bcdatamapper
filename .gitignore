@@ -38,4 +38,9 @@ datascrapers/network/telus/output/tiles/
 datascrapers/environmental-burden/output/
 datascrapers/census/output/bcenviroscreen-census-lha/
 datascrapers/health/bccdc-chronic-disease-tableau/output/
+
+# Raw provincial Freshwater Atlas archives are multi-gigabyte source downloads.
+datascrapers/bc/boundaries/source/BCFWA/*.zip
+datascrapers/bc/boundaries/source/BCFWA/*.part
+datascrapers/bc/boundaries/source/BCFWA/*_province_full.geojson
 datascrapers/health/phsa-community-health/output/

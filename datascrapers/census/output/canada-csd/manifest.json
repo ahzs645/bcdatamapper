@@ -1,0 +1,155 @@
+{
+  "generatedAt": "2026-07-29T04:30:32.455Z",
+  "name": "2021 Census Subdivisions",
+  "source": {
+    "name": "Statistics Canada 2021 Cartographic Boundary File - Census Subdivisions",
+    "service": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/9",
+    "boundaryQuery": {
+      "maxAllowableOffset": 0.002,
+      "geometryPrecision": 5
+    }
+  },
+  "classification": {
+    "path": "north-south.json",
+    "joinField": "CSDUID",
+    "field": "north_south"
+  },
+  "features": 5161,
+  "north": 1109,
+  "south": 4052,
+  "rawBytes": 28056242,
+  "gzipBytes": 7682889,
+  "completeArchive": "canada-csd.geojson.gz",
+  "chunks": [
+    {
+      "id": "10",
+      "name": "Newfoundland and Labrador",
+      "path": "provinces/10.geojson",
+      "features": 372,
+      "north": 29,
+      "south": 343,
+      "rawBytes": 2745078,
+      "gzipBytes": 756488
+    },
+    {
+      "id": "11",
+      "name": "Prince Edward Island",
+      "path": "provinces/11.geojson",
+      "features": 98,
+      "north": 0,
+      "south": 98,
+      "rawBytes": 140887,
+      "gzipBytes": 33377
+    },
+    {
+      "id": "12",
+      "name": "Nova Scotia",
+      "path": "provinces/12.geojson",
+      "features": 95,
+      "north": 0,
+      "south": 95,
+      "rawBytes": 571358,
+      "gzipBytes": 154889
+    },
+    {
+      "id": "13",
+      "name": "New Brunswick",
+      "path": "provinces/13.geojson",
+      "features": 266,
+      "north": 0,
+      "south": 266,
+      "rawBytes": 414996,
+      "gzipBytes": 99070
+    },
+    {
+      "id": "24",
+      "name": "Quebec",
+      "path": "provinces/24.geojson",
+      "features": 1282,
+      "north": 166,
+      "south": 1116,
+      "rawBytes": 3727756,
+      "gzipBytes": 964289
+    },
+    {
+      "id": "35",
+      "name": "Ontario",
+      "path": "provinces/35.geojson",
+      "features": 577,
+      "north": 280,
+      "south": 297,
+      "rawBytes": 4320012,
+      "gzipBytes": 1103584
+    },
+    {
+      "id": "46",
+      "name": "Manitoba",
+      "path": "provinces/46.geojson",
+      "features": 239,
+      "north": 85,
+      "south": 154,
+      "rawBytes": 435745,
+      "gzipBytes": 108132
+    },
+    {
+      "id": "47",
+      "name": "Saskatchewan",
+      "path": "provinces/47.geojson",
+      "features": 951,
+      "north": 60,
+      "south": 891,
+      "rawBytes": 875661,
+      "gzipBytes": 165820
+    },
+    {
+      "id": "48",
+      "name": "Alberta",
+      "path": "provinces/48.geojson",
+      "features": 423,
+      "north": 157,
+      "south": 266,
+      "rawBytes": 645696,
+      "gzipBytes": 148182
+    },
+    {
+      "id": "59",
+      "name": "British Columbia",
+      "path": "provinces/59.geojson",
+      "features": 751,
+      "north": 225,
+      "south": 526,
+      "rawBytes": 4357179,
+      "gzipBytes": 1114691
+    },
+    {
+      "id": "60",
+      "name": "Yukon",
+      "path": "provinces/60.geojson",
+      "features": 35,
+      "north": 35,
+      "south": 0,
+      "rawBytes": 79649,
+      "gzipBytes": 22924
+    },
+    {
+      "id": "61",
+      "name": "Northwest Territories",
+      "path": "provinces/61.geojson",
+      "features": 41,
+      "north": 41,
+      "south": 0,
+      "rawBytes": 779348,
+      "gzipBytes": 240433
+    },
+    {
+      "id": "62",
+      "name": "Nunavut",
+      "path": "provinces/62.geojson",
+      "features": 31,
+      "north": 31,
+      "south": 0,
+      "rawBytes": 8963369,
+      "gzipBytes": 2773031
+    }
+  ]
+}

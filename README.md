@@ -41,7 +41,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | Heat and shade | `heat-shade:sync` | CityPG heat/shade snapshots plus Landsat metadata | `public/data/heat-shade/` |
 | BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
 | HealthyPlan PG | `healthyplan-pg:sync`, `healthyplan-pg:sync:education`, `healthyplan-pg:sync:citypg-business` | BC Data Catalogue education CSVs, CityPG-owned business licence snapshots, OSM Overpass, and BC Address Geocoder via shared mapping utilities | `datascrapers/healthyplan-pg/output/` |
-| BC freshwater watersheds | `watersheds:sync`, `watersheds:dev` | BC Freshwater Atlas / watershed geospatial sources | `public/data/boundaries/BCFWA/` |
+| BC freshwater watersheds | `watersheds:sync`, `watersheds:dev`, `watersheds:assessment-50m` | BC Freshwater Atlas / watershed geospatial sources | `public/data/boundaries/BCFWA/` |
 | BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
 | BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
 | Indigenous acknowledgement support sources | `indigenous:sync` | BC CAD/PIP app and operational-service metadata, BCGW First Nation community/treaty layers, BC reserve admin boundaries, and Canada First Nations Location | `public/data/indigenous/` |

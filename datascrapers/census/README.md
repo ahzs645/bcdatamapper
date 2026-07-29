@@ -2,6 +2,28 @@
 
 BCDataMapper owns source-to-app data generation for census-derived layers. PGMaps consumes these files through `npm run data:sync-from-bcdatamapper`.
 
+## Canada census subdivisions and North/South classification
+
+Build the national 2021 census-subdivision geometry and the separate
+`CSDUID`-keyed Statistics Canada North/South classification:
+
+```bash
+npm run census:canada-csd
+```
+
+Outputs:
+
+- `datascrapers/census/output/canada-csd/manifest.json`
+- `datascrapers/census/output/canada-csd/provinces/*.geojson`
+- `datascrapers/census/output/canada-csd/canada-csd.geojson.gz`
+- `datascrapers/census/output/canada-csd/north-south.json`
+
+Every boundary preserves its seven-digit `CSDUID` and adds `CDUID` and `PRUID`.
+The province/territory GeoJSON files are the deployable map chunks, and the
+deterministic gzip file is the complete national geometry snapshot. The
+North/South dataset contains no geometry; PGMaps joins its `byCsdUid` values to
+the shared CSD features at load time.
+
 ## BC DB to CHSA crosswalk
 
 Build the enriched DB crosswalk and CHSA summary from the Ministry workbook, BCCDC DBF attributes, and the BCMoH boundary index:
