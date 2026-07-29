@@ -83,11 +83,26 @@ post-repair slivers total 4.816466 m²; the largest is 1.772612 m².
 ## Rebuild the province-wide named-watershed web snapshot
 
 The builder reads all 11,580 features from
-`FWA_NAMED_WATERSHEDS_POLY` and writes only the deterministic deployable
+`FWA_NAMED_WATERSHEDS_POLY` and writes the deterministic full deployable
 artifact:
 
 ```text
 datascrapers/bc/boundaries/output/BCFWA/named_watersheds_province_50m.geojson.gz
+```
+
+It also writes a deterministic manifest and ten exact-stream-order shards:
+
+```text
+datascrapers/bc/boundaries/output/BCFWA/named_watersheds_stream_orders_manifest.json
+datascrapers/bc/boundaries/output/BCFWA/named_watersheds_stream_order_{1..10}_50m.geojson.gz
+```
+
+The application uses these shards so selecting one order does not require
+transferring the complete named-watershed snapshot. They can be regenerated
+from an existing full snapshot without reopening the source File Geodatabase:
+
+```sh
+npm run watersheds:named-order-shards
 ```
 
 Named watersheds overlap and nest, so the unified builder deliberately omits
@@ -102,3 +117,16 @@ compressed, with SHA-256:
 ```text
 23c98186ab4d362aee0dc3bbc6af43b57dc79a6dfc3d30347bc092a3648b163f
 ```
+
+| Stream order | Features | Raw bytes | Gzip bytes |
+| ---: | ---: | ---: | ---: |
+| 1 | 592 | 411,224 | 98,827 |
+| 2 | 1,776 | 1,693,311 | 440,915 |
+| 3 | 3,189 | 4,651,992 | 1,294,094 |
+| 4 | 3,298 | 7,984,554 | 2,321,998 |
+| 5 | 1,875 | 8,320,007 | 2,472,387 |
+| 6 | 638 | 5,644,393 | 1,695,262 |
+| 7 | 160 | 3,329,955 | 1,005,558 |
+| 8 | 41 | 1,876,897 | 567,390 |
+| 9 | 9 | 981,924 | 298,853 |
+| 10 | 2 | 467,148 | 141,615 |

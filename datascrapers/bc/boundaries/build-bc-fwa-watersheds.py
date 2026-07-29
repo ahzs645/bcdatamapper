@@ -32,6 +32,7 @@ MAPSHAPER_VERSION = "0.6.113"
 DEFAULT_TOLERANCE_METRES = 50.0
 DEFAULT_COORDINATE_PRECISION = 0.00001
 MATERIAL_OVERLAP_AREA_M2 = 10.0
+NAMED_STREAM_ORDERS = tuple(range(1, 11))
 
 
 @dataclass(frozen=True)
@@ -168,7 +169,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--layer",
-        choices=["assessment", "named", "all"],
+        choices=["assessment", "named", "named-shards", "all"],
         default="all",
     )
     parser.add_argument("--source", type=pathlib.Path, default=default_source())
@@ -184,7 +185,7 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_COORDINATE_PRECISION,
     )
     args = parser.parse_args()
-    if args.output and args.layer == "all":
+    if args.output and args.layer in {"all", "named-shards"}:
         parser.error("--output requires a single --layer")
     return args
 
@@ -584,6 +585,115 @@ def deterministic_gzip(payload: bytes, output_path: pathlib.Path) -> None:
             gzip_handle.write(payload)
 
 
+def deterministic_json_payload(value: Any) -> bytes:
+    return (
+        json.dumps(
+            value,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode("utf-8")
+
+
+def named_stream_order_output_path(
+    full_output_path: pathlib.Path,
+    stream_order: int,
+) -> pathlib.Path:
+    return (
+        full_output_path.parent
+        / f"named_watersheds_stream_order_{stream_order}_50m.geojson.gz"
+    )
+
+
+def write_named_stream_order_shards(
+    collection: dict[str, Any],
+    full_output_path: pathlib.Path,
+    *,
+    full_raw_bytes: int,
+) -> dict[str, Any]:
+    features = collection.get("features") or []
+    if len(features) != LAYERS["named"].expected_feature_count:
+        raise RuntimeError(
+            "Named stream-order sharding requires the complete "
+            f"{LAYERS['named'].expected_feature_count:,}-feature snapshot"
+        )
+
+    features_by_order: dict[int, list[dict[str, Any]]] = {
+        stream_order: [] for stream_order in NAMED_STREAM_ORDERS
+    }
+    for feature in features:
+        stream_order = int(feature["properties"]["streamOrder"])
+        if stream_order not in features_by_order:
+            raise RuntimeError(
+                f"Unexpected named watershed stream order {stream_order}"
+            )
+        features_by_order[stream_order].append(feature)
+
+    shards: list[dict[str, Any]] = []
+    for stream_order in NAMED_STREAM_ORDERS:
+        order_features = features_by_order[stream_order]
+        output_path = named_stream_order_output_path(
+            full_output_path,
+            stream_order,
+        )
+        order_collection = {
+            "type": "FeatureCollection",
+            "name": f"named_watersheds_stream_order_{stream_order}_50m",
+            "metadata": {
+                **(collection.get("metadata") or {}),
+                "scope": f"Province-wide stream order {stream_order}",
+                "streamOrder": stream_order,
+                "featureCount": len(order_features),
+                "parentSnapshot": full_output_path.name,
+                "parentFeatureCount": len(features),
+            },
+            "features": order_features,
+        }
+        payload = deterministic_json_payload(order_collection)
+        deterministic_gzip(payload, output_path)
+        shards.append(
+            {
+                "streamOrder": stream_order,
+                "path": output_path.name,
+                "features": len(order_features),
+                "rawBytes": len(payload),
+                "gzipBytes": output_path.stat().st_size,
+                "gzipSha256": sha256_file(output_path),
+            }
+        )
+
+    if sum(shard["features"] for shard in shards) != len(features):
+        raise RuntimeError("Named stream-order shard feature counts do not sum")
+
+    manifest = {
+        "schemaVersion": 1,
+        "source": collection.get("metadata", {}).get("source"),
+        "sourceLayer": collection.get("metadata", {}).get("sourceLayer"),
+        "simplificationToleranceMetres": collection.get("metadata", {}).get(
+            "simplificationToleranceMetres"
+        ),
+        "parentSnapshot": {
+            "path": full_output_path.name,
+            "features": len(features),
+            "rawBytes": full_raw_bytes,
+            "gzipBytes": full_output_path.stat().st_size,
+            "gzipSha256": sha256_file(full_output_path),
+        },
+        "orders": shards,
+    }
+    manifest_path = (
+        full_output_path.parent
+        / "named_watersheds_stream_orders_manifest.json"
+    )
+    manifest_path.write_bytes(deterministic_json_payload(manifest))
+    return {
+        "manifest": str(manifest_path),
+        "orders": shards,
+    }
+
+
 def build_layer(
     config: LayerConfig,
     source_zip: pathlib.Path,
@@ -652,17 +762,9 @@ def build_layer(
         },
         "features": features,
     }
-    payload = (
-        json.dumps(
-            collection,
-            ensure_ascii=False,
-            separators=(",", ":"),
-            sort_keys=True,
-        )
-        + "\n"
-    ).encode("utf-8")
+    payload = deterministic_json_payload(collection)
     deterministic_gzip(payload, output_path)
-    return {
+    result = {
         "layer": config.key,
         "output": str(output_path),
         "rawBytes": len(payload),
@@ -670,10 +772,33 @@ def build_layer(
         "gzipSha256": sha256_file(output_path),
         **validation,
     }
+    if config.key == "named":
+        result["streamOrderShards"] = write_named_stream_order_shards(
+            collection,
+            output_path,
+            full_raw_bytes=len(payload),
+        )
+    return result
 
 
 def main() -> None:
     args = parse_args()
+    if args.layer == "named-shards":
+        output_path = LAYERS["named"].output_path.resolve()
+        if not output_path.is_file():
+            raise FileNotFoundError(
+                f"Missing {output_path}. Build the named snapshot first."
+            )
+        with gzip.open(output_path, "rt", encoding="utf-8") as handle:
+            collection = json.load(handle)
+        result = write_named_stream_order_shards(
+            collection,
+            output_path,
+            full_raw_bytes=len(deterministic_json_payload(collection)),
+        )
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return
+
     source_zip = args.source.resolve()
     if not source_zip.is_file():
         raise FileNotFoundError(

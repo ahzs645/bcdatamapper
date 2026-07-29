@@ -15,6 +15,7 @@
     "watersheds:50m": "./run-in-pgmaps.sh uv run --python 3.11 --with-requirements datascrapers/bc/boundaries/requirements-fwa.txt python datascrapers/bc/boundaries/build-bc-fwa-watersheds.py --layer all",
     "watersheds:assessment-50m": "./run-in-pgmaps.sh uv run --python 3.11 --with-requirements datascrapers/bc/boundaries/requirements-fwa.txt python datascrapers/bc/boundaries/build-bc-fwa-watersheds.py --layer assessment",
     "watersheds:named-50m": "./run-in-pgmaps.sh uv run --python 3.11 --with-requirements datascrapers/bc/boundaries/requirements-fwa.txt python datascrapers/bc/boundaries/build-bc-fwa-watersheds.py --layer named",
+    "watersheds:named-order-shards": "./run-in-pgmaps.sh uv run --python 3.11 --with-requirements datascrapers/bc/boundaries/requirements-fwa.txt python datascrapers/bc/boundaries/build-bc-fwa-watersheds.py --layer named-shards",
     "drainage-basins:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-drainage-basins.mjs",
     "municipalities:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-municipalities.mjs",
     "nr-admin:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-nr-admin.mjs",
