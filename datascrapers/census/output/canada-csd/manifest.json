@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T04:30:32.455Z",
+  "generatedAt": "2026-07-30T05:37:30.884Z",
   "name": "2021 Census Subdivisions",
   "source": {
     "name": "Statistics Canada 2021 Cartographic Boundary File - Census Subdivisions",
@@ -17,8 +17,8 @@
   "features": 5161,
   "north": 1109,
   "south": 4052,
-  "rawBytes": 28056242,
-  "gzipBytes": 7682889,
+  "rawBytes": 28288487,
+  "gzipBytes": 7689338,
   "completeArchive": "canada-csd.geojson.gz",
   "chunks": [
     {
@@ -28,8 +28,14 @@
       "features": 372,
       "north": 29,
       "south": 343,
-      "rawBytes": 2745078,
-      "gzipBytes": 756488
+      "rawBytes": 2761818,
+      "gzipBytes": 757255,
+      "bbox": [
+        -67.82169,
+        46.61099,
+        -52.61936,
+        60.37773
+      ]
     },
     {
       "id": "11",
@@ -38,8 +44,14 @@
       "features": 98,
       "north": 0,
       "south": 98,
-      "rawBytes": 140887,
-      "gzipBytes": 33377
+      "rawBytes": 145297,
+      "gzipBytes": 33459,
+      "bbox": [
+        -64.41357,
+        45.94814,
+        -61.97118,
+        47.05886
+      ]
     },
     {
       "id": "12",
@@ -48,8 +60,14 @@
       "features": 95,
       "north": 0,
       "south": 95,
-      "rawBytes": 571358,
-      "gzipBytes": 154889
+      "rawBytes": 575633,
+      "gzipBytes": 155084,
+      "bbox": [
+        -66.39541,
+        43.38779,
+        -59.66131,
+        47.22753
+      ]
     },
     {
       "id": "13",
@@ -58,8 +76,14 @@
       "features": 266,
       "north": 0,
       "south": 266,
-      "rawBytes": 414996,
-      "gzipBytes": 99070
+      "rawBytes": 426966,
+      "gzipBytes": 99258,
+      "bbox": [
+        -69.05288,
+        44.56767,
+        -63.77064,
+        48.07256
+      ]
     },
     {
       "id": "24",
@@ -68,8 +92,14 @@
       "features": 1282,
       "north": 166,
       "south": 1116,
-      "rawBytes": 3727756,
-      "gzipBytes": 964289
+      "rawBytes": 3785446,
+      "gzipBytes": 965737,
+      "bbox": [
+        -79.76291,
+        44.99115,
+        -57.10586,
+        62.58186
+      ]
     },
     {
       "id": "35",
@@ -78,8 +108,14 @@
       "features": 577,
       "north": 280,
       "south": 297,
-      "rawBytes": 4320012,
-      "gzipBytes": 1103584
+      "rawBytes": 4345977,
+      "gzipBytes": 1104486,
+      "bbox": [
+        -95.15525,
+        41.68142,
+        -74.34347,
+        56.86153
+      ]
     },
     {
       "id": "46",
@@ -88,8 +124,14 @@
       "features": 239,
       "north": 85,
       "south": 154,
-      "rawBytes": 435745,
-      "gzipBytes": 108132
+      "rawBytes": 446500,
+      "gzipBytes": 108639,
+      "bbox": [
+        -102.00762,
+        48.99887,
+        -88.97959,
+        60.00001
+      ]
     },
     {
       "id": "47",
@@ -98,8 +140,14 @@
       "features": 951,
       "north": 60,
       "south": 891,
-      "rawBytes": 875661,
-      "gzipBytes": 165820
+      "rawBytes": 918456,
+      "gzipBytes": 166639,
+      "bbox": [
+        -110.01041,
+        48.99897,
+        -101.362,
+        60.00007
+      ]
     },
     {
       "id": "48",
@@ -108,8 +156,14 @@
       "features": 423,
       "north": 157,
       "south": 266,
-      "rawBytes": 645696,
-      "gzipBytes": 148182
+      "rawBytes": 664731,
+      "gzipBytes": 148801,
+      "bbox": [
+        -120.00272,
+        48.99716,
+        -110.00002,
+        60.00007
+      ]
     },
     {
       "id": "59",
@@ -118,8 +172,14 @@
       "features": 751,
       "north": 225,
       "south": 526,
-      "rawBytes": 4357179,
-      "gzipBytes": 1114691
+      "rawBytes": 4390974,
+      "gzipBytes": 1116092,
+      "bbox": [
+        -139.05222,
+        48.29686,
+        -114.05377,
+        60.00006
+      ]
     },
     {
       "id": "60",
@@ -128,8 +188,14 @@
       "features": 35,
       "north": 35,
       "south": 0,
-      "rawBytes": 79649,
-      "gzipBytes": 22924
+      "rawBytes": 81224,
+      "gzipBytes": 23088,
+      "bbox": [
+        -141.0181,
+        60.00002,
+        -123.78934,
+        69.64671
+      ]
     },
     {
       "id": "61",
@@ -138,8 +204,14 @@
       "features": 41,
       "north": 41,
       "south": 0,
-      "rawBytes": 779348,
-      "gzipBytes": 240433
+      "rawBytes": 781193,
+      "gzipBytes": 240530,
+      "bbox": [
+        -136.46872,
+        60.00001,
+        -102.00001,
+        78.80459
+      ]
     },
     {
       "id": "62",
@@ -148,8 +220,14 @@
       "features": 31,
       "north": 31,
       "south": 0,
-      "rawBytes": 8963369,
-      "gzipBytes": 2773031
+      "rawBytes": 8964764,
+      "gzipBytes": 2773162,
+      "bbox": [
+        -120.7248,
+        51.25308,
+        -61.09132,
+        83.13656
+      ]
     }
   ]
 }

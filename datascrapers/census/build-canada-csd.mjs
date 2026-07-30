@@ -107,6 +107,7 @@ function normalizeFeature(rawFeature) {
   if (!/^\d{7}$/.test(csdUid)) return null
   const csdName = String(sourceProperties.CSDNAME ?? csdUid).trim() || csdUid
   const landArea = Number(sourceProperties.LANDAREA)
+  const northSouth = classifyCsdNorthSouth(csdUid)
 
   return {
     type: 'Feature',
@@ -126,8 +127,31 @@ function normalizeFeature(rawFeature) {
       DGUID: sourceProperties.DGUID ?? null,
       LANDAREA: Number.isFinite(landArea) ? landArea : null,
       areaKm2: Number.isFinite(landArea) ? landArea : 0,
+      north_south: northSouth,
+      north_south_code: northSouth === 'North' ? 'N' : 'S',
     },
   }
+}
+
+function extendBboxWithCoordinates(bbox, coordinates) {
+  if (typeof coordinates[0] === 'number') {
+    bbox[0] = Math.min(bbox[0], coordinates[0])
+    bbox[1] = Math.min(bbox[1], coordinates[1])
+    bbox[2] = Math.max(bbox[2], coordinates[0])
+    bbox[3] = Math.max(bbox[3], coordinates[1])
+    return
+  }
+  for (const nested of coordinates) {
+    extendBboxWithCoordinates(bbox, nested)
+  }
+}
+
+function featureCollectionBbox(features) {
+  const bbox = [Infinity, Infinity, -Infinity, -Infinity]
+  for (const feature of features) {
+    extendBboxWithCoordinates(bbox, feature.geometry.coordinates)
+  }
+  return bbox.map((value) => Number(value.toFixed(GEOMETRY_PRECISION)))
 }
 
 function byteLength(value) {
@@ -155,7 +179,7 @@ async function main() {
     await fs.writeFile(path.join(outputDir, 'provinces', fileName), text)
 
     const chunkNorthCount = features.filter(
-      (feature) => classifyCsdNorthSouth(feature.properties.CSDUID) === 'North',
+      (feature) => feature.properties.north_south === 'North',
     ).length
     const chunkSouthCount = features.length - chunkNorthCount
     northCount += chunkNorthCount
@@ -165,6 +189,7 @@ async function main() {
       id: prUid,
       name,
       path: `provinces/${fileName}`,
+      bbox: featureCollectionBbox(features),
       features: features.length,
       north: chunkNorthCount,
       south: chunkSouthCount,
