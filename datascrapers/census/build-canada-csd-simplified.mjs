@@ -146,7 +146,10 @@ async function main() {
     await fs.writeFile(tempInputPath, JSON.stringify({ type: 'FeatureCollection', features: sourceFeatures }))
     execFileSync('npx', [
       '--yes',
+      '--package',
       `mapshaper@${MAPSHAPER_VERSION}`,
+      '--',
+      'mapshaper',
       tempInputPath,
       '-clean',
       '-filter-islands',
