@@ -97,6 +97,7 @@
     "census:sync": "./run-in-pgmaps.sh node datascrapers/census/build-census-hierarchy.mjs",
     "census:bc-da-simplified": "./run-in-pgmaps.sh node datascrapers/census/build-bc-da-simplified.mjs",
     "census:canada-csd": "./run-in-pgmaps.sh node datascrapers/census/build-canada-csd.mjs",
+    "census:canada-csd-simplified": "./run-in-pgmaps.sh node datascrapers/census/build-canada-csd-simplified.mjs",
     "test:census:north-south": "node --test datascrapers/census/north-south-classification.test.mjs",
     "census:bc-db-crosswalk": "./run-in-pgmaps.sh node datascrapers/census/build-bc-db-crosswalk.mjs",
     "census:bc-db-chunks": "./run-in-pgmaps.sh node datascrapers/census/build-bc-db-chunks.mjs",

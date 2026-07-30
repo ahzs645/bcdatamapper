@@ -31,6 +31,10 @@ datascrapers/eccc/output/modelled-pm25-vector-tiles/
 # Generated BC DB boundary chunks are large and should be published to object storage.
 datascrapers/census/output/bc-db-chunks/
 
+# Generated simplified canada-csd overview is derived from the committed
+# full-detail snapshot at build time (census:canada-csd-simplified).
+datascrapers/census/output/canada-csd-simplified.geojson
+
 # Generated TELUS network vector tiles are local scraper output.
 datascrapers/network/telus/output/tiles/
 
