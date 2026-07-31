@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const SOURCE_URL = 'https://services6.arcgis.com/ubm4tcTYICKBpist/arcgis/rest/services/British_Columbia_Fire_Zone_Boundaries/FeatureServer/0/query'
@@ -126,8 +127,9 @@ async function fetchFireZones() {
 const toleranceMetres = parseToleranceMetres()
 const raw = normalizeCollection(await fetchFireZones())
 const rawVertices = raw.features.reduce((sum, feature) => sum + countPositions(feature.geometry), 0)
-const simplified = simplifySharedPolygonTopology(raw, {
+const simplified = simplifyPolygonTopology(raw, {
   toleranceMetres,
+  topologyProfile: TOPOLOGY_PROFILES.PARTITION,
   sourceCrs: SOURCE_CRS,
   workingCrs: WORKING_CRS,
   outputCrs: OUTPUT_CRS,
@@ -137,6 +139,7 @@ const simplified = simplifySharedPolygonTopology(raw, {
 const output = {
   type: 'FeatureCollection',
   metadata: {
+    ...simplified.metadata,
     source: 'BC Wildfire Service Fire Zone ArcGIS service',
     sourceUrl: SOURCE_URL,
     sourceCrs: SOURCE_CRS,

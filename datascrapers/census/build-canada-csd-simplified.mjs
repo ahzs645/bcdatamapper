@@ -19,7 +19,8 @@ import { gunzipSync, gzipSync } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../lib/mapshaper-topology.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -99,8 +100,9 @@ async function main() {
   }
   const sourceVertices = countVertices(sourceFeatures)
 
-  const simplified = simplifySharedPolygonTopology({ type: 'FeatureCollection', features: sourceFeatures }, {
+  const simplified = simplifyPolygonTopology({ type: 'FeatureCollection', features: sourceFeatures }, {
     toleranceMetres: SIMPLIFICATION_TOLERANCE_METRES,
+    topologyProfile: TOPOLOGY_PROFILES.PARTITION,
     sourceCrs: SOURCE_CRS,
     workingCrs: WORKING_CRS,
     outputCrs: OUTPUT_CRS,
@@ -132,6 +134,7 @@ async function main() {
   const text = JSON.stringify({
     type: 'FeatureCollection',
     metadata: {
+      ...simplified.metadata,
       sourceCrs: SOURCE_CRS,
       workingCrs: WORKING_CRS,
       outputCrs: OUTPUT_CRS,

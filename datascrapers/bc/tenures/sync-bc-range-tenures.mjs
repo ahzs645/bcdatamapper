@@ -1,10 +1,19 @@
 import { mkdir, writeFile } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import bboxClip from '@turf/bbox-clip'
-import simplify from '@turf/simplify'
+import {
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
+} from '../../lib/mapshaper-topology.mjs'
 
-const OUTPUT_DIR = 'public/data/boundaries/BCRange'
+const OUTPUT_DIR = join(dirname(fileURLToPath(import.meta.url)), 'output', 'BCRange')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
 const PG_REGION_BBOX = [-125, 52.5, -120, 55.5]
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 const LAYERS = [
   {
@@ -30,7 +39,7 @@ const LAYERS = [
       'ADMIN_DISTRICT_CODE',
       'ADMIN_DISTRICT_NAME',
     ],
-    tolerance: 0.001,
+    toleranceMetres: 100,
     nameBuilder: (props) => {
       const file = String(props.FOREST_FILE_ID ?? '').trim()
       const block = String(props.MAP_BLOCK_ID ?? '').trim()
@@ -57,7 +66,7 @@ const LAYERS = [
       'OWNERSHIP_CODE',
       'FEATURE_AREA_SQM',
     ],
-    tolerance: 0.001,
+    toleranceMetres: 100,
     nameBuilder: (props) => String(props.PASTURE_NAME ?? '').trim(),
   },
 ]
@@ -116,23 +125,11 @@ function normalizeFeature(feature, layer) {
 
   if (!clipped.geometry) return null
 
-  let simplifiedGeometry = clipped.geometry
-  try {
-    const simplified = simplify(clipped, {
-      tolerance: layer.tolerance,
-      highQuality: false,
-      mutate: true,
-    })
-    simplifiedGeometry = simplified.geometry
-  } catch {
-    // Some BCGW polygons have degenerate rings that turf.simplify rejects.
-  }
-
   return {
     type: 'Feature',
     id: feature.id,
     properties: pickProperties(feature.properties ?? {}, layer),
-    geometry: simplifiedGeometry,
+    geometry: clipped.geometry,
   }
 }
 
@@ -147,6 +144,20 @@ async function syncLayer(layer) {
     .map((feature) => normalizeFeature(feature, layer))
     .filter((feature) => feature && feature.properties.boundaryCode)
 
+  const simplified = simplifyPolygonTopology({
+    type: 'FeatureCollection',
+    name: layer.id,
+    features,
+  }, {
+    toleranceMetres: layer.toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    topologyProfile: TOPOLOGY_PROFILES.OVERLAP,
+    tempPrefix: `bc-${layer.id}-`,
+  })
+
   const collection = {
     type: 'FeatureCollection',
     name: layer.id,
@@ -156,13 +167,13 @@ async function syncLayer(layer) {
       bbox: PG_REGION_BBOX,
       clippedTo: 'Prince George regional viewport',
       cqlFilter: layer.cqlFilter ?? null,
-      generatedAt: new Date().toISOString(),
+      ...simplified.metadata,
     },
-    features,
+    features: simplified.features,
   }
 
   await writeFile(`${OUTPUT_DIR}/${layer.id}.geojson`, `${JSON.stringify(collection)}\n`)
-  console.log(`${layer.id}: wrote ${features.length} features`)
+  console.log(`${layer.id}: wrote ${simplified.features.length} features`)
 }
 
 await mkdir(OUTPUT_DIR, { recursive: true })

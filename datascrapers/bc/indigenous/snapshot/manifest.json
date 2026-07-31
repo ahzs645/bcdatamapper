@@ -1,9 +1,8 @@
 {
-  "generatedAt": "2026-06-18T18:36:32.931Z",
   "notes": [
     "CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application/report workflow, not downloadable consultation-area boundary geometry. The related ArcGIS MapServer dynamic layer 382 is bundled for offline use; the public CAD viewer resolves it to Indian reserves/band-name administrative geography, not consultation-area polygons.",
     "Automated layers are supporting context only. They do not determine Indigenous title, traditional territory, or acknowledgement wording.",
-    "Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot."
+    "Polygon GeoJSON outputs use the shared Mapshaper topology pipeline in overlap-preserving mode. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot."
   ],
   "automated": [
     {
@@ -16,7 +15,6 @@
       "sourceLayer": "WHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP",
       "sourceUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_HUMAN_CULTURAL_ECONOMIC.FN_COMMUNITY_LOCATIONS_SP&outputFormat=json&srsName=EPSG%3A4326&maxFeatures=50000",
       "generalized": false,
-      "simplifyToleranceDegrees": null,
       "caveat": "Approximate community/office locations and administrative reference data. Not a traditional territory or acknowledgement boundary layer."
     },
     {
@@ -29,7 +27,21 @@
       "sourceLayer": "WHSE_LEGAL_ADMIN_BOUNDARIES.FNT_TREATY_AREA_SP",
       "sourceUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.FNT_TREATY_AREA_SP/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.FNT_TREATY_AREA_SP&outputFormat=json&srsName=EPSG%3A4326&maxFeatures=50000",
       "generalized": true,
-      "simplifyToleranceDegrees": 0.0002,
+      "sourceCrs": "EPSG:4326",
+      "workingCrs": "EPSG:3005",
+      "outputCrs": "EPSG:4326",
+      "simplification": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+      "simplificationToleranceMetres": 20,
+      "topologyProfile": "overlap",
+      "topologyPreserving": true,
+      "cleaningApplied": false,
+      "intentionalOverlapPreserved": true,
+      "unsimplifiedFallbackFeatureCount": 0,
+      "sourceFeatureCount": 69,
+      "droppedInvalidGeometryFeatureCount": 0,
+      "outputFeatureCount": 69,
+      "mapshaperVersion": "0.6.113",
+      "coordinatePrecision": 6,
       "caveat": "Treaty-defined legal/admin geography where available. Not a comprehensive traditional territory layer."
     },
     {
@@ -41,7 +53,21 @@
       "source": "BC ArcGIS REST service",
       "sourceUrl": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_legal_admin_boundaries/MapServer/19",
       "generalized": true,
-      "simplifyToleranceDegrees": 0.0002,
+      "sourceCrs": "EPSG:4326",
+      "workingCrs": "EPSG:3005",
+      "outputCrs": "EPSG:4326",
+      "simplification": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+      "simplificationToleranceMetres": 20,
+      "topologyProfile": "overlap",
+      "topologyPreserving": true,
+      "cleaningApplied": false,
+      "intentionalOverlapPreserved": true,
+      "unsimplifiedFallbackFeatureCount": 0,
+      "sourceFeatureCount": 148,
+      "droppedInvalidGeometryFeatureCount": 0,
+      "outputFeatureCount": 148,
+      "mapshaperVersion": "0.6.113",
+      "coordinatePrecision": 6,
       "caveat": "Treaty land polygons where official treaty data is available. Not a comprehensive traditional territory layer."
     },
     {
@@ -53,7 +79,21 @@
       "source": "BC ArcGIS REST service",
       "sourceUrl": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/mpcm/bcgwpub/MapServer/34",
       "generalized": true,
-      "simplifyToleranceDegrees": 0.0002,
+      "sourceCrs": "EPSG:4326",
+      "workingCrs": "EPSG:3005",
+      "outputCrs": "EPSG:4326",
+      "simplification": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+      "simplificationToleranceMetres": 20,
+      "topologyProfile": "overlap",
+      "topologyPreserving": true,
+      "cleaningApplied": false,
+      "intentionalOverlapPreserved": true,
+      "unsimplifiedFallbackFeatureCount": 0,
+      "sourceFeatureCount": 1687,
+      "droppedInvalidGeometryFeatureCount": 0,
+      "outputFeatureCount": 1687,
+      "mapshaperVersion": "0.6.113",
+      "coordinatePrecision": 6,
       "caveat": "Reserve and band-name administrative geography. Not traditional territory or acknowledgement wording."
     },
     {
@@ -66,7 +106,21 @@
       "sourceUrl": "https://maps.gov.bc.ca/arcserver/rest/services/mpcm/bcgw/MapServer",
       "sourceLayer": "layers=show:382",
       "generalized": true,
-      "simplifyToleranceDegrees": 0.0002,
+      "sourceCrs": "EPSG:4326",
+      "workingCrs": "EPSG:3005",
+      "outputCrs": "EPSG:4326",
+      "simplification": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+      "simplificationToleranceMetres": 20,
+      "topologyProfile": "overlap",
+      "topologyPreserving": true,
+      "cleaningApplied": false,
+      "intentionalOverlapPreserved": true,
+      "unsimplifiedFallbackFeatureCount": 0,
+      "sourceFeatureCount": 1687,
+      "droppedInvalidGeometryFeatureCount": 0,
+      "outputFeatureCount": 1687,
+      "mapshaperVersion": "0.6.113",
+      "coordinatePrecision": 6,
       "caveat": "Pulled from the CAD/PIP operational MapServer dynamic layer 382 for offline use. The public CAD viewer resolves this layer to WHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP (Indian Reserves including Band Names). This is reserve/band-name administrative geography, not the hidden CAD consultation-area polygons or acknowledgement wording."
     },
     {
@@ -78,7 +132,6 @@
       "source": "Government of Canada ArcGIS REST service",
       "sourceUrl": "https://geo.sac-isc.gc.ca/geomatics/rest/services/Donnees_Ouvertes-Open_Data/Premiere_Nation_First_Nation/MapServer/0",
       "generalized": false,
-      "simplifyToleranceDegrees": null,
       "caveat": "National First Nation point/name reference from ISC/CIRNAC. Points represent community/admin locations, not territory or acknowledgement boundaries."
     }
   ],

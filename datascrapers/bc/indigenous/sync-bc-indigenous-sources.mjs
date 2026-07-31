@@ -1,7 +1,10 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import simplify from '@turf/simplify'
 import { SNAPSHOT_DIR, copySnapshotToPublic } from './indigenous-snapshot.mjs'
+import {
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
+} from '../../lib/mapshaper-topology.mjs'
 
 // Write generated layers into the committed snapshot in the submodule, then copy them
 // into the PGMaps public/ dir. The snapshot is the version-controlled source of truth.
@@ -9,7 +12,11 @@ const OUTPUT_DIR = SNAPSHOT_DIR
 const CKAN_BASE = 'https://catalogue.data.gov.bc.ca/api/3/action/package_show'
 const OPEN_CANADA_BASE = 'https://open.canada.ca/data/api/action/package_show'
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
-const SIMPLIFY_TOLERANCE = 0.0002
+const SIMPLIFICATION_TOLERANCE_METRES = 20
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 const CAD_PACKAGE_ID = 'profiles-of-indigenous-peoples-pip-consultation-areas-public-map-service'
 const COMMUNITY_PACKAGE_ID = 'first-nation-community-locations'
@@ -189,28 +196,34 @@ function normalizeFeatureCollection(source, metadata) {
   }
 }
 
-function maybeSimplifyFeatures(features, dataset) {
-  if (!dataset.simplify) return features
-  return features.map((feature) => {
-    if (!feature.geometry || (feature.geometry.type !== 'Polygon' && feature.geometry.type !== 'MultiPolygon')) {
-      return feature
-    }
-    try {
-      return simplify(feature, {
-        tolerance: SIMPLIFY_TOLERANCE,
-        highQuality: false,
-        mutate: false,
-      })
-    } catch {
-      return feature
-    }
+function generalizeFeatures(features, dataset) {
+  const collection = {
+    type: 'FeatureCollection',
+    name: dataset.id,
+    features,
+  }
+  if (!dataset.simplify) return collection
+  return simplifyPolygonTopology(collection, {
+    toleranceMetres: SIMPLIFICATION_TOLERANCE_METRES,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    topologyProfile: TOPOLOGY_PROFILES.OVERLAP,
+    tempPrefix: `bc-indigenous-${dataset.id}-`,
   })
+}
+
+function generalizationMetadata(dataset, collection) {
+  return dataset.simplify
+    ? { generalized: true, ...collection.metadata }
+    : { generalized: false }
 }
 
 async function syncWfsDataset(dataset, packages) {
   const url = wfsUrl(dataset)
   const source = await fetchJson(url)
-  const features = maybeSimplifyFeatures(Array.isArray(source.features) ? source.features : [], dataset)
+  const generalized = generalizeFeatures(Array.isArray(source.features) ? source.features : [], dataset)
   const collection = normalizeFeatureCollection(source, {
     id: dataset.id,
     title: dataset.title,
@@ -219,12 +232,10 @@ async function syncWfsDataset(dataset, packages) {
     sourceUrl: url,
     sourcePackage: packageSummary(packages.get(dataset.packageId)),
     geometryType: dataset.geometryType,
-    generalized: Boolean(dataset.simplify),
-    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    ...generalizationMetadata(dataset, generalized),
     caveat: dataset.caveat,
-    generatedAt: new Date().toISOString(),
   })
-  collection.features = features
+  collection.features = generalized.features
 
   const outputPath = path.join(OUTPUT_DIR, dataset.output)
   await writeFile(outputPath, `${JSON.stringify(collection)}\n`)
@@ -239,8 +250,7 @@ async function syncWfsDataset(dataset, packages) {
     source: collection.metadata.source,
     sourceLayer: dataset.typeName,
     sourceUrl: url,
-    generalized: Boolean(dataset.simplify),
-    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    ...generalizationMetadata(dataset, generalized),
     caveat: dataset.caveat,
   }
 }
@@ -289,19 +299,17 @@ async function syncArcGisDataset(dataset, options = {}) {
     offset += page.features.length
   }
 
-  const outputFeatures = maybeSimplifyFeatures(features, dataset)
-  const collection = normalizeFeatureCollection(template ?? { type: 'FeatureCollection', features: outputFeatures }, {
+  const generalized = generalizeFeatures(features, dataset)
+  const collection = normalizeFeatureCollection(template ?? { type: 'FeatureCollection', features: generalized.features }, {
     id: dataset.id,
     title: dataset.title,
     source: options.source ?? 'BC ArcGIS REST service',
     sourceUrl: dataset.url,
     sourcePackage: options.sourcePackage ?? null,
-    generalized: Boolean(dataset.simplify),
-    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    ...generalizationMetadata(dataset, generalized),
     caveat: dataset.caveat,
-    generatedAt: new Date().toISOString(),
   })
-  collection.features = outputFeatures
+  collection.features = generalized.features
 
   const outputPath = path.join(OUTPUT_DIR, dataset.output)
   await writeFile(outputPath, `${JSON.stringify(collection)}\n`)
@@ -315,8 +323,7 @@ async function syncArcGisDataset(dataset, options = {}) {
     access: 'automated',
     source: collection.metadata.source,
     sourceUrl: dataset.url,
-    generalized: Boolean(dataset.simplify),
-    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    ...generalizationMetadata(dataset, generalized),
     caveat: dataset.caveat,
   }
 }
@@ -338,8 +345,8 @@ async function syncDynamicArcGisDataset(dataset, options = {}) {
     offset += page.features.length
   }
 
-  const outputFeatures = maybeSimplifyFeatures(features, dataset)
-  const collection = normalizeFeatureCollection(template ?? { type: 'FeatureCollection', features: outputFeatures }, {
+  const generalized = generalizeFeatures(features, dataset)
+  const collection = normalizeFeatureCollection(template ?? { type: 'FeatureCollection', features: generalized.features }, {
     id: dataset.id,
     title: dataset.title,
     source: options.source ?? 'BC ArcGIS REST dynamic layer query',
@@ -347,12 +354,10 @@ async function syncDynamicArcGisDataset(dataset, options = {}) {
     sourceLayer: dataset.sourceLayer,
     sourcePackage: options.sourcePackage ?? null,
     dynamicDefinition: dataset.dynamicDefinition,
-    generalized: Boolean(dataset.simplify),
-    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    ...generalizationMetadata(dataset, generalized),
     caveat: dataset.caveat,
-    generatedAt: new Date().toISOString(),
   })
-  collection.features = outputFeatures
+  collection.features = generalized.features
 
   const outputPath = path.join(OUTPUT_DIR, dataset.output)
   await writeFile(outputPath, `${JSON.stringify(collection)}\n`)
@@ -367,8 +372,7 @@ async function syncDynamicArcGisDataset(dataset, options = {}) {
     source: collection.metadata.source,
     sourceUrl: dataset.url,
     sourceLayer: dataset.sourceLayer,
-    generalized: Boolean(dataset.simplify),
-    simplifyToleranceDegrees: dataset.simplify ? SIMPLIFY_TOLERANCE : null,
+    ...generalizationMetadata(dataset, generalized),
     caveat: dataset.caveat,
   }
 }
@@ -418,11 +422,10 @@ async function main() {
   }))
 
   const manifest = {
-    generatedAt: new Date().toISOString(),
     notes: [
       'CAD/PIP consultation areas are not bulk-downloaded because the public catalogue exposes an access-only application/report workflow, not downloadable consultation-area boundary geometry. The related ArcGIS MapServer dynamic layer 382 is bundled for offline use; the public CAD viewer resolves it to Indian reserves/band-name administrative geography, not consultation-area polygons.',
       'Automated layers are supporting context only. They do not determine Indigenous title, traditional territory, or acknowledgement wording.',
-      'Polygon GeoJSON outputs are generalized with turf.simplify for app/dev use. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot.',
+      'Polygon GeoJSON outputs use the shared Mapshaper topology pipeline in overlap-preserving mode. They are committed as a snapshot in the bcdatamapper submodule (datascrapers/bc/indigenous/snapshot); rerun npm run indigenous:sync to refresh them from source services, then commit the updated snapshot.',
     ],
     automated,
     manual,

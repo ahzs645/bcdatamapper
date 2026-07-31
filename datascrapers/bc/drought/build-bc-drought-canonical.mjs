@@ -1,9 +1,11 @@
 import { readFile, writeFile } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import booleanIntersects from '@turf/boolean-intersects'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import centroid from '@turf/centroid'
 
-const INPUT_DIR = 'public/data/drought'
+const INPUT_DIR = join(dirname(fileURLToPath(import.meta.url)), 'output')
 const OUTPUT_BASINS = `${INPUT_DIR}/basins.geojson`
 const OUTPUT_TIMESERIES = `${INPUT_DIR}/timeseries.json`
 const MANIFEST = `${INPUT_DIR}/manifest.json`
@@ -167,14 +169,12 @@ for (const year of YEARS) {
   console.log(`${year}: ${collection.features.length} source rows -> ${mappedRows} canonical records (${unmapped} unmapped)`)
 }
 
-const generatedAt = new Date().toISOString()
 const basinsCollection = {
   type: 'FeatureCollection',
   name: 'bc_drought_canonical_basins',
   metadata: {
     source: 'BC Drought Information Portal / ArcGIS Hub',
     canonicalYear: CANONICAL_YEAR,
-    generatedAt,
     featureCount: basins.length,
     note: 'Canonical 2025 basin polygons used as the stable display geometry for historical drought time-series records.',
   },
@@ -185,14 +185,12 @@ const timeseries = {
   title: 'B.C. drought levels canonical time series',
   source: 'BC Drought Information Portal / ArcGIS Hub',
   canonicalYear: CANONICAL_YEAR,
-  generatedAt,
   basinCount: basins.length,
   recordCount: records.length,
   years: yearSummaries,
   records,
 }
 
-manifest.generatedAt = generatedAt
 manifest.canonical = {
   basinFile: 'basins.geojson',
   timeseriesFile: 'timeseries.json',

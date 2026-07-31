@@ -3,7 +3,8 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
@@ -26,8 +27,9 @@ mkdirSync(SIMPLIFIED_DIR, { recursive: true })
 for (const layer of LAYERS) {
   const sourcePath = join(OUTPUT_DIR, layer.file)
   const source = JSON.parse(readFileSync(sourcePath, 'utf8'))
-  const simplified = simplifySharedPolygonTopology(source, {
+  const simplified = simplifyPolygonTopology(source, {
     toleranceMetres: layer.toleranceMetres,
+    topologyProfile: TOPOLOGY_PROFILES.PARTITION,
     sourceCrs: SOURCE_CRS,
     workingCrs: WORKING_CRS,
     outputCrs: OUTPUT_CRS,
@@ -37,6 +39,7 @@ for (const layer of LAYERS) {
   const output = {
     type: 'FeatureCollection',
     metadata: {
+      ...simplified.metadata,
       sourceSnapshot: layer.file,
       sourceCrs: SOURCE_CRS,
       workingCrs: WORKING_CRS,

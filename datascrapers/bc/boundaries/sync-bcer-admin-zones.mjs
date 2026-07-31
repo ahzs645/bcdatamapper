@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const ITEM_URL = 'https://data-bc-er.opendata.arcgis.com/datasets/032cac78a0264d23b7461ba2f8e1a8d7_1'
@@ -122,8 +123,9 @@ async function fetchAdminZones() {
 }
 
 function simplifySharedTopology(raw, toleranceMetres) {
-  const simplified = simplifySharedPolygonTopology(raw, {
+  const simplified = simplifyPolygonTopology(raw, {
     toleranceMetres,
+    topologyProfile: TOPOLOGY_PROFILES.PARTITION,
     sourceCrs: SOURCE_CRS,
     workingCrs: SOURCE_CRS,
     outputCrs: OUTPUT_CRS,
@@ -132,6 +134,7 @@ function simplifySharedTopology(raw, toleranceMetres) {
   })
   return {
     type: 'FeatureCollection',
+    metadata: simplified.metadata,
     features: simplified.features.sort(
       (a, b) => String(a.properties?.boundaryName ?? '').localeCompare(String(b.properties?.boundaryName ?? '')),
     ),
@@ -148,6 +151,7 @@ const output = {
   type: 'FeatureCollection',
   name: 'BCER administrative zones',
   metadata: {
+    ...simplified.metadata,
     source: 'British Columbia Energy Regulator',
     itemUrl: ITEM_URL,
     serviceUrl: SOURCE_URL,

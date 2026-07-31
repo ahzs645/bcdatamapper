@@ -3,10 +3,17 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import bboxClip from '@turf/bbox-clip'
-import simplify from '@turf/simplify'
+import {
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
+} from '../../lib/mapshaper-topology.mjs'
 
 const OUTPUT_DIR = join(dirname(fileURLToPath(import.meta.url)), 'output', 'BCUWR')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 /**
  * Province-wide extract: every UWR polygon in the BCGW, not a regional subset.
@@ -34,7 +41,7 @@ const LAYER = {
     'LEGISLATION_ACT_NAME',
     'HECTARES',
   ],
-  tolerance: 0.001,
+  toleranceMetres: 100,
 }
 
 function getWfsUrl(typeName, startIndex) {
@@ -145,23 +152,17 @@ function normalizeFeature(feature, layer) {
 
   if (!clipped.geometry) return null
 
-  const simplified = simplify(clipped, {
-    tolerance: layer.tolerance,
-    highQuality: false,
-    mutate: true,
-  })
-
   // bboxClip can return empty Polygon/MultiPolygon coordinate arrays for
   // features that the WFS bbox query includes but that do not actually
   // intersect the viewport. Those shapes are invalid GeoJSON and crash
   // MapLibre's worker while it indexes the source.
-  if (!isUsablePolygonGeometry(simplified.geometry)) return null
+  if (!isUsablePolygonGeometry(clipped.geometry)) return null
 
   return {
     type: 'Feature',
     id: feature.id,
     properties: pickProperties(feature.properties ?? {}, layer.keepFields, layer.sourceLayer),
-    geometry: simplified.geometry,
+    geometry: clipped.geometry,
   }
 }
 
@@ -184,6 +185,20 @@ async function syncLayer(layer) {
     if (pageFeatures.length < PAGE_SIZE) break
   }
 
+  const simplified = simplifyPolygonTopology({
+    type: 'FeatureCollection',
+    name: layer.id,
+    features,
+  }, {
+    toleranceMetres: layer.toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    topologyProfile: TOPOLOGY_PROFILES.OVERLAP,
+    tempPrefix: 'bc-uwr-',
+  })
+
   const collection = {
     type: 'FeatureCollection',
     name: layer.id,
@@ -195,10 +210,10 @@ async function syncLayer(layer) {
       bbox: REGION_BBOX,
       clippedTo: REGION_BBOX ? 'Prince George regional viewport' : null,
       extent: REGION_BBOX ? 'regional subset' : 'Full British Columbia',
-      featureCount: features.length,
-      generatedAt: new Date().toISOString(),
+      featureCount: simplified.features.length,
+      ...simplified.metadata,
     },
-    features,
+    features: simplified.features,
   }
 
   // Shipped gzipped: `useFetchData` sniffs the gzip magic bytes and inflates
@@ -212,7 +227,7 @@ async function syncLayer(layer) {
 
   const mb = (bytes) => `${(bytes / 1048576).toFixed(2)} MB`
   console.log(
-    `${layer.id}: wrote ${features.length} features (${mb(raw.byteLength)} raw -> ${mb(gz.byteLength)} gzip)`,
+    `${layer.id}: wrote ${simplified.features.length} features (${mb(raw.byteLength)} raw -> ${mb(gz.byteLength)} gzip)`,
   )
 }
 

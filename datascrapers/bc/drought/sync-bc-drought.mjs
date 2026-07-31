@@ -1,6 +1,17 @@
 import { mkdir, writeFile } from 'node:fs/promises'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import {
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
+} from '../../lib/mapshaper-topology.mjs'
 
-const OUTPUT_DIR = 'public/data/drought'
+const OUTPUT_DIR = join(dirname(fileURLToPath(import.meta.url)), 'output')
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const SIMPLIFICATION_TOLERANCE_METRES = 1000
+const COORDINATE_PRECISION = 6
 
 const SERVICES = [
   {
@@ -91,8 +102,6 @@ function getQueryUrl(url, params = {}) {
     outFields: '*',
     returnGeometry: 'true',
     outSR: '4326',
-    maxAllowableOffset: '0.01',
-    geometryPrecision: '5',
     f: 'geojson',
     ...params,
   })
@@ -230,7 +239,6 @@ const manifest = {
   source: 'BC Drought Information Portal / ArcGIS Hub',
   catalogUrl: 'https://droughtportal.gov.bc.ca/search',
   sourceGroup: '20aab1139c5d4e38b7cddf16d8a7cd44',
-  generatedAt: new Date().toISOString(),
   legend: {
     0: { label: 'Normal or wetter than normal', color: DROUGHT_LEVEL_COLORS[0] },
     1: { label: 'Abnormally dry', color: DROUGHT_LEVEL_COLORS[1] },
@@ -248,7 +256,20 @@ for (const service of SERVICES) {
   const expectedCount = await getFeatureCount(layerUrl)
   const features = await fetchAllFeatures(layerUrl, metadata, expectedCount)
   const normalized = features.map((feature, index) => normalizeFeature(feature, service, index))
-  const dates = normalized
+  const simplified = simplifyPolygonTopology({
+    type: 'FeatureCollection',
+    name: `bc_drought_levels_${service.year}`,
+    features: normalized,
+  }, {
+    toleranceMetres: SIMPLIFICATION_TOLERANCE_METRES,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    topologyProfile: TOPOLOGY_PROFILES.OVERLAP,
+    tempPrefix: `bc-drought-${service.year}-`,
+  })
+  const dates = simplified.features
     .flatMap((feature) => [feature.properties.startDate, feature.properties.endDate])
     .filter(Boolean)
     .sort()
@@ -261,11 +282,11 @@ for (const service of SERVICES) {
       sourceUrl: service.url,
       layerUrl,
       expectedFeatureCount: expectedCount,
-      featureCount: normalized.length,
+      featureCount: simplified.features.length,
       fields: metadata.fields?.map((field) => ({ name: field.name, type: field.type, alias: field.alias })) ?? [],
-      generatedAt: manifest.generatedAt,
+      ...simplified.metadata,
     },
-    features: normalized,
+    features: simplified.features,
   }
 
   const file = `${service.year}.geojson`
@@ -276,13 +297,13 @@ for (const service of SERVICES) {
     file,
     sourceUrl: service.url,
     layerUrl,
-    featureCount: normalized.length,
+    featureCount: simplified.features.length,
     expectedFeatureCount: expectedCount,
     startDate: dates[0] ?? null,
     endDate: dates[dates.length - 1] ?? null,
   })
 
-  console.log(`${service.year}: wrote ${normalized.length} features`)
+  console.log(`${service.year}: wrote ${simplified.features.length} features`)
 }
 
 await writeFile(`${OUTPUT_DIR}/manifest.json`, `${JSON.stringify(manifest, null, 2)}\n`)

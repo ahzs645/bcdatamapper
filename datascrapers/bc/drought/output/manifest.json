@@ -3,7 +3,6 @@
   "source": "BC Drought Information Portal / ArcGIS Hub",
   "catalogUrl": "https://droughtportal.gov.bc.ca/search",
   "sourceGroup": "20aab1139c5d4e38b7cddf16d8a7cd44",
-  "generatedAt": "2026-05-11T06:21:12.321Z",
   "legend": {
     "0": {
       "label": "Normal or wetter than normal",
@@ -46,7 +45,7 @@
       "file": "2016.geojson",
       "sourceUrl": "https://services6.arcgis.com/ubm4tcTYICKBpist/arcgis/rest/services/BC_Drought_Levels_Time_Lapse_2016/FeatureServer",
       "layerUrl": "https://services6.arcgis.com/ubm4tcTYICKBpist/arcgis/rest/services/BC_Drought_Levels_Time_Lapse_2016/FeatureServer/0",
-      "featureCount": 563,
+      "featureCount": 562,
       "expectedFeatureCount": 563,
       "startDate": "2016-04-27",
       "endDate": "2016-10-12"
@@ -147,7 +146,7 @@
     "timeseriesFile": "timeseries.json",
     "canonicalYear": 2025,
     "basinCount": 40,
-    "recordCount": 9822,
+    "recordCount": 9105,
     "note": "Yearly source files remain raw ArcGIS time-lapse rows. The canonical files use one stable 2025 basin geometry layer plus time-series records joined by basinId."
   }
 }

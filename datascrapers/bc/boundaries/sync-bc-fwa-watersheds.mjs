@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import bboxClip from '@turf/bbox-clip'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
@@ -167,11 +168,12 @@ async function syncLayer(layer) {
   const normalizedFeatures = source.features
     .map((feature) => normalizeFeature(feature, layer))
     .filter((feature) => feature && feature.properties.boundaryCode)
-  const simplified = simplifySharedPolygonTopology({
+  const simplified = simplifyPolygonTopology({
     type: 'FeatureCollection',
     features: normalizedFeatures,
   }, {
     toleranceMetres: layer.toleranceMetres,
+    topologyProfile: TOPOLOGY_PROFILES.PARTITION,
     sourceCrs: SOURCE_CRS,
     workingCrs: WORKING_CRS,
     outputCrs: OUTPUT_CRS,
@@ -184,6 +186,7 @@ async function syncLayer(layer) {
     type: 'FeatureCollection',
     name: layer.id,
     metadata: {
+      ...simplified.metadata,
       source: 'BC Freshwater Atlas / BC Geographic Warehouse',
       sourceLayer: layer.sourceLayer,
       bbox: PG_REGION_BBOX,

@@ -8,7 +8,8 @@ import { fileURLToPath } from 'node:url'
 import * as turf from '@turf/turf'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../lib/mapshaper-topology.mjs'
 
 const SERVICE_BASE = 'https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer'
@@ -539,11 +540,12 @@ async function writeParentBoundaries(parentBoundaries) {
     const normalizedFeatures = (Array.isArray(collection?.features) ? collection.features : [])
       .map((feature) => normalizeParentBoundary(feature, definition))
       .filter(Boolean)
-    const simplified = simplifySharedPolygonTopology({
+    const simplified = simplifyPolygonTopology({
       type: 'FeatureCollection',
       features: normalizedFeatures,
     }, {
       toleranceMetres: definition.toleranceMetres,
+      topologyProfile: TOPOLOGY_PROFILES.PARTITION,
       sourceCrs: SOURCE_CRS,
       workingCrs: WORKING_CRS,
       outputCrs: OUTPUT_CRS,
@@ -578,11 +580,12 @@ async function writeLod(sourceFeatures, lod, gridCols, gridRows, hierarchyByDaUi
   const normalizedFeatures = sourceFeatures
     .map((feature) => normalizeFeature(feature, lod.id, hierarchyByDaUid))
     .filter(Boolean)
-  const simplified = simplifySharedPolygonTopology({
+  const simplified = simplifyPolygonTopology({
     type: 'FeatureCollection',
     features: normalizedFeatures,
   }, {
     toleranceMetres: lod.toleranceMetres,
+    topologyProfile: TOPOLOGY_PROFILES.PARTITION,
     sourceCrs: SOURCE_CRS,
     workingCrs: WORKING_CRS,
     outputCrs: OUTPUT_CRS,

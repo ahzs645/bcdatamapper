@@ -8,7 +8,8 @@ import { gzipSync } from 'node:zlib'
 import shp from 'shpjs'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../lib/mapshaper-topology.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -302,8 +303,9 @@ function writeLod(args, sourceFeatures, sourceLayerBbox, lod) {
   console.log(`Building ${lod.id} LOD at ${lod.toleranceMetres} metre tolerance`)
   const prepared = sourceFeatures.map((feature) => prepareFeatureForLod(feature, lod))
   const collection = lod.toleranceMetres > 0
-    ? simplifySharedPolygonTopology({ type: 'FeatureCollection', features: prepared }, {
+    ? simplifyPolygonTopology({ type: 'FeatureCollection', features: prepared }, {
       toleranceMetres: lod.toleranceMetres,
+      topologyProfile: TOPOLOGY_PROFILES.PARTITION,
       sourceCrs: SOURCE_CRS,
       workingCrs: WORKING_CRS,
       outputCrs: OUTPUT_CRS,

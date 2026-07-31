@@ -3,7 +3,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
@@ -93,8 +94,9 @@ async function simplifyLayer(layer, fullPath) {
     }))
     .filter((feature) => feature.properties.boundaryCode),
   }
-  const simplified = simplifySharedPolygonTopology(normalized, {
+  const simplified = simplifyPolygonTopology(normalized, {
     toleranceMetres: layer.toleranceMetres,
+    topologyProfile: TOPOLOGY_PROFILES.PARTITION,
     sourceCrs: SOURCE_CRS,
     workingCrs: WORKING_CRS,
     outputCrs: OUTPUT_CRS,
@@ -107,6 +109,7 @@ async function simplifyLayer(layer, fullPath) {
     type: 'FeatureCollection',
     name: layer.id,
     metadata: {
+      ...simplified.metadata,
       source: 'BC Freshwater Atlas / BC Geographic Warehouse',
       sourceLayer: layer.typeName,
       scope: 'Province-wide',

@@ -24,11 +24,11 @@ from shapely.ops import unary_union
 
 
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
+TOPOLOGY_CLI = SCRIPT_DIR.parent.parent / "lib/mapshaper-topology-cli.mjs"
 REPOSITORY_SOURCE = SCRIPT_DIR / "source/BCFWA/FWA_BC.zip"
 SOURCE_GDB_NAME = "FWA_BC.gdb"
 SOURCE_CRS = "EPSG:3005"
 OUTPUT_CRS = "EPSG:4326"
-MAPSHAPER_VERSION = "0.6.113"
 DEFAULT_TOLERANCE_METRES = 50.0
 DEFAULT_COORDINATE_PRECISION = 0.00001
 MATERIAL_OVERLAP_AREA_M2 = 10.0
@@ -130,7 +130,7 @@ LAYERS = {
             / "output/BCFWA/named_watersheds_province_50m.geojson.gz"
         ),
         id_property="namedWatershedId",
-        topology_profile="overlapping",
+        topology_profile="overlap",
         intentional_overlap=True,
         schema_properties={
             "namedWatershedId": "int64",
@@ -300,36 +300,35 @@ def simplify_with_mapshaper(
     tolerance_metres: float,
     coordinate_precision: float,
 ) -> None:
+    if coordinate_precision <= 0 or coordinate_precision > 1:
+        raise RuntimeError(
+            "coordinate precision must be a positive decimal-degree grid no greater than 1"
+        )
+    precision_places = len(
+        f"{coordinate_precision:.12f}".rstrip("0").split(".")[1]
+    )
     command = [
-        "npx",
-        "--yes",
-        f"mapshaper@{MAPSHAPER_VERSION}",
+        "node",
+        str(TOPOLOGY_CLI),
+        "--input",
         str(extracted_path),
+        "--output",
+        str(simplified_path),
+        "--tolerance-metres",
+        str(tolerance_metres),
+        "--source-crs",
+        SOURCE_CRS,
+        "--working-crs",
+        SOURCE_CRS,
+        "--output-crs",
+        OUTPUT_CRS,
+        "--coordinate-precision",
+        str(precision_places),
+        "--topology-profile",
+        config.topology_profile,
+        "--temp-prefix",
+        f"bc-fwa-{config.key}-",
     ]
-    if config.topology_profile == "partition":
-        command.append("-clean")
-    command.extend(
-        [
-            "-simplify",
-            "dp",
-            f"interval={tolerance_metres}",
-            "keep-shapes",
-        ]
-    )
-    if config.topology_profile == "partition":
-        command.append("-clean")
-    command.extend(
-        [
-            "-proj",
-            "wgs84",
-            f"init={SOURCE_CRS}",
-            "-o",
-            "force",
-            "format=geojson",
-            f"precision={coordinate_precision}",
-            str(simplified_path),
-        ]
-    )
     subprocess.run(command, check=True)
 
 
@@ -742,22 +741,15 @@ def build_layer(
         "type": "FeatureCollection",
         "name": config.output_name,
         "metadata": {
+            **(simplified.get("metadata") or {}),
             "source": "Government of British Columbia Freshwater Atlas",
             "sourceArchive": source_zip.name,
             "sourceSha256": source_sha256,
             "sourceLayer": config.source_layer,
             "scope": "Province-wide",
             "nativeCrs": SOURCE_CRS,
-            "outputCrs": OUTPUT_CRS,
-            "simplification": (
-                "Mapshaper shared-topology Ramer-Douglas-Peucker"
-            ),
-            "topologyProfile": config.topology_profile,
             "intentionalOverlap": config.intentional_overlap,
-            "cleaningApplied": config.topology_profile == "partition",
-            "simplificationToleranceMetres": tolerance_metres,
             "coordinatePrecisionDegrees": coordinate_precision,
-            "mapshaperVersion": MAPSHAPER_VERSION,
             **validation,
         },
         "features": features,

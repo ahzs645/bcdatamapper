@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const TYPE_NAME = 'WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP'
@@ -117,6 +118,7 @@ function normalizeCollection(collection) {
     type: 'FeatureCollection',
     name: 'municipalities',
     metadata: {
+      ...(collection.metadata ?? {}),
       source: 'BC Geographic Warehouse',
       sourceLayer: TYPE_NAME,
       coverage: 'BC-wide legally defined municipality boundaries',
@@ -144,8 +146,9 @@ async function fetchMunicipalities() {
 const toleranceMetres = parseToleranceMetres()
 const raw = await fetchMunicipalities()
 const rawVertices = raw.features.reduce((sum, feature) => sum + countPositions(feature.geometry), 0)
-const source = simplifySharedPolygonTopology(raw, {
+const source = simplifyPolygonTopology(raw, {
   toleranceMetres,
+  topologyProfile: TOPOLOGY_PROFILES.PARTITION,
   sourceCrs: SOURCE_CRS,
   workingCrs: WORKING_CRS,
   outputCrs: OUTPUT_CRS,

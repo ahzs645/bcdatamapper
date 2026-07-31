@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import {
   MAPSHAPER_VERSION,
-  simplifySharedPolygonTopology,
+  simplifyPolygonTopology,
+  TOPOLOGY_PROFILES,
 } from '../../lib/mapshaper-topology.mjs'
 
 const TYPE_NAME = 'WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP'
@@ -76,8 +77,9 @@ if (source.type !== 'FeatureCollection' || !Array.isArray(source.features)) {
 }
 const features = source.features.map(normalizeFeature).filter(Boolean)
 const toleranceMetres = parseToleranceMetres()
-const simplified = simplifySharedPolygonTopology({ type: 'FeatureCollection', features }, {
+const simplified = simplifyPolygonTopology({ type: 'FeatureCollection', features }, {
   toleranceMetres,
+  topologyProfile: TOPOLOGY_PROFILES.PARTITION,
   sourceCrs: SOURCE_CRS,
   workingCrs: WORKING_CRS,
   outputCrs: OUTPUT_CRS,
@@ -88,6 +90,7 @@ const output = {
   type: 'FeatureCollection',
   name: 'regional_districts',
   metadata: {
+    ...simplified.metadata,
     source: 'BC Geographic Warehouse',
     sourceLayer: TYPE_NAME,
     coverage: 'BC-wide regional district boundaries',
