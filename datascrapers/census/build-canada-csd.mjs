@@ -3,7 +3,7 @@
 
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { gzipSync } from 'node:zlib'
+import { gunzipSync, gzipSync } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import { classifyCsdNorthSouth, NORTH_SOUTH_CLASSIFICATION_URL } from './north-south-classification.mjs'
 
@@ -26,8 +26,10 @@ const PROVINCES_AND_TERRITORIES = [
   ['62', 'Nunavut'],
 ]
 const FETCH_PAGE_SIZE = 250
-const MAX_ALLOWABLE_OFFSET = 0.002
-const GEOMETRY_PRECISION = 5
+// Keep the source snapshot unsimplified. Applying maxAllowableOffset here lets
+// ArcGIS generalize every polygon separately, which permanently introduces
+// gaps and overlaps before the shared-topology build sees the data.
+const GEOMETRY_PRECISION = 7
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const outputDir = path.join(__dirname, 'output', 'canada-csd')
@@ -58,21 +60,28 @@ async function fetchObjectIds(prUid) {
     .sort((a, b) => a - b)
 }
 
-async function queryObjectIds(objectIds) {
+async function queryObjectIds(objectIds, extraParams = {}) {
   const params = new URLSearchParams({
     objectIds: objectIds.join(','),
     outFields: 'CSDUID,DGUID,CSDNAME,CSDTYPE,LANDAREA,PRUID',
     returnGeometry: 'true',
     outSR: '4326',
-    maxAllowableOffset: String(MAX_ALLOWABLE_OFFSET),
     geometryPrecision: String(GEOMETRY_PRECISION),
     f: 'geojson',
   })
+  Object.entries(extraParams).forEach(([key, value]) => params.set(key, String(value)))
 
   try {
     const json = await fetchJson(`${CSD_SERVICE_URL}/query?${params.toString()}`)
     return Array.isArray(json.features) ? json.features : []
   } catch (error) {
+    if (objectIds.length === 1 && !extraParams.maxAllowableOffset) {
+      // Statistics Canada's largest Nunavut geometry exceeds the ArcGIS
+      // response limit at full detail. Use the smallest offset that the
+      // service accepts, then snap this sub-25 m discrepancy when the complete
+      // national coverage is processed by Mapshaper.
+      return queryObjectIds(objectIds, { maxAllowableOffset: 0.0002 })
+    }
     if (objectIds.length <= 1) throw error
     const midpoint = Math.ceil(objectIds.length / 2)
     const [left, right] = await Promise.all([
@@ -154,12 +163,9 @@ function featureCollectionBbox(features) {
   return bbox.map((value) => Number(value.toFixed(GEOMETRY_PRECISION)))
 }
 
-function byteLength(value) {
-  return Buffer.byteLength(JSON.stringify(value))
-}
-
 async function main() {
-  await fs.rm(outputDir, { recursive: true, force: true })
+  const resume = process.argv.includes('--resume')
+  if (!resume) await fs.rm(outputDir, { recursive: true, force: true })
   await fs.mkdir(path.join(outputDir, 'provinces'), { recursive: true })
 
   const allFeatures = []
@@ -168,15 +174,36 @@ async function main() {
   let southCount = 0
 
   for (const [prUid, name] of PROVINCES_AND_TERRITORIES) {
-    console.log(`Fetching ${name} CSD boundaries...`)
-    const features = (await fetchProvince(prUid, name))
-      .map(normalizeFeature)
-      .filter(Boolean)
-      .sort((a, b) => a.properties.CSDUID.localeCompare(b.properties.CSDUID))
+    const fileName = `${prUid}.geojson.gz`
+    const provincePath = path.join(outputDir, 'provinces', fileName)
+    let features
+    if (resume) {
+      try {
+        const existing = JSON.parse(gunzipSync(await fs.readFile(provincePath)).toString('utf8'))
+        features = existing.features
+        console.log(`Reusing ${features.length.toLocaleString()} ${name} CSD boundaries...`)
+      } catch {
+        try {
+          const legacyPath = path.join(outputDir, 'provinces', `${prUid}.geojson`)
+          const existing = JSON.parse(await fs.readFile(legacyPath, 'utf8'))
+          features = existing.features
+          console.log(`Compressing ${features.length.toLocaleString()} existing ${name} CSD boundaries...`)
+        } catch {
+          // Fetch below when no valid resumable snapshot exists.
+        }
+      }
+    }
+    if (!features) {
+      console.log(`Fetching ${name} CSD boundaries...`)
+      features = (await fetchProvince(prUid, name))
+        .map(normalizeFeature)
+        .filter(Boolean)
+        .sort((a, b) => a.properties.CSDUID.localeCompare(b.properties.CSDUID))
+    }
     const collection = { type: 'FeatureCollection', features }
     const text = JSON.stringify(collection)
-    const fileName = `${prUid}.geojson`
-    await fs.writeFile(path.join(outputDir, 'provinces', fileName), text)
+    const compressed = gzipSync(text, { level: 9 })
+    await fs.writeFile(provincePath, compressed)
 
     const chunkNorthCount = features.filter(
       (feature) => feature.properties.north_south === 'North',
@@ -194,16 +221,11 @@ async function main() {
       north: chunkNorthCount,
       south: chunkSouthCount,
       rawBytes: Buffer.byteLength(text),
-      gzipBytes: gzipSync(text, { level: 9 }).byteLength,
+      gzipBytes: compressed.byteLength,
     })
   }
 
   allFeatures.sort((a, b) => a.properties.CSDUID.localeCompare(b.properties.CSDUID))
-  const completeCollection = { type: 'FeatureCollection', features: allFeatures }
-  const completeText = JSON.stringify(completeCollection)
-  const completeGzip = gzipSync(completeText, { level: 9 })
-  await fs.writeFile(path.join(outputDir, 'canada-csd.geojson.gz'), completeGzip)
-
   const byCsdUid = Object.fromEntries(
     allFeatures.map((feature) => [
       feature.properties.CSDUID,
@@ -211,7 +233,6 @@ async function main() {
     ]),
   )
   const classification = {
-    generatedAt: new Date().toISOString(),
     name: 'Variant of Standard Geographical Classification (SGC) 2021 for North and South',
     url: NORTH_SOUTH_CLASSIFICATION_URL,
     joinField: 'CSDUID',
@@ -228,14 +249,17 @@ async function main() {
   )
 
   const manifest = {
-    generatedAt: new Date().toISOString(),
     name: '2021 Census Subdivisions',
     source: {
       name: 'Statistics Canada 2021 Cartographic Boundary File - Census Subdivisions',
       service: CSD_SERVICE_URL,
       boundaryQuery: {
-        maxAllowableOffset: MAX_ALLOWABLE_OFFSET,
+        topologySimplification: null,
         geometryPrecision: GEOMETRY_PRECISION,
+        exceptionalFallback: {
+          reason: 'ArcGIS response limit for one large Nunavut geometry',
+          maxAllowableOffset: 0.0002,
+        },
       },
     },
     classification: {
@@ -246,9 +270,8 @@ async function main() {
     features: allFeatures.length,
     north: northCount,
     south: southCount,
-    rawBytes: byteLength(completeCollection),
-    gzipBytes: completeGzip.byteLength,
-    completeArchive: 'canada-csd.geojson.gz',
+    rawBytes: chunks.reduce((sum, chunk) => sum + chunk.rawBytes, 0),
+    gzipBytes: chunks.reduce((sum, chunk) => sum + chunk.gzipBytes, 0),
     chunks,
   }
 

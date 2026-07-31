@@ -2,24 +2,30 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
-import simplify from '@turf/simplify'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../../lib/mapshaper-topology.mjs'
 
 const TYPE_NAME = 'WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP'
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
 const OUTPUT_PATH = 'datascrapers/bc/boundaries/output/BC/municipalities.geojson'
-const DEFAULT_TOLERANCE = 0.000025
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const DEFAULT_TOLERANCE_METRES = 3
 const COORDINATE_PRECISION = 6
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const VENDOR_ROOT = join(SCRIPT_DIR, '..', '..', '..')
 
-function parseTolerance() {
-  const arg = process.argv.find((value) => value.startsWith('--tolerance='))
-  const raw = arg ? arg.split('=')[1] : process.env.MUNICIPALITY_SIMPLIFY_TOLERANCE
-  if (!raw) return DEFAULT_TOLERANCE
+function parseToleranceMetres() {
+  const arg = process.argv.find((value) => value.startsWith('--tolerance-metres='))
+  const raw = arg ? arg.split('=')[1] : process.env.MUNICIPALITY_SIMPLIFY_TOLERANCE_METRES
+  if (!raw) return DEFAULT_TOLERANCE_METRES
 
   const parsed = Number(raw)
   if (!Number.isFinite(parsed) || parsed < 0) {
-    throw new Error(`Invalid municipality simplification tolerance: ${raw}`)
+    throw new Error(`Invalid municipality simplification tolerance in metres: ${raw}`)
   }
   return parsed
 }
@@ -114,8 +120,14 @@ function normalizeCollection(collection) {
       source: 'BC Geographic Warehouse',
       sourceLayer: TYPE_NAME,
       coverage: 'BC-wide legally defined municipality boundaries',
-      simplifyTolerance: parseTolerance(),
-      generatedAt: new Date().toISOString(),
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      simplification: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+      simplificationToleranceMetres: parseToleranceMetres(),
+      topologyPreserving: true,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
     },
     features,
   }
@@ -129,12 +141,19 @@ async function fetchMunicipalities() {
   return response.json()
 }
 
-const tolerance = parseTolerance()
+const toleranceMetres = parseToleranceMetres()
 const raw = await fetchMunicipalities()
 const rawVertices = raw.features.reduce((sum, feature) => sum + countPositions(feature.geometry), 0)
-const source = tolerance > 0 ? simplify(raw, { tolerance, highQuality: true, mutate: false }) : raw
+const source = simplifySharedPolygonTopology(raw, {
+  toleranceMetres,
+  sourceCrs: SOURCE_CRS,
+  workingCrs: WORKING_CRS,
+  outputCrs: OUTPUT_CRS,
+  coordinatePrecision: COORDINATE_PRECISION,
+  tempPrefix: 'bc-municipalities-',
+})
 const output = normalizeCollection(source)
-output.metadata.simplifyTolerance = tolerance
+output.metadata.simplificationToleranceMetres = toleranceMetres
 
 const outputVertices = output.features.reduce((sum, feature) => sum + countPositions(feature.geometry), 0)
 const payload = `${JSON.stringify(output)}\n`
@@ -146,7 +165,7 @@ writeFileSync(outputPath, payload)
 console.log(JSON.stringify({
   output: OUTPUT_PATH,
   features: output.features.length,
-  tolerance,
+  toleranceMetres,
   rawVertices,
   outputVertices,
   bytes: Buffer.byteLength(payload),

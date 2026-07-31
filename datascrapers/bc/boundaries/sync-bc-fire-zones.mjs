@@ -2,23 +2,29 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
-import simplify from '@turf/simplify'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../../lib/mapshaper-topology.mjs'
 
 const SOURCE_URL = 'https://services6.arcgis.com/ubm4tcTYICKBpist/arcgis/rest/services/British_Columbia_Fire_Zone_Boundaries/FeatureServer/0/query'
 const OUTPUT_PATH = 'datascrapers/bc/boundaries/output/BCWildfire/fire_zones.geojson'
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const VENDOR_ROOT = join(SCRIPT_DIR, '..', '..', '..')
-const DEFAULT_TOLERANCE = 0.00025
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const DEFAULT_TOLERANCE_METRES = 25
 const COORDINATE_PRECISION = 6
 
-function parseTolerance() {
-  const arg = process.argv.find((value) => value.startsWith('--tolerance='))
-  const raw = arg ? arg.split('=')[1] : process.env.FIRE_ZONE_SIMPLIFY_TOLERANCE
-  if (!raw) return DEFAULT_TOLERANCE
+function parseToleranceMetres() {
+  const arg = process.argv.find((value) => value.startsWith('--tolerance-metres='))
+  const raw = arg ? arg.split('=')[1] : process.env.FIRE_ZONE_SIMPLIFY_TOLERANCE_METRES
+  if (!raw) return DEFAULT_TOLERANCE_METRES
 
   const parsed = Number(raw)
   if (!Number.isFinite(parsed) || parsed <= 0) {
-    throw new Error(`Invalid fire-zone simplification tolerance: ${raw}`)
+    throw new Error(`Invalid fire-zone simplification tolerance in metres: ${raw}`)
   }
   return parsed
 }
@@ -117,12 +123,31 @@ async function fetchFireZones() {
   return response.json()
 }
 
-const tolerance = parseTolerance()
+const toleranceMetres = parseToleranceMetres()
 const raw = normalizeCollection(await fetchFireZones())
 const rawVertices = raw.features.reduce((sum, feature) => sum + countPositions(feature.geometry), 0)
-const simplified = simplify(raw, { tolerance, highQuality: true, mutate: false })
+const simplified = simplifySharedPolygonTopology(raw, {
+  toleranceMetres,
+  sourceCrs: SOURCE_CRS,
+  workingCrs: WORKING_CRS,
+  outputCrs: OUTPUT_CRS,
+  coordinatePrecision: COORDINATE_PRECISION,
+  tempPrefix: 'bc-fire-zones-',
+})
 const output = {
   type: 'FeatureCollection',
+  metadata: {
+    source: 'BC Wildfire Service Fire Zone ArcGIS service',
+    sourceUrl: SOURCE_URL,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    simplification: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+    simplificationToleranceMetres: toleranceMetres,
+    topologyPreserving: true,
+    mapshaperVersion: MAPSHAPER_VERSION,
+    coordinatePrecision: COORDINATE_PRECISION,
+  },
   features: simplified.features.map(roundGeometry),
 }
 const outputVertices = output.features.reduce((sum, feature) => sum + countPositions(feature.geometry), 0)
@@ -135,7 +160,7 @@ writeFileSync(outputPath, payload)
 console.log(JSON.stringify({
   output: OUTPUT_PATH,
   features: output.features.length,
-  tolerance,
+  toleranceMetres,
   rawVertices,
   outputVertices,
   bytes: Buffer.byteLength(payload),

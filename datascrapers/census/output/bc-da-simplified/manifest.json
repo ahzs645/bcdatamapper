@@ -1,9 +1,17 @@
 {
-  "generatedAt": "2026-06-29T19:28:58.857Z",
   "source": {
     "name": "Statistics Canada 2021 Cartographic Boundary File - Dissemination Areas",
     "service": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/12",
     "where": "PRUID='59'"
+  },
+  "simplification": {
+    "sourceCrs": "EPSG:4326",
+    "workingCrs": "EPSG:3005",
+    "outputCrs": "EPSG:4326",
+    "algorithm": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+    "topologyPreserving": true,
+    "mapshaperVersion": "0.6.113",
+    "coordinatePrecision": 6
   },
   "tolerance": 0.0002,
   "grid": {
@@ -11,282 +19,282 @@
     "rows": 5
   },
   "features": 7848,
-  "coordinateCount": 611750,
-  "rawBytes": 29699955,
-  "gzipBytes": 9255587,
+  "coordinateCount": 553089,
+  "rawBytes": 18428231,
+  "gzipBytes": 4112607,
   "chunks": [
     {
       "id": "r0-c2",
       "path": "chunks/medium/bc-da-r0-c2.geojson",
       "bbox": [
-        -129.09555771428847,
-        49.513228840466844,
-        -125.68656990235085,
-        50.94601546288416
+        -129.095585,
+        49.513229,
+        -125.68657,
+        50.946118
       ],
-      "featureCount": 32,
-      "rawBytes": 1568321,
-      "gzipBytes": 572177
+      "featureCount": 33,
+      "rawBytes": 766053,
+      "gzipBytes": 224115
     },
     {
       "id": "r0-c3",
       "path": "chunks/medium/bc-da-r0-c3.geojson",
       "bbox": [
-        -126.59271028960124,
-        48.29681409005964,
-        -122.07062623307725,
-        50.86350742191523
+        -126.592834,
+        48.297703,
+        -122.070626,
+        50.863507
       ],
       "featureCount": 5140,
-      "rawBytes": 8982281,
-      "gzipBytes": 2174738
+      "rawBytes": 6650947,
+      "gzipBytes": 1081541
     },
     {
       "id": "r0-c4",
       "path": "chunks/medium/bc-da-r0-c4.geojson",
       "bbox": [
-        -122.80581265726427,
-        49.000006127648575,
-        -118.01155915690609,
-        50.86440916098597
+        -122.805813,
+        49.000006,
+        -118.011502,
+        50.864409
       ],
-      "featureCount": 1236,
-      "rawBytes": 2741719,
-      "gzipBytes": 736801
+      "featureCount": 1237,
+      "rawBytes": 1946909,
+      "gzipBytes": 358342
     },
     {
       "id": "r0-c5",
       "path": "chunks/medium/bc-da-r0-c5.geojson",
       "bbox": [
-        -118.35131028112144,
-        48.998857097707,
-        -114.0537719802721,
-        51.06606987021632
+        -118.35131,
+        48.998857,
+        -114.053772,
+        51.06607
       ],
       "featureCount": 269,
-      "rawBytes": 1150216,
-      "gzipBytes": 352399
+      "rawBytes": 738115,
+      "gzipBytes": 162857
     },
     {
       "id": "r1-c1",
       "path": "chunks/medium/bc-da-r1-c1.geojson",
       "bbox": [
-        -132.5960411013338,
-        51.90529129494191,
-        -130.9352584323013,
-        53.260782489577366
+        -132.596041,
+        51.905365,
+        -130.93622,
+        53.260792
       ],
       "featureCount": 1,
-      "rawBytes": 1118319,
-      "gzipBytes": 412847
+      "rawBytes": 539746,
+      "gzipBytes": 160829
     },
     {
       "id": "r1-c2",
       "path": "chunks/medium/bc-da-r1-c2.geojson",
       "bbox": [
-        -128.54182834925157,
-        50.61868239377232,
-        -125.77776404921595,
-        53.30903792636081
+        -128.541496,
+        50.618705,
+        -125.777603,
+        53.309038
       ],
-      "featureCount": 27,
-      "rawBytes": 2667980,
-      "gzipBytes": 986069
+      "featureCount": 26,
+      "rawBytes": 1351883,
+      "gzipBytes": 397724
     },
     {
       "id": "r1-c3",
       "path": "chunks/medium/bc-da-r1-c3.geojson",
       "bbox": [
-        -127.74904472773991,
-        49.948151986408085,
-        -122.09053520709894,
-        53.00075661978387
+        -127.749107,
+        49.948159,
+        -122.090535,
+        53.000735
       ],
       "featureCount": 67,
-      "rawBytes": 2198350,
-      "gzipBytes": 818615
+      "rawBytes": 1169154,
+      "gzipBytes": 345347
     },
     {
       "id": "r1-c4",
       "path": "chunks/medium/bc-da-r1-c4.geojson",
       "bbox": [
-        -122.67744069646474,
-        50.22872364316955,
-        -118.19336646239154,
-        53.241662442155835
+        -122.677441,
+        50.228724,
+        -118.193366,
+        53.241662
       ],
-      "featureCount": 407,
-      "rawBytes": 1468407,
-      "gzipBytes": 445511
+      "featureCount": 406,
+      "rawBytes": 960018,
+      "gzipBytes": 210863
     },
     {
       "id": "r1-c5",
       "path": "chunks/medium/bc-da-r1-c5.geojson",
       "bbox": [
-        -118.99028197592844,
-        50.405123896200614,
-        -115.49318057293888,
-        52.500244863036414
+        -118.990282,
+        50.405124,
+        -115.49329,
+        52.500245
       ],
       "featureCount": 33,
-      "rawBytes": 253915,
-      "gzipBytes": 91700
+      "rawBytes": 156485,
+      "gzipBytes": 42734
     },
     {
       "id": "r2-c1",
       "path": "chunks/medium/bc-da-r2-c1.geojson",
       "bbox": [
-        -133.20209589310127,
-        53.13496919283544,
-        -131.1091398156745,
-        54.660408126107576
+        -133.202069,
+        53.134969,
+        -131.10914,
+        54.660408
       ],
       "featureCount": 11,
-      "rawBytes": 681879,
-      "gzipBytes": 251872
+      "rawBytes": 341653,
+      "gzipBytes": 101128
     },
     {
       "id": "r2-c2",
       "path": "chunks/medium/bc-da-r2-c2.geojson",
       "bbox": [
-        -131.1003029070591,
-        52.25016387060913,
-        -125.92203358111021,
-        56.003184231610255
+        -131.100371,
+        52.250164,
+        -125.922034,
+        56.003184
       ],
       "featureCount": 160,
-      "rawBytes": 4823491,
-      "gzipBytes": 1744885
+      "rawBytes": 2509698,
+      "gzipBytes": 716626
     },
     {
       "id": "r2-c3",
       "path": "chunks/medium/bc-da-r2-c3.geojson",
       "bbox": [
-        -127.78808506881539,
-        52.49521736470193,
-        -121.39002366639657,
-        56.00010765976782
+        -127.788085,
+        52.495217,
+        -121.390024,
+        56.000108
       ],
       "featureCount": 285,
-      "rawBytes": 899918,
-      "gzipBytes": 270110
+      "rawBytes": 601684,
+      "gzipBytes": 128837
     },
     {
       "id": "r2-c4",
       "path": "chunks/medium/bc-da-r2-c4.geojson",
       "bbox": [
-        -122.78614648714823,
-        52.66032548336239,
-        -119.26951501032619,
-        55.81057893165609
+        -122.786146,
+        52.660325,
+        -119.269515,
+        55.810579
       ],
       "featureCount": 14,
-      "rawBytes": 231941,
-      "gzipBytes": 83677
+      "rawBytes": 137991,
+      "gzipBytes": 37254
     },
     {
       "id": "r3-c1",
       "path": "chunks/medium/bc-da-r3-c1.geojson",
       "bbox": [
-        -133.0695633448184,
-        56.400936159728026,
-        -129.00207345776158,
-        58.00055608269938
+        -133.069563,
+        56.400936,
+        -129.002073,
+        58.000556
       ],
       "featureCount": 1,
-      "rawBytes": 11203,
-      "gzipBytes": 4964
+      "rawBytes": 7083,
+      "gzipBytes": 2656
     },
     {
       "id": "r3-c2",
       "path": "chunks/medium/bc-da-r3-c2.geojson",
       "bbox": [
-        -131.0433388482588,
-        54.658291459036626,
-        -126.60961927120844,
-        57.179510377877094
+        -131.043339,
+        54.658291,
+        -126.609619,
+        57.17951
       ],
       "featureCount": 8,
-      "rawBytes": 344810,
-      "gzipBytes": 131966
+      "rawBytes": 185857,
+      "gzipBytes": 56782
     },
     {
       "id": "r3-c3",
       "path": "chunks/medium/bc-da-r3-c3.geojson",
       "bbox": [
-        -127.73843151068472,
-        55.31637894977057,
-        -121.59382255316203,
-        58.02710958278447
+        -127.738432,
+        55.316379,
+        -121.593823,
+        58.02711
       ],
       "featureCount": 14,
-      "rawBytes": 81692,
-      "gzipBytes": 31375
+      "rawBytes": 50441,
+      "gzipBytes": 14922
     },
     {
       "id": "r3-c4",
       "path": "chunks/medium/bc-da-r3-c4.geojson",
       "bbox": [
-        -123.01821277117206,
-        55.29206779829842,
-        -120.00000818012549,
-        58.00141843954263
+        -123.018213,
+        55.292068,
+        -120.000008,
+        58.001418
       ],
       "featureCount": 112,
-      "rawBytes": 335012,
-      "gzipBytes": 93256
+      "rawBytes": 222372,
+      "gzipBytes": 43100
     },
     {
       "id": "r4-c1",
       "path": "chunks/medium/bc-da-r4-c1.geojson",
       "bbox": [
-        -139.0522229418129,
-        55.9975632095031,
-        -124.44070374302052,
-        60.0000630741635
+        -139.052223,
+        55.997563,
+        -124.440704,
+        60.000044
       ],
       "featureCount": 9,
-      "rawBytes": 71837,
-      "gzipBytes": 28031
+      "rawBytes": 45031,
+      "gzipBytes": 14139
     },
     {
       "id": "r4-c2",
       "path": "chunks/medium/bc-da-r4-c2.geojson",
       "bbox": [
-        -131.00998188107434,
-        57.83164924721545,
-        -128.48121028474404,
-        59.93976689084565
+        -131.009982,
+        57.831649,
+        -128.481119,
+        59.939767
       ],
       "featureCount": 7,
-      "rawBytes": 10035,
-      "gzipBytes": 3043
+      "rawBytes": 7871,
+      "gzipBytes": 1850
     },
     {
       "id": "r4-c3",
       "path": "chunks/medium/bc-da-r4-c3.geojson",
       "bbox": [
-        -127.8106066137704,
-        57.99931408238232,
-        -122.32939957704065,
-        60.00003659219355
+        -127.810607,
+        57.999314,
+        -122.3294,
+        60.000027
       ],
       "featureCount": 12,
-      "rawBytes": 40200,
-      "gzipBytes": 14124
+      "rawBytes": 27324,
+      "gzipBytes": 7221
     },
     {
       "id": "r4-c4",
       "path": "chunks/medium/bc-da-r4-c4.geojson",
       "bbox": [
-        -124.00932416706881,
-        57.9975717447029,
-        -120.00001918069509,
-        60.00006756592265
+        -124.009324,
+        57.997572,
+        -120.000019,
+        60.000006
       ],
       "featureCount": 3,
-      "rawBytes": 18429,
-      "gzipBytes": 7427
+      "rawBytes": 11916,
+      "gzipBytes": 3740
     }
   ],
   "levels": [
@@ -294,285 +302,286 @@
       "id": "overview",
       "label": "Overview",
       "tolerance": 0.001,
+      "simplificationToleranceMetres": 100,
       "minZoom": 0,
       "maxZoom": 8.5,
       "features": 7848,
-      "coordinateCount": 290422,
-      "rawBytes": 16863194,
-      "gzipBytes": 4589996,
+      "coordinateCount": 198661,
+      "rawBytes": 9955352,
+      "gzipBytes": 1702699,
       "chunks": [
         {
           "id": "r0-c2",
           "path": "chunks/overview/bc-da-r0-c2.geojson",
           "bbox": [
-            -129.09523981392618,
-            49.513228840466844,
-            -125.68656990235085,
-            50.94608236553843
+            -129.095585,
+            49.513229,
+            -125.68657,
+            50.929415
           ],
-          "featureCount": 32,
-          "rawBytes": 832131,
-          "gzipBytes": 286601
+          "featureCount": 34,
+          "rawBytes": 182405,
+          "gzipBytes": 54066
         },
         {
           "id": "r0-c3",
           "path": "chunks/overview/bc-da-r0-c3.geojson",
           "bbox": [
-            -126.59271028960124,
-            48.29681409005964,
-            -122.07062623307725,
-            50.86350742191523
+            -126.581275,
+            48.308933,
+            -122.071754,
+            50.863507
           ],
           "featureCount": 5140,
-          "rawBytes": 6160289,
-          "gzipBytes": 1216064
+          "rawBytes": 4972868,
+          "gzipBytes": 616565
         },
         {
           "id": "r0-c4",
           "path": "chunks/overview/bc-da-r0-c4.geojson",
           "bbox": [
-            -122.80581265726427,
-            49.000006127648575,
-            -118.01185571090879,
-            50.86440916098597
+            -122.805813,
+            49.000007,
+            -118.011502,
+            50.864409
           ],
-          "featureCount": 1237,
-          "rawBytes": 1732749,
-          "gzipBytes": 403341
+          "featureCount": 1249,
+          "rawBytes": 1406133,
+          "gzipBytes": 213361
         },
         {
           "id": "r0-c5",
           "path": "chunks/overview/bc-da-r0-c5.geojson",
           "bbox": [
-            -118.35131028112144,
-            48.998857097707,
-            -114.0537719802721,
-            51.06606987021632
+            -118.35131,
+            48.998857,
+            -114.053772,
+            51.065941
           ],
           "featureCount": 269,
-          "rawBytes": 624874,
-          "gzipBytes": 180083
+          "rawBytes": 440673,
+          "gzipBytes": 84958
         },
         {
           "id": "r1-c1",
           "path": "chunks/overview/bc-da-r1-c1.geojson",
           "bbox": [
-            -132.59609150332454,
-            51.905279879037394,
-            -130.9352584323013,
-            53.260658595334675
+            -132.595482,
+            51.908513,
+            -130.93622,
+            53.260782
           ],
           "featureCount": 1,
-          "rawBytes": 538926,
-          "gzipBytes": 188774
+          "rawBytes": 107271,
+          "gzipBytes": 34891
         },
         {
           "id": "r1-c2",
           "path": "chunks/overview/bc-da-r1-c2.geojson",
           "bbox": [
-            -128.54182834925157,
-            50.61889748532792,
-            -125.77776404921595,
-            53.30903792636081
+            -128.539999,
+            50.662327,
+            -125.777603,
+            53.309038
           ],
-          "featureCount": 27,
-          "rawBytes": 1172950,
-          "gzipBytes": 410160
+          "featureCount": 25,
+          "rawBytes": 303053,
+          "gzipBytes": 92503
         },
         {
           "id": "r1-c3",
           "path": "chunks/overview/bc-da-r1-c3.geojson",
           "bbox": [
-            -127.74891514902018,
-            49.94825598785761,
-            -122.09053520709894,
-            53.000653514959176
+            -127.749107,
+            49.948159,
+            -122.090535,
+            53.000654
           ],
-          "featureCount": 67,
-          "rawBytes": 1005437,
-          "gzipBytes": 354798
+          "featureCount": 76,
+          "rawBytes": 357530,
+          "gzipBytes": 104355
         },
         {
           "id": "r1-c4",
           "path": "chunks/overview/bc-da-r1-c4.geojson",
           "bbox": [
-            -122.67735468555314,
-            50.22872364316955,
-            -118.19336646239154,
-            53.241662442155835
+            -122.67674,
+            50.228724,
+            -118.193366,
+            53.241662
           ],
-          "featureCount": 406,
-          "rawBytes": 823302,
-          "gzipBytes": 232885
+          "featureCount": 394,
+          "rawBytes": 588372,
+          "gzipBytes": 111053
         },
         {
           "id": "r1-c5",
           "path": "chunks/overview/bc-da-r1-c5.geojson",
           "bbox": [
-            -118.99028197592844,
-            50.405123896200614,
-            -115.49329036913504,
-            52.5000202567733
+            -118.990282,
+            50.405124,
+            -115.49329,
+            52.500245
           ],
           "featureCount": 33,
-          "rawBytes": 137781,
-          "gzipBytes": 48793
+          "rawBytes": 87320,
+          "gzipBytes": 22384
         },
         {
           "id": "r2-c1",
           "path": "chunks/overview/bc-da-r2-c1.geojson",
           "bbox": [
-            -133.20191058875162,
-            53.134981994626,
-            -131.1091398156745,
-            54.660408126107576
+            -133.19955,
+            53.134969,
+            -131.641811,
+            54.258625
           ],
           "featureCount": 11,
-          "rawBytes": 319584,
-          "gzipBytes": 111862
+          "rawBytes": 81244,
+          "gzipBytes": 24894
         },
         {
           "id": "r2-c2",
           "path": "chunks/overview/bc-da-r2-c2.geojson",
           "bbox": [
-            -131.1001077093739,
-            52.25016387060913,
-            -125.92203358111021,
-            56.002957584529106
+            -131.100371,
+            52.251944,
+            -125.922034,
+            56.003184
           ],
-          "featureCount": 160,
-          "rawBytes": 2346488,
-          "gzipBytes": 798693
+          "featureCount": 161,
+          "rawBytes": 640517,
+          "gzipBytes": 176029
         },
         {
           "id": "r2-c3",
           "path": "chunks/overview/bc-da-r2-c3.geojson",
           "bbox": [
-            -127.78808506881539,
-            52.49529426348309,
-            -121.39002366639657,
-            56.00010765976782
+            -127.788085,
+            52.495217,
+            -121.390024,
+            56.000108
           ],
-          "featureCount": 285,
-          "rawBytes": 549807,
-          "gzipBytes": 151208
+          "featureCount": 277,
+          "rawBytes": 395222,
+          "gzipBytes": 72445
         },
         {
           "id": "r2-c4",
           "path": "chunks/overview/bc-da-r2-c4.geojson",
           "bbox": [
-            -122.78614648714823,
-            52.66032548336239,
-            -119.26951501032619,
-            55.81057893165609
+            -122.786136,
+            52.660325,
+            -119.269515,
+            55.810579
           ],
           "featureCount": 14,
-          "rawBytes": 121113,
-          "gzipBytes": 43315
+          "rawBytes": 73542,
+          "gzipBytes": 19090
         },
         {
           "id": "r3-c1",
           "path": "chunks/overview/bc-da-r3-c1.geojson",
           "bbox": [
-            -133.0695633448184,
-            56.400936159728026,
-            -129.00207345776158,
-            58.00055608269938
+            -133.069563,
+            56.400936,
+            -129.002073,
+            58.000556
           ],
           "featureCount": 1,
-          "rawBytes": 9052,
-          "gzipBytes": 4038
+          "rawBytes": 5556,
+          "gzipBytes": 2116
         },
         {
           "id": "r3-c2",
           "path": "chunks/overview/bc-da-r3-c2.geojson",
           "bbox": [
-            -131.0433388482588,
-            54.658446218595735,
-            -126.60961927120844,
-            57.179510377877094
+            -131.043339,
+            54.658291,
+            -126.62836,
+            57.17951
           ],
-          "featureCount": 8,
-          "rawBytes": 130896,
-          "gzipBytes": 49808
+          "featureCount": 7,
+          "rawBytes": 61564,
+          "gzipBytes": 19724
         },
         {
           "id": "r3-c3",
           "path": "chunks/overview/bc-da-r3-c3.geojson",
           "bbox": [
-            -127.73843151068472,
-            55.31637894977057,
-            -121.59382255316203,
-            58.02710958278447
+            -127.738432,
+            55.321996,
+            -121.593823,
+            58.02711
           ],
-          "featureCount": 14,
-          "rawBytes": 54474,
-          "gzipBytes": 20098
+          "featureCount": 13,
+          "rawBytes": 35011,
+          "gzipBytes": 10117
         },
         {
           "id": "r3-c4",
           "path": "chunks/overview/bc-da-r3-c4.geojson",
           "bbox": [
-            -123.01821277117206,
-            55.29206779829842,
-            -120.00001024541908,
-            58.00141843954263
+            -123.018213,
+            55.292068,
+            -120.00001,
+            58.000588
           ],
           "featureCount": 112,
-          "rawBytes": 200892,
-          "gzipBytes": 51388
+          "rawBytes": 149165,
+          "gzipBytes": 24779
         },
         {
           "id": "r4-c1",
           "path": "chunks/overview/bc-da-r4-c1.geojson",
           "bbox": [
-            -139.0522229418129,
-            55.9975632095031,
-            -124.44070374302052,
-            60.0000630741635
+            -139.052223,
+            55.997563,
+            -124.440704,
+            60.000044
           ],
           "featureCount": 9,
-          "rawBytes": 52632,
-          "gzipBytes": 20783
+          "rawBytes": 33139,
+          "gzipBytes": 10241
         },
         {
           "id": "r4-c2",
           "path": "chunks/overview/bc-da-r4-c2.geojson",
           "bbox": [
-            -131.00998188107434,
-            57.8319270667543,
-            -128.48198893594065,
-            59.93975048975205
+            -131.009807,
+            57.831927,
+            -128.481119,
+            59.939767
           ],
           "featureCount": 7,
-          "rawBytes": 7439,
-          "gzipBytes": 2071
+          "rawBytes": 6267,
+          "gzipBytes": 1382
         },
         {
           "id": "r4-c3",
           "path": "chunks/overview/bc-da-r4-c3.geojson",
           "bbox": [
-            -127.8106066137704,
-            57.99931408238232,
-            -122.32939957704065,
-            60.00003659219355
+            -127.810607,
+            57.999314,
+            -122.3294,
+            60.000027
           ],
           "featureCount": 12,
-          "rawBytes": 30470,
-          "gzipBytes": 10471
+          "rawBytes": 20785,
+          "gzipBytes": 5260
         },
         {
           "id": "r4-c4",
           "path": "chunks/overview/bc-da-r4-c4.geojson",
           "bbox": [
-            -124.00932416706881,
-            57.9975717447029,
-            -120.00001918069509,
-            60.00006756592265
+            -124.009324,
+            57.997572,
+            -120.000019,
+            60.000006
           ],
           "featureCount": 3,
-          "rawBytes": 11908,
-          "gzipBytes": 4762
+          "rawBytes": 7715,
+          "gzipBytes": 2486
         }
       ]
     },
@@ -580,285 +589,286 @@
       "id": "medium",
       "label": "Medium",
       "tolerance": 0.0002,
+      "simplificationToleranceMetres": 20,
       "minZoom": 8.5,
       "maxZoom": 24,
       "features": 7848,
-      "coordinateCount": 611750,
-      "rawBytes": 29699955,
-      "gzipBytes": 9255587,
+      "coordinateCount": 553089,
+      "rawBytes": 18428231,
+      "gzipBytes": 4112607,
       "chunks": [
         {
           "id": "r0-c2",
           "path": "chunks/medium/bc-da-r0-c2.geojson",
           "bbox": [
-            -129.09555771428847,
-            49.513228840466844,
-            -125.68656990235085,
-            50.94601546288416
+            -129.095585,
+            49.513229,
+            -125.68657,
+            50.946118
           ],
-          "featureCount": 32,
-          "rawBytes": 1568321,
-          "gzipBytes": 572177
+          "featureCount": 33,
+          "rawBytes": 766053,
+          "gzipBytes": 224115
         },
         {
           "id": "r0-c3",
           "path": "chunks/medium/bc-da-r0-c3.geojson",
           "bbox": [
-            -126.59271028960124,
-            48.29681409005964,
-            -122.07062623307725,
-            50.86350742191523
+            -126.592834,
+            48.297703,
+            -122.070626,
+            50.863507
           ],
           "featureCount": 5140,
-          "rawBytes": 8982281,
-          "gzipBytes": 2174738
+          "rawBytes": 6650947,
+          "gzipBytes": 1081541
         },
         {
           "id": "r0-c4",
           "path": "chunks/medium/bc-da-r0-c4.geojson",
           "bbox": [
-            -122.80581265726427,
-            49.000006127648575,
-            -118.01155915690609,
-            50.86440916098597
+            -122.805813,
+            49.000006,
+            -118.011502,
+            50.864409
           ],
-          "featureCount": 1236,
-          "rawBytes": 2741719,
-          "gzipBytes": 736801
+          "featureCount": 1237,
+          "rawBytes": 1946909,
+          "gzipBytes": 358342
         },
         {
           "id": "r0-c5",
           "path": "chunks/medium/bc-da-r0-c5.geojson",
           "bbox": [
-            -118.35131028112144,
-            48.998857097707,
-            -114.0537719802721,
-            51.06606987021632
+            -118.35131,
+            48.998857,
+            -114.053772,
+            51.06607
           ],
           "featureCount": 269,
-          "rawBytes": 1150216,
-          "gzipBytes": 352399
+          "rawBytes": 738115,
+          "gzipBytes": 162857
         },
         {
           "id": "r1-c1",
           "path": "chunks/medium/bc-da-r1-c1.geojson",
           "bbox": [
-            -132.5960411013338,
-            51.90529129494191,
-            -130.9352584323013,
-            53.260782489577366
+            -132.596041,
+            51.905365,
+            -130.93622,
+            53.260792
           ],
           "featureCount": 1,
-          "rawBytes": 1118319,
-          "gzipBytes": 412847
+          "rawBytes": 539746,
+          "gzipBytes": 160829
         },
         {
           "id": "r1-c2",
           "path": "chunks/medium/bc-da-r1-c2.geojson",
           "bbox": [
-            -128.54182834925157,
-            50.61868239377232,
-            -125.77776404921595,
-            53.30903792636081
+            -128.541496,
+            50.618705,
+            -125.777603,
+            53.309038
           ],
-          "featureCount": 27,
-          "rawBytes": 2667980,
-          "gzipBytes": 986069
+          "featureCount": 26,
+          "rawBytes": 1351883,
+          "gzipBytes": 397724
         },
         {
           "id": "r1-c3",
           "path": "chunks/medium/bc-da-r1-c3.geojson",
           "bbox": [
-            -127.74904472773991,
-            49.948151986408085,
-            -122.09053520709894,
-            53.00075661978387
+            -127.749107,
+            49.948159,
+            -122.090535,
+            53.000735
           ],
           "featureCount": 67,
-          "rawBytes": 2198350,
-          "gzipBytes": 818615
+          "rawBytes": 1169154,
+          "gzipBytes": 345347
         },
         {
           "id": "r1-c4",
           "path": "chunks/medium/bc-da-r1-c4.geojson",
           "bbox": [
-            -122.67744069646474,
-            50.22872364316955,
-            -118.19336646239154,
-            53.241662442155835
+            -122.677441,
+            50.228724,
+            -118.193366,
+            53.241662
           ],
-          "featureCount": 407,
-          "rawBytes": 1468407,
-          "gzipBytes": 445511
+          "featureCount": 406,
+          "rawBytes": 960018,
+          "gzipBytes": 210863
         },
         {
           "id": "r1-c5",
           "path": "chunks/medium/bc-da-r1-c5.geojson",
           "bbox": [
-            -118.99028197592844,
-            50.405123896200614,
-            -115.49318057293888,
-            52.500244863036414
+            -118.990282,
+            50.405124,
+            -115.49329,
+            52.500245
           ],
           "featureCount": 33,
-          "rawBytes": 253915,
-          "gzipBytes": 91700
+          "rawBytes": 156485,
+          "gzipBytes": 42734
         },
         {
           "id": "r2-c1",
           "path": "chunks/medium/bc-da-r2-c1.geojson",
           "bbox": [
-            -133.20209589310127,
-            53.13496919283544,
-            -131.1091398156745,
-            54.660408126107576
+            -133.202069,
+            53.134969,
+            -131.10914,
+            54.660408
           ],
           "featureCount": 11,
-          "rawBytes": 681879,
-          "gzipBytes": 251872
+          "rawBytes": 341653,
+          "gzipBytes": 101128
         },
         {
           "id": "r2-c2",
           "path": "chunks/medium/bc-da-r2-c2.geojson",
           "bbox": [
-            -131.1003029070591,
-            52.25016387060913,
-            -125.92203358111021,
-            56.003184231610255
+            -131.100371,
+            52.250164,
+            -125.922034,
+            56.003184
           ],
           "featureCount": 160,
-          "rawBytes": 4823491,
-          "gzipBytes": 1744885
+          "rawBytes": 2509698,
+          "gzipBytes": 716626
         },
         {
           "id": "r2-c3",
           "path": "chunks/medium/bc-da-r2-c3.geojson",
           "bbox": [
-            -127.78808506881539,
-            52.49521736470193,
-            -121.39002366639657,
-            56.00010765976782
+            -127.788085,
+            52.495217,
+            -121.390024,
+            56.000108
           ],
           "featureCount": 285,
-          "rawBytes": 899918,
-          "gzipBytes": 270110
+          "rawBytes": 601684,
+          "gzipBytes": 128837
         },
         {
           "id": "r2-c4",
           "path": "chunks/medium/bc-da-r2-c4.geojson",
           "bbox": [
-            -122.78614648714823,
-            52.66032548336239,
-            -119.26951501032619,
-            55.81057893165609
+            -122.786146,
+            52.660325,
+            -119.269515,
+            55.810579
           ],
           "featureCount": 14,
-          "rawBytes": 231941,
-          "gzipBytes": 83677
+          "rawBytes": 137991,
+          "gzipBytes": 37254
         },
         {
           "id": "r3-c1",
           "path": "chunks/medium/bc-da-r3-c1.geojson",
           "bbox": [
-            -133.0695633448184,
-            56.400936159728026,
-            -129.00207345776158,
-            58.00055608269938
+            -133.069563,
+            56.400936,
+            -129.002073,
+            58.000556
           ],
           "featureCount": 1,
-          "rawBytes": 11203,
-          "gzipBytes": 4964
+          "rawBytes": 7083,
+          "gzipBytes": 2656
         },
         {
           "id": "r3-c2",
           "path": "chunks/medium/bc-da-r3-c2.geojson",
           "bbox": [
-            -131.0433388482588,
-            54.658291459036626,
-            -126.60961927120844,
-            57.179510377877094
+            -131.043339,
+            54.658291,
+            -126.609619,
+            57.17951
           ],
           "featureCount": 8,
-          "rawBytes": 344810,
-          "gzipBytes": 131966
+          "rawBytes": 185857,
+          "gzipBytes": 56782
         },
         {
           "id": "r3-c3",
           "path": "chunks/medium/bc-da-r3-c3.geojson",
           "bbox": [
-            -127.73843151068472,
-            55.31637894977057,
-            -121.59382255316203,
-            58.02710958278447
+            -127.738432,
+            55.316379,
+            -121.593823,
+            58.02711
           ],
           "featureCount": 14,
-          "rawBytes": 81692,
-          "gzipBytes": 31375
+          "rawBytes": 50441,
+          "gzipBytes": 14922
         },
         {
           "id": "r3-c4",
           "path": "chunks/medium/bc-da-r3-c4.geojson",
           "bbox": [
-            -123.01821277117206,
-            55.29206779829842,
-            -120.00000818012549,
-            58.00141843954263
+            -123.018213,
+            55.292068,
+            -120.000008,
+            58.001418
           ],
           "featureCount": 112,
-          "rawBytes": 335012,
-          "gzipBytes": 93256
+          "rawBytes": 222372,
+          "gzipBytes": 43100
         },
         {
           "id": "r4-c1",
           "path": "chunks/medium/bc-da-r4-c1.geojson",
           "bbox": [
-            -139.0522229418129,
-            55.9975632095031,
-            -124.44070374302052,
-            60.0000630741635
+            -139.052223,
+            55.997563,
+            -124.440704,
+            60.000044
           ],
           "featureCount": 9,
-          "rawBytes": 71837,
-          "gzipBytes": 28031
+          "rawBytes": 45031,
+          "gzipBytes": 14139
         },
         {
           "id": "r4-c2",
           "path": "chunks/medium/bc-da-r4-c2.geojson",
           "bbox": [
-            -131.00998188107434,
-            57.83164924721545,
-            -128.48121028474404,
-            59.93976689084565
+            -131.009982,
+            57.831649,
+            -128.481119,
+            59.939767
           ],
           "featureCount": 7,
-          "rawBytes": 10035,
-          "gzipBytes": 3043
+          "rawBytes": 7871,
+          "gzipBytes": 1850
         },
         {
           "id": "r4-c3",
           "path": "chunks/medium/bc-da-r4-c3.geojson",
           "bbox": [
-            -127.8106066137704,
-            57.99931408238232,
-            -122.32939957704065,
-            60.00003659219355
+            -127.810607,
+            57.999314,
+            -122.3294,
+            60.000027
           ],
           "featureCount": 12,
-          "rawBytes": 40200,
-          "gzipBytes": 14124
+          "rawBytes": 27324,
+          "gzipBytes": 7221
         },
         {
           "id": "r4-c4",
           "path": "chunks/medium/bc-da-r4-c4.geojson",
           "bbox": [
-            -124.00932416706881,
-            57.9975717447029,
-            -120.00001918069509,
-            60.00006756592265
+            -124.009324,
+            57.997572,
+            -120.000019,
+            60.000006
           ],
           "featureCount": 3,
-          "rawBytes": 18429,
-          "gzipBytes": 7427
+          "rawBytes": 11916,
+          "gzipBytes": 3740
         }
       ]
     }
@@ -869,24 +879,27 @@
       "label": "Census Division",
       "path": "parents/cd.geojson",
       "features": 29,
-      "rawBytes": 8358718,
-      "gzipBytes": 2974019
+      "simplificationToleranceMetres": 50,
+      "rawBytes": 3632313,
+      "gzipBytes": 1133232
     },
     {
       "level": "csd",
       "label": "Census Subdivision",
       "path": "parents/csd.geojson",
       "features": 751,
-      "rawBytes": 11960074,
-      "gzipBytes": 4318141
+      "simplificationToleranceMetres": 50,
+      "rawBytes": 5064890,
+      "gzipBytes": 1491916
     },
     {
       "level": "ct",
       "label": "Census Tract",
       "path": "parents/ct.geojson",
       "features": 844,
-      "rawBytes": 1562126,
-      "gzipBytes": 460007
+      "simplificationToleranceMetres": 20,
+      "rawBytes": 1017420,
+      "gzipBytes": 212765
     }
   ]
 }

@@ -13,27 +13,26 @@
 // Pass --if-missing to skip the rebuild when the output is newer than every
 // input; pass nothing to force a rebuild.
 
-import { execFileSync } from 'node:child_process'
 import fs from 'node:fs/promises'
-import { mkdtempSync, rmSync } from 'node:fs'
-import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { gzipSync } from 'node:zlib'
+import { gunzipSync, gzipSync } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../lib/mapshaper-topology.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const sourceDir = path.join(__dirname, 'output', 'canada-csd')
 const manifestPath = path.join(sourceDir, 'manifest.json')
 const outputPath = path.join(__dirname, 'output', 'canada-csd-simplified.geojson')
+const sharedTopologyPath = fileURLToPath(new URL('../lib/mapshaper-topology.mjs', import.meta.url))
 
-const MAPSHAPER_VERSION = '0.6.113'
-// Tuning knobs: lower the keep percentage or raise the island floor for a
-// smaller file, raise/lower for more fidelity. The island floor is what
-// removes the thousands of tiny coastal islands that dominate the full
-// file's vertex count.
-const SIMPLIFY_KEEP = '10%'
-const MIN_ISLAND_AREA = '4km2'
-const COORDINATE_PRECISION = 0.001
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3978'
+const OUTPUT_CRS = 'EPSG:4326'
+const SIMPLIFICATION_TOLERANCE_METRES = 200
+const COORDINATE_PRECISION = 7
 
 const KEEP_PROPERTIES = [
   'id',
@@ -51,49 +50,6 @@ const KEEP_PROPERTIES = [
   'north_south',
   'north_south_code',
 ]
-
-// Planar shoelace area in squared degrees — only used to rank rings by size,
-// so the missing latitude correction is irrelevant.
-function ringRankingArea(ring) {
-  let sum = 0
-  for (let i = 0; i < ring.length - 1; i += 1) {
-    sum += ring[i][0] * ring[i + 1][1] - ring[i + 1][0] * ring[i][1]
-  }
-  return Math.abs(sum / 2)
-}
-
-function roundRing(ring) {
-  const rounded = []
-  for (const [lng, lat] of ring) {
-    const point = [Number(lng.toFixed(3)), Number(lat.toFixed(3))]
-    const previous = rounded[rounded.length - 1]
-    if (previous && previous[0] === point[0] && previous[1] === point[1]) continue
-    rounded.push(point)
-  }
-  const first = rounded[0]
-  const last = rounded[rounded.length - 1]
-  if (first && (first[0] !== last[0] || first[1] !== last[1])) rounded.push([first[0], first[1]])
-  return rounded.length >= 4 ? rounded : null
-}
-
-// mapshaper's -clean / -filter-islands can erase micro CSDs (tiny island
-// communities) entirely; give those a minimal footprint from their largest
-// source ring so every CSD stays searchable and selectable.
-function fallbackFeature(sourceFeature) {
-  const polygons = sourceFeature.geometry.type === 'Polygon'
-    ? [sourceFeature.geometry.coordinates]
-    : sourceFeature.geometry.coordinates
-  const largestOuter = polygons
-    .map((rings) => rings[0])
-    .sort((a, b) => ringRankingArea(b) - ringRankingArea(a))[0]
-  if (!largestOuter) return null
-  const outer = roundRing(largestOuter) ?? largestOuter
-  return {
-    type: 'Feature',
-    geometry: { type: 'Polygon', coordinates: [outer] },
-    properties: sourceFeature.properties,
-  }
-}
 
 function countVertices(features) {
   let count = 0
@@ -123,6 +79,7 @@ async function main() {
   const inputPaths = [
     manifestPath,
     fileURLToPath(import.meta.url),
+    sharedTopologyPath,
     ...manifest.chunks.map((chunk) => path.join(sourceDir, chunk.path)),
   ]
 
@@ -133,57 +90,36 @@ async function main() {
 
   const sourceFeatures = []
   for (const chunk of manifest.chunks) {
-    const collection = JSON.parse(await fs.readFile(path.join(sourceDir, chunk.path), 'utf8'))
+    const chunkPath = path.join(sourceDir, chunk.path)
+    const buffer = await fs.readFile(chunkPath)
+    const collection = JSON.parse(
+      chunk.path.endsWith('.gz') ? gunzipSync(buffer).toString('utf8') : buffer.toString('utf8'),
+    )
     sourceFeatures.push(...collection.features)
   }
   const sourceVertices = countVertices(sourceFeatures)
 
-  const tempDir = mkdtempSync(path.join(tmpdir(), 'canada-csd-simplified-'))
-  const tempInputPath = path.join(tempDir, 'canada-csd-full.geojson')
-  const tempOutputPath = path.join(tempDir, 'canada-csd-simplified.geojson')
+  const simplified = simplifySharedPolygonTopology({ type: 'FeatureCollection', features: sourceFeatures }, {
+    toleranceMetres: SIMPLIFICATION_TOLERANCE_METRES,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    tempPrefix: 'canada-csd-simplified-',
+  })
+  const simplifiedFeatures = simplified.features
+    .filter((feature) => feature.geometry && (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon'))
+    .filter((feature) => feature.properties?.CSDUID)
 
-  try {
-    await fs.writeFile(tempInputPath, JSON.stringify({ type: 'FeatureCollection', features: sourceFeatures }))
-    execFileSync('npx', [
-      '--yes',
-      '--package',
-      `mapshaper@${MAPSHAPER_VERSION}`,
-      '--',
-      'mapshaper',
-      tempInputPath,
-      '-clean',
-      '-filter-islands',
-      `min-area=${MIN_ISLAND_AREA}`,
-      '-simplify',
-      SIMPLIFY_KEEP,
-      'keep-shapes',
-      '-clean',
-      '-o',
-      'force',
-      'format=geojson',
-      `precision=${COORDINATE_PRECISION}`,
-      tempOutputPath,
-    ], {
-      stdio: 'inherit',
-      maxBuffer: 1024 * 1024 * 64,
-    })
+  const outputUids = new Set(simplifiedFeatures.map((feature) => String(feature.properties.CSDUID)))
+  const missingUids = sourceFeatures
+    .map((feature) => String(feature.properties.CSDUID))
+    .filter((uid) => !outputUids.has(uid))
+  if (missingUids.length > 0 || simplifiedFeatures.length !== sourceFeatures.length) {
+    throw new Error(`Shared-topology output lost ${missingUids.length} CSDs: ${missingUids.slice(0, 20).join(', ')}`)
+  }
 
-    const simplified = JSON.parse(await fs.readFile(tempOutputPath, 'utf8'))
-    if (simplified.type !== 'FeatureCollection' || !Array.isArray(simplified.features)) {
-      throw new Error('Mapshaper output was not a GeoJSON FeatureCollection')
-    }
-
-    const simplifiedFeatures = simplified.features
-      .filter((feature) => feature.geometry && (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon'))
-      .filter((feature) => feature.properties?.CSDUID)
-
-    const simplifiedUids = new Set(simplifiedFeatures.map((feature) => String(feature.properties.CSDUID)))
-    const recoveredFeatures = sourceFeatures
-      .filter((feature) => !simplifiedUids.has(String(feature.properties.CSDUID)))
-      .map((feature) => fallbackFeature(feature))
-      .filter((feature) => feature !== null)
-
-    const features = [...simplifiedFeatures, ...recoveredFeatures]
+  const features = simplifiedFeatures
       .map((feature) => {
         const properties = {}
         for (const key of KEEP_PROPERTIES) {
@@ -193,22 +129,31 @@ async function main() {
       })
       .sort((a, b) => String(a.properties.CSDUID).localeCompare(String(b.properties.CSDUID)))
 
-    const text = JSON.stringify({ type: 'FeatureCollection', features })
-    await fs.writeFile(outputPath, text)
+  const text = JSON.stringify({
+    type: 'FeatureCollection',
+    metadata: {
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      simplification: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+      simplificationToleranceMetres: SIMPLIFICATION_TOLERANCE_METRES,
+      topologyPreserving: true,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
+    },
+    features,
+  })
+  await fs.writeFile(outputPath, text)
 
-    const outputVertices = countVertices(features)
-    const rawMiB = (Buffer.byteLength(text) / 1024 / 1024).toFixed(1)
-    const gzipMiB = (gzipSync(text, { level: 9 }).byteLength / 1024 / 1024).toFixed(1)
-    console.log(
-      `[canada-csd-simplified] mapshaper@${MAPSHAPER_VERSION}: ` +
-      `${features.length.toLocaleString()} / ${sourceFeatures.length.toLocaleString()} features ` +
-      `(${recoveredFeatures.length.toLocaleString()} recovered via fallback), ` +
+  const outputVertices = countVertices(features)
+  const rawMiB = (Buffer.byteLength(text) / 1024 / 1024).toFixed(1)
+  const gzipMiB = (gzipSync(text, { level: 9 }).byteLength / 1024 / 1024).toFixed(1)
+  console.log(
+    `[canada-csd-simplified] mapshaper@${MAPSHAPER_VERSION}: ` +
+      `${features.length.toLocaleString()} / ${sourceFeatures.length.toLocaleString()} features, ` +
       `${sourceVertices.toLocaleString()} -> ${outputVertices.toLocaleString()} vertices, ` +
       `${rawMiB} MiB raw (${gzipMiB} MiB gzip) -> ${path.relative(process.cwd(), outputPath)}`,
-    )
-  } finally {
-    rmSync(tempDir, { recursive: true, force: true })
-  }
+  )
 }
 
 main().catch((error) => {

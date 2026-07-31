@@ -1,12 +1,15 @@
 {
-  "generatedAt": "2026-07-30T05:37:30.884Z",
   "name": "2021 Census Subdivisions",
   "source": {
     "name": "Statistics Canada 2021 Cartographic Boundary File - Census Subdivisions",
     "service": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/9",
     "boundaryQuery": {
-      "maxAllowableOffset": 0.002,
-      "geometryPrecision": 5
+      "topologySimplification": null,
+      "geometryPrecision": 7,
+      "exceptionalFallback": {
+        "reason": "ArcGIS response limit for one large Nunavut geometry",
+        "maxAllowableOffset": 0.0002
+      }
     }
   },
   "classification": {
@@ -17,217 +20,216 @@
   "features": 5161,
   "north": 1109,
   "south": 4052,
-  "rawBytes": 28288487,
-  "gzipBytes": 7689338,
-  "completeArchive": "canada-csd.geojson.gz",
+  "rawBytes": 429810261,
+  "gzipBytes": 127432325,
   "chunks": [
     {
       "id": "10",
       "name": "Newfoundland and Labrador",
-      "path": "provinces/10.geojson",
+      "path": "provinces/10.geojson.gz",
+      "bbox": [
+        -67.8216856,
+        46.6109937,
+        -52.6193607,
+        60.3777555
+      ],
       "features": 372,
       "north": 29,
       "south": 343,
-      "rawBytes": 2761818,
-      "gzipBytes": 757255,
-      "bbox": [
-        -67.82169,
-        46.61099,
-        -52.61936,
-        60.37773
-      ]
+      "rawBytes": 33057033,
+      "gzipBytes": 10298243
     },
     {
       "id": "11",
       "name": "Prince Edward Island",
-      "path": "provinces/11.geojson",
+      "path": "provinces/11.geojson.gz",
+      "bbox": [
+        -64.4135736,
+        45.948126,
+        -61.9707522,
+        47.0589835
+      ],
       "features": 98,
       "north": 0,
       "south": 98,
-      "rawBytes": 145297,
-      "gzipBytes": 33459,
-      "bbox": [
-        -64.41357,
-        45.94814,
-        -61.97118,
-        47.05886
-      ]
+      "rawBytes": 1478359,
+      "gzipBytes": 460059
     },
     {
       "id": "12",
       "name": "Nova Scotia",
-      "path": "provinces/12.geojson",
+      "path": "provinces/12.geojson.gz",
+      "bbox": [
+        -66.3954114,
+        43.3877565,
+        -59.6611626,
+        47.2277587
+      ],
       "features": 95,
       "north": 0,
       "south": 95,
-      "rawBytes": 575633,
-      "gzipBytes": 155084,
-      "bbox": [
-        -66.39541,
-        43.38779,
-        -59.66131,
-        47.22753
-      ]
+      "rawBytes": 8652447,
+      "gzipBytes": 2677150
     },
     {
       "id": "13",
       "name": "New Brunswick",
-      "path": "provinces/13.geojson",
+      "path": "provinces/13.geojson.gz",
+      "bbox": [
+        -69.0530146,
+        44.567673,
+        -63.7706386,
+        48.0725573
+      ],
       "features": 266,
       "north": 0,
       "south": 266,
-      "rawBytes": 426966,
-      "gzipBytes": 99258,
-      "bbox": [
-        -69.05288,
-        44.56767,
-        -63.77064,
-        48.07256
-      ]
+      "rawBytes": 5600648,
+      "gzipBytes": 1689238
     },
     {
       "id": "24",
       "name": "Quebec",
-      "path": "provinces/24.geojson",
+      "path": "provinces/24.geojson.gz",
+      "bbox": [
+        -79.7629068,
+        44.9911522,
+        -57.1054825,
+        62.5824768
+      ],
       "features": 1282,
       "north": 166,
       "south": 1116,
-      "rawBytes": 3785446,
-      "gzipBytes": 965737,
-      "bbox": [
-        -79.76291,
-        44.99115,
-        -57.10586,
-        62.58186
-      ]
+      "rawBytes": 74674835,
+      "gzipBytes": 21731205
     },
     {
       "id": "35",
       "name": "Ontario",
-      "path": "provinces/35.geojson",
+      "path": "provinces/35.geojson.gz",
+      "bbox": [
+        -95.1557124,
+        41.6813284,
+        -74.3434735,
+        56.8617144
+      ],
       "features": 577,
       "north": 280,
       "south": 297,
-      "rawBytes": 4345977,
-      "gzipBytes": 1104486,
-      "bbox": [
-        -95.15525,
-        41.68142,
-        -74.34347,
-        56.86153
-      ]
+      "rawBytes": 108514015,
+      "gzipBytes": 31017977
     },
     {
       "id": "46",
       "name": "Manitoba",
-      "path": "provinces/46.geojson",
+      "path": "provinces/46.geojson.gz",
+      "bbox": [
+        -102.0076221,
+        48.998872,
+        -88.9795857,
+        60.0000709
+      ],
       "features": 239,
       "north": 85,
       "south": 154,
-      "rawBytes": 446500,
-      "gzipBytes": 108639,
-      "bbox": [
-        -102.00762,
-        48.99887,
-        -88.97959,
-        60.00001
-      ]
+      "rawBytes": 11406788,
+      "gzipBytes": 3388050
     },
     {
       "id": "47",
       "name": "Saskatchewan",
-      "path": "provinces/47.geojson",
+      "path": "provinces/47.geojson.gz",
+      "bbox": [
+        -110.010406,
+        48.9989334,
+        -101.3618855,
+        60.0000702
+      ],
       "features": 951,
       "north": 60,
       "south": 891,
-      "rawBytes": 918456,
-      "gzipBytes": 166639,
-      "bbox": [
-        -110.01041,
-        48.99897,
-        -101.362,
-        60.00007
-      ]
+      "rawBytes": 8755446,
+      "gzipBytes": 2320760
     },
     {
       "id": "48",
       "name": "Alberta",
-      "path": "provinces/48.geojson",
+      "path": "provinces/48.geojson.gz",
+      "bbox": [
+        -120.0027155,
+        48.9967468,
+        -109.9996574,
+        60.0000804
+      ],
       "features": 423,
       "north": 157,
       "south": 266,
-      "rawBytes": 664731,
-      "gzipBytes": 148801,
-      "bbox": [
-        -120.00272,
-        48.99716,
-        -110.00002,
-        60.00007
-      ]
+      "rawBytes": 8512953,
+      "gzipBytes": 2495144
     },
     {
       "id": "59",
       "name": "British Columbia",
-      "path": "provinces/59.geojson",
+      "path": "provinces/59.geojson.gz",
+      "bbox": [
+        -139.0522229,
+        48.2968141,
+        -114.053772,
+        60.0000679
+      ],
       "features": 751,
       "north": 225,
       "south": 526,
-      "rawBytes": 4390974,
-      "gzipBytes": 1116092,
-      "bbox": [
-        -139.05222,
-        48.29686,
-        -114.05377,
-        60.00006
-      ]
+      "rawBytes": 84124096,
+      "gzipBytes": 24164001
     },
     {
       "id": "60",
       "name": "Yukon",
-      "path": "provinces/60.geojson",
+      "path": "provinces/60.geojson.gz",
+      "bbox": [
+        -141.0181045,
+        60.0000035,
+        -123.7893448,
+        69.6467097
+      ],
       "features": 35,
       "north": 35,
       "south": 0,
-      "rawBytes": 81224,
-      "gzipBytes": 23088,
-      "bbox": [
-        -141.0181,
-        60.00002,
-        -123.78934,
-        69.64671
-      ]
+      "rawBytes": 765834,
+      "gzipBytes": 231315
     },
     {
       "id": "61",
       "name": "Northwest Territories",
-      "path": "provinces/61.geojson",
+      "path": "provinces/61.geojson.gz",
+      "bbox": [
+        -136.4687197,
+        60.0000058,
+        -102.0000143,
+        78.8046397
+      ],
       "features": 41,
       "north": 41,
       "south": 0,
-      "rawBytes": 781193,
-      "gzipBytes": 240530,
-      "bbox": [
-        -136.46872,
-        60.00001,
-        -102.00001,
-        78.80459
-      ]
+      "rawBytes": 12502406,
+      "gzipBytes": 3898681
     },
     {
       "id": "62",
       "name": "Nunavut",
-      "path": "provinces/62.geojson",
+      "path": "provinces/62.geojson.gz",
+      "bbox": [
+        -120.7247982,
+        51.2530835,
+        -61.0913178,
+        83.1370981
+      ],
       "features": 31,
       "north": 31,
       "south": 0,
-      "rawBytes": 8964764,
-      "gzipBytes": 2773162,
-      "bbox": [
-        -120.7248,
-        51.25308,
-        -61.09132,
-        83.13656
-      ]
+      "rawBytes": 71765401,
+      "gzipBytes": 23060502
     }
   ]
 }

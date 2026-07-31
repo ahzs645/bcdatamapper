@@ -14,15 +14,26 @@ npm run census:canada-csd
 Outputs:
 
 - `datascrapers/census/output/canada-csd/manifest.json`
-- `datascrapers/census/output/canada-csd/provinces/*.geojson`
-- `datascrapers/census/output/canada-csd/canada-csd.geojson.gz`
+- `datascrapers/census/output/canada-csd/provinces/*.geojson.gz`
 - `datascrapers/census/output/canada-csd/north-south.json`
 
 Every boundary preserves its seven-digit `CSDUID` and adds `CDUID` and `PRUID`.
-The province/territory GeoJSON files are the deployable map chunks, and the
-deterministic gzip file is the complete national geometry snapshot. The
-North/South dataset contains no geometry; PGMaps joins its `byCsdUid` values to
-the shared CSD features at load time.
+The deterministic compressed province/territory GeoJSON files are both the
+source snapshots and deployable map chunks. The North/South dataset contains
+no geometry; PGMaps joins its `byCsdUid` values to the shared CSD features at
+load time.
+
+Build the app-facing national CSD layer with:
+
+```bash
+npm run census:canada-csd-simplified
+```
+
+This imports all 13 province/territory snapshots together and simplifies their
+shared polygon topology in metres with the pinned Mapshaper utility in
+`datascrapers/lib/mapshaper-topology.mjs`. Census Subdivision and North/South
+CSD views both consume this one geometry file, so classification never changes
+the borders and neighbouring polygons cannot diverge during simplification.
 
 ## BC DB to CHSA crosswalk
 

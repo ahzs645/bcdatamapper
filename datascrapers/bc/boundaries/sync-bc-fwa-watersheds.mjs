@@ -2,12 +2,19 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import bboxClip from '@turf/bbox-clip'
-import simplify from '@turf/simplify'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../../lib/mapshaper-topology.mjs'
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
 const OUTPUT_DIR = path.join(SCRIPT_DIR, 'output', 'BCFWA')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
 const PG_REGION_BBOX = [-125, 52.5, -120, 55.5]
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 const LAYERS = [
   {
@@ -17,7 +24,7 @@ const LAYERS = [
     codeField: 'MAJOR_WATERSHED_CODE',
     nameField: 'MAJOR_WATERSHED_SYSTEM',
     keepFields: ['OBJECTID', 'MAJOR_WATERSHED_CODE', 'MAJOR_WATERSHED_SYSTEM', 'FEATURE_AREA_SQM'],
-    tolerance: 0.006,
+    toleranceMetres: 500,
   },
   {
     id: 'watershed_groups',
@@ -26,7 +33,7 @@ const LAYERS = [
     codeField: 'WATERSHED_GROUP_CODE',
     nameField: 'WATERSHED_GROUP_NAME',
     keepFields: ['OBJECTID', 'WATERSHED_GROUP_ID', 'WATERSHED_GROUP_CODE', 'WATERSHED_GROUP_NAME', 'AREA_HA'],
-    tolerance: 0.004,
+    toleranceMetres: 350,
   },
   {
     id: 'assessment_watersheds',
@@ -46,7 +53,7 @@ const LAYERS = [
       'LOCAL_WATERSHED_CODE',
       'AREA_HA',
     ],
-    tolerance: 0.002,
+    toleranceMetres: 150,
   },
 ]
 
@@ -142,20 +149,11 @@ function normalizeFeature(feature, layer) {
   if (!clippedGeometry) return null
   clipped.geometry = clippedGeometry
 
-  const simplified = simplify(clipped, {
-    tolerance: layer.tolerance,
-    highQuality: false,
-    mutate: true,
-  })
-
-  const simplifiedGeometry = cleanPolygonGeometry(simplified.geometry)
-  if (!simplifiedGeometry) return null
-
   return {
     type: 'Feature',
     id: feature.id,
     properties: pickProperties(feature.properties ?? {}, layer.keepFields, layer.codeField, layer.nameField, layer.sourceLayer),
-    geometry: simplifiedGeometry,
+    geometry: clippedGeometry,
   }
 }
 
@@ -166,9 +164,21 @@ async function syncLayer(layer) {
   }
 
   const source = await response.json()
-  const features = source.features
+  const normalizedFeatures = source.features
     .map((feature) => normalizeFeature(feature, layer))
     .filter((feature) => feature && feature.properties.boundaryCode)
+  const simplified = simplifySharedPolygonTopology({
+    type: 'FeatureCollection',
+    features: normalizedFeatures,
+  }, {
+    toleranceMetres: layer.toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    tempPrefix: `bc-fwa-${layer.id}-`,
+  })
+  const features = simplified.features
 
   const collection = {
     type: 'FeatureCollection',
@@ -178,7 +188,14 @@ async function syncLayer(layer) {
       sourceLayer: layer.sourceLayer,
       bbox: PG_REGION_BBOX,
       clippedTo: 'Prince George regional viewport',
-      generatedAt: new Date().toISOString(),
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      simplification: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+      simplificationToleranceMetres: layer.toleranceMetres,
+      topologyPreserving: true,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
     },
     features,
   }

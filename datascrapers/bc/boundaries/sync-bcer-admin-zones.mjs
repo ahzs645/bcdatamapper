@@ -1,9 +1,11 @@
-import { execFileSync } from 'node:child_process'
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../../lib/mapshaper-topology.mjs'
 
 const ITEM_URL = 'https://data-bc-er.opendata.arcgis.com/datasets/032cac78a0264d23b7461ba2f8e1a8d7_1'
 const SOURCE_URL = 'https://geoweb-ags.bc-er.ca/arcgis/rest/services/ADMIN/ADMINISTRATIVE_ZONES_PY/MapServer/1/query'
@@ -13,7 +15,6 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const VENDOR_ROOT = join(SCRIPT_DIR, '..', '..', '..')
 const SOURCE_CRS = 'EPSG:3005'
 const OUTPUT_CRS = 'EPSG:4326'
-const MAPSHAPER_VERSION = '0.6.113'
 const DEFAULT_TOLERANCE_METRES = 50
 const COORDINATE_PRECISION = 6
 
@@ -121,47 +122,19 @@ async function fetchAdminZones() {
 }
 
 function simplifySharedTopology(raw, toleranceMetres) {
-  const tempDir = mkdtempSync(join(tmpdir(), 'bcer-admin-zones-'))
-  const inputPath = join(tempDir, 'admin-zones-epsg3005.geojson')
-  const outputPath = join(tempDir, 'admin-zones-wgs84.geojson')
-
-  try {
-    writeFileSync(inputPath, JSON.stringify(raw))
-    execFileSync('npx', [
-      '--yes',
-      `mapshaper@${MAPSHAPER_VERSION}`,
-      inputPath,
-      '-clean',
-      '-simplify',
-      'dp',
-      `interval=${toleranceMetres}`,
-      'keep-shapes',
-      '-clean',
-      '-proj',
-      'wgs84',
-      `init=${SOURCE_CRS}`,
-      '-o',
-      'force',
-      'format=geojson',
-      `precision=${10 ** -COORDINATE_PRECISION}`,
-      outputPath,
-    ], {
-      stdio: 'inherit',
-      maxBuffer: 1024 * 1024 * 20,
-    })
-
-    const simplified = JSON.parse(readFileSync(outputPath, 'utf8'))
-    if (simplified.type !== 'FeatureCollection' || !Array.isArray(simplified.features)) {
-      throw new Error('Mapshaper output was not a GeoJSON FeatureCollection')
-    }
-    return {
-      type: 'FeatureCollection',
-      features: simplified.features.sort(
-        (a, b) => String(a.properties?.boundaryName ?? '').localeCompare(String(b.properties?.boundaryName ?? '')),
-      ),
-    }
-  } finally {
-    rmSync(tempDir, { recursive: true, force: true })
+  const simplified = simplifySharedPolygonTopology(raw, {
+    toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: SOURCE_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    tempPrefix: 'bcer-admin-zones-',
+  })
+  return {
+    type: 'FeatureCollection',
+    features: simplified.features.sort(
+      (a, b) => String(a.properties?.boundaryName ?? '').localeCompare(String(b.properties?.boundaryName ?? '')),
+    ),
   }
 }
 

@@ -1,14 +1,20 @@
-import { execFile } from 'node:child_process'
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
-import { promisify } from 'node:util'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../../lib/mapshaper-topology.mjs'
 
-const execFileAsync = promisify(execFile)
-
-const SIMPLIFIED_OUTPUT_DIR = 'public/data/boundaries/BCFWA'
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
+const SIMPLIFIED_OUTPUT_DIR = path.join(SCRIPT_DIR, 'output', 'BCFWA')
 const FULL_OUTPUT_DIR = process.env.FWA_FULL_OUTPUT_DIR
   ?? '/Users/ahmadjalil/Library/CloudStorage/GoogleDrive-ahzs645@gmail.com/My Drive/University/Research/Grad/Data/Boundaries'
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
-const SIMPLIFY_KEEP = process.env.FWA_SIMPLIFY_KEEP ?? '3%'
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 const LAYERS = [
   {
@@ -17,6 +23,7 @@ const LAYERS = [
     codeField: 'OBJECTID',
     nameField: 'MAJOR_WATERSHED_SYSTEM',
     keepFields: ['OBJECTID', 'MAJOR_WATERSHED_CODE', 'MAJOR_WATERSHED_SYSTEM', 'FEATURE_AREA_SQM'],
+    toleranceMetres: 100,
   },
   {
     id: 'watershed_groups',
@@ -24,6 +31,7 @@ const LAYERS = [
     codeField: 'WATERSHED_GROUP_CODE',
     nameField: 'WATERSHED_GROUP_NAME',
     keepFields: ['OBJECTID', 'WATERSHED_GROUP_ID', 'WATERSHED_GROUP_CODE', 'WATERSHED_GROUP_NAME', 'AREA_HA'],
+    toleranceMetres: 75,
   },
 ]
 
@@ -71,27 +79,11 @@ async function fetchFullLayer(layer) {
 }
 
 async function simplifyLayer(layer, fullPath) {
-  const tempPath = `${SIMPLIFIED_OUTPUT_DIR}/${layer.id}_mapshaper_tmp.geojson`
   const outputPath = `${SIMPLIFIED_OUTPUT_DIR}/${layer.id}_province_simplified.geojson`
-
-  await execFileAsync('npx', [
-    '-y',
-    'mapshaper',
-    fullPath,
-    '-clean',
-    '-simplify',
-    SIMPLIFY_KEEP,
-    'keep-shapes',
-    '-o',
-    'force',
-    'format=geojson',
-    tempPath,
-  ], {
-    maxBuffer: 1024 * 1024 * 20,
-  })
-
-  const source = JSON.parse(await readFile(tempPath, 'utf8'))
-  const features = source.features
+  const full = JSON.parse(await readFile(fullPath, 'utf8'))
+  const normalized = {
+    type: 'FeatureCollection',
+    features: full.features
     .filter((feature) => feature.geometry && (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon'))
     .map((feature) => ({
       type: 'Feature',
@@ -99,7 +91,17 @@ async function simplifyLayer(layer, fullPath) {
       properties: pickProperties(feature.properties ?? {}, layer),
       geometry: feature.geometry,
     }))
-    .filter((feature) => feature.properties.boundaryCode)
+    .filter((feature) => feature.properties.boundaryCode),
+  }
+  const simplified = simplifySharedPolygonTopology(normalized, {
+    toleranceMetres: layer.toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    tempPrefix: `bc-fwa-${layer.id}-`,
+  })
+  const features = simplified.features
 
   const collection = {
     type: 'FeatureCollection',
@@ -108,11 +110,15 @@ async function simplifyLayer(layer, fullPath) {
       source: 'BC Freshwater Atlas / BC Geographic Warehouse',
       sourceLayer: layer.typeName,
       scope: 'Province-wide',
-      simplifier: 'mapshaper',
-      simplifyKeep: SIMPLIFY_KEEP,
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      simplification: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+      simplificationToleranceMetres: layer.toleranceMetres,
       topologyPreserving: true,
-      generatedAt: new Date().toISOString(),
-      numberMatched: source.features?.length ?? features.length,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
+      numberMatched: features.length,
       fullSourcePath: fullPath,
     },
     features,
@@ -120,7 +126,6 @@ async function simplifyLayer(layer, fullPath) {
 
   const payload = `${JSON.stringify(collection)}\n`
   await writeFile(outputPath, payload)
-  await rm(tempPath, { force: true })
   console.log(`${layer.id}: wrote topology-preserving simplified file (${Buffer.byteLength(payload).toLocaleString()} bytes)`)
 }
 

@@ -6,6 +6,10 @@ import path from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import * as turf from '@turf/turf'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../lib/mapshaper-topology.mjs'
 
 const SERVICE_BASE = 'https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer'
 const DA_LAYER_ID = 12
@@ -17,6 +21,7 @@ const PARENT_LAYER_DEFS = [
     idKey: 'CDUID',
     nameKey: 'CDNAME',
     typeKey: 'CDTYPE',
+    toleranceMetres: 50,
   },
   {
     level: 'csd',
@@ -25,6 +30,7 @@ const PARENT_LAYER_DEFS = [
     idKey: 'CSDUID',
     nameKey: 'CSDNAME',
     typeKey: 'CSDTYPE',
+    toleranceMetres: 50,
   },
   {
     level: 'ct',
@@ -33,11 +39,16 @@ const PARENT_LAYER_DEFS = [
     idKey: 'CTUID',
     nameKey: 'CTNAME',
     typeKey: null,
+    toleranceMetres: 20,
   },
 ]
 const BC_PRUID = '59'
 const FETCH_PAGE_SIZE = 500
 const PARENT_FETCH_PAGE_SIZE = 25
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const censusDir = __dirname
@@ -51,6 +62,7 @@ const DEFAULT_LODS = [
     id: 'overview',
     label: 'Overview',
     tolerance: 0.001,
+    toleranceMetres: 100,
     minZoom: 0,
     maxZoom: 8.5,
   },
@@ -58,6 +70,7 @@ const DEFAULT_LODS = [
     id: 'medium',
     label: 'Medium',
     tolerance: 0.0002,
+    toleranceMetres: 20,
     minZoom: 8.5,
     maxZoom: 24,
   },
@@ -86,6 +99,17 @@ function parseArgs(argv) {
         id: 'medium',
         label: 'Medium',
         tolerance: options.tolerance,
+        toleranceMetres: options.tolerance * 100_000,
+        minZoom: 0,
+        maxZoom: 24,
+      }]
+      if (inlineValue == null) index += 1
+    } else if (key === '--tolerance-metres') {
+      options.lods = [{
+        id: 'medium',
+        label: 'Medium',
+        tolerance: Number(nextValue) / 100_000,
+        toleranceMetres: Number(nextValue),
         minZoom: 0,
         maxZoom: 24,
       }]
@@ -102,7 +126,7 @@ function parseArgs(argv) {
     }
   }
 
-  if (options.lods.some((lod) => !Number.isFinite(lod.tolerance) || lod.tolerance <= 0)) {
+  if (options.lods.some((lod) => !Number.isFinite(lod.toleranceMetres) || lod.toleranceMetres <= 0)) {
     throw new Error('Every LOD tolerance must be a positive number')
   }
   if (!Number.isInteger(options.gridCols) || options.gridCols < 1) {
@@ -138,6 +162,7 @@ function parseLods(value) {
       id: normalizedId,
       label: normalizedId.charAt(0).toUpperCase() + normalizedId.slice(1),
       tolerance,
+      toleranceMetres: tolerance * 100_000,
       minZoom,
       maxZoom,
     }
@@ -168,15 +193,7 @@ async function fetchBcDaSource() {
   const features = []
   for (let offset = 0; offset < objectIds.length; offset += FETCH_PAGE_SIZE) {
     const ids = objectIds.slice(offset, offset + FETCH_PAGE_SIZE)
-    const params = new URLSearchParams({
-      objectIds: ids.join(','),
-      outFields: '*',
-      returnGeometry: 'true',
-      outSR: '4326',
-      f: 'geojson',
-    })
-    const json = await fetchJson(`${SERVICE_BASE}/${DA_LAYER_ID}/query?${params.toString()}`)
-    features.push(...(Array.isArray(json.features) ? json.features : []))
+    features.push(...await queryLayerObjectIds(DA_LAYER_ID, ids))
     console.log(`Fetched ${features.length.toLocaleString()} / ${objectIds.length.toLocaleString()} BC DA features`)
   }
 
@@ -226,10 +243,9 @@ async function queryLayerObjectIdsWithOptions(layerId, objectIds, extraParams) {
     const json = await fetchJson(`${SERVICE_BASE}/${layerId}/query?${params.toString()}`)
     return Array.isArray(json.features) ? json.features : []
   } catch (error) {
-    if (objectIds.length === 1 && !extraParams.maxAllowableOffset) {
+    if (objectIds.length === 1 && !extraParams.geometryPrecision) {
       return queryLayerObjectIdsWithOptions(layerId, objectIds, {
-        maxAllowableOffset: 0.001,
-        geometryPrecision: 6,
+        geometryPrecision: 7,
       })
     }
     if (objectIds.length <= 1) throw error
@@ -404,56 +420,49 @@ function createDaHierarchy(sourceFeatures, parentIndex) {
   return hierarchyByDaUid
 }
 
-function normalizeFeature(rawFeature, tolerance, lodId, hierarchyByDaUid) {
+function normalizeFeature(rawFeature, lodId, hierarchyByDaUid) {
   if (!rawFeature?.geometry || (rawFeature.geometry.type !== 'Polygon' && rawFeature.geometry.type !== 'MultiPolygon')) {
     return null
   }
 
-  const simplified = turf.simplify(rawFeature, {
-    tolerance,
-    highQuality: false,
-    mutate: false,
-  })
-
-  if (!simplified.geometry || (simplified.geometry.type !== 'Polygon' && simplified.geometry.type !== 'MultiPolygon')) {
-    return null
-  }
-
-  const properties = simplified.properties ?? {}
+  const properties = rawFeature.properties ?? {}
   const daUid = String(properties.DAUID ?? properties.id ?? rawFeature.id ?? '').trim()
   if (!daUid) return null
 
   const hierarchy = hierarchyByDaUid.get(daUid) ?? {}
-  const areaKm2 = turf.area(simplified) / 1_000_000
-  simplified.properties = {
-    id: daUid,
-    boundaryCode: daUid,
-    boundaryName: `DA ${daUid}`,
-    boundarySource: 'census',
-    boundaryLevel: 'bcDaSimplified',
-    boundaryDetail: lodId,
-    DAUID: daUid,
-    DGUID: properties.DGUID ?? null,
-    PRUID: properties.PRUID ?? BC_PRUID,
-    CDUID: hierarchy.cd?.id ?? properties.CDUID ?? null,
-    CDNAME: hierarchy.cd?.name ?? properties.CDNAME ?? null,
-    CDTYPE: hierarchy.cd?.type ?? properties.CDTYPE ?? null,
-    CSDUID: hierarchy.csd?.id ?? properties.CSDUID ?? null,
-    CSDNAME: hierarchy.csd?.name ?? properties.CSDNAME ?? null,
-    CSDTYPE: hierarchy.csd?.type ?? properties.CSDTYPE ?? null,
-    CTUID: hierarchy.ct?.id ?? properties.CTUID ?? null,
-    CTNAME: hierarchy.ct?.name ?? properties.CTNAME ?? null,
-    parentCdId: hierarchy.cd?.id ?? null,
-    parentCdName: hierarchy.cd?.name ?? null,
-    parentCsdId: hierarchy.csd?.id ?? null,
-    parentCsdName: hierarchy.csd?.name ?? null,
-    parentCtId: hierarchy.ct?.id ?? null,
-    parentCtName: hierarchy.ct?.name ?? null,
-    LANDAREA: toNumber(properties.LANDAREA),
-    areaKm2: Number.isFinite(areaKm2) && areaKm2 > 0 ? areaKm2 : 0,
+  const areaKm2 = turf.area(rawFeature) / 1_000_000
+  const normalized = {
+    ...rawFeature,
+    properties: {
+      id: daUid,
+      boundaryCode: daUid,
+      boundaryName: `DA ${daUid}`,
+      boundarySource: 'census',
+      boundaryLevel: 'bcDaSimplified',
+      boundaryDetail: lodId,
+      DAUID: daUid,
+      DGUID: properties.DGUID ?? null,
+      PRUID: properties.PRUID ?? BC_PRUID,
+      CDUID: hierarchy.cd?.id ?? properties.CDUID ?? null,
+      CDNAME: hierarchy.cd?.name ?? properties.CDNAME ?? null,
+      CDTYPE: hierarchy.cd?.type ?? properties.CDTYPE ?? null,
+      CSDUID: hierarchy.csd?.id ?? properties.CSDUID ?? null,
+      CSDNAME: hierarchy.csd?.name ?? properties.CSDNAME ?? null,
+      CSDTYPE: hierarchy.csd?.type ?? properties.CSDTYPE ?? null,
+      CTUID: hierarchy.ct?.id ?? properties.CTUID ?? null,
+      CTNAME: hierarchy.ct?.name ?? properties.CTNAME ?? null,
+      parentCdId: hierarchy.cd?.id ?? null,
+      parentCdName: hierarchy.cd?.name ?? null,
+      parentCsdId: hierarchy.csd?.id ?? null,
+      parentCsdName: hierarchy.csd?.name ?? null,
+      parentCtId: hierarchy.ct?.id ?? null,
+      parentCtName: hierarchy.ct?.name ?? null,
+      LANDAREA: toNumber(properties.LANDAREA),
+      areaKm2: Number.isFinite(areaKm2) && areaKm2 > 0 ? areaKm2 : 0,
+    },
   }
 
-  return simplified
+  return normalized
 }
 
 function createChunks(features, gridCols, gridRows) {
@@ -499,11 +508,7 @@ function normalizeParentBoundary(rawFeature, definition) {
   const record = createParentRecord(rawFeature, definition)
   if (!record) return null
 
-  const feature = turf.simplify(rawFeature, {
-    tolerance: definition.level === 'ct' ? 0.0002 : 0.0005,
-    highQuality: false,
-    mutate: false,
-  })
+  const feature = structuredClone(rawFeature)
   if (!feature.geometry || (feature.geometry.type !== 'Polygon' && feature.geometry.type !== 'MultiPolygon')) {
     return null
   }
@@ -531,9 +536,21 @@ async function writeParentBoundaries(parentBoundaries) {
 
   for (const definition of PARENT_LAYER_DEFS) {
     const collection = parentBoundaries[definition.level]
-    const features = (Array.isArray(collection?.features) ? collection.features : [])
+    const normalizedFeatures = (Array.isArray(collection?.features) ? collection.features : [])
       .map((feature) => normalizeParentBoundary(feature, definition))
       .filter(Boolean)
+    const simplified = simplifySharedPolygonTopology({
+      type: 'FeatureCollection',
+      features: normalizedFeatures,
+    }, {
+      toleranceMetres: definition.toleranceMetres,
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      coordinatePrecision: COORDINATE_PRECISION,
+      tempPrefix: `bc-census-${definition.level}-`,
+    })
+    const features = simplified.features
       .sort((a, b) => String(a.properties?.boundaryCode ?? '').localeCompare(String(b.properties?.boundaryCode ?? '')))
     const output = {
       type: 'FeatureCollection',
@@ -547,6 +564,7 @@ async function writeParentBoundaries(parentBoundaries) {
       label: definition.label,
       path: `parents/${fileName}`,
       features: features.length,
+      simplificationToleranceMetres: definition.toleranceMetres,
       rawBytes: stats.rawBytes,
       gzipBytes: stats.gzipBytes,
     })
@@ -556,10 +574,22 @@ async function writeParentBoundaries(parentBoundaries) {
 }
 
 async function writeLod(sourceFeatures, lod, gridCols, gridRows, hierarchyByDaUid) {
-  console.log(`Building ${lod.id} LOD at tolerance ${lod.tolerance}`)
-  const features = sourceFeatures
-    .map((feature) => normalizeFeature(feature, lod.tolerance, lod.id, hierarchyByDaUid))
+  console.log(`Building ${lod.id} LOD at ${lod.toleranceMetres} metre tolerance`)
+  const normalizedFeatures = sourceFeatures
+    .map((feature) => normalizeFeature(feature, lod.id, hierarchyByDaUid))
     .filter(Boolean)
+  const simplified = simplifySharedPolygonTopology({
+    type: 'FeatureCollection',
+    features: normalizedFeatures,
+  }, {
+    toleranceMetres: lod.toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    tempPrefix: `bc-da-${lod.id}-`,
+  })
+  const features = simplified.features
     .sort((a, b) => String(a.properties?.DAUID ?? '').localeCompare(String(b.properties?.DAUID ?? '')))
 
   const chunksDir = path.join(outputDir, 'chunks', lod.id)
@@ -599,6 +629,7 @@ async function writeLod(sourceFeatures, lod, gridCols, gridRows, hierarchyByDaUi
     id: lod.id,
     label: lod.label,
     tolerance: lod.tolerance,
+    simplificationToleranceMetres: lod.toleranceMetres,
     minZoom: lod.minZoom,
     maxZoom: lod.maxZoom,
     features: features.length,
@@ -630,11 +661,19 @@ async function main() {
   const defaultLevel = levels[levels.length - 1]
 
   const manifest = {
-    generatedAt: new Date().toISOString(),
     source: {
       name: 'Statistics Canada 2021 Cartographic Boundary File - Dissemination Areas',
       service: `${SERVICE_BASE}/${DA_LAYER_ID}`,
       where: `PRUID='${BC_PRUID}'`,
+    },
+    simplification: {
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      algorithm: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+      topologyPreserving: true,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
     },
     tolerance: defaultLevel.tolerance,
     grid: {

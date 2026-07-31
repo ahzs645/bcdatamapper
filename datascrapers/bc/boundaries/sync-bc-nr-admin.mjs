@@ -1,8 +1,18 @@
 import { mkdir, writeFile } from 'node:fs/promises'
-import simplify from '@turf/simplify'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../../lib/mapshaper-topology.mjs'
 
-const OUTPUT_DIR = 'public/data/boundaries/BCNR'
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
+const OUTPUT_DIR = path.join(SCRIPT_DIR, 'output', 'BCNR')
 const WFS_BASE = 'https://openmaps.gov.bc.ca/geo/pub'
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 const LAYERS = [
   {
@@ -12,7 +22,7 @@ const LAYERS = [
     codeField: 'AREA_NUMBER',
     nameField: 'AREA_NAME',
     keepFields: ['OBJECTID', 'AREA_NUMBER', 'AREA_NAME', 'FEATURE_AREA_SQM'],
-    tolerance: 0.01,
+    toleranceMetres: 250,
   },
   {
     id: 'nr_regions',
@@ -21,7 +31,7 @@ const LAYERS = [
     codeField: 'ORG_UNIT',
     nameField: 'REGION_NAME',
     keepFields: ['OBJECTID', 'ORG_UNIT', 'ORG_UNIT_NAME', 'REGION_NAME', 'FEATURE_AREA_SQM'],
-    tolerance: 0.008,
+    toleranceMetres: 150,
   },
   {
     id: 'nr_districts',
@@ -38,7 +48,7 @@ const LAYERS = [
       'REGION_ORG_UNIT_NAME',
       'FEATURE_AREA_SQM',
     ],
-    tolerance: 0.005,
+    toleranceMetres: 100,
   },
 ]
 
@@ -80,17 +90,11 @@ function normalizeFeature(feature, layer) {
     return null
   }
 
-  const simplified = simplify(feature, {
-    tolerance: layer.tolerance,
-    highQuality: false,
-    mutate: false,
-  })
-
   return {
     type: 'Feature',
     id: feature.id,
     properties: pickProperties(feature.properties ?? {}, layer.keepFields, layer.codeField, layer.nameField, layer.sourceLayer),
-    geometry: simplified.geometry,
+    geometry: feature.geometry,
   }
 }
 
@@ -101,9 +105,21 @@ async function syncLayer(layer) {
   }
 
   const source = await response.json()
-  const features = source.features
+  const normalizedFeatures = source.features
     .map((feature) => normalizeFeature(feature, layer))
     .filter((feature) => feature && feature.properties.boundaryCode)
+  const simplified = simplifySharedPolygonTopology({
+    type: 'FeatureCollection',
+    features: normalizedFeatures,
+  }, {
+    toleranceMetres: layer.toleranceMetres,
+    sourceCrs: SOURCE_CRS,
+    workingCrs: WORKING_CRS,
+    outputCrs: OUTPUT_CRS,
+    coordinatePrecision: COORDINATE_PRECISION,
+    tempPrefix: `bc-${layer.id}-`,
+  })
+  const features = simplified.features
 
   const collection = {
     type: 'FeatureCollection',
@@ -112,12 +128,19 @@ async function syncLayer(layer) {
       source: 'BC Geographic Warehouse',
       sourceLayer: layer.sourceLayer,
       coverage: 'BC-wide (administrative boundaries)',
-      generatedAt: new Date().toISOString(),
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      simplification: 'Mapshaper shared-topology Ramer-Douglas-Peucker',
+      simplificationToleranceMetres: layer.toleranceMetres,
+      topologyPreserving: true,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
     },
     features,
   }
 
-  await writeFile(`${OUTPUT_DIR}/${layer.id}.geojson`, `${JSON.stringify(collection)}\n`)
+  await writeFile(path.join(OUTPUT_DIR, `${layer.id}.geojson`), `${JSON.stringify(collection)}\n`)
   console.log(`${layer.id}: wrote ${features.length} features`)
 }
 

@@ -5,8 +5,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
-import * as turf from '@turf/turf'
 import shp from 'shpjs'
+import {
+  MAPSHAPER_VERSION,
+  simplifySharedPolygonTopology,
+} from '../lib/mapshaper-topology.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const censusDir = __dirname
@@ -19,6 +22,10 @@ const DEFAULT_RAW_ARCHIVE = path.join(
 )
 const DEFAULT_CROSSWALK = path.join(censusDir, 'output/bc_db_population_chsa_crosswalk.json')
 const DEFAULT_OUTPUT = path.join(censusDir, 'output/bc-db-chunks')
+const SOURCE_CRS = 'EPSG:4326'
+const WORKING_CRS = 'EPSG:3005'
+const OUTPUT_CRS = 'EPSG:4326'
+const COORDINATE_PRECISION = 6
 
 function defaultLods(minZoom) {
   return [
@@ -26,6 +33,7 @@ function defaultLods(minZoom) {
       id: 'overview',
       label: 'Overview',
       tolerance: 0.002,
+      toleranceMetres: 200,
       minZoom: 7,
       maxZoom: 8.5,
       detailProperties: false,
@@ -34,6 +42,7 @@ function defaultLods(minZoom) {
       id: 'medium',
       label: 'Medium',
       tolerance: 0.0007,
+      toleranceMetres: 70,
       minZoom: 8.5,
       maxZoom: minZoom,
       detailProperties: false,
@@ -42,6 +51,7 @@ function defaultLods(minZoom) {
       id: 'full',
       label: 'Full DB detail',
       tolerance: 0,
+      toleranceMetres: 0,
       minZoom,
       maxZoom: 24,
       detailProperties: true,
@@ -142,6 +152,7 @@ function parseLods(value) {
         id,
         label: id === 'full' ? 'Full DB detail' : id.charAt(0).toUpperCase() + id.slice(1),
         tolerance,
+        toleranceMetres: tolerance * 100_000,
         minZoom,
         maxZoom,
         detailProperties: tolerance === 0,
@@ -241,24 +252,23 @@ function lodProperties(properties, detailProperties) {
   })
 }
 
-function simplifyFeature(feature, lod) {
+function prepareFeatureForLod(feature, lod) {
   const properties = lodProperties(feature.properties, lod.detailProperties)
-  const sourceFeature = {
+  return {
     type: 'Feature',
     geometry: feature.geometry,
     properties,
   }
-  const simplified = lod.tolerance > 0
-    ? turf.simplify(sourceFeature, { tolerance: lod.tolerance, highQuality: false, mutate: false })
-    : sourceFeature
-  if (!simplified.geometry || (simplified.geometry.type !== 'Polygon' && simplified.geometry.type !== 'MultiPolygon')) return null
+}
 
-  const geometry = { ...simplified.geometry, coordinates: roundCoordinates(simplified.geometry.coordinates) }
+function attachFeatureBbox(feature) {
+  if (!feature.geometry || (feature.geometry.type !== 'Polygon' && feature.geometry.type !== 'MultiPolygon')) return null
+  const geometry = { ...feature.geometry, coordinates: roundCoordinates(feature.geometry.coordinates) }
   const featureBbox = bboxForGeometry(geometry)
   return {
     type: 'Feature',
     geometry,
-    properties,
+    properties: feature.properties,
     bbox: featureBbox,
   }
 }
@@ -289,8 +299,19 @@ function createChunks(features, layerBbox, cols, rows) {
 }
 
 function writeLod(args, sourceFeatures, sourceLayerBbox, lod) {
-  console.log(`Building ${lod.id} LOD at tolerance ${lod.tolerance}`)
-  const features = sourceFeatures.map((feature) => simplifyFeature(feature, lod)).filter(Boolean)
+  console.log(`Building ${lod.id} LOD at ${lod.toleranceMetres} metre tolerance`)
+  const prepared = sourceFeatures.map((feature) => prepareFeatureForLod(feature, lod))
+  const collection = lod.toleranceMetres > 0
+    ? simplifySharedPolygonTopology({ type: 'FeatureCollection', features: prepared }, {
+      toleranceMetres: lod.toleranceMetres,
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      coordinatePrecision: COORDINATE_PRECISION,
+      tempPrefix: `bc-db-${lod.id}-`,
+    })
+    : { type: 'FeatureCollection', features: prepared }
+  const features = collection.features.map(attachFeatureBbox).filter(Boolean)
   const chunksDir = path.join(args.output, 'chunks', lod.id)
   fs.mkdirSync(chunksDir, { recursive: true })
 
@@ -328,6 +349,7 @@ function writeLod(args, sourceFeatures, sourceLayerBbox, lod) {
     id: lod.id,
     label: lod.label,
     tolerance: lod.tolerance,
+    simplificationToleranceMetres: lod.toleranceMetres,
     minZoom: lod.minZoom,
     maxZoom: lod.maxZoom,
     features: features.length,
@@ -381,12 +403,20 @@ async function main() {
   const defaultLevel = levels[levels.length - 1]
 
   const manifest = {
-    generatedAt: new Date().toISOString(),
     source: {
       name: 'BCCDC db21 dissemination-block shapefile with DB-CHSA crosswalk enrichment',
       path: path.relative(bcdatamapperRoot, args.rawArchive),
       crosswalk: path.relative(bcdatamapperRoot, args.crosswalk),
       chunkUrlBase: args.chunkUrlBase || null,
+    },
+    simplification: {
+      sourceCrs: SOURCE_CRS,
+      workingCrs: WORKING_CRS,
+      outputCrs: OUTPUT_CRS,
+      algorithm: 'Mapshaper shared-topology Ramer-Douglas-Peucker for overview and medium LODs',
+      topologyPreserving: true,
+      mapshaperVersion: MAPSHAPER_VERSION,
+      coordinatePrecision: COORDINATE_PRECISION,
     },
     grid: { cols: args.cols, rows: args.rows },
     features: defaultLevel.features,
