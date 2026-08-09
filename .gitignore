@@ -48,3 +48,16 @@ datascrapers/bc/boundaries/source/BCFWA/*.zip
 datascrapers/bc/boundaries/source/BCFWA/*.part
 datascrapers/bc/boundaries/source/BCFWA/*_province_full.geojson
 datascrapers/health/phsa-community-health/output/
+
+# Flood Study Explorer is licensed "Access Only". Keep queried polygons and
+# third-party report packages as a local research cache, not redistributed git data.
+datascrapers/bc/flood/studies/cache/
+
+# BC Hazard Insights / DCRRA services are licensed "Access Only". Downloads
+# are a local research cache and must not be committed or redistributed unless
+# written permission from the Province has been recorded.
+datascrapers/bc/hazard-insights/cache/
+
+# ClimateData.ca source rasters and derived HDF5 packs are multi-gigabyte local
+# assessment/build artifacts. Keep the maintained inventory and converters only.
+datascrapers/climate/climatedata-ca/cache/

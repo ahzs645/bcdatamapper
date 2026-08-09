@@ -1,0 +1,628 @@
+[
+  {
+    "basin_id": "12",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:12",
+    "title": "Boundary",
+    "slug": "boundary",
+    "route": "/bcsnowpack/boundary",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -119.372489,
+      48.999903,
+      -118.029648,
+      50.166429
+    ],
+    "counts": {
+      "manual_stations": 7,
+      "manual_active": 2,
+      "automated_stations": 2,
+      "automated_active": 2,
+      "current_manual_observations": 10,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 1380,
+      "archived_manual_sites": 7
+    }
+  },
+  {
+    "basin_id": "16",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:16",
+    "title": "Central Coast",
+    "slug": "central-coast",
+    "route": "/bcsnowpack/central-coast",
+    "route_aliases": [
+      "/bcsnowpack/centralcoast"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -130.750881,
+      50.425324,
+      -124.706025,
+      54.348043
+    ],
+    "counts": {
+      "manual_stations": 7,
+      "manual_active": 1,
+      "automated_stations": 1,
+      "automated_active": 1,
+      "current_manual_observations": 3,
+      "current_manual_sites": 1,
+      "archived_manual_observations": 225,
+      "archived_manual_sites": 7
+    }
+  },
+  {
+    "basin_id": "10",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:10",
+    "title": "East Kootenay",
+    "slug": "east-kootenay",
+    "route": "/bcsnowpack/east-kootenay",
+    "route_aliases": [
+      "/bcsnowpack/eastkootenay"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -116.697584,
+      48.999954,
+      -114.088899,
+      51.320342
+    ],
+    "counts": {
+      "manual_stations": 24,
+      "manual_active": 5,
+      "automated_stations": 6,
+      "automated_active": 5,
+      "current_manual_observations": 17,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 3944,
+      "archived_manual_sites": 24
+    }
+  },
+  {
+    "basin_id": "23",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:23",
+    "title": "Haida Gwaii",
+    "slug": "haida-gwaii",
+    "route": "/bcsnowpack/haida-gwaii",
+    "route_aliases": [
+      "/bcsnowpack/haidagwaii"
+    ],
+    "state": "coverage-gap",
+    "bounds_wgs84": [
+      -133.146853,
+      51.940219,
+      -130.972151,
+      54.244119
+    ],
+    "counts": {
+      "manual_stations": 0,
+      "manual_active": 0,
+      "automated_stations": 0,
+      "automated_active": 0,
+      "current_manual_observations": 0,
+      "current_manual_sites": 0,
+      "archived_manual_observations": 0,
+      "archived_manual_sites": 0
+    }
+  },
+  {
+    "basin_id": "21",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:21",
+    "title": "Liard",
+    "slug": "liard",
+    "route": "/bcsnowpack/liard",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -130.895537,
+      56.933208,
+      -119.999999,
+      60.000125
+    ],
+    "counts": {
+      "manual_stations": 14,
+      "manual_active": 2,
+      "automated_stations": 7,
+      "automated_active": 2,
+      "current_manual_observations": 7,
+      "current_manual_sites": 2,
+      "archived_manual_observations": 1118,
+      "archived_manual_sites": 14
+    }
+  },
+  {
+    "basin_id": "5",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:5",
+    "title": "Lower Fraser",
+    "slug": "lower-fraser",
+    "route": "/bcsnowpack/lower-fraser",
+    "route_aliases": [
+      "/bcsnowpack/lowerfraser"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -123.872503,
+      48.999118,
+      -120.951368,
+      50.833394
+    ],
+    "counts": {
+      "manual_stations": 16,
+      "manual_active": 3,
+      "automated_stations": 10,
+      "automated_active": 7,
+      "current_manual_observations": 14,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 2044,
+      "archived_manual_sites": 16
+    }
+  },
+  {
+    "basin_id": "4",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:4",
+    "title": "Middle Fraser",
+    "slug": "middle-fraser",
+    "route": "/bcsnowpack/middle-fraser",
+    "route_aliases": [
+      "/bcsnowpack/middlefraser"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -125.584423,
+      49.609616,
+      -119.70991,
+      53.575272
+    ],
+    "counts": {
+      "manual_stations": 46,
+      "manual_active": 14,
+      "automated_stations": 16,
+      "automated_active": 16,
+      "current_manual_observations": 46,
+      "current_manual_sites": 14,
+      "archived_manual_observations": 6508,
+      "archived_manual_sites": 46
+    }
+  },
+  {
+    "basin_id": "3",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:3",
+    "title": "Nechako",
+    "slug": "nechako",
+    "route": "/bcsnowpack/nechako",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -127.799181,
+      52.946709,
+      -124.460908,
+      53.914984
+    ],
+    "counts": {
+      "manual_stations": 7,
+      "manual_active": 5,
+      "automated_stations": 3,
+      "automated_active": 3,
+      "current_manual_observations": 25,
+      "current_manual_sites": 5,
+      "archived_manual_observations": 1356,
+      "archived_manual_sites": 7
+    }
+  },
+  {
+    "basin_id": "6",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:6",
+    "title": "North Thompson",
+    "slug": "north-thompson",
+    "route": "/bcsnowpack/north-thompson",
+    "route_aliases": [
+      "/bcsnowpack/norththompson"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -121.573044,
+      50.691338,
+      -118.780212,
+      52.870153
+    ],
+    "counts": {
+      "manual_stations": 16,
+      "manual_active": 3,
+      "automated_stations": 6,
+      "automated_active": 5,
+      "current_manual_observations": 13,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 2549,
+      "archived_manual_sites": 16
+    }
+  },
+  {
+    "basin_id": "22",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:22",
+    "title": "Northwest",
+    "slug": "northwest",
+    "route": "/bcsnowpack/northwest",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -139.014514,
+      58.733067,
+      -130.345672,
+      60.000125
+    ],
+    "counts": {
+      "manual_stations": 5,
+      "manual_active": 2,
+      "automated_stations": 1,
+      "automated_active": 1,
+      "current_manual_observations": 8,
+      "current_manual_sites": 2,
+      "archived_manual_observations": 539,
+      "archived_manual_sites": 5
+    }
+  },
+  {
+    "basin_id": "11",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:11",
+    "title": "Okanagan",
+    "slug": "okanagan",
+    "route": "/bcsnowpack/okanagan",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -120.24884,
+      49.000635,
+      -118.802993,
+      50.623556
+    ],
+    "counts": {
+      "manual_stations": 22,
+      "manual_active": 9,
+      "automated_stations": 6,
+      "automated_active": 6,
+      "current_manual_observations": 37,
+      "current_manual_sites": 9,
+      "archived_manual_observations": 4975,
+      "archived_manual_sites": 22
+    }
+  },
+  {
+    "basin_id": "18",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:18",
+    "title": "Peace",
+    "slug": "peace",
+    "route": "/bcsnowpack/peace",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -127.746114,
+      53.779328,
+      -119.899855,
+      58.023648
+    ],
+    "counts": {
+      "manual_stations": 34,
+      "manual_active": 9,
+      "automated_stations": 21,
+      "automated_active": 20,
+      "current_manual_observations": 26,
+      "current_manual_sites": 7,
+      "archived_manual_observations": 5595,
+      "archived_manual_sites": 34
+    }
+  },
+  {
+    "basin_id": "13",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:13",
+    "title": "Similkameen",
+    "slug": "similkameen",
+    "route": "/bcsnowpack/similkameen",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -121.116628,
+      48.999877,
+      -119.514303,
+      49.938263
+    ],
+    "counts": {
+      "manual_stations": 10,
+      "manual_active": 4,
+      "automated_stations": 4,
+      "automated_active": 3,
+      "current_manual_observations": 21,
+      "current_manual_sites": 4,
+      "archived_manual_observations": 2125,
+      "archived_manual_sites": 10
+    }
+  },
+  {
+    "basin_id": "17",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:17",
+    "title": "Skagit",
+    "slug": "skagit",
+    "route": "/bcsnowpack/skagit",
+    "route_aliases": [],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -121.333501,
+      48.999856,
+      -120.806969,
+      49.310992
+    ],
+    "counts": {
+      "manual_stations": 7,
+      "manual_active": 3,
+      "automated_stations": 0,
+      "automated_active": 0,
+      "current_manual_observations": 12,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 868,
+      "archived_manual_sites": 7
+    }
+  },
+  {
+    "basin_id": "19",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:19",
+    "title": "Skeena-Nass",
+    "slug": "skeena-nass",
+    "route": "/bcsnowpack/skeena-nass",
+    "route_aliases": [
+      "/bcsnowpack/skeenanass"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -131.107715,
+      53.657054,
+      -124.523575,
+      57.212731
+    ],
+    "counts": {
+      "manual_stations": 16,
+      "manual_active": 9,
+      "automated_stations": 7,
+      "automated_active": 6,
+      "current_manual_observations": 35,
+      "current_manual_sites": 9,
+      "archived_manual_observations": 2884,
+      "archived_manual_sites": 16
+    }
+  },
+  {
+    "basin_id": "14",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:14",
+    "title": "South Coast",
+    "slug": "south-coast",
+    "route": "/bcsnowpack/south-coast",
+    "route_aliases": [
+      "/bcsnowpack/southcoast"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -125.442798,
+      49.240515,
+      -122.679944,
+      51.942022
+    ],
+    "counts": {
+      "manual_stations": 26,
+      "manual_active": 8,
+      "automated_stations": 9,
+      "automated_active": 8,
+      "current_manual_observations": 31,
+      "current_manual_sites": 8,
+      "archived_manual_observations": 2777,
+      "archived_manual_sites": 25
+    }
+  },
+  {
+    "basin_id": "7",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:7",
+    "title": "South Thompson",
+    "slug": "south-thompson",
+    "route": "/bcsnowpack/south-thompson",
+    "route_aliases": [
+      "/bcsnowpack/souththompson"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -120.529937,
+      50.016938,
+      -118.163592,
+      52.121015
+    ],
+    "counts": {
+      "manual_stations": 8,
+      "manual_active": 3,
+      "automated_stations": 5,
+      "automated_active": 4,
+      "current_manual_observations": 13,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 1641,
+      "archived_manual_sites": 8
+    }
+  },
+  {
+    "basin_id": "20",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:20",
+    "title": "Stikine",
+    "slug": "stikine",
+    "route": "/bcsnowpack/stikine",
+    "route_aliases": [],
+    "state": "historical-or-automated-only",
+    "bounds_wgs84": [
+      -134.028007,
+      56.235546,
+      -126.774734,
+      59.502127
+    ],
+    "counts": {
+      "manual_stations": 16,
+      "manual_active": 0,
+      "automated_stations": 7,
+      "automated_active": 5,
+      "current_manual_observations": 0,
+      "current_manual_sites": 0,
+      "archived_manual_observations": 942,
+      "archived_manual_sites": 16
+    }
+  },
+  {
+    "basin_id": "8",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:8",
+    "title": "Upper Columbia",
+    "slug": "upper-columbia",
+    "route": "/bcsnowpack/upper-columbia",
+    "route_aliases": [
+      "/bcsnowpack/uppercolumbia"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -119.705488,
+      50.110462,
+      -115.774201,
+      52.877679
+    ],
+    "counts": {
+      "manual_stations": 33,
+      "manual_active": 12,
+      "automated_stations": 11,
+      "automated_active": 10,
+      "current_manual_observations": 54,
+      "current_manual_sites": 12,
+      "archived_manual_observations": 5684,
+      "archived_manual_sites": 32
+    }
+  },
+  {
+    "basin_id": "2",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:2",
+    "title": "Upper Fraser East",
+    "slug": "upper-fraser-east",
+    "route": "/bcsnowpack/upper-fraser-east",
+    "route_aliases": [
+      "/bcsnowpack/upperfrasereast"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -122.937038,
+      52.512174,
+      -118.246142,
+      54.554316
+    ],
+    "counts": {
+      "manual_stations": 18,
+      "manual_active": 2,
+      "automated_stations": 7,
+      "automated_active": 7,
+      "current_manual_observations": 5,
+      "current_manual_sites": 2,
+      "archived_manual_observations": 3739,
+      "archived_manual_sites": 18
+    }
+  },
+  {
+    "basin_id": "1",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:1",
+    "title": "Upper Fraser West",
+    "slug": "upper-fraser-west",
+    "route": "/bcsnowpack/upper-fraser-west",
+    "route_aliases": [
+      "/bcsnowpack/upperfraserwest"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -127.304751,
+      53.342147,
+      -122.696484,
+      56.176503
+    ],
+    "counts": {
+      "manual_stations": 7,
+      "manual_active": 3,
+      "automated_stations": 1,
+      "automated_active": 1,
+      "current_manual_observations": 13,
+      "current_manual_sites": 3,
+      "archived_manual_observations": 1164,
+      "archived_manual_sites": 7
+    }
+  },
+  {
+    "basin_id": "15",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:15",
+    "title": "Vancouver Island",
+    "slug": "vancouver-island",
+    "route": "/bcsnowpack/vancouver-island",
+    "route_aliases": [
+      "/bcsnowpack/vancouverisland"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -128.685563,
+      48.297521,
+      -123.062535,
+      50.931019
+    ],
+    "counts": {
+      "manual_stations": 24,
+      "manual_active": 4,
+      "automated_stations": 10,
+      "automated_active": 9,
+      "current_manual_observations": 20,
+      "current_manual_sites": 5,
+      "archived_manual_observations": 3001,
+      "archived_manual_sites": 24
+    }
+  },
+  {
+    "basin_id": "9",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_feature_id": "snow-survey-basin:9",
+    "title": "West Kootenay",
+    "slug": "west-kootenay",
+    "route": "/bcsnowpack/west-kootenay",
+    "route_aliases": [
+      "/bcsnowpack/westkootenay"
+    ],
+    "state": "current-manual-observations",
+    "bounds_wgs84": [
+      -118.490634,
+      48.999912,
+      -116.061357,
+      51.212844
+    ],
+    "counts": {
+      "manual_stations": 26,
+      "manual_active": 12,
+      "automated_stations": 11,
+      "automated_active": 11,
+      "current_manual_observations": 51,
+      "current_manual_sites": 11,
+      "archived_manual_observations": 5280,
+      "archived_manual_sites": 26
+    }
+  }
+]

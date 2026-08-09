@@ -1,0 +1,136 @@
+{
+  "title": "BC Snow Survey project snapshot",
+  "license": {
+    "title": "Open Government Licence - British Columbia",
+    "url": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
+  },
+  "geometry": {
+    "crs": "EPSG:4326",
+    "note": "Station points use WGS84. Project polygons come from the canonical Snow Survey boundary dataset and are not duplicated in this output.",
+    "boundary_dataset_id": "bc-snow-survey-admin-basins",
+    "boundary_repository_path": "datascrapers/bc/boundaries/output/BCSnowSurvey/snow_survey_admin_basins.geojson",
+    "boundary_public_path": "/data/boundaries/BCSnowSurvey/snow_survey_admin_basins.geojson"
+  },
+  "sources": {
+    "basins": {
+      "boundary_dataset_id": "bc-snow-survey-admin-basins",
+      "repository_path": "datascrapers/bc/boundaries/output/BCSnowSurvey/snow_survey_admin_basins.geojson",
+      "source_metadata": {
+        "sourceCrs": "EPSG:3005",
+        "workingCrs": "EPSG:3005",
+        "outputCrs": "EPSG:4326",
+        "simplification": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+        "simplificationToleranceMetres": 25,
+        "topologyProfile": "partition",
+        "topologyPreserving": true,
+        "cleaningApplied": true,
+        "intentionalOverlapPreserved": false,
+        "unsimplifiedFallbackFeatureCount": 0,
+        "sourceFeatureCount": 23,
+        "droppedInvalidGeometryFeatureCount": 0,
+        "outputFeatureCount": 23,
+        "mapshaperVersion": "0.6.113",
+        "coordinatePrecision": 6,
+        "boundaryDatasetId": "bc-snow-survey-admin-basins",
+        "boundaryFamilyId": "BCSnowSurvey",
+        "source": "BC Geographic Warehouse Snow Survey Administrative Basin Areas",
+        "sourceLayer": "WHSE_WATER_MANAGEMENT.SSL_SNOW_SURVEY_BASIN_AREA_SP",
+        "sourceUrl": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.SSL_SNOW_SURVEY_BASIN_AREA_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WATER_MANAGEMENT.SSL_SNOW_SURVEY_BASIN_AREA_SP&outputFormat=application%2Fjson&srsName=EPSG%3A3005",
+        "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/9ec01cdb-7085-44fe-b059-9fe5aefb7497",
+        "licence": "Open Government Licence - British Columbia",
+        "licenceUrl": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61",
+        "purpose": "Snow Survey Network station naming and snow-program reporting areas",
+        "lineageStatement": "May 15, 2019 the linework for the boundaries was updated.",
+        "derivationAssessment": "The official metadata does not identify an existing BC Data Mapper boundary family as a parent. Preserve this published program-specific partition rather than deriving it from FWA, drainage, health, or administrative boundaries.",
+        "hydrologicContext": "Some basin edges closely follow hydrologic units, but the complete 23-basin partition is not equivalent to the existing FWA or BC Drainage families.",
+        "nativeCrs": "EPSG:3005",
+        "rawVertices": 25395,
+        "outputVertices": 20266,
+        "areaValidation": {
+          "comparedFeatures": 23,
+          "maximumRelativeDeviation": 0.0035903163195242665,
+          "meanRelativeDeviation": 0.0016420603567373565
+        }
+      }
+    },
+    "manual_stations": {
+      "layer": "WHSE_WATER_MANAGEMENT.SSL_SNOW_MSS_LOCS_SP",
+      "wfs_url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.SSL_SNOW_MSS_LOCS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WATER_MANAGEMENT.SSL_SNOW_MSS_LOCS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+      "catalogue_url": "https://catalogue.data.gov.bc.ca/dataset/9f653102-5627-45a7-bd4c-686e365ee04a"
+    },
+    "automated_stations": {
+      "layer": "WHSE_WATER_MANAGEMENT.SSL_SNOW_ASWS_STNS_SP",
+      "wfs_url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WATER_MANAGEMENT.SSL_SNOW_ASWS_STNS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WATER_MANAGEMENT.SSL_SNOW_ASWS_STNS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+      "catalogue_url": "https://catalogue.data.gov.bc.ca/dataset/ebe546aa-ac34-491c-a828-fdc87fb70610"
+    },
+    "current_manual_observations": {
+      "url": "https://www.env.gov.bc.ca/wsd/data_searches/snow/asws/data/allmss_current.csv",
+      "catalogue_url": "https://catalogue.data.gov.bc.ca/dataset/12472805-6f6d-457b-8db2-5c1f42a00099"
+    },
+    "archived_manual_observations": {
+      "url": "https://www.env.gov.bc.ca/wsd/data_searches/snow/asws/data/allmss_archive.csv",
+      "catalogue_url": "https://catalogue.data.gov.bc.ca/dataset/705df46f-e9d6-4124-bc4a-66f54c07b228"
+    },
+    "observation_link_templates": {
+      "source_web_map_item": "f1daea2c0ff846f7b63cfcc066d6d16e",
+      "snapshot_policy": "outbound-links-only"
+    }
+  },
+  "counts": {
+    "basins": 23,
+    "manual_stations": 390,
+    "manual_active": 115,
+    "manual_inactive": 275,
+    "automated_stations": 152,
+    "automated_active": 133,
+    "automated_inactive": 19,
+    "automated_with_camera": 8,
+    "stations_with_basin_assignment": 540,
+    "basin_subprojects": 23,
+    "basin_subprojects_with_current_manual_observations": 21,
+    "current_manual_observations": 461,
+    "archived_manual_observations": 60604
+  },
+  "limitations": [
+    "The observation CSV contains no percent-normal field.",
+    "Automated live observations remain outbound links and are not mirrored.",
+    "Station basin assignment is a point-in-polygon convenience field and should be reviewed at basin boundaries."
+  ],
+  "routing": {
+    "base_path": "/bcsnowpack",
+    "canonical_slug_style": "kebab-case",
+    "compact_slug_aliases": true,
+    "example": "/bcsnowpack/upper-columbia",
+    "example_alias": "/bcsnowpack/uppercolumbia"
+  },
+  "files": {
+    "manual-stations.geojson": {
+      "bytes": 277376,
+      "sha256": "9f6af49c551d780ea24c37df3d21ccac065754c122be37dbb1ac793cc4baad64"
+    },
+    "automated-stations.geojson": {
+      "bytes": 127155,
+      "sha256": "eea5eb3fa3380178914c6c32976335517df84d03783d753c2282b94bc59d1d88"
+    },
+    "stations.geojson": {
+      "bytes": 404489,
+      "sha256": "1f36fd9aa36c4974261f9b70fd5d7fd65e04878dcbb0055e7bbaf576b53e3ede"
+    },
+    "manual-current.csv": {
+      "bytes": 25732,
+      "sha256": "605251c53b349e8c49882f2f0b4d458466514cc8f120e5edc659916af41dbbd5"
+    },
+    "station-series-index.json": {
+      "bytes": 399325,
+      "sha256": "7f0281bfa7e70d43d41a6618b5d806164d75b4c73a00c0aa751ec953e8314b09"
+    },
+    "basin-project-index.json": {
+      "bytes": 16438,
+      "sha256": "7a80fd1c1b976853fe1bce145a8c87039b3fe94769c0504adab2399ddf43720d"
+    },
+    "manual-archive.csv.gz": {
+      "bytes": 566061,
+      "sha256": "69bc34bac49f36dea7432777270a6d965307a6b796de7cbf9253a364bce1115f"
+    }
+  }
+}

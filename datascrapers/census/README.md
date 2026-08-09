@@ -2,6 +2,14 @@
 
 BCDataMapper owns source-to-app data generation for census-derived layers. PGMaps consumes these files through `npm run data:sync-from-bcdatamapper`.
 
+## Population ecumene boundaries
+
+The `ecumene/` workflow maintains the official generalized Statistics Canada
+2021 BC population ecumene and an experimental fine-scale GHSL reproduction
+pilot for Prince George. See `ecumene/README.md` for source ownership,
+rebuild commands, validation results, and the distinction between canonical DA
+boundaries and alternate inhabited-area display geometries.
+
 ## Canada census subdivisions and North/South classification
 
 Build the national 2021 census-subdivision geometry and the separate

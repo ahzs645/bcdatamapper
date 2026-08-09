@@ -42,6 +42,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
 | HealthyPlan PG | `healthyplan-pg:sync`, `healthyplan-pg:sync:education`, `healthyplan-pg:sync:citypg-business` | BC Data Catalogue education CSVs, CityPG-owned business licence snapshots, OSM Overpass, and BC Address Geocoder via shared mapping utilities | `datascrapers/healthyplan-pg/output/` |
 | BC freshwater watersheds | `watersheds:sync`, `watersheds:dev`, `watersheds:50m`, `watersheds:assessment-50m`, `watersheds:named-50m` | BC Freshwater Atlas / watershed geospatial sources | `datascrapers/bc/boundaries/output/BCFWA/` |
+| BC Snow Survey administrative basins | `snow-survey-basins:sync`, `snow-survey-basins:compare` | OGL-BC Snow Survey Administrative Basin Areas | `datascrapers/bc/boundaries/output/BCSnowSurvey/` |
 | BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
 | BC Energy Regulator admin zones | `bcer-admin-zones:sync` | BCER Administrative Zones ArcGIS service | `datascrapers/bc/boundaries/output/BCER/admin_zones.geojson` |
 | BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
@@ -50,6 +51,8 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | BC child care map | `bc:childcare:sync` | DataBC Child Care Map Data ArcGIS layer used by the BC child care map | `datascrapers/bc/childcare/output/` |
 | BC drought | `drought:sync`, `drought:canonical` | BC drought region/status feeds | `public/data/drought/` |
 | BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
+| BC Flood Study Explorer | `flood-studies:sync`, `flood-studies:ecocat`, `flood-studies:ecocat:audit` | ClimateReadyBC Access Only study-index layer, report links, and EcoCat collections | Ignored local research cache under `datascrapers/bc/flood/studies/cache/`; no deploy snapshot without permission |
+| BC Snow Survey project data | `snow-survey:sync` | Canonical Snow Survey basin boundaries plus OGL-BC manual station, automated station, and manual observation sources | `datascrapers/bc/snow-survey/output/` |
 | Environmental burden source inventory | `environmental-burden:inventory` | Open Canada, BC Data Catalogue, ECCC Data Mart, DataBC WFS/ArcGIS, and COMS object storage probes for NPRI, contaminated sites, waste authorizations, groundwater, water quality, and floodplains | `datascrapers/environmental-burden/output/` |
 | BC tenures | `crown-tenures:sync`, `range-tenures:sync`, `mineral-tenures:sync` | BC Crown, range, and mineral tenure geospatial services | `public/data/boundaries/BCTantalis/` and related boundary folders |
 | Wildlife accident reporting | `wars:sync` | BC wildlife accident reporting data | `public/data/wars/` |
@@ -73,6 +76,10 @@ Scraper-related documentation lives in `docs/`:
 - DriveBC event normalization and strict bridge definitions.
 - BC River Forecast Centre flood-advisory normalization and strict bridge definitions.
 - Canada network availability source inventory and carrier vector/raster findings.
+- [Flood Study Explorer and BC Snow Survey](docs/flood-studies-and-snow-survey.md)
+  source, cache, licensing, validation, and route-index operations.
+- [EcoCat display and sub-project resource audit](docs/ecocat-display-resource-audit.md)
+  with content coverage, browser treatment, ZIP findings, and licensing guardrails.
 
 Shared location helpers live under `datascrapers/bc/geocoder/`, including BC
 Address Geocoder query/cache/GeoJSON helpers, Overpass queries, OSM address

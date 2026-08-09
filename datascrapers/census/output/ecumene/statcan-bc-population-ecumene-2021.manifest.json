@@ -1,0 +1,37 @@
+{
+  "dataset": "Statistics Canada 2021 Population Ecumene Boundary Files",
+  "coverage": "British Columbia",
+  "sourceReleaseDate": "2022-02-09",
+  "sourceLayer": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Population_ecumene_boundary_files/MapServer/2",
+  "provinceClipLayer": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Digital_boundary_files/MapServer/0",
+  "sourceCrs": "EPSG:4326",
+  "outputCrs": "EPSG:4326",
+  "licence": "Open Government Licence - Canada",
+  "featureCount": 219,
+  "bbox": [
+    -133.876677,
+    48.308921,
+    -114.570216,
+    60.000067
+  ],
+  "rawBytes": 13762831,
+  "gzipBytes": 3686661,
+  "sha256": "0b9d70c4a6f551fd04ba71500b6c45928375cc30af490e071ccc369dc0b33f70",
+  "validation": {
+    "validFeatureCount": 219,
+    "emptyFeatureCount": 0,
+    "uniqueEcuidCount": 219,
+    "overlapPairCount": 1,
+    "overlapAreaKm2": 4.467895,
+    "overlappingEcuidPairs": [
+      [
+        "1185",
+        "52"
+      ]
+    ],
+    "overlapNote": "Source ECUID polygons are preserved; consumers should union them when using the product as a mask."
+  },
+  "files": {
+    "ecumene": "statcan-bc-population-ecumene-2021.geojson.gz"
+  }
+}

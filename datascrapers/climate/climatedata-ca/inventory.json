@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "assessedAt": "2026-08-08",
+  "scope": "British Columbia",
+  "families": [
+    {
+      "id": "candcs-m6-fixed",
+      "kind": "raster",
+      "grid": "CanDCS-M6, approximately 6 x 10 km",
+      "bcCells": 18012,
+      "products": 60,
+      "dimensions": "13 overlapping 30-year periods; 4 SSPs; p10, p50 and p90; absolute and two supplied delta baselines",
+      "measuredSourceBytes": 2146613699,
+      "measuredBcAbsoluteFloat32Bytes": 458450823,
+      "measuredBcAbsoluteUint16Bytes": 294250976,
+      "measuredProjectSubsetBytes": 23264387,
+      "measurement": "Downloaded and inspected locally"
+    },
+    {
+      "id": "candcs-u5",
+      "kind": "raster",
+      "grid": "NRCANmet target, approximately 6 x 10 km",
+      "dimensions": "CMIP5; 3 emissions scenarios; p10, p50 and p90 from 24 models; changes relative to 1971-2000",
+      "bcFixedStatisticsGiBEstimate": [1, 2],
+      "measurement": "Catalogue specification; storage extrapolated from the measured CanDCS-M6 fixed-product batch",
+      "compatibility": "Treat as a separate grid until downloaded coordinates are hash-compared with CanDCS-M6 and CanDCS-U6"
+    },
+    {
+      "id": "candcs-u6",
+      "kind": "raster",
+      "grid": "NRCANmet target, approximately 6 x 10 km",
+      "dimensions": "CMIP6; 3 emissions scenarios; p10, p50 and p90 from 26 models; changes relative to 1971-2000",
+      "bcFixedStatisticsGiBEstimate": [1, 2],
+      "measurement": "Catalogue specification; storage extrapolated from the measured CanDCS-M6 fixed-product batch",
+      "compatibility": "Likely shares NRCANmet coordinates with CanDCS-U5, but must be verified from source files"
+    },
+    {
+      "id": "humidex",
+      "kind": "raster",
+      "grid": "ERA5-Land/CMIP6, 0.1 degree (about 9 km in BC)",
+      "bcCells": 11928,
+      "products": 3,
+      "dimensions": "Annual maximum Humidex days above 30, 35 and 40; 1950-2100; SSP1-2.6, SSP2-4.5 and SSP5-8.5; 19-model ensemble",
+      "downloadedFiles": 78,
+      "downloadedBytes": 152870411,
+      "packedBcUint16Bytes": 34947948,
+      "packedArrays": 702,
+      "packing": "Exact UInt16 day counts; zero quantization error",
+      "fullArchive": "Not bounded by the fixed-product download. A daily, model-member mirror is expected to be tens to hundreds of GiB.",
+      "measurement": "All annual and individual-month files downloaded for all three thresholds in 30-year and all-years forms; BC boundary mask and storage measured locally"
+    },
+    {
+      "id": "spei",
+      "kind": "raster",
+      "grid": "CMIP5, 1 degree (about 100 km)",
+      "bcCells": 99,
+      "products": 2,
+      "dimensions": "SPEI-3 and SPEI-12; monthly; 3 emissions scenarios; 29 models",
+      "downloadedFiles": 2,
+      "downloadedBytes": 29923593,
+      "packedBcUint16Bytes": 8421199,
+      "packedArrays": 18,
+      "maximumPackingError": 0.0000462185,
+      "modelArchiveBcMiBEstimate": [100, 1024],
+      "measurement": "Complete monthly 1950-2100 p10/p50/p90 files for both indicators downloaded; BC boundary mask and storage measured locally"
+    },
+    {
+      "id": "relative-sea-level",
+      "kind": "coastal-raster-or-points",
+      "grid": "0.1 degree coastal locations",
+      "bcCellsEstimate": 1896,
+      "dimensions": "2020-2100 by decade; four SSPs plus enhanced scenarios; percentile projections",
+      "combinedCoastalMapReadyBcMiBEstimate": [5, 30],
+      "measurement": "BC coastal point count estimated from the live layer; storage is an engineering estimate"
+    },
+    {
+      "id": "vertical-allowance",
+      "kind": "coastal-raster-or-points",
+      "grid": "0.1 degree coastal locations",
+      "bcCellsEstimate": 1896,
+      "dimensions": "2020-2100 by decade; four SSPs",
+      "combinedCoastalMapReadyBcMiBEstimate": [5, 30],
+      "measurement": "Shares the coastal family estimate; do not add the range twice"
+    },
+    {
+      "id": "seasonal-to-decadal",
+      "kind": "raster",
+      "grid": "CanSIPSv3, approximately 100 x 100 km",
+      "bcCellsEstimate": 99,
+      "products": 2,
+      "dimensions": "Mean temperature and precipitation; monthly outlooks to 3 months and rolling seasonal outlooks to 12 months; 40-member ensemble; refreshed monthly",
+      "latestSnapshotMiBEstimate": [5, 20],
+      "measurement": "Storage is an engineering estimate; a historical mirror grows every month"
+    },
+    {
+      "id": "casr-v3",
+      "kind": "historical-reanalysis-raster",
+      "grid": "Approximately 10 x 10 km over North and Central America",
+      "dimensions": "High-resolution precipitation and surface variables; also supplies the CanSIPSv3 historical climatology",
+      "bcArchiveSize": "Unmeasured. Cadence, variables and period must be selected; a multi-variable sub-daily mirror can be hundreds of GiB.",
+      "measurement": "Catalogue specification only"
+    },
+    {
+      "id": "cangrd",
+      "kind": "historical-interpolated-raster",
+      "grid": "Approximately 50 km over Canada",
+      "dimensions": "Historical temperature, precipitation, wind speed and humidity; used as the SPEI bias-adjustment target",
+      "bcArchiveSize": "Unmeasured; expected to be comparatively small at this resolution, but cadence and period must be selected",
+      "measurement": "Catalogue specification only"
+    },
+    {
+      "id": "era5-land",
+      "kind": "historical-reanalysis-raster",
+      "grid": "Approximately 9 km global land grid",
+      "dimensions": "Many atmospheric and land-surface variables; used as the Humidex downscaling target",
+      "bcArchiveSize": "Unmeasured. A full hourly multi-variable BC mirror is a hundreds-of-GiB to TiB-scale source archive, not a project package.",
+      "measurement": "Catalogue specification; order-of-magnitude storage warning"
+    },
+    {
+      "id": "nrcanmet",
+      "kind": "historical-interpolated-raster",
+      "grid": "Approximately 6 x 10 km over Canada",
+      "dimensions": "Daily minimum temperature, maximum temperature and precipitation, 1950-2012",
+      "bcUncompressedThreeVariableGiBEstimate": 4.6,
+      "measurement": "Catalogue dimensions and arithmetic estimate using the measured 18,012-cell BC grid"
+    },
+    {
+      "id": "pcic-blend",
+      "kind": "historical-interpolated-raster",
+      "grid": "Daily gridded Canada/North America blend used by CanDCS-M6",
+      "dimensions": "Minimum temperature, maximum temperature and precipitation from PNWNAmet, NRCANmetV2 temperature and NRCANmet-Adjusted precipitation",
+      "bcArchiveSize": "Unmeasured; likely several GiB for a BC-only three-variable daily cube, depending on the available period",
+      "measurement": "Catalogue specification and engineering estimate"
+    },
+    {
+      "id": "ahccd",
+      "kind": "station-files",
+      "bcStations": 182,
+      "measuredZipBytes": 42324588,
+      "dimensions": "Adjusted and homogenized station temperature and precipitation series",
+      "measurement": "Current BC station package URLs enumerated and their content lengths summed"
+    },
+    {
+      "id": "msc-daily",
+      "kind": "station-table",
+      "bcStations": 1762,
+      "bcRows": 38518200,
+      "csvGiBEstimate": 5.74,
+      "gzipGiBEstimate": [0.6, 1.0],
+      "dimensions": "Daily station observations; station periods vary",
+      "measurement": "Station/row counts measured; storage extrapolated from sampled rows and compression"
+    },
+    {
+      "id": "climate-normals-1981-2010",
+      "kind": "station-table",
+      "bcStations": 163,
+      "bcRows": 131050,
+      "csvMiBEstimate": 29.2,
+      "gzipMiBEstimate": [2, 4],
+      "measurement": "Station/row counts measured; storage extrapolated from sampled rows"
+    },
+    {
+      "id": "idf",
+      "kind": "station-files",
+      "bcStations": 155,
+      "allPackagesBytes": 306395782,
+      "historicalMiB": 129.0,
+      "cmip6MiB": 83.6,
+      "quickStartMiB": 79.6,
+      "nonDerivativeCoreMiB": 212.6,
+      "measurement": "Current package content lengths summed; quick-start files overlap the underlying historical and CMIP6 packages"
+    },
+    {
+      "id": "future-building-design-summaries",
+      "kind": "pdf",
+      "bcLocations": 106,
+      "bilingualPdfs": 212,
+      "measuredBytes": 13111939,
+      "englishOnlyMiBEstimate": 6,
+      "measurement": "Current PDF content lengths summed"
+    },
+    {
+      "id": "parameterized-analyses",
+      "kind": "on-demand-raster",
+      "grid": "Mostly CanDCS-M6 and therefore reusable after generation",
+      "examples": [
+        "average wet-day intensity",
+        "compound maximum/minimum-temperature days",
+        "maximum consecutive wet days",
+        "degree-day threshold exceedance",
+        "heat-wave index, duration and frequency",
+        "cold-spell days"
+      ],
+      "storage": "Unbounded until thresholds, seasons, periods, scenarios and percentiles are selected",
+      "measurement": "The portal exposes these as parameterized analyses, not one canonical bulk file per card"
+    }
+  ],
+  "wholeCollectionEstimate": {
+    "practicalM6EraProjectMirrorGiB": [3.1, 4.5],
+    "practicalIncludes": "The measured 2.00 GiB CanDCS-M6 fixed-product source batch, compressed/estimated BC station collections, IDF/PDF packages, and compact map-ready estimates for the other current product grids",
+    "practicalExcludes": "CanDCS-U5/U6, full historical target/reanalysis grids, daily Humidex model-member cubes, accumulated seasonal forecast history, and arbitrary parameterized-analysis outputs",
+    "olderCanDCSFixedStatisticsAdditionalGiBEstimate": [2, 4],
+    "literalEverything": "No defensible finite total without selecting variables, cadence and periods. Full BC subsets of CaSR v3 and ERA5-Land can make the archive hundreds of GiB to TiB-scale.",
+    "warning": "Use the project mirror as the storage target. Treat upstream daily/hourly model and reanalysis archives as reproducible sources to query, not assets to commit."
+  }
+}

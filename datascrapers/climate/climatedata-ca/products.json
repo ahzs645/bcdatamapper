@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "endpoint": "https://data.climatedata.ca/download",
+  "request": {
+    "dataset_name": "cmip6",
+    "dataset_type": "30ygraph",
+    "format": "netcdf",
+    "zipped": true,
+    "bbox": [48.2, -139.1, 60.1, -113.8]
+  },
+  "groups": [
+    {
+      "id": "annual",
+      "month": "ann",
+      "variables": [
+        "cdd",
+        "cddcold_18",
+        "dlyfrzthw_tx0_tn-1",
+        "first_fall_frost",
+        "frost_days",
+        "frost_free_season",
+        "gddgrow_0",
+        "gddgrow_5",
+        "hddheat_18",
+        "ice_days",
+        "last_spring_frost",
+        "nr_cdd",
+        "prcptot",
+        "r1mm",
+        "r10mm",
+        "r20mm",
+        "ratot",
+        "rax1day",
+        "rx1day",
+        "rx5day",
+        "sn2mm",
+        "sn10mm",
+        "sntot",
+        "snx1day",
+        "tg_mean",
+        "tn_mean",
+        "tn_min",
+        "tnlt_-15",
+        "tnlt_-25",
+        "tr_18",
+        "tr_20",
+        "tr_22",
+        "tx_max",
+        "tx_mean",
+        "txgt_25",
+        "txgt_27",
+        "txgt_29",
+        "txgt_30",
+        "txgt_32"
+      ]
+    },
+    {
+      "id": "annual-july-june",
+      "month": "annual_jul_jun",
+      "variables": [
+        "first_snowfall",
+        "last_snowfall",
+        "snowfall_season_length"
+      ]
+    },
+    {
+      "id": "return-period",
+      "month": "ann",
+      "variables": [
+        "rl5tasmax",
+        "rl5tasmin",
+        "rl5pr",
+        "rl10tasmax",
+        "rl10tasmin",
+        "rl10pr",
+        "rl20tasmax",
+        "rl20tasmin",
+        "rl20pr",
+        "rl25tasmax",
+        "rl25tasmin",
+        "rl25pr",
+        "rl30tasmax",
+        "rl30tasmin",
+        "rl30pr",
+        "rl50tasmax",
+        "rl50tasmin",
+        "rl50pr"
+      ]
+    }
+  ],
+  "separateProducts": [
+    {
+      "id": "humidex",
+      "variables": ["HXmax30", "HXmax35", "HXmax40"],
+      "reason": "Humidex uses a separate 0.1 degree ERA5-Land/CMIP6 grid and is maintained by the separate-grid downloader. The identifiers are case-sensitive."
+    },
+    {
+      "id": "spei",
+      "variables": ["SPEI-3", "SPEI-12"],
+      "reason": "SPEI uses a separate 1 degree CMIP5 grid and is not compatible with the CanDCS-M6 cell index."
+    },
+    {
+      "id": "coastal",
+      "variables": ["relative-sea-level", "vertical-allowance"],
+      "reason": "These are coastal point/grid products and need their own spatial index."
+    },
+    {
+      "id": "seasonal-to-decadal",
+      "variables": ["mean-temperature", "precipitation"],
+      "reason": "CanSIPSv3 is a rolling forecast product on a roughly 100 km grid and is updated monthly."
+    }
+  ]
+}

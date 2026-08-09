@@ -1,0 +1,85 @@
+{
+  "dataset": "Prince George residential ecumene GHSL reproduction pilot",
+  "status": "experimental",
+  "grain": "one feature per 2021 DA with a non-empty derived residential footprint",
+  "sources": {
+    "ghsl": {
+      "product": "GHS_BUILT_C_FUN_E2018_GLOBE_R2022A_54009_10_V1_0",
+      "tile": "R3_C10",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_BUILT_C_GLOBE_R2022A/GHS_BUILT_C_FUN_GLOBE_R2022A/GHS_BUILT_C_FUN_E2018_GLOBE_R2022A_54009_10/V1-0/tiles/GHS_BUILT_C_FUN_E2018_GLOBE_R2022A_54009_10_V1_0_R3_C10.zip",
+      "zipSha256": "b1a0eb591291e7e797dc64eb71940c33a1030371cb5155cc147d43ae7fc9b7e0"
+    },
+    "dbGeometryAndPopulation": "/Users/ahmadjalil/github/PGMaps/vendor/bcdatamapper/datascrapers/census/ecumene/.cache/statcan/prince-george-city-db-2021-full.geojson.gz",
+    "daGeometry": "/Users/ahmadjalil/github/PGMaps/vendor/bcdatamapper/datascrapers/census/ecumene/.cache/statcan/prince-george-city-da-2021-full.geojson.gz",
+    "cmaGeometryForGridOrigin": "/Users/ahmadjalil/github/PGMaps/vendor/bcdatamapper/datascrapers/census/ecumene/.cache/statcan/prince-george-cma-2021-full.geojson.gz",
+    "lavalReference": "/private/tmp/ulaval-bc-inspect/British_Columbia/VlnExpVagueChaleur.shp"
+  },
+  "parameters": {
+    "workingCrs": "EPSG:3347",
+    "builtClasses": {
+      "1": "residential",
+      "2": "non-residential"
+    },
+    "hexagonAreaM2": 10000,
+    "hexGridOrigin": {
+      "x": 4216481.64483402,
+      "y": 2345820.2511525704,
+      "source": "/Users/ahmadjalil/github/PGMaps/vendor/bcdatamapper/datascrapers/census/ecumene/.cache/statcan/prince-george-cma-2021-full.geojson.gz"
+    },
+    "maximumTinTrianglePerimeterM": 350,
+    "hexSelectionMethod": "vector-intersection",
+    "smoothingMethod": "chaikin-approximation",
+    "smoothingBufferM": null,
+    "bezierSubdivisionsPerSegment": null,
+    "chaikinIterations": 2,
+    "chaikinRatio": 0.35,
+    "simplificationToleranceM": 0,
+    "unpopulatedDbRule": "exclude DB features whose population is zero"
+  },
+  "profile": {
+    "dbCount": 1011,
+    "inhabitedDbCount": 813,
+    "inputDaCount": 135,
+    "outputDaCount": 135,
+    "emptyDaCount": 0,
+    "emptyDaIds": [],
+    "rasterRows": 2404,
+    "rasterColumns": 4566,
+    "builtPixelCount": 672903,
+    "builtPolygonCount": 3879,
+    "hexagonCount": 69414,
+    "selectedHexagonCount": 13872,
+    "tinVertexCount": 36719,
+    "tinTriangleCount": 73314,
+    "retainedTriangleCount": 65111,
+    "rawBytes": 767188,
+    "gzipBytes": 187337,
+    "outputSha256": "bb623ac30b61d2726c3cafe38c6010b2264401c20bf84e53d9b7a26af99c6ec8",
+    "derivedAreaBeforeSimplificationKm2": 101.416145,
+    "derivedAreaAfterSimplificationKm2": 101.416145,
+    "simplificationAreaChangePct": 0.0
+  },
+  "validation": {
+    "validFeatureCount": 135,
+    "emptyFeatureCount": 0,
+    "uniqueDauidCount": 135,
+    "overlapPairCount": 0,
+    "overlapAreaM2": 0.0
+  },
+  "evaluation": {
+    "candidateAreaKm2": 101.416145,
+    "referenceAreaKm2": 101.094581,
+    "intersectionAreaKm2": 100.741703,
+    "candidatePrecisionPct": 99.334976,
+    "referenceRecallPct": 99.650943,
+    "jaccardPct": 98.990538
+  },
+  "files": {
+    "boundary": "prince-george-city-ghsl-ecumene-pilot.geojson.gz"
+  },
+  "knownDifferences": [
+    "The Laval report does not publish its hex-grid origin or exact working projection; the pilot infers Statistics Canada Lambert and the official CMA lower-left extent from the measured reconstruction.",
+    "The Laval report names ArcGIS Smooth Polygon but does not publish the smoothing algorithm or parameters; the pilot uses an explicitly labelled Chaikin approximation.",
+    "Statistics Canada geometry and population inputs are fetched independently and may not be byte-identical to Laval's original source archive."
+  ]
+}

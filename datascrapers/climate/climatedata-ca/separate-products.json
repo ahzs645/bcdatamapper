@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "endpoint": "https://data.climatedata.ca/download",
+  "bbox": [48.2, -139.1, 60.1, -113.8],
+  "families": [
+    {
+      "id": "humidex",
+      "dataset_name": "cmip6",
+      "variables": ["HXmax30", "HXmax35", "HXmax40"],
+      "dataset_types": ["30ygraph", "allyears"],
+      "months": [
+        "ann",
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "notes": "The endpoint is case-sensitive: HXmax works, HXMax does not. Request months individually because month=all currently returns HTTP 502. Seasonal counts can be derived from monthly counts with an explicit winter-year convention."
+    },
+    {
+      "id": "spei",
+      "dataset_name": "cmip5",
+      "variables": ["spei_3m", "spei_12m"],
+      "dataset_types": ["allyears"],
+      "months": ["all"],
+      "notes": "Each file contains the full monthly 1950-2100 p10/p50/p90 series for RCP2.6, RCP4.5 and RCP8.5."
+    }
+  ]
+}
