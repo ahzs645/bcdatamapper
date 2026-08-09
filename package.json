@@ -121,6 +121,7 @@
     "health:phsa-community": "./run-in-pgmaps.sh node datascrapers/health/phsa-community-health/sync-phsa-community-health.mjs",
     "health:phsa-community:crosswalk": "./run-in-pgmaps.sh node datascrapers/health/phsa-community-health/build-chsa-lha-crosswalk.mjs",
     "health:bccdc-chronic-tableau": "./run-in-pgmaps.sh node datascrapers/health/bccdc-chronic-disease-tableau/probe-bccdc-chronic-disease-tableau.mjs",
+    "health:msp-facilities": "./run-in-pgmaps.sh node datascrapers/health/msp-facilities/build-msp-health-facilities.mjs",
     "walkability:build": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-web.mjs",
     "walkability:import-supplements": "./run-in-pgmaps.sh node datascrapers/walkability/import-walkability-supplements.mjs",
     "eccc:pm25-snapshot": "./run-in-pgmaps.sh node datascrapers/eccc/build-aqmap-pm25-snapshot.mjs",

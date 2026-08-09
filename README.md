@@ -46,6 +46,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | BC Energy Regulator admin zones | `bcer-admin-zones:sync` | BCER Administrative Zones ArcGIS service | `datascrapers/bc/boundaries/output/BCER/admin_zones.geojson` |
 | BC ungulate winter range | `uwr:sync` | BC UWR geospatial services | `public/data/boundaries/BCUWR/` |
 | Indigenous acknowledgement support sources | `indigenous:sync` | BC CAD/PIP app and operational-service metadata, BCGW First Nation community/treaty layers, BC reserve admin boundaries, and Canada First Nations Location | `public/data/indigenous/` |
+| Curated acknowledgement registry | Manual | Maintained Nation names, aliases, and relationship graph used by PGMaps acknowledgement tooling | `datascrapers/manual/output/acknowledgement/` |
 | BC child care map | `bc:childcare:sync` | DataBC Child Care Map Data ArcGIS layer used by the BC child care map | `datascrapers/bc/childcare/output/` |
 | BC drought | `drought:sync`, `drought:canonical` | BC drought region/status feeds | `public/data/drought/` |
 | BC River Forecast Centre flood advisories | `flood:sync` | BC RFC advisory pages and documents | `public/data/flood/` |
@@ -63,6 +64,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
 | BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `public/data/bc-assessment/` |
 | Northern Health food inspection data | `food-health:refresh`, `food-health:geocode`, `food-health:bc-geocoder-check` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `datascrapers/food-health/output/`, `datascrapers/food-health/cache/` |
+| BC MSP facility map | `health:msp-facilities` | BC MSP Blue Book SQLite data joined to public BC health-service provider layers and the BC Address Geocoder | `datascrapers/health/msp-facilities/output/` |
 | Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap` | CityPG layers, ICBC crashes, transit-owned stop snapshots, BC child care output, and supplemental walkability inputs | `public/data/walkability/` |
 
 Scraper-related documentation lives in `docs/`:
