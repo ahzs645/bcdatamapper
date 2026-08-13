@@ -1,0 +1,200 @@
+{
+  "features": 293,
+  "chunks": [
+    {
+      "id": "10",
+      "name": "Newfoundland and Labrador",
+      "path": "national/census-divisions-2021/provinces/10.geojson.gz",
+      "features": 11,
+      "bbox": [
+        -67.8216856,
+        46.6109937,
+        -52.6193607,
+        60.3777555
+      ],
+      "rawBytes": 30394178,
+      "gzipBytes": 9478365,
+      "sha256": "b1bf774331ffcd7cd622850472f15032406aa56c79f40583de7a67be288ca536"
+    },
+    {
+      "id": "11",
+      "name": "Prince Edward Island",
+      "path": "national/census-divisions-2021/provinces/11.geojson.gz",
+      "features": 3,
+      "bbox": [
+        -64.4135736,
+        45.948126,
+        -61.9707522,
+        47.0589835
+      ],
+      "rawBytes": 1108246,
+      "gzipBytes": 349938,
+      "sha256": "ae06c10937bedf87e53914f90b61a16c9e7ec483109e470eebd8e01722da5e8e"
+    },
+    {
+      "id": "12",
+      "name": "Nova Scotia",
+      "path": "national/census-divisions-2021/provinces/12.geojson.gz",
+      "features": 18,
+      "bbox": [
+        -66.3954114,
+        43.3877565,
+        -59.6611626,
+        47.2277587
+      ],
+      "rawBytes": 7515662,
+      "gzipBytes": 2336915,
+      "sha256": "2b592282bc77616ab45deeea4c638ee25345fc366917514043ea6cbb1c9270f4"
+    },
+    {
+      "id": "13",
+      "name": "New Brunswick",
+      "path": "national/census-divisions-2021/provinces/13.geojson.gz",
+      "features": 15,
+      "bbox": [
+        -69.0530146,
+        44.567673,
+        -63.7706386,
+        48.0725573
+      ],
+      "rawBytes": 3957032,
+      "gzipBytes": 1236788,
+      "sha256": "ff0ea6ebb297ea2fb410847f86733dbf5660ea119459f5b86f4d055b1452f1de"
+    },
+    {
+      "id": "24",
+      "name": "Quebec",
+      "path": "national/census-divisions-2021/provinces/24.geojson.gz",
+      "features": 98,
+      "bbox": [
+        -79.7629068,
+        44.9911522,
+        -57.1054825,
+        62.5824768
+      ],
+      "rawBytes": 61029475,
+      "gzipBytes": 17915416,
+      "sha256": "3390b96176053cb13b588e419ac91ead1b837fac5b66090887d9e923ca41321c"
+    },
+    {
+      "id": "35",
+      "name": "Ontario",
+      "path": "national/census-divisions-2021/provinces/35.geojson.gz",
+      "features": 49,
+      "bbox": [
+        -95.1557124,
+        41.6813284,
+        -74.3434735,
+        56.8617144
+      ],
+      "rawBytes": 96915273,
+      "gzipBytes": 27630657,
+      "sha256": "723801c794681514eeedab7a8a46f46e964700010b2cbb8a0da01e62cfcc611e"
+    },
+    {
+      "id": "46",
+      "name": "Manitoba",
+      "path": "national/census-divisions-2021/provinces/46.geojson.gz",
+      "features": 23,
+      "bbox": [
+        -102.0076221,
+        48.998872,
+        -88.9795857,
+        60.0000709
+      ],
+      "rawBytes": 5613276,
+      "gzipBytes": 1679238,
+      "sha256": "186fd016b0acad7ee9b8feaf42f50dab639cf589855e54ad63fd2ef1f741fc29"
+    },
+    {
+      "id": "47",
+      "name": "Saskatchewan",
+      "path": "national/census-divisions-2021/provinces/47.geojson.gz",
+      "features": 18,
+      "bbox": [
+        -110.010406,
+        48.9989334,
+        -101.3618855,
+        60.0000702
+      ],
+      "rawBytes": 1461202,
+      "gzipBytes": 424652,
+      "sha256": "946244735e921ce8d86b83e438790e60b960413a5221cbae202ee9eb50ec74fe"
+    },
+    {
+      "id": "48",
+      "name": "Alberta",
+      "path": "national/census-divisions-2021/provinces/48.geojson.gz",
+      "features": 19,
+      "bbox": [
+        -120.0027155,
+        48.9967468,
+        -109.9996574,
+        60.0000804
+      ],
+      "rawBytes": 2804745,
+      "gzipBytes": 859104,
+      "sha256": "64218db89d3874d8fdb443525ae818895422f0ee905dfb050f69a1b73ba281f3"
+    },
+    {
+      "id": "59",
+      "name": "British Columbia",
+      "path": "national/census-divisions-2021/provinces/59.geojson.gz",
+      "features": 29,
+      "bbox": [
+        -139.0522229,
+        48.2968141,
+        -114.053772,
+        60.0000679
+      ],
+      "rawBytes": 76464169,
+      "gzipBytes": 21890885,
+      "sha256": "1c33cc1890c3aa1a84040a7bd6c6963992251da471aa6ba6ac4d677335804a02"
+    },
+    {
+      "id": "60",
+      "name": "Yukon",
+      "path": "national/census-divisions-2021/provinces/60.geojson.gz",
+      "features": 1,
+      "bbox": [
+        -141.0181045,
+        60.0000035,
+        -123.7893448,
+        69.6467097
+      ],
+      "rawBytes": 334959,
+      "gzipBytes": 102743,
+      "sha256": "d2fec8dbd1fd91f4ac165f6fb7167bf68f6724a4c052b1525a1995991ddbed24"
+    },
+    {
+      "id": "61",
+      "name": "Northwest Territories",
+      "path": "national/census-divisions-2021/provinces/61.geojson.gz",
+      "features": 6,
+      "bbox": [
+        -136.4687197,
+        60.0000058,
+        -102.0000143,
+        78.8046397
+      ],
+      "rawBytes": 12329346,
+      "gzipBytes": 3844971,
+      "sha256": "34b2974ee7d423e6acd629fea93b50d2942f0a7c3a448d872584f7ef90dece6a"
+    },
+    {
+      "id": "62",
+      "name": "Nunavut",
+      "path": "national/census-divisions-2021/provinces/62.geojson.gz",
+      "features": 3,
+      "bbox": [
+        -120.7247982,
+        51.2530835,
+        -61.0913178,
+        83.1370981
+      ],
+      "rawBytes": 71486810,
+      "gzipBytes": 22971621,
+      "sha256": "5780c05004a6c91d73a1543d1edac46103ad810a649b8005d3584d1abc9488e8"
+    }
+  ]
+}

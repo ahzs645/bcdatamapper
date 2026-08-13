@@ -1,0 +1,10 @@
+{
+  "source": "https://www.env.gov.bc.ca/soe/indicators/air/aqbylaw_viz/data/bylaws.csv",
+  "indicator": "https://www.env.gov.bc.ca/soe/indicators/air/air-quality-bylaws.html",
+  "rows": 188,
+  "regionalDistricts": 27,
+  "csvBytes": 7643,
+  "geojsonBytes": 585495,
+  "geojsonGzipBytes": 193696,
+  "csvSha256": "ba3bbf54e4e763db5c686699ee52cd58313f9fefade1615efb7de30bfe24cab1"
+}

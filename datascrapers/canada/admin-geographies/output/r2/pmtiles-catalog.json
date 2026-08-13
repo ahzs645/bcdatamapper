@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-13T06:51:06.847Z",
+  "generatedBy": "datascrapers/canada/admin-geographies/build-pmtiles.mjs",
+  "sourceManifest": {
+    "path": "manifest.json",
+    "generatedAt": "2026-08-13T06:27:23.850Z",
+    "sha256": "5d1b29298d3847746c2dca432f5c7baa56c1bb5cc1b3b9e2707a857102e2f5f8"
+  },
+  "storage": {
+    "provider": "Cloudflare R2",
+    "bucket": "maps",
+    "prefix": "canada/admin-geographies",
+    "version": "v2025-01-01",
+    "publicBaseUrl": "https://data.map.ahmad.sh"
+  },
+  "archives": [
+    {
+      "id": "census-subdivisions-2025",
+      "title": "Canada census subdivisions, 2025",
+      "description": "Municipalities and statistical municipal equivalents from Statistics Canada, boundaries in effect January 1, 2025.",
+      "referenceDate": "2025-01-01",
+      "representationRole": "municipality-or-statistical-equivalent",
+      "sourceUrl": "https://geo.statcan.gc.ca/geo_wa/rest/services/2025/lcsd000a25s_e/MapServer/0",
+      "licence": "Statistics Canada Open Licence",
+      "sourceLayers": [
+        {
+          "id": "census_subdivisions_2025",
+          "features": 5054
+        }
+      ],
+      "r2Path": "canada/admin-geographies/v2025-01-01/census-subdivisions-2025.pmtiles",
+      "publicUrl": "https://data.map.ahmad.sh/canada/admin-geographies/v2025-01-01/census-subdivisions-2025.pmtiles",
+      "bytes": 7202319,
+      "sha256": "9b8b12e3eda534037ad9370bd07beb121a197792647a5a5ecfd8f606f34cd6df",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "bounds": [
+        -141.018104,
+        41.676957,
+        -52.58229,
+        85.051129
+      ],
+      "tileEntries": 15823,
+      "tileContents": 5126,
+      "vectorLayers": [
+        {
+          "id": "census_subdivisions_2025",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "CDNAME": "String",
+            "CDTYPE": "String",
+            "CDUID": "String",
+            "CSDNAME": "String",
+            "CSDTYPE": "String",
+            "CSDUID": "String",
+            "PRNAME": "String",
+            "PRUID": "String",
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "id": "String",
+            "referenceDate": "String",
+            "representationRole": "String"
+          }
+        }
+      ]
+    },
+    {
+      "id": "census-divisions-2025-derived",
+      "title": "Canada census-division parent geographies, 2025 derived",
+      "description": "Current regional-government or statistical-equivalent parent geographies dissolved from 2025 census subdivisions.",
+      "referenceDate": "2025-01-01",
+      "representationRole": "regional-government-or-statistical-equivalent",
+      "sourceUrl": "https://geo.statcan.gc.ca/geo_wa/rest/services/2025/lcsd000a25s_e/MapServer/0",
+      "licence": "Statistics Canada Open Licence",
+      "sourceLayers": [
+        {
+          "id": "census_divisions_2025",
+          "features": 290
+        }
+      ],
+      "r2Path": "canada/admin-geographies/v2025-01-01/census-divisions-2025-derived.pmtiles",
+      "publicUrl": "https://data.map.ahmad.sh/canada/admin-geographies/v2025-01-01/census-divisions-2025-derived.pmtiles",
+      "bytes": 2875519,
+      "sha256": "8813d7b70b015fad0e9bb1ceee4e0ec88cc1bae4b602b9a3c2c01c4b2c12a068",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "bounds": [
+        -141.018104,
+        41.676957,
+        -52.58229,
+        85.051129
+      ],
+      "tileEntries": 15264,
+      "tileContents": 4078,
+      "vectorLayers": [
+        {
+          "id": "census_divisions_2025",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "CDNAME": "String",
+            "CDTYPE": "String",
+            "CDUID": "String",
+            "PRNAME": "String",
+            "PRUID": "String",
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "derivedFrom": "String",
+            "id": "String",
+            "referenceDate": "String",
+            "representationRole": "String"
+          }
+        }
+      ]
+    },
+    {
+      "id": "census-divisions-2021",
+      "title": "Canada census divisions, 2021",
+      "description": "Regional governments and statistical equivalents from the 2021 Census comparison geography.",
+      "referenceDate": "2021-01-01",
+      "representationRole": "regional-government-or-statistical-equivalent",
+      "sourceUrl": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/4",
+      "licence": "Open Government Licence - Canada",
+      "sourceLayers": [
+        {
+          "id": "census_divisions_2021",
+          "features": 293
+        }
+      ],
+      "r2Path": "canada/admin-geographies/v2025-01-01/census-divisions-2021.pmtiles",
+      "publicUrl": "https://data.map.ahmad.sh/canada/admin-geographies/v2025-01-01/census-divisions-2021.pmtiles",
+      "bytes": 5781957,
+      "sha256": "521f548344e345d1a2bdf0b92c1fe9ff1b7d65bf38450a36b22e8f1f1bfc4197",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "bounds": [
+        -141.011526,
+        41.724428,
+        -52.619361,
+        83.136561
+      ],
+      "tileEntries": 11430,
+      "tileContents": 8104,
+      "vectorLayers": [
+        {
+          "id": "census_divisions_2021",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "CDNAME": "String",
+            "CDTYPE": "String",
+            "CDUID": "String",
+            "PRNAME": "String",
+            "PRUID": "String",
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "id": "String",
+            "referenceDate": "String",
+            "representationRole": "String"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indigenous-lands-clss",
+      "title": "Canada Indigenous lands by CLSS legal class",
+      "description": "Canada Lands Survey System administrative boundaries retaining each federal legal distribution type.",
+      "referenceDate": null,
+      "representationRole": "indigenous-land-by-legal-class",
+      "sourceUrl": "https://proxyinternet.nrcan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0",
+      "licence": "Open Government Licence - Canada",
+      "sourceLayers": [
+        {
+          "id": "indigenous_lands_clss",
+          "features": 3372
+        }
+      ],
+      "r2Path": "canada/admin-geographies/v2025-01-01/indigenous-lands-clss.pmtiles",
+      "publicUrl": "https://data.map.ahmad.sh/canada/admin-geographies/v2025-01-01/indigenous-lands-clss.pmtiles",
+      "bytes": 9459680,
+      "sha256": "aafb63049afac14a97f6ac7965c3db1da327e10220bd69038738540422551088",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "bounds": [
+        -141.000688,
+        42.020544,
+        -55.618554,
+        79.836374
+      ],
+      "tileEntries": 5728,
+      "tileContents": 5706,
+      "vectorLayers": [
+        {
+          "id": "indigenous_lands_clss",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "NID": "String",
+            "adminAreaId": "String",
+            "adminAreaNameAlt1": "String",
+            "adminAreaNameAltLang1": "String",
+            "adminAreaNameEng": "String",
+            "adminAreaNameFra": "String",
+            "adminRegion": "String",
+            "adminRegionEng": "String",
+            "adminRegionFra": "String",
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "distributionType": "String",
+            "distributionTypeEng": "String",
+            "distributionTypeFra": "String",
+            "id": "String",
+            "jurisdiction": "String",
+            "jurisdictionEng": "String",
+            "jurisdictionFra": "String",
+            "representationPurpose": "String",
+            "representationPurposeEng": "String",
+            "representationPurposeFra": "String",
+            "representationRole": "String",
+            "sourceGeoDB": "String",
+            "webReference": "String"
+          }
+        }
+      ]
+    },
+    {
+      "id": "newfoundland-labrador-overlays",
+      "title": "Newfoundland and Labrador local-government and Inuit land overlays",
+      "description": "Provincial municipality, Labrador Inuit Lands, and Labrador Inuit Settlement Area source layers.",
+      "referenceDate": null,
+      "representationRole": "provincial-local-government-and-treaty-land-overlays",
+      "sourceUrl": "https://dnrmaps.gov.nl.ca/arcgis/rest/services/GeoAtlas/Land_Use/MapServer",
+      "licence": "Government of Newfoundland and Labrador open-data terms",
+      "sourceLayers": [
+        {
+          "id": "nl_municipalities",
+          "features": 252
+        },
+        {
+          "id": "nl_labrador_inuit_lands",
+          "features": 2
+        },
+        {
+          "id": "nl_labrador_inuit_settlement_area",
+          "features": 2
+        }
+      ],
+      "r2Path": "canada/admin-geographies/v2025-01-01/newfoundland-labrador-overlays.pmtiles",
+      "publicUrl": "https://data.map.ahmad.sh/canada/admin-geographies/v2025-01-01/newfoundland-labrador-overlays.pmtiles",
+      "bytes": 1303064,
+      "sha256": "9258845ccf46df8a826dbb9cb9cb99193135f4978081168fe24d32798b47bba1",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "bounds": [
+        -66.988898,
+        46.688977,
+        -52.619403,
+        60.999888
+      ],
+      "tileEntries": 293,
+      "tileContents": 293,
+      "vectorLayers": [
+        {
+          "id": "nl_labrador_inuit_lands",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "agreementAreaId": "String",
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "id": "String",
+            "representationRole": "String",
+            "sourceFeatureId": "String"
+          }
+        },
+        {
+          "id": "nl_labrador_inuit_settlement_area",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "agreementAreaId": "String",
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "id": "String",
+            "representationRole": "String",
+            "sourceFeatureId": "String"
+          }
+        },
+        {
+          "id": "nl_municipalities",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 9,
+          "fields": {
+            "boundaryCode": "String",
+            "boundaryId": "String",
+            "boundaryLevel": "String",
+            "boundaryName": "String",
+            "boundarySource": "String",
+            "enablingActUrl": "String",
+            "id": "String",
+            "legalBoundaryUrl": "String",
+            "representationRole": "String",
+            "sourceFeatureId": "String"
+          }
+        }
+      ]
+    }
+  ]
+}

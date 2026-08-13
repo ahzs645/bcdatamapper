@@ -1,0 +1,592 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-13T06:27:23.850Z",
+  "complete": true,
+  "notes": [
+    "Census subdivisions are municipalities or areas treated as municipal equivalents for statistical purposes.",
+    "Census divisions are regional governments or statistical equivalents; CD geometry must not be presented as uniformly administrative.",
+    "CLSS features retain their legal distribution type and must not be collapsed into a single reserve-land category."
+  ],
+  "datasets": {
+    "censusSubdivisions2025": {
+      "name": "Statistics Canada 2025 Census Subdivision Boundary File",
+      "referenceDate": "2025-01-01",
+      "sourceUrl": "https://geo.statcan.gc.ca/geo_wa/rest/services/2025/lcsd000a25s_e/MapServer/0",
+      "licence": "Statistics Canada Open Licence",
+      "sourceFeatureCount": 5054,
+      "features": 5054,
+      "typeCounts": {
+        "C": 11,
+        "CC": 3,
+        "CG": 4,
+        "CT": 41,
+        "CU": 2,
+        "CV": 2,
+        "CY": 153,
+        "DM": 49,
+        "FD": 35,
+        "GR": 1,
+        "HAM": 37,
+        "ID": 7,
+        "IGD": 2,
+        "IM": 1,
+        "IRI": 1061,
+        "LGD": 2,
+        "M": 3,
+        "MD": 74,
+        "MÉ": 652,
+        "MRM": 1,
+        "MU": 102,
+        "NH": 11,
+        "NL": 1,
+        "NO": 139,
+        "NV": 11,
+        "PE": 131,
+        "RCR": 17,
+        "RDA": 161,
+        "RDR": 12,
+        "RGM": 4,
+        "RM": 403,
+        "RMU": 2,
+        "RV": 43,
+        "S-É": 20,
+        "SA": 3,
+        "SC": 28,
+        "SÉ": 13,
+        "SET": 12,
+        "SG": 3,
+        "SM": 6,
+        "SNO": 92,
+        "SV": 51,
+        "T": 696,
+        "TAL": 1,
+        "TC": 9,
+        "TI": 13,
+        "TK": 1,
+        "TL": 1,
+        "TP": 195,
+        "TV": 31,
+        "TWL": 1,
+        "V": 234,
+        "VC": 8,
+        "VK": 1,
+        "VL": 443,
+        "VN": 14
+      },
+      "chunks": [
+        {
+          "id": "10",
+          "name": "Newfoundland and Labrador",
+          "path": "national/census-subdivisions-2025/provinces/10.geojson.gz",
+          "features": 372,
+          "bbox": [
+            -67.8216856,
+            46.5956253,
+            -52.5822902,
+            60.3777555
+          ],
+          "rawBytes": 7466543,
+          "gzipBytes": 2220031,
+          "sha256": "1e4abe96af5fd89b2402899dc06408b1d9005a033b92490a0598407f527368b3"
+        },
+        {
+          "id": "11",
+          "name": "Prince Edward Island",
+          "path": "national/census-subdivisions-2025/provinces/11.geojson.gz",
+          "features": 96,
+          "bbox": [
+            -64.4460147,
+            45.8580329,
+            -61.9549907,
+            47.0659775
+          ],
+          "rawBytes": 459163,
+          "gzipBytes": 113984,
+          "sha256": "fd5b8f891fe44a7e6f658af1a64dda095ad147667c5ead63450b63db237c84a9"
+        },
+        {
+          "id": "12",
+          "name": "Nova Scotia",
+          "path": "national/census-subdivisions-2025/provinces/12.geojson.gz",
+          "features": 96,
+          "bbox": [
+            -66.4470806,
+            43.2517513,
+            -59.6517235,
+            47.2350905
+          ],
+          "rawBytes": 1208844,
+          "gzipBytes": 328987,
+          "sha256": "44a41b5a2cc5bd49b9968e785e1ba006f3f8d859cc867f6f55c3aec78eea9438"
+        },
+        {
+          "id": "13",
+          "name": "New Brunswick",
+          "path": "national/census-subdivisions-2025/provinces/13.geojson.gz",
+          "features": 109,
+          "bbox": [
+            -69.0534725,
+            44.5556898,
+            -63.6147099,
+            48.089349
+          ],
+          "rawBytes": 1636657,
+          "gzipBytes": 479975,
+          "sha256": "3d1a7ebc43b2f83fe67cd20c399b46b493604669a5c4990c4d84345c82f84f39"
+        },
+        {
+          "id": "24",
+          "name": "Quebec",
+          "path": "national/census-subdivisions-2025/provinces/24.geojson.gz",
+          "features": 1278,
+          "bbox": [
+            -79.7707805,
+            44.9911522,
+            -57.1054825,
+            62.5936025
+          ],
+          "rawBytes": 14425708,
+          "gzipBytes": 4163901,
+          "sha256": "90503726e88317634d900ebb6e375cbf47c5542e20f822a07526dbfda7f5cbcd"
+        },
+        {
+          "id": "35",
+          "name": "Ontario",
+          "path": "national/census-subdivisions-2025/provinces/35.geojson.gz",
+          "features": 578,
+          "bbox": [
+            -95.1560103,
+            41.6769573,
+            -74.3203828,
+            56.8617144
+          ],
+          "rawBytes": 13745208,
+          "gzipBytes": 4108347,
+          "sha256": "244004089474ee6df31c29ae97935de5699ebd23d071116357a7c7f6abb004e7"
+        },
+        {
+          "id": "46",
+          "name": "Manitoba",
+          "path": "national/census-subdivisions-2025/provinces/46.geojson.gz",
+          "features": 241,
+          "bbox": [
+            -102.0076221,
+            48.9988695,
+            -88.9795857,
+            60.0000095
+          ],
+          "rawBytes": 7638048,
+          "gzipBytes": 2305035,
+          "sha256": "df6be389803ab3bcec6117f0ade8d9ec8589656626646dd1f9eae2cd220fe395"
+        },
+        {
+          "id": "47",
+          "name": "Saskatchewan",
+          "path": "national/census-subdivisions-2025/provinces/47.geojson.gz",
+          "features": 995,
+          "bbox": [
+            -110.010406,
+            48.9989334,
+            -101.3618855,
+            60.0000595
+          ],
+          "rawBytes": 5487421,
+          "gzipBytes": 1446543,
+          "sha256": "6bbb299e643e0100e00174d1d8a8afdb1d30e8113d1ea48957a3f83592d2746f"
+        },
+        {
+          "id": "48",
+          "name": "Alberta",
+          "path": "national/census-subdivisions-2025/provinces/48.geojson.gz",
+          "features": 419,
+          "bbox": [
+            -120.0027155,
+            48.9967468,
+            -109.9996574,
+            60.0000804
+          ],
+          "rawBytes": 6483864,
+          "gzipBytes": 1926400,
+          "sha256": "dc09b3f835b16fd640f7021b01561dfab6715305f05212dd0ae760c9745f7cbd"
+        },
+        {
+          "id": "59",
+          "name": "British Columbia",
+          "path": "national/census-subdivisions-2025/provinces/59.geojson.gz",
+          "features": 765,
+          "bbox": [
+            -139.0522229,
+            48.2500055,
+            -114.053772,
+            60.0000665
+          ],
+          "rawBytes": 7025938,
+          "gzipBytes": 2063281,
+          "sha256": "757aab5cb32eb109e225fa5ca15d5a1664529c19aabb5120359951a7b51865d4"
+        },
+        {
+          "id": "60",
+          "name": "Yukon",
+          "path": "national/census-subdivisions-2025/provinces/60.geojson.gz",
+          "features": 33,
+          "bbox": [
+            -141.0181045,
+            60.0000035,
+            -123.7893448,
+            69.6894302
+          ],
+          "rawBytes": 461716,
+          "gzipBytes": 135874,
+          "sha256": "12034c8e958527c8464e760e4c20043b53cb92c1b8808576d95e8061e4a511d7"
+        },
+        {
+          "id": "61",
+          "name": "Northwest Territories",
+          "path": "national/census-subdivisions-2025/provinces/61.geojson.gz",
+          "features": 41,
+          "bbox": [
+            -141.0101229,
+            60.0000058,
+            -102,
+            89.9994308
+          ],
+          "rawBytes": 840162,
+          "gzipBytes": 262598,
+          "sha256": "43c151746c8c654193556274b9b0ce15319d7b7b41153e99e4515ff8adee3a4c"
+        },
+        {
+          "id": "62",
+          "name": "Nunavut",
+          "path": "national/census-subdivisions-2025/provinces/62.geojson.gz",
+          "features": 31,
+          "bbox": [
+            -128.9489751,
+            51.152436,
+            -59.991264,
+            89.9994308
+          ],
+          "rawBytes": 2455395,
+          "gzipBytes": 773772,
+          "sha256": "8d502c777e36e6bca41263766a2351fd05a2d65cf036b21c670d0710e1cd9ef7"
+        }
+      ]
+    },
+    "censusDivisions2021": {
+      "name": "Statistics Canada 2021 Cartographic Boundary File - Census Divisions",
+      "referenceDate": "2021-01-01",
+      "sourceUrl": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/4",
+      "licence": "Open Government Licence - Canada",
+      "advertisedMaxRecordCount": 6000,
+      "features": 293,
+      "typeCounts": {
+        "CDR": 85,
+        "CT": 15,
+        "CTY": 41,
+        "DIS": 10,
+        "DM": 1,
+        "MRC": 81,
+        "RD": 28,
+        "REG": 10,
+        "RM": 6,
+        "TÉ": 12,
+        "TER": 1,
+        "UC": 3
+      },
+      "chunks": [
+        {
+          "id": "10",
+          "name": "Newfoundland and Labrador",
+          "path": "national/census-divisions-2021/provinces/10.geojson.gz",
+          "features": 11,
+          "bbox": [
+            -67.8216856,
+            46.6109937,
+            -52.6193607,
+            60.3777555
+          ],
+          "rawBytes": 30394178,
+          "gzipBytes": 9478365,
+          "sha256": "b1bf774331ffcd7cd622850472f15032406aa56c79f40583de7a67be288ca536"
+        },
+        {
+          "id": "11",
+          "name": "Prince Edward Island",
+          "path": "national/census-divisions-2021/provinces/11.geojson.gz",
+          "features": 3,
+          "bbox": [
+            -64.4135736,
+            45.948126,
+            -61.9707522,
+            47.0589835
+          ],
+          "rawBytes": 1108246,
+          "gzipBytes": 349938,
+          "sha256": "ae06c10937bedf87e53914f90b61a16c9e7ec483109e470eebd8e01722da5e8e"
+        },
+        {
+          "id": "12",
+          "name": "Nova Scotia",
+          "path": "national/census-divisions-2021/provinces/12.geojson.gz",
+          "features": 18,
+          "bbox": [
+            -66.3954114,
+            43.3877565,
+            -59.6611626,
+            47.2277587
+          ],
+          "rawBytes": 7515662,
+          "gzipBytes": 2336915,
+          "sha256": "2b592282bc77616ab45deeea4c638ee25345fc366917514043ea6cbb1c9270f4"
+        },
+        {
+          "id": "13",
+          "name": "New Brunswick",
+          "path": "national/census-divisions-2021/provinces/13.geojson.gz",
+          "features": 15,
+          "bbox": [
+            -69.0530146,
+            44.567673,
+            -63.7706386,
+            48.0725573
+          ],
+          "rawBytes": 3957032,
+          "gzipBytes": 1236788,
+          "sha256": "ff0ea6ebb297ea2fb410847f86733dbf5660ea119459f5b86f4d055b1452f1de"
+        },
+        {
+          "id": "24",
+          "name": "Quebec",
+          "path": "national/census-divisions-2021/provinces/24.geojson.gz",
+          "features": 98,
+          "bbox": [
+            -79.7629068,
+            44.9911522,
+            -57.1054825,
+            62.5824768
+          ],
+          "rawBytes": 61029475,
+          "gzipBytes": 17915416,
+          "sha256": "3390b96176053cb13b588e419ac91ead1b837fac5b66090887d9e923ca41321c"
+        },
+        {
+          "id": "35",
+          "name": "Ontario",
+          "path": "national/census-divisions-2021/provinces/35.geojson.gz",
+          "features": 49,
+          "bbox": [
+            -95.1557124,
+            41.6813284,
+            -74.3434735,
+            56.8617144
+          ],
+          "rawBytes": 96915273,
+          "gzipBytes": 27630657,
+          "sha256": "723801c794681514eeedab7a8a46f46e964700010b2cbb8a0da01e62cfcc611e"
+        },
+        {
+          "id": "46",
+          "name": "Manitoba",
+          "path": "national/census-divisions-2021/provinces/46.geojson.gz",
+          "features": 23,
+          "bbox": [
+            -102.0076221,
+            48.998872,
+            -88.9795857,
+            60.0000709
+          ],
+          "rawBytes": 5613276,
+          "gzipBytes": 1679238,
+          "sha256": "186fd016b0acad7ee9b8feaf42f50dab639cf589855e54ad63fd2ef1f741fc29"
+        },
+        {
+          "id": "47",
+          "name": "Saskatchewan",
+          "path": "national/census-divisions-2021/provinces/47.geojson.gz",
+          "features": 18,
+          "bbox": [
+            -110.010406,
+            48.9989334,
+            -101.3618855,
+            60.0000702
+          ],
+          "rawBytes": 1461202,
+          "gzipBytes": 424652,
+          "sha256": "946244735e921ce8d86b83e438790e60b960413a5221cbae202ee9eb50ec74fe"
+        },
+        {
+          "id": "48",
+          "name": "Alberta",
+          "path": "national/census-divisions-2021/provinces/48.geojson.gz",
+          "features": 19,
+          "bbox": [
+            -120.0027155,
+            48.9967468,
+            -109.9996574,
+            60.0000804
+          ],
+          "rawBytes": 2804745,
+          "gzipBytes": 859104,
+          "sha256": "64218db89d3874d8fdb443525ae818895422f0ee905dfb050f69a1b73ba281f3"
+        },
+        {
+          "id": "59",
+          "name": "British Columbia",
+          "path": "national/census-divisions-2021/provinces/59.geojson.gz",
+          "features": 29,
+          "bbox": [
+            -139.0522229,
+            48.2968141,
+            -114.053772,
+            60.0000679
+          ],
+          "rawBytes": 76464169,
+          "gzipBytes": 21890885,
+          "sha256": "1c33cc1890c3aa1a84040a7bd6c6963992251da471aa6ba6ac4d677335804a02"
+        },
+        {
+          "id": "60",
+          "name": "Yukon",
+          "path": "national/census-divisions-2021/provinces/60.geojson.gz",
+          "features": 1,
+          "bbox": [
+            -141.0181045,
+            60.0000035,
+            -123.7893448,
+            69.6467097
+          ],
+          "rawBytes": 334959,
+          "gzipBytes": 102743,
+          "sha256": "d2fec8dbd1fd91f4ac165f6fb7167bf68f6724a4c052b1525a1995991ddbed24"
+        },
+        {
+          "id": "61",
+          "name": "Northwest Territories",
+          "path": "national/census-divisions-2021/provinces/61.geojson.gz",
+          "features": 6,
+          "bbox": [
+            -136.4687197,
+            60.0000058,
+            -102.0000143,
+            78.8046397
+          ],
+          "rawBytes": 12329346,
+          "gzipBytes": 3844971,
+          "sha256": "34b2974ee7d423e6acd629fea93b50d2942f0a7c3a448d872584f7ef90dece6a"
+        },
+        {
+          "id": "62",
+          "name": "Nunavut",
+          "path": "national/census-divisions-2021/provinces/62.geojson.gz",
+          "features": 3,
+          "bbox": [
+            -120.7247982,
+            51.2530835,
+            -61.0913178,
+            83.1370981
+          ],
+          "rawBytes": 71486810,
+          "gzipBytes": 22971621,
+          "sha256": "5780c05004a6c91d73a1543d1edac46103ad810a649b8005d3584d1abc9488e8"
+        }
+      ]
+    },
+    "indigenousLandsClss": {
+      "name": "CLSS Aboriginal Lands of Canada Legislative Boundaries",
+      "sourceUrl": "https://proxyinternet.nrcan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0",
+      "licence": "Open Government Licence - Canada",
+      "referenceDate": null,
+      "advertisedMaxRecordCount": 500,
+      "legalClassCounts": {
+        "Cree and Naskapi 1A and 1A-N Land": 10,
+        "Gwich’in Land": 1,
+        "Indian Land": 1,
+        "Indian Reserve": 3284,
+        "Inuit Owned Land": 27,
+        "Inuvialuit Land": 1,
+        "Sahtu Land": 1,
+        "Salt River First Nation Settlement Land": 1,
+        "Sechelt Land": 33,
+        "Tlicho Land": 1,
+        "Yukon First Nations Settlement Land": 12
+      },
+      "path": "national/indigenous-lands-clss.geojson.gz",
+      "features": 3372,
+      "bbox": [
+        -141.0006908,
+        42.0204785,
+        -55.6185537,
+        79.8363736
+      ],
+      "rawBytes": 135514201,
+      "gzipBytes": 39191380,
+      "sha256": "1465a54baacff6df849eb2d7583d8b5025da662c3d8863916a3c83b5e6c23bbe"
+    },
+    "statcanTypeGlossary": {
+      "name": "Statistics Canada 2025 CSD and CD type glossary",
+      "referenceDate": "2025-01-01",
+      "sourceUrls": {
+        "censusSubdivisionTypes": "https://www150.statcan.gc.ca/n1/pub/92-162-g/2025001/tbl/tbl4.2-eng.htm",
+        "censusDivisionTypes": "https://www150.statcan.gc.ca/n1/pub/92-162-g/2025001/tbl/tbl4.3-eng.htm"
+      },
+      "licence": "Statistics Canada Open Licence",
+      "path": "reference/statcan-geography-types-2025.json",
+      "censusSubdivisionTypes": 56,
+      "censusDivisionTypes": 12,
+      "bytes": 5926,
+      "sha256": "4783f7c69356d499761786bfb062ec87919bb438dbc2efa09b38dd632af9575b"
+    },
+    "newfoundlandLabrador": {
+      "name": "Newfoundland and Labrador local-government and Labrador Inuit agreement areas",
+      "layers": {
+        "municipalities": {
+          "sourceUrl": "https://dnrmaps.gov.nl.ca/arcgis/rest/services/GeoAtlas/Land_Use/MapServer/6",
+          "licence": "Government of Newfoundland and Labrador Open Data Licence",
+          "referenceDate": null,
+          "path": "provincial/newfoundland-labrador/municipalities.geojson.gz",
+          "features": 252,
+          "bbox": [
+            -66.9888977,
+            46.6889766,
+            -52.6194032,
+            53.5443285
+          ],
+          "rawBytes": 15980833,
+          "gzipBytes": 4433166,
+          "sha256": "8a7eac536c499fe2bd1ecec109a63aaa5d57c42f2967a640b97318fdecab3d99"
+        },
+        "labradorInuitLands": {
+          "sourceUrl": "https://dnrmaps.gov.nl.ca/arcgis/rest/services/GeoAtlas/Land_Use/MapServer/2",
+          "licence": "Government of Newfoundland and Labrador Open Data Licence",
+          "referenceDate": null,
+          "path": "provincial/newfoundland-labrador/labradorInuitLands.geojson.gz",
+          "features": 2,
+          "bbox": [
+            -64.1511361,
+            53.7875731,
+            -57.1379626,
+            59.610366
+          ],
+          "rawBytes": 6317425,
+          "gzipBytes": 1524488,
+          "sha256": "55256850e10878da35fe8a28bef109e60445570574a23712dbe225ad3b5cd026"
+        },
+        "labradorInuitSettlementArea": {
+          "sourceUrl": "https://dnrmaps.gov.nl.ca/arcgis/rest/services/GeoAtlas/Land_Use/MapServer/3",
+          "licence": "Government of Newfoundland and Labrador Open Data Licence",
+          "referenceDate": null,
+          "path": "provincial/newfoundland-labrador/labradorInuitSettlementArea.geojson.gz",
+          "features": 2,
+          "bbox": [
+            -64.9209548,
+            53.5440165,
+            -56.2655872,
+            60.9998876
+          ],
+          "rawBytes": 7280492,
+          "gzipBytes": 1777755,
+          "sha256": "c63a95ab378ac864d039e48198609c2dede448ed80045292ec0955b269d2341d"
+        }
+      }
+    }
+  }
+}

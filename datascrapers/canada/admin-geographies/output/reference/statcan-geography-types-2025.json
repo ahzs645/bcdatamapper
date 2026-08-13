@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "referenceDate": "2025-01-01",
+  "warning": "A Statistics Canada geography type name does not by itself establish that every feature is a government. Apply a jurisdiction-specific governance-role crosswalk before presenting administrative status.",
+  "censusSubdivisionTypes": [
+    {
+      "code": "C",
+      "description": "City / Cité"
+    },
+    {
+      "code": "CC",
+      "description": "Chartered community"
+    },
+    {
+      "code": "CG",
+      "description": "Community government"
+    },
+    {
+      "code": "CT",
+      "description": "Canton (municipalité de)"
+    },
+    {
+      "code": "CU",
+      "description": "Cantons unis (municipalité de)"
+    },
+    {
+      "code": "CV",
+      "description": "City / Ville"
+    },
+    {
+      "code": "CY",
+      "description": "City"
+    },
+    {
+      "code": "DM",
+      "description": "District municipality"
+    },
+    {
+      "code": "FD",
+      "description": "Fire district"
+    },
+    {
+      "code": "GR",
+      "description": "Gouvernement régional"
+    },
+    {
+      "code": "HAM",
+      "description": "Hamlet"
+    },
+    {
+      "code": "ID",
+      "description": "Improvement district"
+    },
+    {
+      "code": "IGD",
+      "description": "Indian government district"
+    },
+    {
+      "code": "IM",
+      "description": "Island municipality"
+    },
+    {
+      "code": "IRI",
+      "description": "Indian reserve / Réserve indienne"
+    },
+    {
+      "code": "LGD",
+      "description": "Local government district"
+    },
+    {
+      "code": "M",
+      "description": "Municipality / Municipalité"
+    },
+    {
+      "code": "MD",
+      "description": "Municipal district"
+    },
+    {
+      "code": "MÉ",
+      "description": "Municipalité"
+    },
+    {
+      "code": "MRM",
+      "description": "Regional municipality / Municipalité régionale"
+    },
+    {
+      "code": "MU",
+      "description": "Municipality"
+    },
+    {
+      "code": "NH",
+      "description": "Northern hamlet"
+    },
+    {
+      "code": "NL",
+      "description": "Nisga'a land"
+    },
+    {
+      "code": "NO",
+      "description": "Unorganized / Non organisé"
+    },
+    {
+      "code": "NV",
+      "description": "Northern village"
+    },
+    {
+      "code": "PE",
+      "description": "Paroisse (municipalité de)"
+    },
+    {
+      "code": "RCR",
+      "description": "Rural community / Communauté rurale"
+    },
+    {
+      "code": "RDA",
+      "description": "Regional district electoral area"
+    },
+    {
+      "code": "RDR",
+      "description": "Rural district / District rural"
+    },
+    {
+      "code": "RGM",
+      "description": "Regional municipality"
+    },
+    {
+      "code": "RM",
+      "description": "Rural municipality"
+    },
+    {
+      "code": "RMU",
+      "description": "Resort municipality"
+    },
+    {
+      "code": "RV",
+      "description": "Resort village"
+    },
+    {
+      "code": "SA",
+      "description": "Special area"
+    },
+    {
+      "code": "SC",
+      "description": "Subdivision of county municipality / Subdivision municipalité de comté"
+    },
+    {
+      "code": "SÉ",
+      "description": "Settlement / Établissement"
+    },
+    {
+      "code": "S-É",
+      "description": "Indian settlement / Établissement indien"
+    },
+    {
+      "code": "SET",
+      "description": "Settlement"
+    },
+    {
+      "code": "SG",
+      "description": "Self-government / Autonomie gouvernementale"
+    },
+    {
+      "code": "SM",
+      "description": "Specialized municipality"
+    },
+    {
+      "code": "SNO",
+      "description": "Subdivision of unorganized / Subdivision non organisée"
+    },
+    {
+      "code": "SV",
+      "description": "Summer village"
+    },
+    {
+      "code": "T",
+      "description": "Town"
+    },
+    {
+      "code": "TAL",
+      "description": "Tla’amin Lands"
+    },
+    {
+      "code": "TC",
+      "description": "Terres réservées aux Cris"
+    },
+    {
+      "code": "TI",
+      "description": "Terre inuite"
+    },
+    {
+      "code": "TK",
+      "description": "Terres réservées aux Naskapis"
+    },
+    {
+      "code": "TL",
+      "description": "Teslin land"
+    },
+    {
+      "code": "TP",
+      "description": "Township"
+    },
+    {
+      "code": "TV",
+      "description": "Town / Ville"
+    },
+    {
+      "code": "TWL",
+      "description": "Tsawwassen Lands"
+    },
+    {
+      "code": "V",
+      "description": "Ville"
+    },
+    {
+      "code": "VC",
+      "description": "Village cri"
+    },
+    {
+      "code": "VK",
+      "description": "Village naskapi"
+    },
+    {
+      "code": "VL",
+      "description": "Village"
+    },
+    {
+      "code": "VN",
+      "description": "Village nordique"
+    }
+  ],
+  "censusDivisionTypes": [
+    {
+      "code": "CDR",
+      "description": "Census division / Division de recensement"
+    },
+    {
+      "code": "CTY",
+      "description": "County"
+    },
+    {
+      "code": "DIS",
+      "description": "District"
+    },
+    {
+      "code": "DM",
+      "description": "District municipality"
+    },
+    {
+      "code": "MRC",
+      "description": "Municipalité régionale de comté"
+    },
+    {
+      "code": "RCR",
+      "description": "Regional Service Commission / Commission de services régionaux"
+    },
+    {
+      "code": "RD",
+      "description": "Regional district"
+    },
+    {
+      "code": "REG",
+      "description": "Region"
+    },
+    {
+      "code": "RM",
+      "description": "Regional municipality"
+    },
+    {
+      "code": "TÉ",
+      "description": "Territoire équivalent"
+    },
+    {
+      "code": "TER",
+      "description": "Territory / Territoire"
+    },
+    {
+      "code": "UC",
+      "description": "United counties"
+    }
+  ],
+  "sources": {
+    "censusSubdivisionTypes": "https://www150.statcan.gc.ca/n1/pub/92-162-g/2025001/tbl/tbl4.2-eng.htm",
+    "censusDivisionTypes": "https://www150.statcan.gc.ca/n1/pub/92-162-g/2025001/tbl/tbl4.3-eng.htm"
+  }
+}

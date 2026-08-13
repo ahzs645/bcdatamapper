@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "project": "Canada local-government and administrative-geographies atlas",
+  "sources": [
+    {
+      "id": "statcan-csd-2025",
+      "jurisdiction": "Canada",
+      "status": "automated",
+      "role": "municipality-or-statistical-equivalent foundation",
+      "url": "https://geo.statcan.gc.ca/geo_wa/rest/services/2025/lcsd000a25s_e/MapServer/0",
+      "referenceDate": "2025-01-01",
+      "licence": "Statistics Canada Open Licence"
+    },
+    {
+      "id": "statcan-cd-2021",
+      "jurisdiction": "Canada",
+      "status": "automated",
+      "role": "regional-government-or-statistical-equivalent comparison",
+      "url": "https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/4",
+      "referenceDate": "2021-01-01",
+      "licence": "Open Government Licence - Canada"
+    },
+    {
+      "id": "clss-indigenous-lands",
+      "jurisdiction": "Canada",
+      "status": "automated",
+      "role": "Indigenous land geometry separated by federal legal class",
+      "url": "https://proxyinternet.nrcan.gc.ca/arcgis/rest/services/CLSS-SATC/CLSS_Administrative_Boundaries/MapServer/0",
+      "referenceDate": null,
+      "licence": "Open Government Licence - Canada"
+    },
+    {
+      "id": "bc-regional-districts",
+      "jurisdiction": "British Columbia",
+      "status": "existing-scraper",
+      "role": "regional government",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP/ows",
+      "referenceDate": null,
+      "licence": "Open Government Licence - British Columbia"
+    },
+    {
+      "id": "bc-municipalities",
+      "jurisdiction": "British Columbia",
+      "status": "existing-scraper",
+      "role": "local government",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows",
+      "referenceDate": null,
+      "licence": "Open Government Licence - British Columbia"
+    },
+    {
+      "id": "saskatchewan-nsad",
+      "jurisdiction": "Saskatchewan",
+      "status": "candidate",
+      "role": "province-administered northern district",
+      "url": "https://gis.saskatchewan.ca/arcgis/rest/services/Administrative/MapServer/0",
+      "referenceDate": null,
+      "licence": "Government of Saskatchewan open-data terms"
+    },
+    {
+      "id": "manitoba-municipal-boundaries",
+      "jurisdiction": "Manitoba",
+      "status": "candidate",
+      "role": "municipal and local-government-district geometry",
+      "url": "https://web43.gov.mb.ca/arcgis/rest/services/WALLAS/WaLLAS_REFERENCE/MapServer/7",
+      "referenceDate": null,
+      "licence": "Manitoba Geospatial Open Data Licence"
+    },
+    {
+      "id": "new-brunswick-rsc",
+      "jurisdiction": "New Brunswick",
+      "status": "candidate",
+      "role": "post-2023 regional service commissions",
+      "url": "https://www.gnb.ca/en/campaign/geonb/data-catalogue.html",
+      "referenceDate": "2023-01-01",
+      "licence": "Open Government Licence - New Brunswick"
+    },
+    {
+      "id": "nova-scotia-municipalities",
+      "jurisdiction": "Nova Scotia",
+      "status": "candidate",
+      "role": "regional, county, district, and town municipality boundaries",
+      "url": "https://data.novascotia.ca/resource/7bqh-hssn.geojson",
+      "referenceDate": null,
+      "licence": "Nova Scotia Open Government Licence"
+    },
+    {
+      "id": "ontario-municipal-boundaries",
+      "jurisdiction": "Ontario",
+      "status": "candidate",
+      "role": "upper-tier, district, lower-tier, and single-tier geometry",
+      "url": "https://data.ontario.ca/dataset/municipal-boundaries",
+      "referenceDate": null,
+      "licence": "Open Government Licence - Ontario"
+    },
+    {
+      "id": "quebec-sda",
+      "jurisdiction": "Quebec",
+      "status": "candidate",
+      "role": "MRC, equivalent territory, municipality, and unorganized territory geometry",
+      "url": "https://servicescarto.mern.gouv.qc.ca/pes/rest/services/Territoire/SDA_WMS/MapServer",
+      "referenceDate": null,
+      "licence": "Données Québec open-data terms"
+    },
+    {
+      "id": "newfoundland-labrador-land-use",
+      "jurisdiction": "Newfoundland and Labrador",
+      "status": "automated",
+      "role": "municipal, Labrador Inuit Lands, and Labrador Inuit Settlement Area geometry",
+      "url": "https://dnrmaps.gov.nl.ca/arcgis/rest/services/GeoAtlas/Land_Use/MapServer",
+      "referenceDate": null,
+      "licence": "Government of Newfoundland and Labrador open-data terms"
+    },
+    {
+      "id": "yukon-municipal-boundaries",
+      "jurisdiction": "Yukon",
+      "status": "candidate",
+      "role": "municipal boundaries",
+      "url": "https://open.yukon.ca/data/municipal-boundaries",
+      "referenceDate": null,
+      "licence": "Open Government Licence - Yukon"
+    }
+  ]
+}
