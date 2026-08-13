@@ -22,6 +22,7 @@
     "caaqs-indicators:sync": "./run-in-pgmaps.sh node datascrapers/air/sync-bc-pm25-caaqs.mjs",
     "pm25-caaqs:sync": "npm run caaqs-indicators:sync",
     "lidarbc:availability:sync": "./run-in-pgmaps.sh node datascrapers/bc/lidar/sync-lidarbc-availability.mjs",
+    "envreport:indicators:sync": "./run-in-pgmaps.sh node datascrapers/bc/environmental-reporting/sync-envreport-indicators.mjs",
     "municipalities:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-municipalities.mjs",
     "health-boundaries:build": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/build-bc-health-boundaries.mjs",
     "nr-admin:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-nr-admin.mjs",

@@ -1,0 +1,75 @@
+{
+  "generatedAt": "2026-08-13T12:52:14.076Z",
+  "indicators": {
+    "grizzly": "https://www.env.gov.bc.ca/soe/indicators/plants-and-animals/grizzly-bears.html",
+    "invasive": "https://www.env.gov.bc.ca/soe/indicators/plants-and-animals/invasive-species.html",
+    "waste": "https://www.env.gov.bc.ca/soe/indicators/sustainability/municipal-solid-waste.html",
+    "population": "https://www.env.gov.bc.ca/soe/indicators/sustainability/bc-population.html"
+  },
+  "sources": {
+    "grizzlyUnits": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WILDLIFE_INVENTORY.GCPB_GRIZZLY_BEAR_POP_UNITS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WILDLIFE_INVENTORY.GCPB_GRIZZLY_BEAR_POP_UNITS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+    "grizzlyRanks": "https://catalogue.data.gov.bc.ca/dataset/e08876a1-3f9c-46bf-b69a-3d88de1da725/resource/7282667b-185a-4f08-9d99-13a2e5ada1d4/download/grizzlybear_2019_conservationranking_results.csv",
+    "grizzlyPopulation": "https://catalogue.data.gov.bc.ca/dataset/2bf91935-9158-4f77-9c2c-4310480e6c29/resource/6406840f-9525-4544-9c36-e725fb2e399a/download/bc_grizzly_population_estimates_2015_and_2018_by_gbpu_population_units.csv",
+    "grizzlyMortality": "https://catalogue.data.gov.bc.ca/dataset/4bc13aa2-80c9-441b-8f46-0b9574109b93/resource/c5fc42c7-67d3-4669-b281-61dc50fdef22/download/grizzlybearmortalityhistory_1976_2017.csv",
+    "invasiveOccurrences": "https://openmaps.gov.bc.ca/geo/pub/WHSE_FISH.FISH_AQUATIC_INVASIVE_SPCS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_FISH.FISH_AQUATIC_INVASIVE_SPCS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+    "ecologicalDrainageUnits": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LAND_AND_NATURAL_RESOURCE.EAUBC_ECO_DRAINAGE_UNITS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_LAND_AND_NATURAL_RESOURCE.EAUBC_ECO_DRAINAGE_UNITS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+    "municipalSolidWaste": "https://catalogue.data.gov.bc.ca/dataset/d21ed158-0ac7-4afd-a03b-ce22df0096bc/resource/d2648733-e484-40f2-b589-48192c16686b/download/bc_municipal_solid_waste_disposal.csv",
+    "regionalDistrictPopulation": "https://catalogue.data.gov.bc.ca/dataset/86839277-986a-4a29-9f70-fa9b1166f6cb/resource/36610a52-6f90-4ed6-946d-587641a490df/download/regional-district-population.csv"
+  },
+  "outputs": [
+    {
+      "file": "grizzly_bear_population_units_2018.geojson",
+      "features": 59,
+      "bytes": 425467,
+      "gzipBytes": 132719,
+      "sha256": "c5f6381f0be48b75588c8d7402a10e3bdaa70e6bcb681ebd8b67375501bae99c",
+      "publicPath": "/data/boundaries/BCWildlife/grizzly_bear_population_units_2018.geojson"
+    },
+    {
+      "file": "aquatic_invasive_species_by_edu.geojson",
+      "features": 36,
+      "bytes": 590859,
+      "gzipBytes": 201584,
+      "sha256": "f86c08863e76737ca4f85ba27b30af2c713e1dc94a3b98bdcbbffc14b27a3bed",
+      "publicPath": "/data/boundaries/BCEcology/ecological_drainage_units_aquatic_invasive_species.geojson"
+    },
+    {
+      "file": "regional_district_environmental_indicators.json",
+      "records": 29,
+      "bytes": 42982,
+      "gzipBytes": 6464,
+      "sha256": "98af76622f9cf9b083a5f7e378dd154db059dad0eeb68b211d8bb5103eee3752",
+      "publicPath": "/data/bc/environmental-reporting/regional_district_environmental_indicators.json"
+    }
+  ],
+  "sourceStats": {
+    "grizzly": {
+      "unitFeatures": 455,
+      "unitFeatures2018": 59,
+      "rankRows": 55,
+      "populationRows": 59,
+      "mortalityRows": 14114,
+      "sourceHashes": {
+        "ranks": "a9a5e89bb617c759755a4018d9425263e12584c3118d38f6f079417782ff5b76",
+        "population": "1b2ff1d3cba3fcdf094f3a775ea4681b35a675651d93335ddfad16ce3b8f52b0",
+        "mortality": "a1335462c6d28fb29a536c74f091819d9c9863eb1d021df9476701383ac84ce9"
+      }
+    },
+    "invasive": {
+      "occurrenceFeatures": 8490,
+      "sourceBoundaryFeatures": 40,
+      "ecologicalDrainageUnits": 36,
+      "nearestAssignedOccurrences": 122
+    },
+    "regionalDistricts": {
+      "wasteRows": 918,
+      "populationRows": 4230,
+      "latestWasteYear": 2023,
+      "latestPopulationYear": 2025,
+      "sourceHashes": {
+        "waste": "87cda09f1ae78b4433dc93f7940be8703828d28ad7770b46a5c2d008cb94c496",
+        "population": "177fee280301d12cbab8ea42e6485a1a5cb152b368fab7452e4f5afa3d535fae"
+      }
+    }
+  }
+}
