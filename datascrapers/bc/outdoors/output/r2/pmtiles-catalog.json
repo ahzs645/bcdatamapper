@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-19T16:43:15.110Z",
+  "generatedBy": "datascrapers/bc/outdoors/build-bc-outdoors-pmtiles.mjs",
+  "sourceManifest": {
+    "generatedAt": "2026-08-19T16:31:50.905Z",
+    "layers": [
+      {
+        "id": "wildlife_management_units",
+        "sourceLastModifiedAt": "2026-03-10T12:45:28.279889",
+        "featureCount": 225
+      }
+    ]
+  },
+  "storage": {
+    "provider": "Cloudflare R2",
+    "bucket": "maps",
+    "prefix": "bc/outdoors",
+    "version": "v2026-03-10",
+    "publicBaseUrl": "https://data.map.ahmad.sh"
+  },
+  "archives": [
+    {
+      "id": "regulatory",
+      "title": "British Columbia outdoor planning: regulatory",
+      "sourceLayers": [
+        {
+          "id": "wildlife_management_units",
+          "features": 225
+        }
+      ],
+      "r2Path": "bc/outdoors/v2026-03-10/regulatory.pmtiles",
+      "publicUrl": "https://data.map.ahmad.sh/bc/outdoors/v2026-03-10/regulatory.pmtiles",
+      "bytes": 14191685,
+      "sha256": "a00a75e1dbf6e71925174c18879bfacff9ff19dd89b6163e8131c37b575a5fdc",
+      "minzoom": 0,
+      "maxzoom": 12,
+      "bounds": [
+        -139.061306,
+        48.224835,
+        -114.054149,
+        60.004779
+      ],
+      "tileEntries": 31069,
+      "tileContents": 15376,
+      "vectorLayers": [
+        {
+          "id": "wildlife_management_units",
+          "description": "",
+          "minzoom": 0,
+          "maxzoom": 12,
+          "fields": {
+            "areaDriftPercent": "Number",
+            "authority": "String",
+            "boundaryCode": "String",
+            "boundaryName": "String",
+            "gameManagementZoneId": "String",
+            "gameManagementZoneName": "String",
+            "managementUnitId": "String",
+            "outputAreaSqM": "Number",
+            "planningClass": "String",
+            "regionId": "Number",
+            "regionName": "String",
+            "sourceAreaSqM": "Number",
+            "sourceLayer": "String",
+            "sourceLengthM": "Number"
+          }
+        }
+      ]
+    }
+  ]
+}

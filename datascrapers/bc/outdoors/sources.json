@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "title": "British Columbia outdoor planning sources",
+  "licence": {
+    "name": "Open Government Licence - British Columbia",
+    "url": "https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc"
+  },
+  "storage": {
+    "r2Bucket": "maps",
+    "r2Prefix": "bc/outdoors",
+    "publicBaseUrl": "https://data.map.ahmad.sh"
+  },
+  "layers": [
+    {
+      "id": "wildlife_management_units",
+      "title": "Wildlife Management Units",
+      "archive": "regulatory",
+      "sourceOrganization": "Government of British Columbia",
+      "sourceLayer": "WHSE_WILDLIFE_MANAGEMENT.WAA_WILDLIFE_MGMT_UNITS_SVW",
+      "metadataUrl": "https://catalogue.data.gov.bc.ca/dataset/028d4791-1241-437a-9f7b-fdf08b0d6dfb",
+      "metadataApiUrl": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=028d4791-1241-437a-9f7b-fdf08b0d6dfb",
+      "serviceUrl": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/mpcm/bcgwpub/MapServer/205",
+      "sourceCrs": "EPSG:3005",
+      "workingCrs": "EPSG:3005",
+      "outputCrs": "EPSG:4326",
+      "simplificationToleranceMetres": 10,
+      "expectedFeatureCount": 225,
+      "requiredIds": ["7-42"]
+    }
+  ],
+  "plannedLayers": [
+    {
+      "id": "limited_entry_hunting_zones",
+      "archive": "regulatory",
+      "reason": "Defines the authorized species-specific hunt area; currently published partly as regional georeferenced PDFs."
+    },
+    {
+      "id": "motor_vehicle_closed_areas",
+      "archive": "regulatory",
+      "reason": "Defines where motor vehicles are prohibited or restricted and the effective period."
+    },
+    {
+      "id": "designated_vehicle_corridors",
+      "archive": "regulatory",
+      "reason": "Represents the legal road midlines and corridor widths that qualify as exceptions inside closures."
+    },
+    {
+      "id": "land_status",
+      "archive": "land-access",
+      "reason": "Separates general-use Crown land, private land, leases, conservation land, parks and Indigenous lands."
+    },
+    {
+      "id": "boat_launches_and_access",
+      "archive": "land-access",
+      "reason": "Distinguishes formal launches from staging candidates and unverified informal access."
+    },
+    {
+      "id": "navigable_waterways",
+      "archive": "hydrography",
+      "reason": "Supports boat-access planning and water routes without duplicating label points."
+    },
+    {
+      "id": "fishing_regulation_zones",
+      "archive": "regulatory",
+      "reason": "Attaches date, species, method and retention rules to waterbody or river-segment geography."
+    }
+  ]
+}

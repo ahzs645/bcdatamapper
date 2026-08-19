@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-19T16:31:50.905Z",
+  "generatedBy": "datascrapers/bc/outdoors/sync-bc-outdoors.mjs",
+  "complete": true,
+  "licence": {
+    "name": "Open Government Licence - British Columbia",
+    "url": "https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc"
+  },
+  "layers": [
+    {
+      "id": "wildlife_management_units",
+      "title": "Wildlife Management Units",
+      "archive": "regulatory",
+      "path": "regulatory/wildlife-management-units.geojson.gz",
+      "featureCount": 225,
+      "bytes": 3825003,
+      "rawBytes": 12636432,
+      "sourceLastModifiedAt": "2026-03-10T12:45:28.279889",
+      "metadata": {
+        "sourceOrganization": "Government of British Columbia",
+        "sourceLayer": "WHSE_WILDLIFE_MANAGEMENT.WAA_WILDLIFE_MGMT_UNITS_SVW",
+        "metadataUrl": "https://catalogue.data.gov.bc.ca/dataset/028d4791-1241-437a-9f7b-fdf08b0d6dfb",
+        "metadataApiUrl": "https://catalogue.data.gov.bc.ca/api/3/action/package_show?id=028d4791-1241-437a-9f7b-fdf08b0d6dfb",
+        "serviceUrl": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/mpcm/bcgwpub/MapServer/205",
+        "licence": {
+          "name": "Open Government Licence - British Columbia",
+          "url": "https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc"
+        },
+        "extent": "Full British Columbia",
+        "sourceLastModifiedAt": "2026-03-10T12:45:28.279889",
+        "sourceCrs": "EPSG:3005",
+        "workingCrs": "EPSG:3005",
+        "outputCrs": "EPSG:4326",
+        "simplification": "Mapshaper shared-topology Ramer-Douglas-Peucker",
+        "simplificationToleranceMetres": 10,
+        "topologyPreserving": true,
+        "mapshaperVersion": "0.6.113",
+        "coordinatePrecision": 6,
+        "sourceFeatureCount": 225,
+        "outputFeatureCount": 225,
+        "rawVertices": 2080349,
+        "outputVertices": 526184,
+        "maxAreaDriftPercent": 0.368641,
+        "maxAreaDriftFeatureId": "7-55",
+        "topologyProfile": "partition",
+        "cleaningApplied": true,
+        "intentionalOverlapPreserved": false,
+        "unsimplifiedFallbackFeatureCount": 0,
+        "droppedInvalidGeometryFeatureCount": 0
+      }
+    }
+  ],
+  "plannedLayers": [
+    {
+      "id": "limited_entry_hunting_zones",
+      "archive": "regulatory",
+      "reason": "Defines the authorized species-specific hunt area; currently published partly as regional georeferenced PDFs."
+    },
+    {
+      "id": "motor_vehicle_closed_areas",
+      "archive": "regulatory",
+      "reason": "Defines where motor vehicles are prohibited or restricted and the effective period."
+    },
+    {
+      "id": "designated_vehicle_corridors",
+      "archive": "regulatory",
+      "reason": "Represents the legal road midlines and corridor widths that qualify as exceptions inside closures."
+    },
+    {
+      "id": "land_status",
+      "archive": "land-access",
+      "reason": "Separates general-use Crown land, private land, leases, conservation land, parks and Indigenous lands."
+    },
+    {
+      "id": "boat_launches_and_access",
+      "archive": "land-access",
+      "reason": "Distinguishes formal launches from staging candidates and unverified informal access."
+    },
+    {
+      "id": "navigable_waterways",
+      "archive": "hydrography",
+      "reason": "Supports boat-access planning and water routes without duplicating label points."
+    },
+    {
+      "id": "fishing_regulation_zones",
+      "archive": "regulatory",
+      "reason": "Attaches date, species, method and retention rules to waterbody or river-segment geography."
+    }
+  ]
+}
