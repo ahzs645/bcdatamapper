@@ -86,7 +86,7 @@ const plans = {
   },
   bigTreeRegistry: {
     id: 'bc_bigtree_registry',
-    outputDir: 'public/data/forest/big-trees',
+    outputDir: 'datascrapers/bc/forest-map-sources/output',
     outputFile: 'bc_bigtree_registry.geojson',
     source: {
       name: 'BC BigTree Registry reports',
@@ -95,7 +95,7 @@ const plans = {
     },
     shouldUseDirectSource: true,
     implementationNote:
-      'Use the UBC reports page xlsx/csv export as the authoritative source. The BC Forest Map embedded GeoJSON snapshot is acceptable only as a fallback/reference.',
+      'Use the UBC reports page xlsx/csv export as the authoritative source. The checked-in deployable snapshot is normalized from the supplied BC Forest Map GeoJSON because UBC bot protection can block unattended CSV downloads; preserve that fallback provenance in metadata.',
   },
 }
 
@@ -154,4 +154,3 @@ export function printPlan(planId) {
     ),
   )
 }
-
