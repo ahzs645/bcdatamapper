@@ -66,7 +66,7 @@ const plans = {
   },
   inaturalistSpeciesAtRisk: {
     id: 'inaturalist_species_at_risk',
-    outputDir: 'public/data/forest/species-at-risk',
+    outputDir: 'datascrapers/bc/forest-map-sources/output/species-at-risk',
     outputFile: 'inaturalist_species_at_risk.geojson',
     source: {
       name: 'iNaturalist observations API',

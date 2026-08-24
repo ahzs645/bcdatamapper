@@ -34,6 +34,28 @@ The UBC Registry Reports CSV remains the preferred upstream source. The current
 output records that the supplied BC Forest Map GeoJSON was used as a fallback,
 along with the input SHA-256 digest and upstream UBC links.
 
+## iNaturalist species-at-risk snapshot
+
+Import the supplied BC Forest Map vector-tile mirror with:
+
+```sh
+npm run bcforestmap:inaturalist-species-at-risk:import -- \
+  --input /absolute/path/to/inaturalist_species_at_risk \
+  --snapshot-date 2021-07-28
+```
+
+The importer reads the maximum-zoom PBF tiles, deduplicates observations by
+iNaturalist observation ID, flattens the embedded taxon JSON, derives map-ready
+taxonomic-group, observation-period, positional-accuracy, and observation-frequency
+bands, and writes `output/species-at-risk/inaturalist_species_at_risk.geojson`.
+For cloud-backed folders where recursive directory enumeration is slow, pass a
+newline-delimited list of hydrated PBF paths with `--tile-list /path/to/list.txt`.
+
+This is a historical, processed snapshot. Its Tippecanoe recipe selected records
+with `threatened=true` and positional accuracy below 100 metres. That selection is
+not an official B.C. or federal legal designation, and observation density must not
+be interpreted as abundance, habitat, or confirmed absence.
+
 ## Source mapping
 
 | BC Forest Map layer | Direct source to use | Notes |
