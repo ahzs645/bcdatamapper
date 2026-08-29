@@ -858,7 +858,17 @@ const boundaryIndex = {
       sourceUrl: DASHBOARD_URL,
       delivery: 'Shiny Leaflet runtime layers; no stable standalone download URL identified.',
       captureCommand: 'npm run early-learning-boundaries:capture-dashboard-lsa',
-      cacheFile: '../cache/dashboard_mcfd_local_service_areas.geojson',
+      hierarchy: {
+        mcfdRegions: 4,
+        serviceDeliveryAreas: 13,
+        localServiceAreas: indexedDashboardMapGeometryCount,
+      },
+      cacheFiles: {
+        index: '../cache/dashboard_mcfd_boundary_index.json',
+        mcfdRegions: '../cache/dashboard_mcfd_regions.geojson',
+        serviceDeliveryAreas: '../cache/dashboard_mcfd_service_delivery_areas.geojson',
+        localServiceAreas: '../cache/dashboard_mcfd_local_service_areas.geojson',
+      },
       redistributable: false,
     },
     dataBcGeometry: {

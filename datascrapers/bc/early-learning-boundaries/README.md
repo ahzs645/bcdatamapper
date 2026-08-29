@@ -37,9 +37,12 @@ vector layer to its Leaflet map. Capture that runtime snapshot locally with:
 npm run early-learning-boundaries:capture-dashboard-lsa
 ```
 
-The command writes `cache/dashboard_mcfd_local_service_areas.geojson` and a
-deterministic gzip copy. Both remain ignored because the dashboard publishes no
-dataset-specific open redistribution licence.
+The command writes the captured 47-LSA layer, dissolves it into same-vintage
+13-SDA and 4-Region layers, and writes `cache/dashboard_mcfd_boundary_index.json`.
+Every GeoJSON layer also gets a deterministic gzip copy. A local PGMaps sync
+places them under `public/data/boundaries/BCMCFD`; normal deployment-safe syncs
+remove that directory because the dashboard publishes no dataset-specific open
+redistribution licence.
 
 ## Redistribution policy
 
