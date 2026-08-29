@@ -18,6 +18,8 @@
     "watersheds:named-order-shards": "./run-in-pgmaps.sh uv run --python 3.11 --with-requirements datascrapers/bc/boundaries/requirements-fwa.txt python datascrapers/bc/boundaries/build-bc-fwa-watersheds.py --layer named-shards",
     "drainage-basins:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-drainage-basins.mjs",
     "regional-districts:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-regional-districts.mjs",
+    "early-learning-boundaries:sync": "node datascrapers/bc/early-learning-boundaries/sync-early-learning-boundaries.mjs",
+    "early-learning-boundaries:capture-dashboard-lsa": "./run-in-pgmaps.sh node datascrapers/bc/early-learning-boundaries/capture-dashboard-lsa.mjs",
     "air-quality-bylaws:sync": "./run-in-pgmaps.sh node datascrapers/bc/boundaries/sync-bc-air-quality-bylaws.mjs",
     "caaqs-indicators:sync": "./run-in-pgmaps.sh node datascrapers/air/sync-bc-pm25-caaqs.mjs",
     "pm25-caaqs:sync": "npm run caaqs-indicators:sync",

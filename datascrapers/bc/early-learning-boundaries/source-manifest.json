@@ -1,0 +1,107 @@
+{
+  "name": "BC early-learning boundary source inventory",
+  "dashboard": {
+    "url": "https://dashboard.earlylearning.ubc.ca/",
+    "hierarchy": {
+      "education": ["GEOSD", "NH"],
+      "health": ["HA", "HSDA", "LHA", "CHSA"],
+      "childrenAndFamily": ["MCFD", "SDA", "LSA"]
+    }
+  },
+  "sources": [
+    {
+      "id": "bc-school-districts",
+      "family": "education",
+      "levels": ["GEOSD"],
+      "publisher": "Government of British Columbia",
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b",
+      "serviceLayer": "WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW",
+      "licence": "Open Government Licence - British Columbia",
+      "licenceUrl": "https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc",
+      "redistributable": true,
+      "snapshotPolicy": "Commit the normalized, topology-preserving GeoJSON and deterministic gzip snapshot."
+    },
+    {
+      "id": "help-neighbourhoods",
+      "family": "education",
+      "levels": ["NH"],
+      "publisher": "Human Early Learning Partnership, University of British Columbia",
+      "catalogueUrl": "https://earlylearning.ubc.ca/resources/mediatype/data-library/",
+      "downloadUrl": "https://earlylearning.ubc.ca/app/uploads/2022/08/Neighbourhood_Shorelines.zip",
+      "alternateDownloadUrl": "https://earlylearning.ubc.ca/app/uploads/2022/08/Neighbourhood_NOShorelines.zip",
+      "licence": "No dataset-specific redistribution licence published; UBC site Terms of Use apply",
+      "licenceUrl": "https://www.ubc.ca/site/legal.html",
+      "redistributable": false,
+      "snapshotPolicy": "Keep downloaded archives and derived geometry in the ignored local cache until written redistribution permission is recorded. Commit only aggregate audit facts."
+    },
+    {
+      "id": "help-edi-wave-2-to-8-aggregate-workbook",
+      "family": "early-learning-data",
+      "levels": ["PROVINCE", "NH", "GEOSD", "HA", "HSDA", "LHA", "CHSA", "MCFD", "SDA", "LSA"],
+      "publisher": "Human Early Learning Partnership, University of British Columbia",
+      "catalogueUrl": "https://earlylearning.ubc.ca/resources/mediatype/data-library/",
+      "downloadUrl": "https://earlylearning.ubc.ca/app/uploads/2023/03/EDI_data_library_wave_2_to_8_by_all_region_type_sent.xlsx",
+      "licence": "No dataset-specific redistribution licence published; UBC site Terms of Use apply",
+      "licenceUrl": "https://www.ubc.ca/site/legal.html",
+      "redistributable": false,
+      "dataLevel": "Suppressed aggregate EDI results by geography for Waves 2-8; not child-level records.",
+      "snapshotPolicy": "Download the workbook into the ignored local cache and record its size and SHA-256 in the audit. Do not commit or redistribute it without written permission."
+    },
+    {
+      "id": "bc-mcfd-service-delivery-areas",
+      "family": "children-and-family",
+      "levels": ["MCFD", "SDA"],
+      "publisher": "Government of British Columbia",
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/bdf0e894-1c9c-4161-be60-1d197574a4b8",
+      "serviceLayer": "WHSE_ADMIN_BOUNDARIES.ADM_MCFD_SERVCE_DLVRY_AREAS_SP",
+      "licence": "Access Only",
+      "redistributable": false,
+      "snapshotPolicy": "Fetch for local inspection only. Derive Region geometry locally by dissolving SDA features on REGION_NUMBER; do not commit geometry."
+    },
+    {
+      "id": "bc-mcfd-local-service-areas",
+      "family": "children-and-family",
+      "levels": ["LSA"],
+      "publisher": "Government of British Columbia",
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/2c185d10-1b26-4f46-bab6-da54c1bf4f1b",
+      "serviceLayer": "WHSE_ADMIN_BOUNDARIES.ADM_MCFD_LOCAL_SERVCE_AREAS_SP",
+      "licence": "Access Only",
+      "redistributable": false,
+      "snapshotPolicy": "Fetch for local inspection only; do not commit geometry."
+    },
+    {
+      "id": "ubc-edi-dashboard-runtime-lsa-boundaries",
+      "family": "children-and-family",
+      "levels": ["LSA"],
+      "publisher": "Human Early Learning Partnership, University of British Columbia",
+      "applicationUrl": "https://dashboard.earlylearning.ubc.ca/",
+      "licence": "No dataset-specific redistribution licence published; UBC site Terms of Use apply",
+      "licenceUrl": "https://www.ubc.ca/site/legal.html",
+      "redistributable": false,
+      "runtimeFeatureCount": 47,
+      "geometryStatus": "The live Shiny Leaflet map contains 47 vector polygons, including LSA 2528 and 2529, but no stable standalone download URL was identified.",
+      "captureCommand": "npm run early-learning-boundaries:capture-dashboard-lsa",
+      "snapshotPolicy": "Capture to the ignored local cache for validation and local setup only; do not commit or deploy without written redistribution permission."
+    },
+    {
+      "id": "bc-mcfd-2011-lsa-map-and-inventory",
+      "family": "children-and-family",
+      "levels": ["MCFD", "SDA", "LSA"],
+      "publisher": "Government of British Columbia, Ministry of Children and Family Development",
+      "documentUrl": "https://www2.gov.bc.ca/assets/gov/family-and-social-supports/services-supports-for-parents-with-young-children/reporting-monitoring/03-operational-performance-strategic-management/mcfd_pmr_2013_14.pdf",
+      "documentPage": 10,
+      "printedPage": 3,
+      "inventoryCount": 47,
+      "evidence": "Official historical map and list containing LSA 2528 Bella Coola Valley and 2529 Central Coast.",
+      "geometryStatus": "Raster cartography only; use as inventory evidence, not as an authoritative vector polygon source.",
+      "snapshotPolicy": "Download into the ignored local cache, fingerprint it in the audit, and publish only the geometry-free vintage index."
+    }
+  ],
+  "currentMcfdOrganization": {
+    "url": "https://mcfd.gov.bc.ca/reporting/about-us/how-we-are-organized",
+    "effectiveFiscalYear": "2024/25",
+    "serviceDeliveryAreaCount": 7,
+    "localServiceAreaCount": 44,
+    "note": "The current organizational hierarchy is newer than both the EDI dashboard hierarchy and the accessible DataBC boundary services. No authoritative downloadable current-vintage geometry was identified."
+  }
+}

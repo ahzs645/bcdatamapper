@@ -58,6 +58,11 @@ datascrapers/bc/flood/studies/cache/
 # written permission from the Province has been recorded.
 datascrapers/bc/hazard-insights/cache/
 
+# HELP neighbourhood geometry has no published redistribution licence, and the
+# MCFD boundary services are licensed "Access Only". The early-learning audit
+# downloads and optimizes them locally for source/hierarchy assessment only.
+datascrapers/bc/early-learning-boundaries/cache/
+
 # ClimateData.ca source rasters and derived HDF5 packs are multi-gigabyte local
 # assessment/build artifacts. Keep the maintained inventory and converters only.
 datascrapers/climate/climatedata-ca/cache/

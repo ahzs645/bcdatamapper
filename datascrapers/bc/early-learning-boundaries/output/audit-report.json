@@ -1,0 +1,261 @@
+{
+  "name": "BC early-learning boundary source audit",
+  "processing": {
+    "sourceCrs": "EPSG:4326",
+    "workingCrs": "EPSG:3005",
+    "outputCrs": "EPSG:4326",
+    "topologyProfile": "partition",
+    "mapshaperVersion": "0.6.113",
+    "coordinatePrecision": 6
+  },
+  "dataInputs": {
+    "ediWave2To8AggregateWorkbook": {
+      "sourceUrl": "https://earlylearning.ubc.ca/app/uploads/2023/03/EDI_data_library_wave_2_to_8_by_all_region_type_sent.xlsx",
+      "redistributable": false,
+      "restriction": "No dataset-specific open licence; UBC Terms of Use require permission to republish or redisseminate.",
+      "cacheFile": "cache/EDI_data_library_wave_2_to_8.xlsx",
+      "sourceBytes": 1593126,
+      "sourceSha256": "8a85e36a4a8447ab4b494a4494916caa842ed52f5f847e1faca76c53a4399258",
+      "dataLevel": "Suppressed aggregate results by geography; not child-level EDI records.",
+      "waves": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "geographySheets": [
+        "Province",
+        "Neighbourhood",
+        "School district",
+        "Health Authority",
+        "Health Service Delivery Area",
+        "Local Health Area",
+        "CHSA",
+        "MCFD",
+        "Service Delivery Area",
+        "Local Service Area"
+      ],
+      "note": "The live dashboard includes Wave 9, but no public Wave 9 bulk workbook was identified in the HELP Data Library."
+    }
+  },
+  "sourceDocuments": {
+    "mcfdHistorical2011LsaInventory": {
+      "sourceUrl": "https://www2.gov.bc.ca/assets/gov/family-and-social-supports/services-supports-for-parents-with-young-children/reporting-monitoring/03-operational-performance-strategic-management/mcfd_pmr_2013_14.pdf",
+      "cacheFile": "cache/mcfd_pmr_2013_14.pdf",
+      "sourceBytes": 1844511,
+      "sourceSha256": "e10b57fda8e2b240c64dc6a941bf51ad81f5d5c31d4e65db028d337556fd5271",
+      "evidence": "PDF page 10 (printed page 3) states 13 SDAs and 47 LSAs and maps/lists 2528 Bella Coola Valley and 2529 Central Coast.",
+      "geometryUsability": "The map is embedded as a raster image, so it is authoritative inventory evidence but not authoritative extractable polygon geometry."
+    },
+    "ediDashboardRuntimeLsaGeometry": {
+      "sourceUrl": "https://dashboard.earlylearning.ubc.ca/",
+      "featureCount": 47,
+      "searchIndexFeatureCount": 46,
+      "includesUnsearchableLsa2529": true,
+      "captureCommand": "npm run early-learning-boundaries:capture-dashboard-lsa",
+      "cacheFile": "cache/dashboard_mcfd_local_service_areas.geojson",
+      "redistributable": false,
+      "restriction": "No dataset-specific open redistribution licence; keep the runtime capture in the ignored local cache pending written permission.",
+      "evidence": "The live scalesMap Leaflet layer registry exposes 47 LSA polygon layers, including LSA_2528 and LSA_2529."
+    }
+  },
+  "layers": {
+    "schoolDistricts": {
+      "redistributable": true,
+      "sourceLayer": "WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW",
+      "featureCount": 59,
+      "toleranceMetres": 50,
+      "rawVertexCount": 822047,
+      "optimizedVertexCount": 70308,
+      "sourceBytes": 22840881,
+      "sourceGzipBytes": 7308433,
+      "optimizedBytes": 1691526,
+      "gzipBytes": 546472,
+      "sourceSha256": "c3ca963f00caf3835227827162527e7f42e54e9dc8c578fb6d28f7d97236641b",
+      "optimizedSha256": "3fffdf7242e5e97c1129b4bddf482be62c19703b30f14ab874e8a77150f56f5c",
+      "validation": {
+        "expectedFeatureCount": 59,
+        "identifiersUniqueAndStable": true,
+        "uniqueSegmentCount": 36887,
+        "exactSharedSegmentCount": 33362,
+        "maximumOwnersPerSegment": 2,
+        "pairwiseOverlapCountAboveOneSqM": 0,
+        "maximumOverlapAreaSqM": 0,
+        "overlaps": [],
+        "maximumAbsoluteAreaChangePercent": 0.1613220695171703,
+        "maximumAreaChangeRegionId": "GEOSD_33"
+      }
+    },
+    "helpNeighbourhoods": {
+      "redistributable": false,
+      "restriction": "No dataset-specific open licence; UBC Terms of Use require permission to republish or redisseminate.",
+      "sourceUrl": "https://earlylearning.ubc.ca/app/uploads/2022/08/Neighbourhood_Shorelines.zip",
+      "featureCount": 300,
+      "toleranceMetres": 25,
+      "rawVertexCount": 253773,
+      "optimizedVertexCount": 182250,
+      "sourceBytes": 10302590,
+      "sourceGzipBytes": 3929271,
+      "optimizedBytes": 4450655,
+      "gzipBytes": 1386239,
+      "sourceSha256": "2636ae594a6078d927fce95557efa898677e9810104f2cf42e38cecd488dca35",
+      "optimizedSha256": "56da35016f8bb47b6f7dae83fba4af3d82ad50b065d2ca1962c6645bee1cfbd2",
+      "sourceArchiveBytes": 2920943,
+      "sourceArchiveSha256": "9a01d5b53dacfa664dfc20fd265021cf310de75e66ee92b44ff6fb4b682de295",
+      "validation": {
+        "expectedFeatureCount": 300,
+        "identifiersUniqueAndStable": true,
+        "uniqueSegmentCount": 154656,
+        "exactSharedSegmentCount": 25255,
+        "maximumOwnersPerSegment": 2,
+        "pairwiseOverlapCountAboveOneSqM": 0,
+        "maximumOverlapAreaSqM": 0,
+        "overlaps": [],
+        "maximumAbsoluteAreaChangePercent": 2.174677755836102,
+        "maximumAreaChangeRegionId": "N7905"
+      }
+    },
+    "mcfdRegions": {
+      "redistributable": false,
+      "restriction": "Derived from an Access Only SDA service.",
+      "derivation": "Dissolve SDA geometry on REGION_NUMBER.",
+      "featureCount": 4,
+      "toleranceMetres": 100,
+      "rawVertexCount": 515348,
+      "optimizedVertexCount": 50214,
+      "sourceBytes": 14376499,
+      "sourceGzipBytes": 4286764,
+      "optimizedBytes": 1199730,
+      "gzipBytes": 389193,
+      "sourceSha256": "7b61f3831967192abbe5c7aa38a6935148a2654f3f374cb24b0587de9e245ac6",
+      "optimizedSha256": "14b78ce8b6828842d3115f5e1a74ed1a2afa128594b2a7d3a0e11c6d472d3074",
+      "validation": {
+        "expectedFeatureCount": 4,
+        "identifiersUniqueAndStable": true,
+        "uniqueSegmentCount": 45756,
+        "exactSharedSegmentCount": 3346,
+        "maximumOwnersPerSegment": 2,
+        "pairwiseOverlapCountAboveOneSqM": 0,
+        "maximumOverlapAreaSqM": 0,
+        "overlaps": [],
+        "maximumAbsoluteAreaChangePercent": 0.03444387086596083,
+        "maximumAreaChangeRegionId": "MCFD_3"
+      }
+    },
+    "mcfdServiceDeliveryAreas": {
+      "redistributable": false,
+      "restriction": "BC Data Catalogue licence is Access Only.",
+      "sourceLayer": "WHSE_ADMIN_BOUNDARIES.ADM_MCFD_SERVCE_DLVRY_AREAS_SP",
+      "featureCount": 13,
+      "toleranceMetres": 100,
+      "rawVertexCount": 880929,
+      "optimizedVertexCount": 61659,
+      "sourceBytes": 24523056,
+      "sourceGzipBytes": 7035204,
+      "optimizedBytes": 1475739,
+      "gzipBytes": 484583,
+      "sourceSha256": "26a14e933df99abcedc600af2b80fe9071f1a4c7b5a5f93105831814af51fbb4",
+      "optimizedSha256": "07831f63f98d2ecf92d52abe90a256f198e130cfb93c45ad1e0c8cd4f340e809",
+      "validation": {
+        "expectedFeatureCount": 13,
+        "identifiersUniqueAndStable": true,
+        "uniqueSegmentCount": 51652,
+        "exactSharedSegmentCount": 8886,
+        "maximumOwnersPerSegment": 2,
+        "pairwiseOverlapCountAboveOneSqM": 0,
+        "maximumOverlapAreaSqM": 0,
+        "overlaps": [],
+        "maximumAbsoluteAreaChangePercent": 0.054199972694598454,
+        "maximumAreaChangeRegionId": "SDA_22"
+      }
+    },
+    "mcfdLocalServiceAreas": {
+      "redistributable": false,
+      "restriction": "BC Data Catalogue licence is Access Only.",
+      "sourceLayer": "WHSE_ADMIN_BOUNDARIES.ADM_MCFD_LOCAL_SERVCE_AREAS_SP",
+      "featureCount": 45,
+      "toleranceMetres": 50,
+      "rawVertexCount": 1252356,
+      "optimizedVertexCount": 122630,
+      "sourceBytes": 34912970,
+      "sourceGzipBytes": 9819296,
+      "optimizedBytes": 2941022,
+      "gzipBytes": 939843,
+      "sourceSha256": "9c21970a871bdaf9fcbf79bf4b9350c2d89a34e49a0b66d5ab9dd2c1fd6b0c87",
+      "optimizedSha256": "e20375d84591b1da2a98c107f329dce8b94d2a640d73bf8908e3304f9d5397e8",
+      "validation": {
+        "expectedFeatureCount": 45,
+        "identifiersUniqueAndStable": true,
+        "uniqueSegmentCount": 97545,
+        "exactSharedSegmentCount": 23902,
+        "maximumOwnersPerSegment": 2,
+        "pairwiseOverlapCountAboveOneSqM": 0,
+        "maximumOverlapAreaSqM": 0,
+        "overlaps": [],
+        "maximumAbsoluteAreaChangePercent": 0.42206950849111013,
+        "maximumAreaChangeRegionId": "LSA_2318"
+      }
+    }
+  },
+  "hierarchy": {
+    "education": {
+      "sourceSchoolDistrictCount": 59,
+      "sourceHelpNeighbourhoodCount": 300,
+      "helpParentSchoolDistrictCount": 59,
+      "helpFeaturesWithExplicitParent": 300,
+      "helpParentCodesMissingFromCurrentSchoolDistricts": [],
+      "dashboardSchoolDistrictCount": 59,
+      "dashboardHelpNeighbourhoodCount": 297,
+      "schoolDistrictsOnlyInSource": [],
+      "schoolDistrictsOnlyInDashboard": [],
+      "helpNeighbourhoodsOnlyInPublishedShapefile": [
+        {
+          "code": "N3901",
+          "name": "Stanley Park (UNSURVEYED)"
+        },
+        {
+          "code": "N4410",
+          "name": "Coast Mountains - UNSURVEYED"
+        },
+        {
+          "code": "N5202",
+          "name": "North Coastal Communities"
+        }
+      ],
+      "helpNeighbourhoodsOnlyInDashboard": []
+    },
+    "mcfdDashboardVintage": {
+      "sourceRegionCount": 4,
+      "sourceServiceDeliveryAreaCount": 13,
+      "sourceLocalServiceAreaCount": 45,
+      "dashboardRegionCount": 4,
+      "dashboardServiceDeliveryAreaCount": 13,
+      "dashboardLocalServiceAreaCount": 46,
+      "sdasWithExplicitRegionParent": 13,
+      "lsasWithExplicitSdaAndRegionParents": 45,
+      "lsaParentCodesMissingFromSdaSource": [],
+      "lsaParentRegionMismatches": [],
+      "regionsOnlyInSource": [],
+      "regionsOnlyInDashboard": [],
+      "sdasOnlyInSource": [],
+      "sdasOnlyInDashboard": [],
+      "lsasOnlyInSource": [],
+      "lsasOnlyInDashboard": [
+        {
+          "code": "2528",
+          "name": "Bella Coola Valley"
+        }
+      ]
+    },
+    "mcfdCurrentOrganization": {
+      "effectiveFiscalYear": "2024/25",
+      "documentedServiceDeliveryAreaCount": 7,
+      "documentedLocalServiceAreaCount": 44,
+      "sourceUrl": "https://mcfd.gov.bc.ca/reporting/about-us/how-we-are-organized",
+      "geometryStatus": "No authoritative downloadable current-vintage geometry identified; do not label the Access Only 4/13/45 service as current."
+    }
+  }
+}
