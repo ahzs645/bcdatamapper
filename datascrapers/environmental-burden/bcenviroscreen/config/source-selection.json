@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "selectionPolicy": "Semantic equivalence first, then coverage and benchmark fit as diagnostics.",
+  "benchmarkGapIndicators": ["future_precipitation", "future_temperature"],
+  "selected": {
+    "all_causes_of_cancer": "health.phsa_cancer_all_cause_cancer_incident_cases_all_ages_2008_2012_total_per_1000_pop2011",
+    "copd": "health.phsa_general_health_chronic_obstructive_pulmonary_disease_copd_age_standardized_incidence_rate_per_1000_population_45plus_yrs_2015_per_1000_population",
+    "diabetes_mellitus": "health.phsa_chsa_to_lha_general_health_diabetes_mellitus_age_standardized_incidence_rate_per_1000_population_1plus_yrs_fy_2015_2016_per_1000_population",
+    "disturbed_landscape": "ifl.ifl_2016_disturbed_area_percent",
+    "employment_insurance_beneficiaries": "ei.statcan_ei_2014_regular_benefits_without_declared_earnings_per_100_age_15plus",
+    "housing_burdened_renters": "census_2016.renter_housing_burden_ge50_percent",
+    "hypertension": "health.phsa_general_health_hypertension_age_standardized_incidence_rate_per_1000_population_20plus_yrs_fy_2015_2016_per_1000_population",
+    "industrial_sites": "spatial.industrial_sites_timber_operating_mines_oil_unique_count",
+    "linear_footprint": "spatial.paper_dedup_linear_footprint_km_per_sq_km",
+    "linguistic_isolation": "census_2016.linguistic_isolation_percent",
+    "low_birth_weight": "health.phsa_mother_and_newborn_health_low_birth_weight_rate_per_1_000_live_births_2011_2015_per_1_000_live_births",
+    "low_education": "census_2016.low_education_15plus_percent",
+    "low_income": "census_2016.lico_all_percent",
+    "ozone": "canue_postal.canue_postal_2015_o3chg_a__o3chg15_01",
+    "pm25": "canue_postal.canue_postal_2012_pm25dal_a__pm25dal12_01",
+    "remediation_sites": "spatial.remediation_sites_site_id_lte_23504_count",
+    "traffic_density": "traffic.traffic_data_program_utv_report_2018_cd_representative_point_aadt_sum",
+    "water_quality_exceedances": "ems.2016_2019_freshwater_qa_no_f_paper_sample_location_any_exceedance_share",
+    "wildfire_burn_area": "spatial.wildfire_2010_2019_area_percent"
+  }
+}

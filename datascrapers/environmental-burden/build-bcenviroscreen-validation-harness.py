@@ -45,6 +45,18 @@ DRA_PARQUET_MPAR_PATH = (
 )
 
 
+# Some health candidates have similar values but different populations or
+# measures. Prefer the field that matches the paper's indicator definition
+# before using benchmark fit as a tie-breaker. In particular, the unqualified
+# PHSA hypertension field is the total-population incidence rate; fields with a
+# male/female suffix and lifetime-prevalence fields are not equivalent.
+PREFERRED_CANDIDATE_FIELDS = {
+    "hypertension": {
+        "phsa_general_health_hypertension_age_standardized_incidence_rate_per_1000_population_20plus_yrs_fy_2015_2016_per_1000_population",
+    },
+}
+
+
 INDICATOR_CANDIDATES = {
     "wildfire_burn_area": [
         ("spatial", "wildfire_2010_2019_area_percent", "confirmed paper window: burn area percent, 2010-2019"),
@@ -500,7 +512,11 @@ def choose_best(summary_rows):
         by_indicator[row["shiny_field"]].append(row)
     best = []
     for indicator, rows in sorted(by_indicator.items()):
-        if indicator == "hypertension":
+        preferred_fields = PREFERRED_CANDIDATE_FIELDS.get(indicator, set())
+        preferred_rows = [row for row in rows if row["source_field"] in preferred_fields]
+        if preferred_rows:
+            rows = preferred_rows
+        elif indicator == "hypertension":
             source_rows = [row for row in rows if "rolling_mean" not in row["source_field"]]
             if source_rows:
                 rows = source_rows
@@ -608,7 +624,7 @@ def main():
                     "ei": str(EI_PATH.relative_to(SCRIPT_DIR)),
                     "traffic": str(TRAFFIC_PATH.relative_to(SCRIPT_DIR)),
                 },
-                "selection": "Best-current mapping is selected by lowest mean absolute difference against the Shiny LHA table. It is a diagnostic selection, not proof of source equivalence.",
+                "selection": "Best-current mapping first applies explicit semantic preferences where candidate fields differ in measure or population, then selects by lowest mean absolute difference against the Shiny LHA table. It is a diagnostic selection, not proof of source equivalence.",
             },
             indent=2,
         )

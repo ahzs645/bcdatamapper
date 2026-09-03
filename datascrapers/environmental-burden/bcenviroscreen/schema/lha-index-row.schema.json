@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.map.ahmad.sh/schemas/bc-enviro-screen/lha-index-row-v1.json",
+  "title": "BC EnviroScreen Reconstruction LHA indicator row",
+  "type": "object",
+  "required": ["lha_code", "lha_name", "indicators"],
+  "properties": {
+    "lha_code": {"type": "string", "minLength": 1},
+    "lha_name": {"type": "string", "minLength": 1},
+    "indicators": {"type": "object", "minProperties": 21, "maxProperties": 21}
+  },
+  "additionalProperties": false
+}
