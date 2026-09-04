@@ -316,7 +316,12 @@ def candidate_rows(station_lha: pl.DataFrame, lhas: list[dict[str, object]]) -> 
             )
 
     # Make missing LHAs explicit in candidate exports only after comparison.
-    return [row for row in all_rows if row["lha_name"] in lha_names]
+    rows = [row for row in all_rows if row["lha_name"] in lha_names]
+    keys = [(str(row["lha_name"]), str(row["candidate"])) for row in rows]
+    if len(keys) != len(set(keys)):
+        duplicate_count = len(keys) - len(set(keys))
+        raise RuntimeError(f"EMS candidate output contains {duplicate_count} duplicate LHA/candidate rows")
+    return rows
 
 
 def read_shiny() -> dict[str, float]:

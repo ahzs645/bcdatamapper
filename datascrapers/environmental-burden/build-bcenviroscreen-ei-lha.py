@@ -38,7 +38,14 @@ BENEFIT_DETAILS = [
     "Regular benefits",
     "Regular benefits without declared earnings",
 ]
-YEARS = ["2014", "2015", "2016", "2017", "2018"]
+ANNUAL_YEARS = ["2014", "2015", "2016", "2017", "2018"]
+HISTORICAL_PERIODS = {
+    # Island Health's archived LHA profiles describe a four-quarter average
+    # from December 2011 through September 2012. Keep it separate from the
+    # annual candidates so the provenance is explicit.
+    "2011_12_four_quarter_end_sep_2012": ["2011-12", "2012-03", "2012-06", "2012-09"],
+}
+HISTORICAL_DATES = {date for dates in HISTORICAL_PERIODS.values() for date in dates}
 CENSUS_INCOME_SOURCE_MEMBERS = {
     "17": "ei_benefits",
     "18": "ei_regular_benefits",
@@ -181,15 +188,34 @@ def load_cd_ei_counts():
                     continue
                 ref_date = row["REF_DATE"]
                 year = ref_date[:4]
-                if year not in YEARS:
+                if year not in ANNUAL_YEARS and ref_date not in HISTORICAL_DATES:
                     continue
                 cd_names[cd_code] = row.get("GEO", "")
-                monthly[(cd_code, year, detail)].append(value)
+                monthly[(cd_code, ref_date, detail)].append(value)
 
-    annual = {}
-    for key, values in monthly.items():
-        annual[key] = sum(values) / len(values)
-    return annual, cd_names
+    periods = {}
+    cd_codes = {key[0] for key in monthly}
+    for cd_code in cd_codes:
+        for year in ANNUAL_YEARS:
+            for detail in BENEFIT_DETAILS:
+                values = [
+                    value
+                    for (candidate_cd, ref_date, candidate_detail), rows in monthly.items()
+                    if candidate_cd == cd_code and candidate_detail == detail and ref_date.startswith(f"{year}-")
+                    for value in rows
+                ]
+                if values:
+                    periods[(cd_code, year, detail)] = sum(values) / len(values)
+        for period_key, ref_dates in HISTORICAL_PERIODS.items():
+            for detail in BENEFIT_DETAILS:
+                values = [
+                    value
+                    for ref_date in ref_dates
+                    for value in monthly.get((cd_code, ref_date, detail), [])
+                ]
+                if len(values) == len(ref_dates):
+                    periods[(cd_code, period_key, detail)] = sum(values) / len(values)
+    return periods, cd_names
 
 
 def load_csd_census_income_sources():
@@ -306,13 +332,21 @@ def build_rows():
             "da_count_in_cd": cw["da_count_in_cd"],
             "da_count_total": cw["da_count_total"],
         }
-        for year in YEARS:
+        for year in ANNUAL_YEARS:
             for detail in BENEFIT_DETAILS:
                 detail_key = safe_key(detail)
                 count = annual_counts.get((cd_code, year, detail))
                 row[f"statcan_ei_{year}_{detail_key}_annual_avg_count"] = round(count, 6) if count is not None else None
                 for denom_name, denom_value in denominators.get(cd_code, {}).items():
                     field = f"statcan_ei_{year}_{detail_key}_per_100_{denom_name}"
+                    row[field] = round(count / denom_value * 100, 6) if count is not None and denom_value else None
+        for period_key in HISTORICAL_PERIODS:
+            for detail in BENEFIT_DETAILS:
+                detail_key = safe_key(detail)
+                count = annual_counts.get((cd_code, period_key, detail))
+                row[f"statcan_ei_{period_key}_{detail_key}_avg_count"] = round(count, 6) if count is not None else None
+                for denom_name, denom_value in denominators.get(cd_code, {}).items():
+                    field = f"statcan_ei_{period_key}_{detail_key}_per_100_{denom_name}"
                     row[field] = round(count / denom_value * 100, 6) if count is not None and denom_value else None
 
         for source_key in CENSUS_INCOME_SOURCE_MEMBERS.values():
@@ -369,9 +403,10 @@ def main():
                     if CENSUS_INCOME_SOURCES_ZIP_PATH.exists()
                     else None,
                 },
-                "method": "Annual average monthly EI beneficiaries for BC Census Divisions, both sexes, age 15 years and over; joined to LHAs by primary 2016 Census Division from the DA-to-LHA crosswalk; candidate rates divide by 2016 CD population, labour force, and age-15-plus denominators. Also tests 2016 Census income-source CSD percentages, weighted to LHA by DA age-15-plus denominators from the DA-to-LHA crosswalk.",
+                "method": "Annual average monthly EI beneficiaries for BC Census Divisions, both sexes, age 15 years and over, plus the documented four-quarter December 2011 through September 2012 historical window; joined to LHAs by primary 2016 Census Division from the DA-to-LHA crosswalk; candidate rates divide by 2016 CD population, labour force, and age-15-plus denominators. Also tests 2016 Census income-source CSD percentages, weighted to LHA by DA age-15-plus denominators from the DA-to-LHA crosswalk.",
                 "benefitDetails": BENEFIT_DETAILS,
-                "years": YEARS,
+                "annualYears": ANNUAL_YEARS,
+                "historicalPeriods": HISTORICAL_PERIODS,
                 "censusIncomeSourceMembers": CENSUS_INCOME_SOURCE_MEMBERS,
                 "censusIncomeSourceLabels": census_labels,
                 "phsaChsaSocialSource": "PHSA Community Health Atlas CHSA Social & economic factors CSV downloads, population-weighted to LHA using the CHSA-to-LHA crosswalk",

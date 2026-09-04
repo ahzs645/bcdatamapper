@@ -22,6 +22,15 @@ The builder combines forestry mills, producing metal/nonmetal/coal mines,
 smelters/refineries, and oil/gas fields. Its output remains labelled a proxy
 because the exact September 2020 source binaries have not been recovered.
 
+The socioeconomic validation builders also retain two explicit sensitivity
+families without silently changing the released score: the documented
+December 2011–September 2012 four-quarter EI window, and renter-housing
+candidates with 50/75/90% minimum retained-denominator coverage. The 2014 EI
+candidate and unmasked renter result remain selected because the historical
+window lowers rank agreement and the coverage masks reduce complete LHA
+coverage. EMS candidate output now fails fast if an LHA/candidate pair is
+duplicated.
+
 Build after the validation and score stages:
 
 ```sh

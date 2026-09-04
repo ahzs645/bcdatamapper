@@ -18,6 +18,25 @@ SCORES_SPEC.loader.exec_module(SCORES_MODULE)
 
 
 class CandidateSelectionTests(unittest.TestCase):
+    def test_historical_ei_quarter_window_is_registered(self):
+        fields = {
+            source_field
+            for source_id, source_field, _notes in MODULE.INDICATOR_CANDIDATES["employment_insurance_beneficiaries"]
+            if source_id == "ei"
+        }
+        self.assertIn(
+            "statcan_ei_2011_12_four_quarter_end_sep_2012_regular_benefits_without_declared_earnings_per_100_population",
+            fields,
+        )
+
+    def test_housing_coverage_candidate_is_registered(self):
+        fields = {
+            source_field
+            for source_id, source_field, _notes in MODULE.INDICATOR_CANDIDATES["housing_burdened_renters"]
+            if source_id == "census_2016"
+        }
+        self.assertIn("renter_housing_burden_ge50_min_coverage_50_percent", fields)
+
     def test_total_population_hypertension_wins_over_better_fitting_male_series(self):
         total_field = next(iter(MODULE.PREFERRED_CANDIDATE_FIELDS["hypertension"]))
         rows = [

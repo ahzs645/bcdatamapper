@@ -347,6 +347,7 @@ def aggregate(records, assignments, lha_entries, config):
                 row[f"{prefix}_da_percent_sum"] = row.get(f"{prefix}_da_percent_sum", 0) + percent
                 row[f"{prefix}_da_percent_count"] = row.get(f"{prefix}_da_percent_count", 0) + 1
         renter_denominator = record.get("renter_housing_burden_denominator") or 0
+        row["renter_housing_burden_total_denominator"] = row.get("renter_housing_burden_total_denominator", 0) + renter_denominator
         renter_percent = record.get("renter_housing_burden_percent_source")
         if renter_denominator and renter_percent is not None:
             row["renter_housing_burden_numerator"] = row.get("renter_housing_burden_numerator", 0) + (renter_denominator * renter_percent / 100)
@@ -392,6 +393,11 @@ def aggregate(records, assignments, lha_entries, config):
             if row.get("renter_housing_burden_denominator")
             else None
         )
+        total_renter_denominator = row.get("renter_housing_burden_total_denominator", 0)
+        reported_renter_denominator = row.get("renter_housing_burden_denominator", 0)
+        row["renter_housing_burden_reported_coverage"] = (
+            round(reported_renter_denominator / total_renter_denominator, 6) if total_renter_denominator else None
+        )
         row["renter_housing_burden_da_percent_unweighted"] = (
             round(row["renter_housing_burden_da_percent_sum"] / row["renter_housing_burden_da_percent_count"], 3)
             if row.get("renter_housing_burden_da_percent_count")
@@ -404,6 +410,14 @@ def aggregate(records, assignments, lha_entries, config):
                 if row.get(f"{prefix}_denominator")
                 else None
             )
+            retained_denominator = row.get(f"{prefix}_denominator", 0)
+            coverage = retained_denominator / total_renter_denominator if total_renter_denominator else None
+            row[f"{prefix}_coverage"] = round(coverage, 6) if coverage is not None else None
+            for minimum_coverage in [0.5, 0.75, 0.9]:
+                coverage_key = int(minimum_coverage * 100)
+                row[f"{prefix}_min_coverage_{coverage_key}_percent"] = (
+                    row[f"{prefix}_percent"] if coverage is not None and coverage >= minimum_coverage else None
+                )
         row["owner_housing_burden_percent"] = (
             round(row["owner_housing_burden_numerator"] / row["owner_housing_burden_denominator"] * 100, 3)
             if row.get("owner_housing_burden_denominator")

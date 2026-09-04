@@ -253,6 +253,32 @@ for source_key, source_label in [
             )
         )
 
+for detail_key, detail_label in [
+    ("all_types_of_income_benefits", "all types of income benefits"),
+    ("regular_benefits", "regular benefits"),
+    ("regular_benefits_without_declared_earnings", "regular benefits without declared earnings"),
+]:
+    for denominator in ["population", "labour_force", "age_15plus"]:
+        INDICATOR_CANDIDATES["employment_insurance_beneficiaries"].append(
+            (
+                "ei",
+                f"statcan_ei_2011_12_four_quarter_end_sep_2012_{detail_key}_per_100_{denominator}",
+                f"Statistics Canada EI four-quarter average (Dec 2011, Mar/Jun/Sep 2012), {detail_label}, per 100 {denominator}",
+            )
+        )
+
+for census_year in ["2016", "2021"]:
+    source_key = f"census_{census_year}"
+    for da_threshold in [20, 30, 50, 100]:
+        for minimum_coverage in [50, 75, 90]:
+            INDICATOR_CANDIDATES["housing_burdened_renters"].append(
+                (
+                    source_key,
+                    f"renter_housing_burden_ge{da_threshold}_min_coverage_{minimum_coverage}_percent",
+                    f"{census_year} tenant shelter burden, DA renter denominator >= {da_threshold}, retained LHA renter coverage >= {minimum_coverage}%",
+                )
+            )
+
 for field, label in [
     ("phsa_chsa_social_employment_rate_15_2016", "PHSA Community Health CHSA Social & economic factors, Employment Rate (15+), population-weighted to LHA"),
     ("phsa_chsa_social_sociodemographic_diversity_economic_dependency_dimention_quintile_all_ages_2022", "PHSA Community Health CHSA Social & economic factors, BCIMD economic dependency quintile, population-weighted to LHA"),
