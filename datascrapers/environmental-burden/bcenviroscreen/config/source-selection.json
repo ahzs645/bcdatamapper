@@ -10,7 +10,7 @@
     "employment_insurance_beneficiaries": "ei.statcan_ei_2014_regular_benefits_without_declared_earnings_per_100_age_15plus",
     "housing_burdened_renters": "census_2016.renter_housing_burden_ge50_percent",
     "hypertension": "health.phsa_general_health_hypertension_age_standardized_incidence_rate_per_1000_population_20plus_yrs_fy_2015_2016_per_1000_population",
-    "industrial_sites": "spatial.industrial_sites_timber_operating_mines_oil_unique_count",
+    "industrial_sites": "nrcan_industrial.nrcan_current_mills_mines_smelters_oil_gas_count",
     "linear_footprint": "spatial.paper_dedup_linear_footprint_km_per_sq_km",
     "linguistic_isolation": "census_2016.linguistic_isolation_percent",
     "low_birth_weight": "health.phsa_mother_and_newborn_health_low_birth_weight_rate_per_1_000_live_births_2011_2015_per_1_000_live_births",

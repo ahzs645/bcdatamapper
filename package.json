@@ -46,6 +46,7 @@
     "environmental-burden:bc-enviro-screen": "./run-in-pgmaps.sh node datascrapers/environmental-burden/sync-bc-enviro-screen-sources.mjs",
     "environmental-burden:bc-enviro-screen:shiny-table": "./run-in-pgmaps.sh node datascrapers/environmental-burden/scrape-bcenviroscreen-shiny-table.mjs",
     "environmental-burden:bc-enviro-screen:raw-seed": "./run-in-pgmaps.sh node datascrapers/environmental-burden/sync-bcenviroscreen-raw-rebuild-seed.mjs",
+    "environmental-burden:bc-enviro-screen:nrcan-industrial-lha": "./run-in-pgmaps.sh python3 datascrapers/environmental-burden/build-bcenviroscreen-nrcan-industrial-lha.py",
     "environmental-burden:pesticide-proxy": "./run-in-pgmaps.sh python3 datascrapers/environmental-burden/sync-pesticide-proxy-sources.py",
     "environmental-burden:bc-enviro-screen:linear-footprint-sources": "./run-in-pgmaps.sh python3 datascrapers/environmental-burden/sync-bcenviroscreen-linear-footprint-sources.py",
     "environmental-burden:bc-enviro-screen:canue-lha": "./run-in-pgmaps.sh python3 datascrapers/environmental-burden/build-bcenviroscreen-canue-lha.py",

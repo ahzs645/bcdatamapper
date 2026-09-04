@@ -25,6 +25,22 @@ OUTPUT_DIR = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-scores"
 SHINY_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "official-shiny-table" / "lha-indicators.csv"
 BEST_CURRENT_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-validation" / "best-current-indicators.csv"
 CD_TARGETS_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "cd-attributed-targets" / "lha-cd-attributed-targets.csv"
+NRCAN_INDUSTRIAL_PATH = (
+    SCRIPT_DIR
+    / "output"
+    / "bc-enviro-screen"
+    / "rebuilt-nrcan-industrial-lha"
+    / "lha-nrcan-industrial-candidates.json"
+)
+
+
+INDICATOR_OVERRIDES = {
+    "industrial_sites": {
+        "path": NRCAN_INDUSTRIAL_PATH,
+        "field": "nrcan_current_mills_mines_smelters_oil_gas_count",
+        "source": "nrcan_industrial.nrcan_current_mills_mines_smelters_oil_gas_count",
+    },
+}
 
 
 COMPONENTS = {
@@ -132,6 +148,20 @@ def load_shiny_raw():
     return rows
 
 
+def load_indicator_overrides():
+    overrides = {}
+    for indicator, definition in INDICATOR_OVERRIDES.items():
+        path = definition["path"]
+        if not path.exists():
+            continue
+        source_rows = json.loads(path.read_text())
+        overrides[indicator] = {
+            row["lha_name"]: numeric(row.get(definition["field"]))
+            for row in source_rows
+        }
+    return overrides
+
+
 def load_best_current_hybrid():
     """Use rebuilt indicators where available, with Shiny values as explicit gaps.
 
@@ -143,13 +173,18 @@ def load_best_current_hybrid():
 
     shiny_rows = {row["lha_name"]: row for row in load_shiny_raw()}
     best_rows = {row["lha_name"]: row for row in read_csv(BEST_CURRENT_PATH)}
+    overrides = load_indicator_overrides()
     rows = []
     for lha_name, shiny_row in shiny_rows.items():
         row = {"lha_name": lha_name}
         best_row = best_rows.get(lha_name, {})
         for field in RAW_INDICATORS:
+            override_value = overrides.get(field, {}).get(lha_name)
             rebuilt_value = numeric(best_row.get(f"{field}_rebuilt"))
-            if rebuilt_value is not None:
+            if override_value is not None:
+                row[field] = override_value
+                row[f"{field}_input_source"] = INDICATOR_OVERRIDES[field]["source"]
+            elif rebuilt_value is not None:
                 row[field] = rebuilt_value
                 row[f"{field}_input_source"] = best_row.get(f"{field}_source", "rebuilt")
             else:
@@ -173,15 +208,20 @@ def load_best_current_with_cd_benchmarks():
     shiny_rows = {row["lha_name"]: row for row in load_shiny_raw()}
     best_rows = {row["lha_name"]: row for row in read_csv(BEST_CURRENT_PATH)}
     cd_rows = {row["lha_name"]: row for row in read_csv(CD_TARGETS_PATH)} if CD_TARGETS_PATH.exists() else {}
+    overrides = load_indicator_overrides()
     rows = []
     for lha_name, shiny_row in shiny_rows.items():
         row = {"lha_name": lha_name}
         best_row = best_rows.get(lha_name, {})
         cd_row = cd_rows.get(lha_name, {})
         for field in RAW_INDICATORS:
+            override_value = overrides.get(field, {}).get(lha_name)
             cd_value = numeric(cd_row.get(field)) if field in CD_BENCHMARK_FIELDS else None
             rebuilt_value = numeric(best_row.get(f"{field}_rebuilt"))
-            if cd_value is not None:
+            if override_value is not None:
+                row[field] = override_value
+                row[f"{field}_input_source"] = INDICATOR_OVERRIDES[field]["source"]
+            elif cd_value is not None:
                 row[field] = cd_value
                 row[f"{field}_input_source"] = "shiny_inferred_cd_benchmark"
             elif rebuilt_value is not None:

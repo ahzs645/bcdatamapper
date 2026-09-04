@@ -24,6 +24,13 @@ EI_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-ei-lha" / "lha-e
 DISTURBED_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-disturbed-lha" / "lha-disturbed-candidates.json"
 IFL_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-ifl-lha" / "lha-ifl-candidates.json"
 TRAFFIC_PATH = SCRIPT_DIR / "output" / "bc-enviro-screen" / "rebuilt-traffic-lha" / "lha-traffic-candidates.json"
+NRCAN_INDUSTRIAL_PATH = (
+    SCRIPT_DIR
+    / "output"
+    / "bc-enviro-screen"
+    / "rebuilt-nrcan-industrial-lha"
+    / "lha-nrcan-industrial-candidates.json"
+)
 DRA_GDB_PATH = (
     SCRIPT_DIR
     / "output"
@@ -70,6 +77,11 @@ INDICATOR_CANDIDATES = {
         ("spatial", "remediation_sites_count", "current BC Environmental Remediation Sites point count"),
     ],
     "industrial_sites": [
+        (
+            "nrcan_industrial",
+            "nrcan_current_mills_mines_smelters_oil_gas_count",
+            "Current official NRCan source-family proxy: forestry mills + producing metal, nonmetal and coal mines + smelters/refineries + oil/gas fields assigned to LHA",
+        ),
         ("spatial", "industrial_sites_timber_operating_mines_oil_unique_count", "timber facilities + operating major mine representative points + unique oil field names assigned by representative point"),
         ("spatial", "industrial_sites_timber_operating_mines_representative_count", "timber facilities + operating major mine representative points"),
         ("spatial", "industrial_sites_timber_operating_mines_gas_unique_count", "timber facilities + operating major mine representative points + unique gas field names assigned by representative point"),
@@ -386,6 +398,11 @@ def load_sources():
         "disturbed": {row["lha_name"]: row for row in read_json(DISTURBED_PATH)} if DISTURBED_PATH.exists() else {},
         "ifl": {row["lha_name"]: row for row in read_json(IFL_PATH)} if IFL_PATH.exists() else {},
         "traffic": {row["lha_name"]: row for row in read_json(TRAFFIC_PATH)} if TRAFFIC_PATH.exists() else {},
+        "nrcan_industrial": {
+            row["lha_name"]: row for row in read_json(NRCAN_INDUSTRIAL_PATH)
+        }
+        if NRCAN_INDUSTRIAL_PATH.exists()
+        else {},
     }
     shiny = {row["lha_name"]: row for row in read_csv(SHINY_PATH)}
     return shiny, sources
@@ -623,6 +640,7 @@ def main():
                     "health": str(HEALTH_PATH.relative_to(SCRIPT_DIR)),
                     "ei": str(EI_PATH.relative_to(SCRIPT_DIR)),
                     "traffic": str(TRAFFIC_PATH.relative_to(SCRIPT_DIR)),
+                    "nrcan_industrial": str(NRCAN_INDUSTRIAL_PATH.relative_to(SCRIPT_DIR)),
                 },
                 "selection": "Best-current mapping first applies explicit semantic preferences where candidate fields differ in measure or population, then selects by lowest mean absolute difference against the Shiny LHA table. It is a diagnostic selection, not proof of source equivalence.",
             },

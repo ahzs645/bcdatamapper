@@ -10,6 +10,18 @@ The public label is **BC EnviroScreen Reconstruction**. It is a hybrid research
 reconstruction, not an official Province of British Columbia or paper-author
 product.
 
+Refresh the current official NRCan source-family candidate for the paper's
+combined industrial-sites indicator before running validation when those
+sources need to be updated:
+
+```sh
+npm run environmental-burden:bc-enviro-screen:nrcan-industrial-lha
+```
+
+The builder combines forestry mills, producing metal/nonmetal/coal mines,
+smelters/refineries, and oil/gas fields. Its output remains labelled a proxy
+because the exact September 2020 source binaries have not been recovered.
+
 Build after the validation and score stages:
 
 ```sh
