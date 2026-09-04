@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "snapshotDate": "2026-08-28",
+  "file": "inaturalist_species_at_risk_live_2026-08-28.geojson.gz",
+  "sha256": "8e208527957e466187ef6cab888891295bafc690f3c20f8710c9b95051c4d681",
+  "bytes": 6820901,
+  "uncompressedBytes": 115170370,
+  "counts": {
+    "observations": 118350,
+    "uniqueTaxa": 1665,
+    "withObservationDate": 118350,
+    "observationYearRange": [
+      1973,
+      2026
+    ],
+    "withAccuracy": 118350,
+    "withNamedConservationStatus": 117499,
+    "byGroup": {
+      "Amphibians": 7218,
+      "Arachnids": 114,
+      "Birds": 41728,
+      "Fungi": 7939,
+      "Insects": 10075,
+      "Mammals": 4341,
+      "Molluscs": 917,
+      "Other animals": 16732,
+      "Other taxa": 4,
+      "Plants": 24618,
+      "Ray-finned fishes": 2830,
+      "Reptiles": 1834
+    },
+    "byObservationPeriod": {
+      "2010–2015": 1550,
+      "2016–2018": 2695,
+      "2019–2021": 18481,
+      "2022–2024": 47916,
+      "2025–2026": 47214,
+      "Before 2010": 494
+    },
+    "byAccuracyBand": {
+      "10–24 m": 36266,
+      "25–49 m": 20745,
+      "Under 10 m": 61339
+    },
+    "byLicense": {
+      "cc-by": 13245,
+      "cc-by-nc": 69262,
+      "cc-by-nc-nd": 251,
+      "cc-by-nc-sa": 4251,
+      "cc-by-nd": 22,
+      "cc-by-sa": 247,
+      "cc0": 17496,
+      "null": 13576
+    }
+  },
+  "topTaxa": [
+    {
+      "taxonId": "4956",
+      "name": "Great Blue Heron · Ardea herodias",
+      "observations": 11135
+    },
+    {
+      "taxonId": "49699",
+      "name": "Ochre Sea Star · Pisaster ochraceus",
+      "observations": 7180
+    },
+    {
+      "taxonId": "64970",
+      "name": "Western Toad · Anaxyrus boreas",
+      "observations": 4824
+    },
+    {
+      "taxonId": "63382",
+      "name": "Leather Star · Dermasterias imbricata",
+      "observations": 3647
+    },
+    {
+      "taxonId": "55209",
+      "name": "Pacific yew · Taxus brevifolia",
+      "observations": 2699
+    },
+    {
+      "taxonId": "84265",
+      "name": "Mottled Star · Evasterias troschelii",
+      "observations": 2356
+    },
+    {
+      "taxonId": "6363",
+      "name": "Rufous Hummingbird · Selasphorus rufus",
+      "observations": 2195
+    },
+    {
+      "taxonId": "7111",
+      "name": "Harlequin Duck · Histrionicus histrionicus",
+      "observations": 2087
+    },
+    {
+      "taxonId": "6994",
+      "name": "Barrow's Goldeneye · Bucephala islandica",
+      "observations": 2071
+    },
+    {
+      "taxonId": "4793",
+      "name": "Killdeer · Charadrius vociferus",
+      "observations": 1994
+    },
+    {
+      "taxonId": "11901",
+      "name": "Barn Swallow · Hirundo rustica",
+      "observations": 1795
+    },
+    {
+      "taxonId": "78623",
+      "name": "white bog orchid · Platanthera dilatata",
+      "observations": 1654
+    },
+    {
+      "taxonId": "1454382",
+      "name": "Double-crested Cormorant · Nannopterum auritum",
+      "observations": 1597
+    },
+    {
+      "taxonId": "25545",
+      "name": "Northern Red-legged Frog · Rana aurora",
+      "observations": 1572
+    },
+    {
+      "taxonId": "68084",
+      "name": "western white pine · Pinus monticola",
+      "observations": 1526
+    },
+    {
+      "taxonId": "68083",
+      "name": "Whitebark Pine · Pinus albicaulis",
+      "observations": 1422
+    },
+    {
+      "taxonId": "6915",
+      "name": "Trumpeter Swan · Cygnus buccinator",
+      "observations": 1283
+    },
+    {
+      "taxonId": "39773",
+      "name": "Western Painted Turtle · Chrysemys picta bellii",
+      "observations": 1279
+    },
+    {
+      "taxonId": "47673",
+      "name": "Sunflower Sea Star · Pycnopodia helianthoides",
+      "observations": 1195
+    },
+    {
+      "taxonId": "3892",
+      "name": "Greater Yellowlegs · Tringa melanoleuca",
+      "observations": 1136
+    }
+  ],
+  "source": {
+    "apiUrl": "https://api.inaturalist.org/v2/observations",
+    "placeId": 7085,
+    "placeName": "British Columbia, CA",
+    "query": {
+      "place_id": "7085",
+      "quality_grade": "research",
+      "acc_below": "50",
+      "threatened": "true",
+      "taxon_geoprivacy": "open",
+      "hrank": "genus",
+      "created_d2": "2026-08-28",
+      "d2": "2026-08-28",
+      "per_page": "200",
+      "order_by": "id",
+      "order": "asc",
+      "fields": "id,observed_on,location,positional_accuracy,quality_grade,geoprivacy,license_code,taxon.id,taxon.name,taxon.preferred_common_name,taxon.iconic_taxon_name,taxon.threatened,taxon.native,taxon.introduced,taxon.extinct,taxon.is_active,taxon.conservation_status.status,taxon.conservation_status.status_name,taxon.conservation_status.authority,taxon.conservation_status.place_id"
+    },
+    "reportedTotalAtStart": 118348,
+    "requests": 592
+  },
+  "note": "Dated live API snapshot. Taxa were selected by the iNaturalist threatened flag; this is not an official B.C. or federal legal designation. Observation density does not measure abundance, habitat, or absence."
+}

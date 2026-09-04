@@ -74,14 +74,17 @@ const plans = {
     },
     shouldUseDirectSource: true,
     implementationNote:
-      'Use the public API directly, then persist a dated snapshot. Results are live and may not match the old BC Forest Map Mapbox snapshot.',
+      'Use the supported public API with id_above cursor pagination, then persist a dated compressed snapshot. Results are live and will not match the old BC Forest Map Mapbox snapshot.',
     query: {
+      place_id: '7085',
       quality_grade: 'research',
       acc_below: '50',
       threatened: 'true',
       taxon_geoprivacy: 'open',
       per_page: '200',
       hrank: 'genus',
+      order_by: 'id',
+      order: 'asc',
     },
   },
   bigTreeRegistry: {

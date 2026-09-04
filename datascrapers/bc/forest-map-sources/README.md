@@ -56,6 +56,26 @@ with `threatened=true` and positional accuracy below 100 metres. That selection 
 not an official B.C. or federal legal designation, and observation density must not
 be interpreted as abundance, habitat, or confirmed absence.
 
+### Live API snapshot
+
+Create a current, dated snapshot from the supported iNaturalist API with:
+
+```sh
+npm run bcforestmap:inaturalist-species-at-risk:sync -- \
+  --snapshot-date YYYY-MM-DD
+```
+
+The live sync uses iNaturalist place 7085 (British Columbia), research-grade
+observations, positional accuracy below 50 metres, taxa flagged threatened,
+open taxon geoprivacy, and taxonomic ranks at genus or below. It requests 200
+records at a time, follows the API's `id_above` cursor guidance, waits at least
+one second between requests, and can resume an interrupted run with `--resume`.
+
+Dated outputs are deterministic `*.geojson.gz` files accompanied by a manifest;
+temporary checkpoints live under the ignored submodule `tmp/` directory. A live
+snapshot is not equivalent to the July 2021 vector-tile reconstruction, and the
+same interpretation cautions apply.
+
 ## Source mapping
 
 | BC Forest Map layer | Direct source to use | Notes |

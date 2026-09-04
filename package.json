@@ -102,6 +102,7 @@
     "bcforestmap:species-at-risk:plan": "./run-in-pgmaps.sh node datascrapers/bc/forest-map-sources/plan-species-at-risk.mjs",
     "bcforestmap:inaturalist-species-at-risk:plan": "./run-in-pgmaps.sh node datascrapers/bc/forest-map-sources/plan-inaturalist-species-at-risk.mjs",
     "bcforestmap:inaturalist-species-at-risk:import": "./run-in-pgmaps.sh node datascrapers/bc/forest-map-sources/import-inaturalist-species-at-risk.mjs",
+    "bcforestmap:inaturalist-species-at-risk:sync": "./run-in-pgmaps.sh node datascrapers/bc/forest-map-sources/sync-inaturalist-species-at-risk.mjs",
     "bcforestmap:big-tree-registry:plan": "./run-in-pgmaps.sh node datascrapers/bc/forest-map-sources/plan-big-tree-registry.mjs",
     "bcforestmap:big-tree-registry:import": "./run-in-pgmaps.sh node datascrapers/bc/forest-map-sources/import-big-tree-registry.mjs",
     "wars:sync": "./run-in-pgmaps.sh python3 datascrapers/bc/wars/sync-bc-wars.py",
