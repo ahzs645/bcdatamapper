@@ -4,7 +4,9 @@
     "Curated relationship facts for acknowledgement wording experiments. These records support generated variants; they are not boundary datasets.",
     "Use spatial layers as context only. Prefer these verified relationship records when a known place or campus matches.",
     "Generated wording should be reviewed before publication, especially outside the named institution or place context.",
-    "Treaty 8 boundary context uses the official B.C. First Nations Treaty Areas layer. Native Land Lheidli, Ts’msyen, Nisg̱a’a, and Dakelh-related layers are context triggers unless replaced by Nation-approved or government-published geometry."
+    "Treaty 8 boundary context uses the official B.C. First Nations Treaty Areas layer. Native Land Lheidli, Ts’msyen, Nisg̱a’a, and Dakelh-related layers are context triggers unless replaced by Nation-approved or government-published geometry.",
+    "UVic continuing relationships reviewed against Culture and Protocol on 2026-09-05; kept distinct from the campus territorial relationship. Place matchRegion values are broad address consistency guards based on the organization library coordinates, not campus or territory boundaries.",
+    "WWNI place-name consistency guard uses the Gitwinksihlkw locality centre from the BC Address Geocoder, checked 2026-09-05; it does not establish campus or territory boundaries."
   ],
   "sources": [
     {
@@ -421,14 +423,24 @@
       "name": "UNBC Prince George campuses",
       "type": "campus_group",
       "locationNames": ["University Hill", "Wood Innovation and Design Centre", "Wood Innovation Research Laboratory"],
-      "addressAliases": ["3333 University Way", "499 George Street", "1153 4th Avenue"]
+      "addressAliases": ["3333 University Way", "499 George Street", "1153 4th Avenue"],
+      "matchRegion": {
+        "latitude": 53.8939,
+        "longitude": -122.8136,
+        "radiusKm": 15
+      }
     },
     {
       "id": "prince-george",
       "name": "Prince George",
       "type": "municipality",
       "locationNames": ["Prince George"],
-      "addressAliases": ["Prince George, BC"]
+      "addressAliases": ["Prince George, BC"],
+      "matchRegion": {
+        "latitude": 53.8939,
+        "longitude": -122.8136,
+        "radiusKm": 30
+      }
     },
     {
       "id": "lheidli-tenneh-boundary-context",
@@ -463,70 +475,120 @@
       "name": "UNBC South-Central campus",
       "type": "campus",
       "locationNames": ["North Cariboo Community Campus"],
-      "addressAliases": ["100 Campus Way"]
+      "addressAliases": ["100 Campus Way"],
+      "matchRegion": {
+        "latitude": 52.9784,
+        "longitude": -122.4944,
+        "radiusKm": 10
+      }
     },
     {
       "id": "unbc-peace-river-liard-fort-st-john",
       "name": "UNBC Peace River-Liard campus",
       "type": "campus",
       "locationNames": ["Peace River-Liard"],
-      "addressAliases": ["9820 120 Avenue"]
+      "addressAliases": ["9820 120 Avenue"],
+      "matchRegion": {
+        "latitude": 56.2465,
+        "longitude": -120.8476,
+        "radiusKm": 10
+      }
     },
     {
       "id": "unbc-northwest-terrace",
       "name": "UNBC Northwest campus",
       "type": "campus",
       "locationNames": ["Northwest campus"],
-      "addressAliases": []
+      "addressAliases": [],
+      "matchRegion": {
+        "latitude": 54.5182,
+        "longitude": -128.5996,
+        "radiusKm": 10
+      }
     },
     {
       "id": "unbc-northwest-prince-rupert",
       "name": "UNBC Prince Rupert satellite campus",
       "type": "satellite_campus",
       "locationNames": [],
-      "addressAliases": []
+      "addressAliases": [],
+      "matchRegion": {
+        "latitude": 54.3122,
+        "longitude": -130.3271,
+        "radiusKm": 10
+      }
     },
     {
       "id": "wwni-gitwinksihlkw",
       "name": "Wilp Wilxo’oskwhl Nisg̱a’a Institute",
       "type": "federated_institute",
       "locationNames": ["WWNI"],
-      "addressAliases": []
+      "addressAliases": [],
+      "matchRegion": {
+        "latitude": 55.1930556,
+        "longitude": -129.2208334,
+        "radiusKm": 10
+      }
     },
     {
       "id": "ubc-vancouver-point-grey-campus",
       "name": "UBC Vancouver-Point Grey academic campus",
       "type": "academic_campus",
       "locationNames": ["Point Grey campus", "UBC Vancouver"],
-      "addressAliases": ["2329 West Mall", "UBC Point Grey", "Point Grey Campus", "UBC Vancouver-Point Grey", "UBC Vancouver"]
+      "addressAliases": ["2329 West Mall", "UBC Point Grey", "Point Grey Campus", "UBC Vancouver-Point Grey", "UBC Vancouver"],
+      "matchRegion": {
+        "latitude": 49.2606,
+        "longitude": -123.246,
+        "radiusKm": 5
+      }
     },
     {
       "id": "ubc-vancouver-operations",
       "name": "UBC operations in Vancouver",
       "type": "operations_area",
       "locationNames": [],
-      "addressAliases": ["UBC operations in Vancouver", "UBC Vancouver operations"]
+      "addressAliases": ["UBC operations in Vancouver", "UBC Vancouver operations"],
+      "matchRegion": {
+        "latitude": 49.2606,
+        "longitude": -123.246,
+        "radiusKm": 25
+      }
     },
     {
       "id": "ubc-robson-square",
       "name": "UBC Robson Square",
       "type": "satellite_campus",
       "locationNames": ["Robson Square"],
-      "addressAliases": ["800 Robson Street", "UBC Robson Square", "Robson Square"]
+      "addressAliases": ["800 Robson Street", "UBC Robson Square", "Robson Square"],
+      "matchRegion": {
+        "latitude": 49.2606,
+        "longitude": -123.246,
+        "radiusKm": 15
+      }
     },
     {
       "id": "ubc-okanagan-campus",
       "name": "UBC Okanagan academic campus",
       "type": "academic_campus",
       "locationNames": ["Okanagan campus", "UBCO"],
-      "addressAliases": ["3333 University Way, Kelowna", "UBC Okanagan", "UBCO", "Okanagan Campus"]
+      "addressAliases": ["3333 University Way, Kelowna", "UBC Okanagan", "UBCO", "Okanagan Campus"],
+      "matchRegion": {
+        "latitude": 49.9395,
+        "longitude": -119.396,
+        "radiusKm": 5
+      }
     },
     {
       "id": "university-of-victoria-campus",
       "name": "University of Victoria",
       "type": "academic_campus",
       "locationNames": ["UVic"],
-      "addressAliases": ["3800 Finnerty Road", "University of Victoria", "UVic"]
+      "addressAliases": ["3800 Finnerty Road", "University of Victoria", "UVic"],
+      "matchRegion": {
+        "latitude": 48.4634,
+        "longitude": -123.3117,
+        "radiusKm": 5
+      }
     }
   ],
   "placeRelationships": [
@@ -719,12 +781,12 @@
     {
       "id": "uvic-lekwungen-wsanec-continuing-relationships",
       "placeId": "university-of-victoria-campus",
-      "relationshipType": "traditional_territories",
+      "relationshipType": "continuing_relationships",
       "nationIds": ["songhees", "esquimalt", "wsanec-peoples"],
       "peopleGroupIds": ["lekwungen", "wsanec"],
       "referenceAreaIds": ["native-land-lekwungen-songhees", "native-land-wsanec"],
-      "verificationStatus": "verified_institutional_context",
-      "sourceRefs": ["uvic-culture-and-protocol", "uvic-indigenous-territories"]
+      "verificationStatus": "verified_institutional",
+      "sourceRefs": ["uvic-culture-and-protocol"]
     }
   ]
 }
