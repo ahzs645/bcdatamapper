@@ -5,6 +5,12 @@ for ClimateData.ca. Large source files and derived HDF5 packages stay in the
 ignored `cache/` directory; the scripts and product specifications are maintained
 in BC Data Mapper.
 
+For the Northern Health report's **BC-wide CanDCS-U6 / SSP585 and ClimateBC snow**
+pipeline, see [`bc-climate/README.md`](bc-climate/README.md). It acquires the
+upstream sources, preserves all source period/percentile/delta bands, builds
+lossless native-grid blocks for Deck.gl, and publishes to R2. No generated data
+is checked into Git or copied into PGMaps `public/data`.
+
 The portal is not one homogeneous dataset. For BC it currently breaks into:
 
 1. fixed CanDCS-M6 rasters that share one grid;

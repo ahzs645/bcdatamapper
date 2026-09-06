@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "bc-climate-u6",
+  "title": "British Columbia climate projections — CanDCS-U6 and archived ClimateBC snow",
+  "scenario": "ssp585",
+  "percentiles": ["p10", "p50", "p90"],
+  "reportHorizons": ["1971-2000", "2041-2070", "2071-2100"],
+  "pavicsCatalogBase": "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/catalog/birdhouse/disk3/cccs_portal/indices/Final/BCCAQv2_CMIP6/",
+  "pavicsFileBase": "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/fileServer/",
+  "boundary": "../../../bc/boundaries/output/BC/regional_districts.geojson",
+  "boundarySupplement": {"path":"../../../bc/boundaries/output/BC/municipalities.geojson", "field":"LGL_ADMIN_AREA_ID", "value":59},
+  "boundaryDescription": "BC regional districts including Stikine, plus Northern Rockies Regional Municipality (which is absent from the regional-district collection)",
+  "boundaryProcessing": "Dissolve all regions together and fill internal holes for provincial coverage, preserving exterior rings. This includes inland waters/administrative exclusions and removes internal precision seams; reject if filling expands area by more than 0.1%. Canonical zone geometries are not changed.",
+  "boundaryCoverageChecks": [
+    {"name":"Fort Nelson", "coordinates":[-122.70,58.805]},
+    {"name":"Northeast BC", "coordinates":[-120.5,59.5]},
+    {"name":"Atlin", "coordinates":[-133.7,59.58]},
+    {"name":"Telegraph Creek", "coordinates":[-131.17,57.90]},
+    {"name":"Haida Gwaii", "coordinates":[-132.1,53.3]},
+    {"name":"Vancouver Island", "coordinates":[-125.5,49.5]},
+    {"name":"Prince George", "coordinates":[-122.75,53.9]},
+    {"name":"Lower Mainland", "coordinates":[-123.0,49.2]},
+    {"name":"Kootenay", "coordinates":[-116.0,49.5]}
+  ],
+  "boundaryRule": "Keep native cells intersecting the complete BC union (regional districts plus Northern Rockies); whole cell footprints retained, including border cells. No interpolation, simplification, or invented values outside source coverage.",
+  "annual": [
+    {"id":"tg_mean", "label":"Mean annual temperature", "units":"°C", "report":true},
+    {"id":"ccdcold_18", "label":"Cooling degree days above 18°C", "units":"°C·days", "report":true},
+    {"id":"hddheat_18", "label":"Heating degree days below 18°C", "units":"°C·days", "report":true},
+    {"id":"txgt_29", "label":"Annual days above 29°C", "units":"days", "report":true},
+    {"id":"tx_max", "label":"Hottest day of the year", "units":"°C", "report":true},
+    {"id":"tn_min", "label":"Coldest night of the year", "units":"°C", "report":true},
+    {"id":"tr_18", "label":"Annual nights above 18°C", "units":"days", "report":true},
+    {"id":"frost_days", "label":"Annual frost days (Tmin below 0°C)", "units":"days", "report":true},
+    {"id":"ice_days", "label":"Annual ice days (Tmax below 0°C)", "units":"days", "report":true},
+    {"id":"frost_free_season", "label":"Frost-free season length", "units":"days", "report":true},
+    {"id":"prcptot", "label":"Annual total precipitation", "units":"mm", "report":true},
+    {"id":"rx1day", "label":"Annual maximum 1-day precipitation", "units":"mm", "report":true},
+    {"id":"rx5day", "label":"Annual maximum 5-day precipitation", "units":"mm", "report":true},
+    {"id":"txgt_32", "label":"Annual days above 32°C", "units":"days", "report":false},
+    {"id":"tn_mean", "label":"Annual mean daily minimum temperature", "units":"°C", "report":false},
+    {"id":"tx_mean", "label":"Annual mean daily maximum temperature", "units":"°C", "report":false}
+  ],
+  "seasonal": {"id":"prcptot", "frequency":"QS-DEC", "seasons":{"12":"winter", "3":"spring", "6":"summer", "9":"autumn"}},
+  "snow": {
+    "id":"PAS", "label":"Annual precipitation as snow", "units":"mm",
+    "source":"https://climatebc.ca/SpatialData",
+    "version":"Northern Health archived ClimateBC; report identifies v7.41",
+    "ensemble":"13-GCM ensemble (future rasters); no percentile dimension",
+    "files":[
+      {"horizon":"1971-2000", "path":"ClimateBC/Historical/Normal/1971_2000/PAS_1971_2000.tif"},
+      {"horizon":"2011-2040", "path":"ClimateBC/Future/13GCM/ssp585/2011-2040/PAS_2011-2040.tif"},
+      {"horizon":"2041-2070", "path":"ClimateBC/Future/13GCM/ssp585/2041-2070/PAS_2041-2070.tif"},
+      {"horizon":"2071-2100", "path":"ClimateBC/Future/13GCM/ssp585/2071-2100/PAS_2071-2100.tif"}
+    ]
+  },
+  "storage": {
+    "bucket":"maps", "accountId":"479e77f49d4ac5d7498529ee360f194b",
+    "prefix":"climate/bc-climate-u6", "publicBaseUrl":"https://data.map.ahmad.sh"
+  }
+}

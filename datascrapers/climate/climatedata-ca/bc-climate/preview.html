@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BC climate · native vector grid</title>
+<style>
+html,body,#map{margin:0;width:100%;height:100%;font:14px system-ui;background:#e8eef3;color:#152d3c}#panel{position:absolute;z-index:2;top:16px;left:16px;background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 30px #1233;width:300px}h1{font-size:19px;margin:0 0 12px}label{display:block;margin:9px 0}select{width:100%;padding:7px}p{font-size:12px;line-height:1.4}#status{font-variant-numeric:tabular-nums}#legend{height:10px;background:linear-gradient(90deg,#287bbd,#ffd87e,#c93b39);border-radius:5px}.range{display:flex;justify-content:space-between;font-size:12px;margin-top:5px}a{color:#215e8e}
+</style>
+<div id="map"></div><aside id="panel"><h1>British Columbia climate</h1>
+<label>Indicator<select id="product"></select></label>
+<label>30-year period<select id="horizon"></select></label>
+<label>Percentile<select id="percentile"></select></label>
+<label>Season<select id="season"></select></label>
+<div id="legend"></div><div class="range"><span id="minimum"></span><span id="maximum"></span></div>
+<p id="status">Loading catalogue…</p><p>SSP5-8.5 · native grid cells · hover for values.<br>Colours show the selected band’s BC-wide numeric range, not health-risk categories. Border cells retain their full footprints.</p>
+<p>Sources: PCIC / ClimateData.ca / PAVICS; ClimateBC (UBC, CC-BY). Snow has no percentile dimension. <a href="manifest.json">Provenance</a> · <a href="validation.json">Validation</a></p></aside>
+<script src="https://unpkg.com/deck.gl@9.1.14/dist.min.js"></script>
+<script type="module">
+import {openClimate} from './deckgl.mjs';
+const $=id=>document.getElementById(id);
+const api=await openClimate(new URL('manifest.json',location.href));
+const controls=['product','horizon','percentile','season'];
+function options(id,values,preferred){const el=$(id);el.replaceChildren(...values.map(value=>{const o=document.createElement('option');o.value=value??'';o.textContent=value??'Not available (snow)';return o}));if(values.includes(preferred))el.value=preferred??'';el.disabled=values.length===1;}
+options('product',api.manifest.products.map(p=>p.id),'txgt_29');
+for(const o of $('product').options)o.textContent=api.manifest.products.find(p=>p.id===o.value).label;
+let product,controller,version=0,productVersion=0,viewState={longitude:-125,latitude:54.3,zoom:4.5,pitch:0,bearing:0};
+const boundary=await fetch(new URL(api.manifest.boundary,api.baseUrl)).then(r=>r.json());
+const outline=()=>new deck.GeoJsonLayer({id:'bc-boundary',data:boundary,filled:false,stroked:true,getLineColor:[35,58,71],getLineWidth:1.5,lineWidthUnits:'pixels'});
+const map=new deck.DeckGL({container:'map',initialViewState:viewState,controller:true,layers:[outline()],onViewStateChange:({viewState:v})=>{viewState=v;clearTimeout(window.reloadTimer);window.reloadTimer=setTimeout(render,200)},getTooltip:({object})=>object?`${object.properties.indicator}: ${object.properties.value.toFixed(2)} ${object.properties.units}\n${object.properties.horizon} · ${object.properties.percentile??'ensemble'}\n${object.properties.cellId}`:null});
+async function chooseProduct(){const request=++productVersion;version++;controller?.abort();product=undefined;$('status').textContent='Loading indicator…';try{const result=await api.product($('product').value);if(request!==productVersion)return;product=result;const bands=product.bands.filter(b=>b.measure==='absolute');options('horizon',[...new Set(bands.map(b=>b.horizon))],'2071-2100');options('percentile',[...new Set(bands.map(b=>b.percentile))],'p50');options('season',[...new Set(bands.map(b=>b.season))],'annual');render()}catch(e){if(request===productVersion)$('status').textContent=e.message;console.error(e)}}
+async function render(){
+ if(!product)return;
+ const current=++version;controller?.abort();controller=new AbortController();const selection={horizon:$('horizon').value,percentile:$('percentile').value||null,season:$('season').value,measure:'absolute'};
+ const band=product.bands.find(b=>Object.entries(selection).every(([k,v])=>b[k]===v));if(!band)return;
+ const lo=band.min,hi=band.max;$('minimum').textContent=`${lo?.toFixed(1)} ${band.units}`;$('maximum').textContent=`${hi?.toFixed(1)} ${band.units}`;
+ const viewport=new deck.WebMercatorViewport({...viewState,width:innerWidth,height:innerHeight});const bounds=viewport.getBounds();
+ // Fine snow cells should be explored locally; don't create two million JS polygons at provincial zoom.
+ if(product.grid==='snow'&&viewState.zoom<7){map.setProps({layers:[outline()]});$('status').textContent='Snow is the fine-resolution grid. Zoom to 7+ to load native snow cells.';return}
+ $('status').textContent='Loading visible grid blocks…';const layers=[];let cells=0;
+ try{for await(const tile of api.visibleTiles(product.id,selection,bounds,{signal:controller.signal})){
+  if(current!==version)return;cells+=tile.data.features.length;
+  layers.push(new deck.GeoJsonLayer({id:`${product.id}-${tile.id}`,data:tile.data,pickable:true,filled:true,stroked:false,getFillColor:f=>{const t=Math.max(0,Math.min(1,(f.properties.value-lo)/(hi-lo||1)));const a=t<.5?[40,123,189]:[255,216,126],b=t<.5?[255,216,126]:[201,59,57],u=t<.5?t*2:(t-.5)*2;return a.map((v,i)=>Math.round(v+(b[i]-v)*u)).concat(190)}}));
+  map.setProps({layers:[...layers,outline()]});$('status').textContent=`${cells.toLocaleString()} cells · ${layers.length} visible blocks`;
+ }}catch(e){if(e.name!=='AbortError'){$('status').textContent=e.message;console.error(e)}}
+}
+$('product').onchange=chooseProduct;for(const id of controls.slice(1))$(id).onchange=render;
+await chooseProduct();
+</script></html>
