@@ -51,5 +51,9 @@
       0.517274342035523,
       "V5Z"
     ]
-  ]
+  ],
+  "postalPrefix2Features": 10,
+  "postalPrefix2ExactlyMatchChildUnions": true,
+  "postalPrefix2PairsChecked": 45,
+  "postalPrefix2Overlaps": 0
 }
