@@ -1,0 +1,42 @@
+{
+  "observedExposure": {
+    "fields": [
+      "avg10yr_annual_precipitation",
+      "pm25_fsa_avg10yr_2020",
+      "total_heat"
+    ],
+    "rows": 193,
+    "method": "Column-centred, sample-SD standardized PCA via numpy SVD; all 193 rows; no additional transformations",
+    "variancePercent": [
+      62.6354433905288,
+      26.47631194581742,
+      10.888244663653794
+    ],
+    "firstTwoVariancePercent": 89.11175533634622,
+    "reportedFirstTwoVariancePercent": 100,
+    "matchesReportWithinOnePercentagePoint": false
+  },
+  "projectedExposure": {
+    "fields": [
+      "avg10yr_annual_precipitation",
+      "pm25_fsa_avg10yr_2020",
+      "total_heat",
+      "2020s_summer_tmean_change",
+      "2050s_summer_tmean_change"
+    ],
+    "rows": 193,
+    "method": "Column-centred, sample-SD standardized PCA via numpy SVD; all 193 rows; no additional transformations",
+    "variancePercent": [
+      47.93070623421291,
+      30.007259368413468,
+      13.210841516831556,
+      5.969568497565682,
+      2.8816243829763875
+    ],
+    "firstTwoVariancePercent": 77.93796560262638,
+    "reportedFirstTwoVariancePercent": 96,
+    "matchesReportWithinOnePercentagePoint": false
+  },
+  "interpretation": "Diagnostic only, not a reconstructed CVI. The straightforward standardized PCA does not match Table 3. Direction reversals alone cannot explain eigenvalue differences. Input version, transformations or model specification need verification.",
+  "scoreStatus": "Not reproduced; no final CVI scores emitted"
+}

@@ -1,0 +1,48 @@
+{
+  "sourceSha256": "1166afd11a5aaa116c0cf882890ccfd55a546560edd5f5a60871801e56dd9ca1",
+  "summary": {
+    "catalogueVariables": 80,
+    "downloadVariables": 76,
+    "rows": 193,
+    "mappedRows": 191,
+    "unmappedFsas": [
+      "V7X",
+      "V7Y"
+    ],
+    "selectedClear": 61,
+    "selectedAmbiguous": 11,
+    "notSelected": 8,
+    "missingSelected": [
+      "Median employment income",
+      "Private dwellings percentage"
+    ],
+    "missingExcluded": [
+      "Median household after-tax income",
+      "Annual maximum temperature, 10-year average"
+    ],
+    "nonFiniteValues": 0,
+    "constantFields": []
+  },
+  "files": {
+    "holdings-evidence.json": {
+      "bytes": 48237,
+      "sha256": "1c4bb9f17d6bac2c68cba2e655f814f9bb27461459cac7ebbb328f2117f11edb"
+    },
+    "inputs.json": {
+      "bytes": 770970,
+      "sha256": "5d0e8a9949acc11db5081594851cb3ab1868bec925c272a01f5e27180773fda1"
+    },
+    "mhcca-fsa-inputs.csv": {
+      "bytes": 120670,
+      "sha256": "1166afd11a5aaa116c0cf882890ccfd55a546560edd5f5a60871801e56dd9ca1"
+    },
+    "reproducibility.json": {
+      "bytes": 1508,
+      "sha256": "26cc1fafe561b7b9857dc2c0be02bd1bad80864c7d9ec889c36deff7e5126e29"
+    },
+    "variable-audit.csv": {
+      "bytes": 45590,
+      "sha256": "cc6ff99bb209b12a7d31e284994102b2866e9e0229b0bb698824e5be5d6a2c20"
+    }
+  }
+}

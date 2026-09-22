@@ -1,0 +1,10 @@
+{
+  "retrievedDate": "2026-09-22",
+  "sourcePage": "https://alexihu.shinyapps.io/ClimateVulnerability/",
+  "downloadControl": "Download BC Climate Index",
+  "rows": 193,
+  "columns": 78,
+  "uniqueFsaCount": 193,
+  "sha256": "1166afd11a5aaa116c0cf882890ccfd55a546560edd5f5a60871801e56dd9ca1",
+  "note": "New audit download, not pre-existing local dataset; no geometry or PCA score columns"
+}
