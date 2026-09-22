@@ -1,3 +1,4 @@
+import { buildPostalRegions } from './build-postal-regions.mjs'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { mkdirSync, existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs'
@@ -63,3 +64,5 @@ const manifest = { ...optimized.metadata, file, features: features.length,
 }
 writeFileSync(resolve(outputDir, 'bc_fsa_2021.manifest.json'), `${JSON.stringify(manifest,null,2)}\n`)
 console.log(JSON.stringify(manifest,null,2))
+
+buildPostalRegions(outputDir)

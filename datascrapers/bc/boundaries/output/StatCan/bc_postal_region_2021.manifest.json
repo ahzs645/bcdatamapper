@@ -1,0 +1,15 @@
+{
+  "boundarySetId": "statcan-cfsa-2021-bc",
+  "level": "postalRegion",
+  "sourceArchiveSha256": "9fd2b6adf66e5716d06f91ebdcdb5d8a4e8b9eeb520f8b4285030d34319959db",
+  "childFile": "bc_fsa_2021.geojson.gz",
+  "childSha256": "2bb201ed818b89768b4040f5d5e06a89de4b5aba16d650b3ad0babe47f227318",
+  "method": "Dissolve shared FSA display geometry by first postal-code character; no additional simplification",
+  "mapshaperVersion": "0.6.113",
+  "outputCrs": "EPSG:4326",
+  "caveat": "PGMaps-defined postal parent derived from census FSAs; not a separate Canada Post delivery boundary release.",
+  "features": 1,
+  "geojsonBytes": 7132433,
+  "gzipBytes": 2252591,
+  "sha256": "a25240334dbb191034e8c78a9b2f893a7382066d062a9cb908dba6991cdcb86b"
+}

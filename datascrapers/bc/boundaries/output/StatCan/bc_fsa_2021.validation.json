@@ -1,4 +1,6 @@
 {
+  "postalParentValid": true,
+  "postalParentExactlyMatchesChildUnion": true,
   "features": 191,
   "validGeometries": 191,
   "pairsChecked": 18145,

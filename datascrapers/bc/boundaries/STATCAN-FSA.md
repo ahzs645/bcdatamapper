@@ -9,3 +9,7 @@ The layer is built once for reuse by all maps, keyed by CFSAUID under boundary d
 Validation requires Python with `shapely` and `pyproj`: `python validate-statcan-fsa.py`. It verifies 191 IDs, geometry validity, every feature pair for area overlaps, exact shared edge reuse and area differences in EPSG:3005. The accepted derivative has zero overlaps and a maximum area change of 1.6232% (V6C). Use full source geometry for analysis. Eight-decimal WGS84 precision prevents self-intersections introduced by six-decimal rounding. The manifest records source checksum, CRS, pinned Mapshaper version, method and 25 m display tolerance.
 
 These are census-reported three-character FSAs, not six-character Canada Post delivery polygons. V7X and V7Y have no polygon in this release. See the reference guide URL in the manifest for source definitions and caveats.
+
+## Postal hierarchy
+
+PGMaps exposes this under its separate `postal` source. `postalRegion` is BC region V; `fsa` is the three-character child level. `build-postal-regions.mjs`, also invoked by the main sync, dissolves the existing FSA display layer by the first character to generate the parent. No independent download or second simplification is involved. The parent is 2.25 MB gzip and its manifest records the exact child snapshot checksum. Validation asserts it equals the union of all children. Six-character postal-code polygons are not available.

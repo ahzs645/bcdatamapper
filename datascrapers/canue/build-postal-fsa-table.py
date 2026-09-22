@@ -64,7 +64,7 @@ def main():
     output={'version':1,'boundarySetId':'statcan-cfsa-2021-bc',
         'boundarySourceSha256':geometry['metadata']['archiveSha256'],
         'boundaryUrl':'/data/boundaries/StatCan/bc_fsa_2021.geojson.gz',
-        'source':'census','level':'fsa','dataset':args.dataset,'year':args.year,
+        'source':'postal','level':'fsa','dataset':args.dataset,'year':args.year,
         'sourceSha256':hashlib.sha256(blob).hexdigest(),'csvSha256':hashlib.sha256(csvbytes).hexdigest(),
         'sourceMember':args.member,'method':'postal-prefix-unweighted-mean-v1',
         'caveat':'One observation per unique six-character postal code. Missing values and CANUE -9999/-1111 sentinels excluded. No population weighting. Census polygon membership can differ from postal prefixes. Unmapped prefixes retained.',

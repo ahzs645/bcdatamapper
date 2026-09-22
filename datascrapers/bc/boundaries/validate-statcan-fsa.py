@@ -3,7 +3,7 @@ import gzip,json
 from collections import defaultdict
 from pathlib import Path
 from shapely.geometry import shape
-from shapely.ops import transform
+from shapely.ops import transform, unary_union
 from shapely import make_valid
 from pyproj import Transformer
 root=Path(__file__).resolve().parent
@@ -39,6 +39,10 @@ for i in range(len(polys)):
   if polys[i].boundary.intersection(polys[j].boundary).length>0:
    adjacent+=1;assert (i,j) in sharedPairs, (i,j,'no exact shared edge')
 assert not overlaps, overlaps[:5]
-report={'features':191,'validGeometries':191,'pairsChecked':191*190//2,'polygonAreaOverlaps':len(overlaps),'adjacentFeaturePairs':adjacent,'exactSharedSegments':sharedSegments,'maxAreaChangePercent':max(changes)[0],'maxAreaChangeFsa':max(changes)[1],'areaComparisonCrs':'EPSG:3005','topAreaChanges':sorted(changes,reverse=True)[:10]}
+parent=json.loads(gzip.decompress((root/'output/StatCan/bc_postal_region_2021.geojson.gz').read_bytes()))
+assert len(parent['features']) == 1
+parent_shape=shape(parent['features'][0]['geometry'])
+assert parent_shape.is_valid and parent_shape.equals(unary_union(polys)), 'Postal parent differs from union of child FSAs'
+report={'postalParentValid': True, 'postalParentExactlyMatchesChildUnion': True, 'features':191,'validGeometries':191,'pairsChecked':191*190//2,'polygonAreaOverlaps':len(overlaps),'adjacentFeaturePairs':adjacent,'exactSharedSegments':sharedSegments,'maxAreaChangePercent':max(changes)[0],'maxAreaChangeFsa':max(changes)[1],'areaComparisonCrs':'EPSG:3005','topAreaChanges':sorted(changes,reverse=True)[:10]}
 (root/'output/StatCan/bc_fsa_2021.validation.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
