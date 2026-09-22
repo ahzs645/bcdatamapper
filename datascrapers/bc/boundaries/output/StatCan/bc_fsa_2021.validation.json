@@ -1,0 +1,53 @@
+{
+  "features": 191,
+  "validGeometries": 191,
+  "pairsChecked": 18145,
+  "polygonAreaOverlaps": 0,
+  "adjacentFeaturePairs": 445,
+  "exactSharedSegments": 24292,
+  "maxAreaChangePercent": 1.623178881665932,
+  "maxAreaChangeFsa": "V6C",
+  "areaComparisonCrs": "EPSG:3005",
+  "topAreaChanges": [
+    [
+      1.623178881665932,
+      "V6C"
+    ],
+    [
+      0.850532107717572,
+      "V6M"
+    ],
+    [
+      0.746423892717929,
+      "V7Z"
+    ],
+    [
+      0.7047406117523303,
+      "V6S"
+    ],
+    [
+      0.6761629625653187,
+      "V7A"
+    ],
+    [
+      0.6758715517020453,
+      "V8W"
+    ],
+    [
+      0.5603442705616857,
+      "V6J"
+    ],
+    [
+      0.5581590913812606,
+      "V6K"
+    ],
+    [
+      0.5399162793168211,
+      "V3X"
+    ],
+    [
+      0.517274342035523,
+      "V5Z"
+    ]
+  ]
+}

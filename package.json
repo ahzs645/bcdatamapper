@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "boundaries:fsa": "node --max-old-space-size=6144 datascrapers/bc/boundaries/sync-statcan-fsa.mjs",
     "citypg:sync": "./run-in-pgmaps.sh node datascrapers/citypg/sync-citypg-arcgis.mjs",
     "citypg:business-licences:sync": "./run-in-pgmaps.sh node datascrapers/citypg/sync-citypg-business-licences.mjs",
     "citypg:heat-shade:sync": "./run-in-pgmaps.sh node datascrapers/citypg/sync-citypg-heat-shade.mjs",
