@@ -1,0 +1,13 @@
+{
+  "featureCount": 10000,
+  "sourceInvalidGeometries": 7,
+  "outputInvalidGeometries": 7,
+  "sourceOverlapPairsOver1sqm": 48,
+  "outputOverlapPairsOver1sqm": 48,
+  "introducedOverlapPairsOver1sqm": 0,
+  "maxIntroducedOverlapSqm": 0,
+  "sharedExactEdges": 1230858,
+  "maximumAbsoluteAreaChangePercent": 0.0,
+  "p99AbsoluteAreaChangePercent": 0.0,
+  "note": "The source contains overlapping thematic VSU polygons. Source overlaps are preserved; this is not a province-wide land partition. All source coordinates and topology are preserved exactly. Existing source geometry defects are retained for review. Boundaries are screening candidates, not survey geometry."
+}
