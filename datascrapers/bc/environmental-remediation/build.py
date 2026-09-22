@@ -36,8 +36,17 @@ def normalize(collection):
 
 
 def build_product(cache):
-    raw = (cache / 'environmental-remediation-sites.geojson').read_bytes()
-    source = json.loads((cache / 'manifest.json').read_text())
+    archive = cache.parent / 'source' / 'environmental-remediation-sites.geojson.gz'
+    if archive.exists():
+        source = json.loads((archive.parent / 'manifest.json').read_text())
+        compressed = archive.read_bytes()
+        if hashlib.sha256(compressed).hexdigest() != source['gzipSha256']:
+            raise ValueError('Compressed source does not match its manifest SHA-256')
+        raw = gzip.decompress(compressed)
+    else:
+        # Compatibility with the initial research download layout.
+        raw = (cache / 'environmental-remediation-sites.geojson').read_bytes()
+        source = json.loads((cache / 'manifest.json').read_text())
     if hashlib.sha256(raw).hexdigest() != source['sha256']:
         raise ValueError('Downloaded source does not match its manifest SHA-256')
     product = normalize(json.loads(raw))
@@ -47,6 +56,7 @@ def build_product(cache):
     digest = hashlib.sha256(payload).hexdigest()
     filename = f'sites-{digest}.geojson.gz'
     compressed = gzip.compress(payload, mtime=0)
+    cache.mkdir(exist_ok=True)
     (cache / filename).write_bytes(compressed)
     manifest = {'schemaVersion': 1, 'title': 'Environmental Remediation Sites',
                 'downloadedAt': source['downloadedAt'], 'featureCount': len(product['features']),

@@ -65,12 +65,13 @@ def main():
     payload = (json.dumps({"type": "FeatureCollection", "features": features},
                           separators=(",", ":"), ensure_ascii=False) + "\n").encode()
     compressed = gzip.compress(payload, mtime=0)
-    cache = ROOT / "cache"
-    cache.mkdir(exist_ok=True)
-    path = cache / "environmental-remediation-sites.geojson"
-    path.write_bytes(payload)
-    path.with_suffix(".geojson.gz").write_bytes(compressed)
-    (cache / "catalogue-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
+    source = ROOT / "source"
+    source.mkdir(exist_ok=True)
+    path = source / "environmental-remediation-sites.geojson.gz"
+    temporary = source / (path.name + '.tmp')
+    temporary.write_bytes(compressed)
+    temporary.replace(path)
+    (source / "catalogue-metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     manifest = dict(downloadedAt=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                     catalogue=CATALOGUE, service=SERVICE, layer=LAYER,
                     license=metadata.get("license_title"), licenseUrl=metadata.get("license_url"),
@@ -78,9 +79,10 @@ def main():
                     uniqueSiteIds=len(set(ids)), geometryTypes=dict(collections.Counter(f["geometry"]["type"] for f in features)),
                     bytes=len(payload), gzipBytes=len(compressed),
                     sha256=hashlib.sha256(payload).hexdigest(), requests=requests,
-                    purpose="Local research cache; not a deployable or redistribution artifact.")
-    (cache / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    build_product(cache)
+                    resource=path.name, gzipSha256=hashlib.sha256(compressed).hexdigest(),
+                    purpose="Local compressed source archive; not a deployable or redistribution artifact.")
+    (source / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    build_product(ROOT / "cache")
     print(json.dumps({k: manifest[k] for k in ["featureCount", "uniqueSiteIds", "geometryTypes", "bytes", "gzipBytes", "license"]}, indent=2))
 
 

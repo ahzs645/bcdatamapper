@@ -1,0 +1,542 @@
+{
+  "author": "d0716cb8-7eb5-4d43-9f57-6022096fd79f",
+  "author_email": null,
+  "creator_user_id": "d0716cb8-7eb5-4d43-9f57-6022096fd79f",
+  "download_audience": "Public",
+  "id": "63804e64-a4f3-4bc7-b1e3-5f736bbc3967",
+  "isopen": false,
+  "license_id": "22",
+  "license_title": "Access Only",
+  "license_url": "https://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA",
+  "lineage_statement": "Formally WHSE_WASTE.SITE_ENV_REMEDIATION_SITES_SVW",
+  "maintainer": null,
+  "maintainer_email": null,
+  "metadata_created": "2014-12-11T09:50:35.965447",
+  "metadata_modified": "2026-09-22T12:45:01.417733",
+  "metadata_visibility": "Public",
+  "name": "environmental-remediation-sites",
+  "notes": "A layer containing data on known and potentially contaminated properties in British Columbia. A site is contaminated if its land, water and/or sediment are unsuitable for particular uses from waste that  exceeds environmental quality standards.\n\nContact [BC Registries and Online Services](https://www.bcregistry.gov.bc.ca/en-CA) for further details for each site using the Site Registry.",
+  "num_resources": 3,
+  "num_tags": 4,
+  "organization": {
+    "id": "218e193f-e6ad-41a8-93ec-3e2b62d1307b",
+    "name": "authorizations-and-remediation",
+    "title": "Authorizations and Remediation",
+    "type": "organization",
+    "description": "",
+    "image_url": "",
+    "created": "2015-04-13T11:59:30.582390",
+    "is_organization": true,
+    "approval_status": "approved",
+    "state": "active"
+  },
+  "owner_org": "218e193f-e6ad-41a8-93ec-3e2b62d1307b",
+  "private": false,
+  "publish_state": "PUBLISHED",
+  "purpose": "The Site Registry records information about  environmental conditions for sites that have been screened, investigated or cleaned up since the recording of site maintenance began.",
+  "record_create_date": "2005-05-13",
+  "record_last_modified": "2026-09-22",
+  "record_publish_date": "2014-12-11",
+  "replacement_record": "",
+  "resource_status": "onGoing",
+  "retention_expiry_date": "",
+  "security_class": "PUBLIC",
+  "source_data_path": "",
+  "state": "active",
+  "title": "Environmental Remediation Sites",
+  "type": "bcdc_dataset",
+  "url": null,
+  "version": null,
+  "view_audience": "Public",
+  "contacts": [
+    {
+      "displayed": [
+        "displayed"
+      ],
+      "email": "Patricia.Fortin@gov.bc.ca",
+      "name": "Patricia Fortin",
+      "org": "218e193f-e6ad-41a8-93ec-3e2b62d1307b",
+      "role": "pointOfContact"
+    },
+    {
+      "displayed": [
+        "displayed"
+      ],
+      "email": "Nicole.Montgomery@gov.bc.ca",
+      "name": "Nicole Montgomery",
+      "org": "218e193f-e6ad-41a8-93ec-3e2b62d1307b",
+      "role": "pointOfContact"
+    },
+    {
+      "displayed": [
+        "displayed"
+      ],
+      "email": "Carrie.Nugent@gov.bc.ca",
+      "name": "Carrie Nugent",
+      "org": "218e193f-e6ad-41a8-93ec-3e2b62d1307b",
+      "role": "custodian"
+    }
+  ],
+  "dates": [
+    {
+      "date": "1997-04-01",
+      "type": "Created"
+    }
+  ],
+  "more_info": [
+    {
+      "description": "",
+      "url": ""
+    }
+  ],
+  "resources": [
+    {
+      "bcdc_type": "geographic",
+      "cache_last_updated": null,
+      "cache_url": null,
+      "created": "2019-05-04T17:42:43.491000",
+      "datastore_active": false,
+      "description": "The Distribution Service allows for data to be downloaded in various file formats from the B.C. Geographic Warehouse (BCGW), a central government repository of spatial and non-spatial data.",
+      "format": "multiple",
+      "hash": "",
+      "id": "f8528206-7de4-4939-a645-cbf7a498efd2",
+      "iso_topic_category": [
+        "environment"
+      ],
+      "last_modified": "2026-09-22T03:39:54",
+      "metadata_modified": "2026-09-22T12:45:00.672600",
+      "mimetype": null,
+      "mimetype_inner": null,
+      "name": "BC Geographic Warehouse Custom Download",
+      "object_name": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+      "object_short_name": "RMDTN_STS",
+      "object_table_comments": "SITE_ENV_RMDTN_SITES_SVW is a spatial view consists of point representation of Environmental Remediation Sites. Remediation is the removal or neutralization of chemical substances from a site to mitigate or prevent any adverse effects. Also known as decontamination. The view exposes the site attributes stored in table SITE_GOAT.",
+      "ofi": "True",
+      "package_id": "63804e64-a4f3-4bc7-b1e3-5f736bbc3967",
+      "position": 0,
+      "projection_name": "epsg3005",
+      "resource_access_method": "indirect access",
+      "resource_storage_location": "bc geographic warehouse",
+      "resource_type": "data",
+      "resource_update_cycle": "asNeeded",
+      "size": null,
+      "spatial_datatype": "SDO_GEOMETRY",
+      "state": "active",
+      "supplemental_info": "Click <b>Access/Download</b> in the toolbar to download this dataset. For more information on using the distribution order form see [How to download data using the Catalogue or iMapBC](https://bcgov.github.io/data-publication/pages/dps_data_distribution_w.html). If the data is visible through public WMS, click the <b>Preview</b> button on the toolbar.",
+      "url": "",
+      "url_type": null,
+      "details": [
+        {
+          "column_comments": "Primary unique numeric identifier for a  feature.",
+          "column_name": "ENV_RMDTN_SITES_ID",
+          "data_precision": "10",
+          "data_type": "NUMBER",
+          "short_name": "ENV_RMD_ID"
+        },
+        {
+          "column_name": "SITE_ID",
+          "data_precision": "38",
+          "data_type": "NUMBER",
+          "short_name": "SITE_ID"
+        },
+        {
+          "column_comments": "GENERAL DESCRIPTION contains free form text used to describe the SITE. It often contains information about how the lat/long was collect such as by GPS, or from mapsheet number XYZ. It may also contain additional location information such as 13 miles up the road from the interseconf of highway 14.",
+          "column_name": "GENERAL_DESCRIPTION",
+          "data_precision": "255",
+          "data_type": "VARCHAR2",
+          "short_name": "GEN_DESC"
+        },
+        {
+          "column_comments": "VICTORIA FILE NO represents the main file number for a specific site.",
+          "column_name": "VICTORIA_FILE_NO",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "VICFILENO"
+        },
+        {
+          "column_comments": "REGIONAL FILE NO represents the file number of files formerly held in regional offices for a specific site. In most cases the regional files have been consolidated with the associated Victoria file.",
+          "column_name": "REGIONAL_FILE_NO",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "REGFILENO"
+        },
+        {
+          "column_comments": "COMMON NAME is the name commonly used to identify the site.",
+          "column_name": "COMMON_NAME",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "COMMON_NM"
+        },
+        {
+          "column_comments": "ADDRESS stores the street name and number where known.",
+          "column_name": "ADDRESS",
+          "data_precision": "232",
+          "data_type": "VARCHAR2",
+          "short_name": "ADDRESS"
+        },
+        {
+          "column_comments": "LATITUDE is the geographic coordinate, in decimal degrees (dd.dddddd), of the location of the feature as measured from the equator, e.g., 55.323653.",
+          "column_name": "LATITUDE",
+          "data_precision": "18",
+          "data_type": "VARCHAR2",
+          "short_name": "LATITUDE"
+        },
+        {
+          "column_comments": "LONGITUDE is the geographic coordinate, in decimal degrees (dd.dddddd), of the location of the feature as measured from the prime meridian, e.g., -123.093544.",
+          "column_name": "LONGITUDE",
+          "data_precision": "19",
+          "data_type": "VARCHAR2",
+          "short_name": "LONGITUDE"
+        },
+        {
+          "column_comments": "GEOMETRY is the column used to reference the spatial coordinates defining the feature. ",
+          "column_name": "GEOMETRY",
+          "data_precision": "64",
+          "data_type": "SDO_GEOMETRY",
+          "short_name": "GEOMETRY"
+        },
+        {
+          "column_comments": "OBJECTID is a required attribute of feature classes and object classes in a geodatabase. ",
+          "column_name": "OBJECTID",
+          "data_precision": "38",
+          "data_type": "NUMBER",
+          "short_name": "OBJECTID"
+        },
+        {
+          "column_comments": "SE_ANNO_CAD_DATA is a binary column used by spatial tools to store annotation, curve features and CAD data when using the SDO_GEOMETRY storage data type.",
+          "column_name": "SE_ANNO_CAD_DATA",
+          "data_precision": "4000",
+          "data_type": "BLOB"
+        }
+      ],
+      "geographic_extent": [
+        {
+          "east_bound_longitude": "-113.5",
+          "north_bound_latitude": "60.0",
+          "south_bound_latitude": "48.0",
+          "west_bound_longitude": "-139.5"
+        }
+      ],
+      "preview_info": [
+        {
+          "layer_name": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+          "link_to_imap": "http://maps.gov.bc.ca/ess/hm/imap4m/?catalogLayers=3283&scale=9600000.0&center=-14500395.8309,7229019.21382",
+          "preview_image_url": "",
+          "preview_latitude": "54.309647",
+          "preview_longitude": "-130.25927201",
+          "preview_map_service_url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?",
+          "preview_zoom_level": "7"
+        }
+      ]
+    },
+    {
+      "bcdc_type": "webservice",
+      "cache_last_updated": null,
+      "cache_url": null,
+      "created": "2016-07-26T16:52:40.815000",
+      "datastore_active": false,
+      "description": "Web Mapping Service (WMS) allows for data to be fed out via a service from the B.C. Geographic Warehouse (BCGW), a central government repository of spatial and non-spatial data.",
+      "format": "wms",
+      "hash": "",
+      "id": "c531dc93-9d8e-4f54-a8b3-7486cdeda4c5",
+      "iso_topic_category": [
+        "environment"
+      ],
+      "last_modified": "2026-09-22T03:39:54",
+      "metadata_modified": "2026-09-22T12:45:01.026704",
+      "mimetype": null,
+      "mimetype_inner": null,
+      "name": "WMS getCapabilities request",
+      "object_name": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+      "object_short_name": "RMDTN_STS",
+      "object_table_comments": "SITE_ENV_RMDTN_SITES_SVW is a spatial view consists of point representation of Environmental Remediation Sites. Remediation is the removal or neutralization of chemical substances from a site to mitigate or prevent any adverse effects. Also known as decontamination. The view exposes the site attributes stored in table SITE_GOAT.",
+      "package_id": "63804e64-a4f3-4bc7-b1e3-5f736bbc3967",
+      "position": 1,
+      "projection_name": "epsg4326",
+      "resource_access_method": "service",
+      "resource_storage_location": "bc geographic warehouse",
+      "resource_type": "data",
+      "resource_update_cycle": "daily",
+      "size": null,
+      "spatial_datatype": "",
+      "state": "active",
+      "supplemental_info": "Click <b>Access/Download</b> in the toolbar to see or copy the WMS call. For more information see [Web Mapping Services](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E).",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?service=WMS&request=GetCapabilities",
+      "url_type": null,
+      "details": [
+        {
+          "column_comments": "Primary unique numeric identifier for a  feature.",
+          "column_name": "ENV_RMDTN_SITES_ID",
+          "data_precision": "10",
+          "data_type": "NUMBER",
+          "short_name": "ENV_RMD_ID"
+        },
+        {
+          "column_name": "SITE_ID",
+          "data_precision": "38",
+          "data_type": "NUMBER",
+          "short_name": "SITE_ID"
+        },
+        {
+          "column_comments": "GENERAL DESCRIPTION contains free form text used to describe the SITE. It often contains information about how the lat/long was collect such as by GPS, or from mapsheet number XYZ. It may also contain additional location information such as 13 miles up the road from the interseconf of highway 14.",
+          "column_name": "GENERAL_DESCRIPTION",
+          "data_precision": "255",
+          "data_type": "VARCHAR2",
+          "short_name": "GEN_DESC"
+        },
+        {
+          "column_comments": "VICTORIA FILE NO represents the main file number for a specific site.",
+          "column_name": "VICTORIA_FILE_NO",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "VICFILENO"
+        },
+        {
+          "column_comments": "REGIONAL FILE NO represents the file number of files formerly held in regional offices for a specific site. In most cases the regional files have been consolidated with the associated Victoria file.",
+          "column_name": "REGIONAL_FILE_NO",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "REGFILENO"
+        },
+        {
+          "column_comments": "COMMON NAME is the name commonly used to identify the site.",
+          "column_name": "COMMON_NAME",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "COMMON_NM"
+        },
+        {
+          "column_comments": "ADDRESS stores the street name and number where known.",
+          "column_name": "ADDRESS",
+          "data_precision": "232",
+          "data_type": "VARCHAR2",
+          "short_name": "ADDRESS"
+        },
+        {
+          "column_comments": "LATITUDE is the geographic coordinate, in decimal degrees (dd.dddddd), of the location of the feature as measured from the equator, e.g., 55.323653.",
+          "column_name": "LATITUDE",
+          "data_precision": "18",
+          "data_type": "VARCHAR2",
+          "short_name": "LATITUDE"
+        },
+        {
+          "column_comments": "LONGITUDE is the geographic coordinate, in decimal degrees (dd.dddddd), of the location of the feature as measured from the prime meridian, e.g., -123.093544.",
+          "column_name": "LONGITUDE",
+          "data_precision": "19",
+          "data_type": "VARCHAR2",
+          "short_name": "LONGITUDE"
+        },
+        {
+          "column_comments": "GEOMETRY is the column used to reference the spatial coordinates defining the feature. ",
+          "column_name": "GEOMETRY",
+          "data_precision": "64",
+          "data_type": "SDO_GEOMETRY",
+          "short_name": "GEOMETRY"
+        },
+        {
+          "column_comments": "OBJECTID is a required attribute of feature classes and object classes in a geodatabase. ",
+          "column_name": "OBJECTID",
+          "data_precision": "38",
+          "data_type": "NUMBER",
+          "short_name": "OBJECTID"
+        },
+        {
+          "column_comments": "SE_ANNO_CAD_DATA is a binary column used by spatial tools to store annotation, curve features and CAD data when using the SDO_GEOMETRY storage data type.",
+          "column_name": "SE_ANNO_CAD_DATA",
+          "data_precision": "4000",
+          "data_type": "BLOB"
+        }
+      ],
+      "geographic_extent": [
+        {
+          "east_bound_longitude": "-113.5",
+          "north_bound_latitude": "60.0",
+          "south_bound_latitude": "48.0",
+          "west_bound_longitude": "-139.5"
+        }
+      ],
+      "preview_info": [
+        {
+          "layer_name": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+          "link_to_imap": "http://maps.gov.bc.ca/ess/hm/imap4m/?catalogLayers=3283&scale=9600000.0&center=-14500395.8309,7229019.21382",
+          "preview_image_url": "",
+          "preview_latitude": "54.309647",
+          "preview_longitude": "-130.25927201",
+          "preview_map_service_url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?",
+          "preview_zoom_level": "7"
+        }
+      ]
+    },
+    {
+      "bcdc_type": "webservice",
+      "cache_last_updated": null,
+      "cache_url": null,
+      "created": "2017-09-25T23:58:44.421000",
+      "datastore_active": false,
+      "description": "KML Ground Overlays can be used to display geographic data in mapping applications, including Google Earth. Data is served via WMS from the B.C. Geographic Warehouse (BCGW), a central government repository.",
+      "format": "kml",
+      "hash": "",
+      "id": "66d49f60-7e39-4f49-9ee8-c9686d3085b4",
+      "iso_topic_category": [
+        "environment"
+      ],
+      "last_modified": "2026-09-22T03:39:54",
+      "metadata_modified": "2026-09-22T12:45:01.421702",
+      "mimetype": null,
+      "mimetype_inner": null,
+      "name": "Download KML Ground Overlay file",
+      "object_name": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+      "object_short_name": "RMDTN_STS",
+      "object_table_comments": "SITE_ENV_RMDTN_SITES_SVW is a spatial view consists of point representation of Environmental Remediation Sites. Remediation is the removal or neutralization of chemical substances from a site to mitigate or prevent any adverse effects. Also known as decontamination. The view exposes the site attributes stored in table SITE_GOAT.",
+      "package_id": "63804e64-a4f3-4bc7-b1e3-5f736bbc3967",
+      "position": 2,
+      "projection_name": "epsg4326",
+      "resource_access_method": "service",
+      "resource_storage_location": "bc geographic warehouse",
+      "resource_type": "data",
+      "resource_update_cycle": "daily",
+      "size": 0,
+      "spatial_datatype": "",
+      "state": "active",
+      "supplemental_info": "Click <b>Access/Download</b> in the toolbar to download the KML Ground Overlay file. For more information see [Web Mapping Services](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E).",
+      "url": "https://openmaps.gov.bc.ca/kml/geo/layers/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW_loader.kml",
+      "url_type": null,
+      "details": [
+        {
+          "column_comments": "Primary unique numeric identifier for a  feature.",
+          "column_name": "ENV_RMDTN_SITES_ID",
+          "data_precision": "10",
+          "data_type": "NUMBER",
+          "short_name": "ENV_RMD_ID"
+        },
+        {
+          "column_name": "SITE_ID",
+          "data_precision": "38",
+          "data_type": "NUMBER",
+          "short_name": "SITE_ID"
+        },
+        {
+          "column_comments": "GENERAL DESCRIPTION contains free form text used to describe the SITE. It often contains information about how the lat/long was collect such as by GPS, or from mapsheet number XYZ. It may also contain additional location information such as 13 miles up the road from the interseconf of highway 14.",
+          "column_name": "GENERAL_DESCRIPTION",
+          "data_precision": "255",
+          "data_type": "VARCHAR2",
+          "short_name": "GEN_DESC"
+        },
+        {
+          "column_comments": "VICTORIA FILE NO represents the main file number for a specific site.",
+          "column_name": "VICTORIA_FILE_NO",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "VICFILENO"
+        },
+        {
+          "column_comments": "REGIONAL FILE NO represents the file number of files formerly held in regional offices for a specific site. In most cases the regional files have been consolidated with the associated Victoria file.",
+          "column_name": "REGIONAL_FILE_NO",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "REGFILENO"
+        },
+        {
+          "column_comments": "COMMON NAME is the name commonly used to identify the site.",
+          "column_name": "COMMON_NAME",
+          "data_precision": "40",
+          "data_type": "VARCHAR2",
+          "short_name": "COMMON_NM"
+        },
+        {
+          "column_comments": "ADDRESS stores the street name and number where known.",
+          "column_name": "ADDRESS",
+          "data_precision": "232",
+          "data_type": "VARCHAR2",
+          "short_name": "ADDRESS"
+        },
+        {
+          "column_comments": "LATITUDE is the geographic coordinate, in decimal degrees (dd.dddddd), of the location of the feature as measured from the equator, e.g., 55.323653.",
+          "column_name": "LATITUDE",
+          "data_precision": "18",
+          "data_type": "VARCHAR2",
+          "short_name": "LATITUDE"
+        },
+        {
+          "column_comments": "LONGITUDE is the geographic coordinate, in decimal degrees (dd.dddddd), of the location of the feature as measured from the prime meridian, e.g., -123.093544.",
+          "column_name": "LONGITUDE",
+          "data_precision": "19",
+          "data_type": "VARCHAR2",
+          "short_name": "LONGITUDE"
+        },
+        {
+          "column_comments": "GEOMETRY is the column used to reference the spatial coordinates defining the feature. ",
+          "column_name": "GEOMETRY",
+          "data_precision": "64",
+          "data_type": "SDO_GEOMETRY",
+          "short_name": "GEOMETRY"
+        },
+        {
+          "column_comments": "OBJECTID is a required attribute of feature classes and object classes in a geodatabase. ",
+          "column_name": "OBJECTID",
+          "data_precision": "38",
+          "data_type": "NUMBER",
+          "short_name": "OBJECTID"
+        },
+        {
+          "column_comments": "SE_ANNO_CAD_DATA is a binary column used by spatial tools to store annotation, curve features and CAD data when using the SDO_GEOMETRY storage data type.",
+          "column_name": "SE_ANNO_CAD_DATA",
+          "data_precision": "4000",
+          "data_type": "BLOB"
+        }
+      ],
+      "geographic_extent": [
+        {
+          "east_bound_longitude": "-113.5",
+          "north_bound_latitude": "60.0",
+          "south_bound_latitude": "48.0",
+          "west_bound_longitude": "-139.5"
+        }
+      ],
+      "preview_info": [
+        {
+          "layer_name": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+          "link_to_imap": "http://maps.gov.bc.ca/ess/hm/imap4m/?catalogLayers=3283&scale=9600000.0&center=-14500395.8309,7229019.21382",
+          "preview_image_url": "",
+          "preview_latitude": "54.309647",
+          "preview_longitude": "-130.25927201",
+          "preview_map_service_url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?",
+          "preview_zoom_level": "7"
+        }
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "display_name": "SIS",
+      "id": "b44805cc-a52e-4f64-8394-baa277ab5961",
+      "name": "SIS",
+      "state": "active",
+      "vocabulary_id": null
+    },
+    {
+      "display_name": "contaminated sites",
+      "id": "0dfed1ef-fabb-4e43-8f63-388d2bd0fe56",
+      "name": "contaminated sites",
+      "state": "active",
+      "vocabulary_id": null
+    },
+    {
+      "display_name": "remediation",
+      "id": "e40cb702-4819-425a-bb6d-036cb5c681ce",
+      "name": "remediation",
+      "state": "active",
+      "vocabulary_id": null
+    },
+    {
+      "display_name": "site",
+      "id": "220b0d3c-cfb0-4115-92cb-9408c067965d",
+      "name": "site",
+      "state": "active",
+      "vocabulary_id": null
+    }
+  ],
+  "groups": [],
+  "relationships_as_subject": [],
+  "relationships_as_object": []
+}

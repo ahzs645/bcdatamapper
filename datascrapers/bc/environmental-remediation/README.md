@@ -2,15 +2,23 @@
 
 From PGMaps, run `npm run remediation:sync` (Python standard library only).
 From this directory, the equivalent is `python3 download.py`.
-Downloads the complete provincial WFS layer, paged by stable site ID, to ignored
-`cache/` GeoJSON and deterministic gzip. All attributes are retained; geometry is
+Downloads the complete provincial WFS layer, paged by stable site ID, to
+`source/environmental-remediation-sites.geojson.gz`. All attributes are retained; geometry is
 unchanged apart from the server's conversion to longitude/latitude (CRS84).
 Validates completeness, unique site IDs, point geometries, and coordinate ranges
-before saving data. The cache includes source metadata and a SHA-256 manifest.
+before saving data. `source/manifest.json` records download time, request URLs,
+counts, sizes and SHA-256 checksums of both the gzip and decompressed GeoJSON.
+`source/catalogue-metadata.json` preserves the source catalogue metadata.
+The compressed source payload is ignored by Git; provenance files are tracked.
+The source archive remains local in bcdatamapper because it is Access Only.
+No uncompressed source file is written by new downloads.
 Transient network errors are retried up to three times.
 
 `npm run remediation:sync -- --from-cache` rebuilds the map product without
-downloading again. The map product preserves every source coordinate and uses
+downloading again: it reads the compressed source, validates both checksums and
+builds the derived map files in ignored `cache/`. It also supports the original
+uncompressed cache layout if no source archive is present.
+The map product preserves every source coordinate and uses
 registry `SITE_ID` as its stable identifier, dropping volatile WFS and object IDs.
 It retains name, address, location notes and both file numbers. No status is
 inferred. The deterministic gzip is named by its uncompressed SHA-256; the

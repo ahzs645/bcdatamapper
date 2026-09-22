@@ -1,0 +1,25 @@
+{
+  "downloadedAt": "2026-09-22T20:54:43.929438+00:00",
+  "catalogue": "https://catalogue.data.gov.bc.ca/dataset/environmental-remediation-sites",
+  "service": "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows",
+  "layer": "WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW",
+  "license": "Access Only",
+  "licenseUrl": "https://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA",
+  "crs": "OGC:CRS84 (longitude, latitude)",
+  "featureCount": 27984,
+  "uniqueSiteIds": 27984,
+  "geometryTypes": {
+    "Point": 27984
+  },
+  "bytes": 16841436,
+  "gzipBytes": 2077966,
+  "sha256": "3c8cca5e3b90c25410cc9fc084f4bd6476c7367ccaba7b9fa817b38c9870092f",
+  "requests": [
+    "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW&outputFormat=application%2Fjson&srsName=urn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=10000&startIndex=0&sortBy=ENV_RMDTN_SITES_ID+A",
+    "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW&outputFormat=application%2Fjson&srsName=urn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=10000&startIndex=10000&sortBy=ENV_RMDTN_SITES_ID+A",
+    "https://openmaps.gov.bc.ca/geo/pub/WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_WASTE.SITE_ENV_RMDTN_SITES_SVW&outputFormat=application%2Fjson&srsName=urn%3Aogc%3Adef%3Acrs%3AOGC%3A1.3%3ACRS84&count=10000&startIndex=20000&sortBy=ENV_RMDTN_SITES_ID+A"
+  ],
+  "purpose": "Local compressed source archive; not a deployable or redistribution artifact.",
+  "resource": "environmental-remediation-sites.geojson.gz",
+  "gzipSha256": "6c6fbaa98b20cea62e9da9ade838ab3c59431b19aed00e5c4e3137e481471e64"
+}
