@@ -28,9 +28,34 @@ actual feature count, CRS, extent and schema. Run it again after each refresh;
 the checksum distinguishes an old inspection from the current download. This
 checks that the geodatabase is readable, not the validity of every parcel shape.
 
-This is the source dataset, with no simplification, clipping, coordinate rounding,
-or housing-suitability filtering. It is not yet an app deployment or tile build.
+The pull is the source dataset, with no simplification, clipping, coordinate rounding,
+or housing-suitability filtering. It is not an app deployment or tile build.
 No files are copied into PGMaps `public/data` by this command.
+
+## Initial public-land screen
+
+```sh
+npm run parcelmap:public-land
+# Refresh exclusion sources as well (parcel archive refresh is a separate command):
+npm run parcelmap:public-land -- --refresh
+uv run --with pyogrio==0.13.0 --with shapely==2.1.2 python datascrapers/bc/parcelmap/test_public_land.py
+```
+
+This reconstructs the initial public-ownership / reserve / parks exclusion stage
+of the BCPLM methodology using current full-resolution sources. See
+`output/public-land/report.md` for results, exact choices and remaining work.
+Summary JSON and the region-by-owner CSV are tracked; source masks, per-parcel
+decisions and the candidate GeoPackage stay in ignored `source/public-land/`.
+The national park mask is catalogued Access Only, so this workflow is a local
+research build and does not publish source or candidate geometries to the app.
+
+Region assignment uses ParcelMap BC's existing region attribute rather than a
+new spatial join to legal district polygons; this preserves Northern Rockies and
+Stikine as reporting units. Any intersection removes the whole parcel, including
+boundary contact. Conservancy exclusions are measured separately because they
+are a distinct source layer not explicitly identified by UBC. Invalid geometries
+are repaired only for spatial predicates, with counts reported; the GeoPackage
+preserves original geometries. Thus it can still contain invalid source shapes.
 
 ## Choosing the dataset
 

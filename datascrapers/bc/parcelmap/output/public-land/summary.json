@@ -1,0 +1,178 @@
+{
+  "methodologyUrl": "https://hart.ubc.ca/our-publications/bcplm-methodology/",
+  "scope": "Initial public ownership and reserve/park exclusion screen only; not housing suitability or land availability",
+  "parcelArchiveSha256": "b79dc1a3dec1046e17b58982cd1bdfdc2494838020e8ab263d91149f23eda2b8",
+  "parcelSourceLastModified": "Mon, 21 Sep 2026 08:26:12 GMT",
+  "sourceFeatures": 1733553,
+  "ownershipCounts": {
+    "Crown Agency": 12979,
+    "Crown Provincial": 149945,
+    "Federal": 5276,
+    "First Nations": 1899,
+    "Local Government": 97490,
+    "Mixed Ownership": 450,
+    "Private": 1291433,
+    "Unclassified": 118269,
+    "Untitled Provincial": 55812
+  },
+  "publicOwnershipSelected": 321502,
+  "excludedByOwnership": 1412051,
+  "spatialExclusions": {
+    "reserves": {
+      "intersectingPublicParcels": 5181,
+      "boundaryTouchOnlyParcels": 0,
+      "newlyExcludedInOrder": 5181,
+      "additionalCandidatesIfApplied": null,
+      "invalidExclusionGeometriesRepairedForPredicates": 0,
+      "appliedToBaseline": true
+    },
+    "provincial_parks": {
+      "intersectingPublicParcels": 8645,
+      "boundaryTouchOnlyParcels": 0,
+      "newlyExcludedInOrder": 8347,
+      "additionalCandidatesIfApplied": null,
+      "invalidExclusionGeometriesRepairedForPredicates": 0,
+      "appliedToBaseline": true
+    },
+    "national_parks": {
+      "intersectingPublicParcels": 3397,
+      "boundaryTouchOnlyParcels": 0,
+      "newlyExcludedInOrder": 3328,
+      "additionalCandidatesIfApplied": null,
+      "invalidExclusionGeometriesRepairedForPredicates": 0,
+      "appliedToBaseline": true
+    },
+    "conservancies": {
+      "intersectingPublicParcels": 2196,
+      "boundaryTouchOnlyParcels": 0,
+      "newlyExcludedInOrder": null,
+      "additionalCandidatesIfApplied": 1976,
+      "invalidExclusionGeometriesRepairedForPredicates": 0,
+      "appliedToBaseline": false
+    }
+  },
+  "excludedSpatialUnion": 16856,
+  "retained": 304646,
+  "excludedOnlyByBoundaryContact": 0,
+  "retainedIfPositiveAreaOverlapRequired": 304646,
+  "invalidParcelGeometriesRepairedForPredicates": 30,
+  "retainedOriginalInvalidGeometries": 25,
+  "regionAssignment": "Existing ParcelMap BC REGIONAL_DISTRICT attribute; no clipping or duplicate assignment at boundaries",
+  "regions": [
+    "Capital Regional District",
+    "Cariboo Regional District",
+    "Central Coast Regional District",
+    "Columbia Shuswap Regional District",
+    "Comox Valley Regional District",
+    "Cowichan Valley Regional District",
+    "Fraser Valley Regional District",
+    "Metro Vancouver Regional District",
+    "North Coast Regional District",
+    "Northern Rockies Regional Municipality",
+    "Peace River Regional District",
+    "Regional District of Alberni-Clayoquot",
+    "Regional District of Bulkley-Nechako",
+    "Regional District of Central Kootenay",
+    "Regional District of Central Okanagan",
+    "Regional District of East Kootenay",
+    "Regional District of Fraser-Fort George",
+    "Regional District of Kitimat-Stikine",
+    "Regional District of Kootenay Boundary",
+    "Regional District of Mount Waddington",
+    "Regional District of Nanaimo",
+    "Regional District of North Okanagan",
+    "Regional District of Okanagan-Similkameen",
+    "Squamish-Lillooet Regional District",
+    "Stikine Region",
+    "Strathcona Regional District",
+    "Sunshine Coast Regional District",
+    "Thompson-Nicola Regional District",
+    "qathet Regional District"
+  ],
+  "unassignedPublicParcels": 0,
+  "unassignedRetainedParcels": 0,
+  "parcelRegionNamesAbsentFromRDBoundaryLayer": [
+    "Northern Rockies Regional Municipality",
+    "Stikine Region"
+  ],
+  "sources": {
+    "reserves": {
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/c2ce81af-78c1-467c-b47e-c392cd0a771f",
+      "title": "Indian Reserves and Band Names - Administrative Boundaries",
+      "licence": "Open Government Licence - Canada",
+      "sourceLayer": "WHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=pub%3AWHSE_ADMIN_BOUNDARIES.ADM_INDIAN_RESERVES_BANDS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A3005&count=10000&sortBy=OBJECTID",
+      "featureCount": 1686,
+      "retrievedAt": "2026-09-22T19:25:34.123018+00:00",
+      "crs": "EPSG:3005",
+      "simplification": "none",
+      "cacheSha256": "ef3207356ea672ca238727e898fe6c801e460781ee07aa61bbcedcac09c23846"
+    },
+    "provincial_parks": {
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/1130248f-f1a3-4956-8b2e-38d29d3e4af7",
+      "title": "BC Parks, Ecological Reserves, and Protected Areas",
+      "licence": "Open Government Licence - British Columbia",
+      "sourceLayer": "WHSE_TANTALIS.TA_PARK_ECORES_PA_SVW",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_TANTALIS.TA_PARK_ECORES_PA_SVW/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=pub%3AWHSE_TANTALIS.TA_PARK_ECORES_PA_SVW&outputFormat=application%2Fjson&srsName=EPSG%3A3005&count=10000&sortBy=ADMIN_AREA_SID",
+      "featureCount": 930,
+      "retrievedAt": "2026-09-22T19:25:37.473435+00:00",
+      "crs": "EPSG:3005",
+      "simplification": "none",
+      "cacheSha256": "4667fb72feb50603b72c0a132f7b150bf668035089443f98439761d665291d15"
+    },
+    "national_parks": {
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/88e61a14-19a0-46ab-bdae-f68401d3d0fb",
+      "title": "National Parks of Canada within British Columbia",
+      "licence": "Access Only",
+      "sourceLayer": "WHSE_ADMIN_BOUNDARIES.CLAB_NATIONAL_PARKS",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.CLAB_NATIONAL_PARKS/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=pub%3AWHSE_ADMIN_BOUNDARIES.CLAB_NATIONAL_PARKS&outputFormat=application%2Fjson&srsName=EPSG%3A3005&count=10000&sortBy=NATIONAL_PARK_ID",
+      "featureCount": 102,
+      "retrievedAt": "2026-09-22T19:25:32.468884+00:00",
+      "crs": "EPSG:3005",
+      "simplification": "none",
+      "cacheSha256": "c37ba78acd19b13fff59f37c17e53ba4e9bdb6e0e8dda9453ddd54b1f1de141c"
+    },
+    "regional_districts": {
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9",
+      "title": "Regional Districts - Legally Defined Administrative Areas of BC",
+      "licence": "Open Government Licence - British Columbia",
+      "sourceLayer": "WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP&outputFormat=application%2Fjson&srsName=EPSG%3A3005&count=10000&sortBy=LGL_ADMIN_AREA_ID",
+      "featureCount": 28,
+      "retrievedAt": "2026-09-22T19:25:36.604427+00:00",
+      "crs": "EPSG:3005",
+      "simplification": "none",
+      "cacheSha256": "1f300a8dc2f18c778a1833e288b030943009ba8d6644a7b5fb841c9285ee5b65"
+    },
+    "conservancies": {
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/550b3133-2004-468f-ba1f-b95d0e281e78",
+      "title": "TANTALIS - Conservancy Areas",
+      "licence": "Open Government Licence - British Columbia",
+      "sourceLayer": "WHSE_TANTALIS.TA_CONSERVANCY_AREAS_SVW",
+      "url": "https://openmaps.gov.bc.ca/geo/pub/WHSE_TANTALIS.TA_CONSERVANCY_AREAS_SVW/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=pub%3AWHSE_TANTALIS.TA_CONSERVANCY_AREAS_SVW&outputFormat=application%2Fjson&srsName=EPSG%3A3005&count=10000&sortBy=ADMIN_AREA_SID",
+      "featureCount": 169,
+      "retrievedAt": "2026-09-22T19:25:40.572459+00:00",
+      "crs": "EPSG:3005",
+      "simplification": "none",
+      "cacheSha256": "c67a8d0b53c50c7f933aae280241c57c40b4e82367e2c635f641695442d4ae62"
+    }
+  },
+  "software": {
+    "pyogrio": "0.13.0",
+    "shapely": "2.1.2"
+  },
+  "geometryPolicy": "No simplification, buffer or area threshold. Any intersection, including touching, removes whole parcel. Validity repairs used only for predicates; output keeps original geometry in EPSG:3005.",
+  "limitations": [
+    "Current snapshots, not UBC's January 2026 input snapshots; exact numerical reproduction is not claimed.",
+    "UBC names source families but not exact layer IDs or intersection tolerance; these choices are explicit here.",
+    "Conservancies are a separate BCGW layer; reported as an additional sensitivity screen, not silently added to baseline.",
+    "Regional grouping uses ParcelMap BC attribution, not a recreated UBC spatial join; Northern Rockies and Stikine are retained as regional reporting units.",
+    "Building strata unit PIDs and BC Assessment are not required for this initial screen, but later assessment joins need a checked crosswalk.",
+    "National park source is Access Only. Raw boundaries and candidate geometries remain in ignored local research cache; no app publication.",
+    "Parcel area sums are not dissolved union area and can double-count any overlapping source parcels."
+  ],
+  "candidateFile": {
+    "path": "source/public-land/public-land-candidates.gpkg",
+    "bytes": 205869056
+  }
+}

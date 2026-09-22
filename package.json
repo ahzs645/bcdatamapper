@@ -158,6 +158,7 @@
     "census:bcenviroscreen-2011-population": "./run-in-pgmaps.sh python3 datascrapers/census/build-bcenviroscreen-2011-lha-population.py",
     "census:variables": "./run-in-pgmaps.sh python3 datascrapers/census/build-census-variables.py",
     "parcelmap:sync": "python3 datascrapers/bc/parcelmap/sync-parcelmap.py",
+    "parcelmap:public-land": "uv run --with pyogrio==0.13.0 --with shapely==2.1.2 python datascrapers/bc/parcelmap/build-public-land.py",
     "bc-assessment:build": "./run-in-pgmaps.sh python3 datascrapers/bc/assessment/build-bc-assessment.py",
     "bc-assessment:refresh": "./run-in-pgmaps.sh python3 datascrapers/bc/assessment/refresh-bc-assessment.py",
     "food-health:refresh": "./run-in-pgmaps.sh python3 datascrapers/food-health/fetch_incremental.py --city \"Prince George\" --output datascrapers/food-health/output/restaurants.json --delay 5",

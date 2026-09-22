@@ -1,0 +1,146 @@
+region,owner_type,before_exclusions,excluded,retained,retained_parcel_area_ha
+Capital Regional District,Crown Agency,840,4,836,1141.3535
+Capital Regional District,Crown Provincial,1137,185,952,20698.198
+Capital Regional District,Federal,331,185,146,2561.0091
+Capital Regional District,Local Government,7121,35,7086,37804.6897
+Capital Regional District,Untitled Provincial,1002,212,790,17388.8008
+Cariboo Regional District,Crown Agency,636,16,620,2054.6967
+Cariboo Regional District,Crown Provincial,4304,139,4165,42826.2515
+Cariboo Regional District,Federal,254,217,37,619.0017
+Cariboo Regional District,Local Government,759,6,753,2591.5193
+Cariboo Regional District,Untitled Provincial,6860,368,6492,581786.7949
+Central Coast Regional District,Crown Agency,15,1,14,22.0105
+Central Coast Regional District,Crown Provincial,379,33,346,4578.1751
+Central Coast Regional District,Federal,65,45,20,54.2546
+Central Coast Regional District,Local Government,57,2,55,107.8856
+Central Coast Regional District,Untitled Provincial,732,78,654,67236.1935
+Columbia Shuswap Regional District,Crown Agency,670,2,668,7004.088
+Columbia Shuswap Regional District,Crown Provincial,5665,141,5524,19916.5153
+Columbia Shuswap Regional District,Federal,150,118,32,111.7548
+Columbia Shuswap Regional District,Local Government,1497,7,1490,1917.0049
+Columbia Shuswap Regional District,Untitled Provincial,1757,273,1484,74535.0619
+Comox Valley Regional District,Crown Agency,105,1,104,1277.2169
+Comox Valley Regional District,Crown Provincial,694,49,645,10386.4517
+Comox Valley Regional District,Federal,44,3,41,747.1555
+Comox Valley Regional District,Local Government,1031,2,1029,1845.9172
+Comox Valley Regional District,Untitled Provincial,414,15,399,6109.9513
+Cowichan Valley Regional District,Crown Agency,261,42,219,332.7595
+Cowichan Valley Regional District,Crown Provincial,3949,2231,1718,23112.0442
+Cowichan Valley Regional District,Federal,299,284,15,41.9276
+Cowichan Valley Regional District,Local Government,2346,29,2317,8180.9954
+Cowichan Valley Regional District,Untitled Provincial,585,66,519,32068.7519
+Fraser Valley Regional District,Crown Agency,588,14,574,2660.9727
+Fraser Valley Regional District,Crown Provincial,1949,201,1748,9623.6044
+Fraser Valley Regional District,Federal,289,168,121,1202.0082
+Fraser Valley Regional District,Local Government,4110,44,4066,6921.6622
+Fraser Valley Regional District,Untitled Provincial,1648,269,1379,28904.5372
+Metro Vancouver Regional District,Crown Agency,3114,45,3069,2358.6304
+Metro Vancouver Regional District,Crown Provincial,2225,191,2034,7767.4262
+Metro Vancouver Regional District,Federal,759,267,492,5493.3261
+Metro Vancouver Regional District,Local Government,50035,178,49857,34541.2995
+Metro Vancouver Regional District,Untitled Provincial,1305,129,1176,13433.3454
+North Coast Regional District,Crown Agency,143,1,142,123.6587
+North Coast Regional District,Crown Provincial,10669,188,10481,37752.9532
+North Coast Regional District,Federal,353,178,175,2071.0838
+North Coast Regional District,Local Government,2940,9,2931,1073.998
+North Coast Regional District,Untitled Provincial,2798,415,2383,289180.0079
+Northern Rockies Regional Municipality,Crown Agency,33,2,31,848.0712
+Northern Rockies Regional Municipality,Crown Provincial,4644,31,4613,16118.941
+Northern Rockies Regional Municipality,Federal,31,17,14,3.6341
+Northern Rockies Regional Municipality,Local Government,166,2,164,1975.8157
+Northern Rockies Regional Municipality,Untitled Provincial,854,71,783,12310.9983
+Peace River Regional District,Crown Agency,1224,9,1215,15199.9556
+Peace River Regional District,Crown Provincial,18654,47,18607,71434.8897
+Peace River Regional District,Federal,55,18,37,93.5444
+Peace River Regional District,Local Government,971,1,970,3154.5027
+Peace River Regional District,Untitled Provincial,5075,119,4956,330014.4057
+Regional District of Alberni-Clayoquot,Crown Agency,254,2,252,582.4438
+Regional District of Alberni-Clayoquot,Crown Provincial,4584,331,4253,8603.9321
+Regional District of Alberni-Clayoquot,Federal,607,551,56,294.3772
+Regional District of Alberni-Clayoquot,Local Government,980,7,973,1240.5922
+Regional District of Alberni-Clayoquot,Untitled Provincial,1497,169,1328,74022.7708
+Regional District of Bulkley-Nechako,Crown Agency,348,31,317,1576.2237
+Regional District of Bulkley-Nechako,Crown Provincial,15822,157,15665,106292.1108
+Regional District of Bulkley-Nechako,Federal,261,209,52,25.636
+Regional District of Bulkley-Nechako,Local Government,1460,8,1452,2566.5199
+Regional District of Bulkley-Nechako,Untitled Provincial,5443,689,4754,490878.2742
+Regional District of Central Kootenay,Crown Agency,1402,25,1377,3597.9793
+Regional District of Central Kootenay,Crown Provincial,10656,476,10180,181158.0259
+Regional District of Central Kootenay,Federal,75,11,64,207.8819
+Regional District of Central Kootenay,Local Government,2476,14,2462,3396.5926
+Regional District of Central Kootenay,Untitled Provincial,2128,260,1868,62485.4228
+Regional District of Central Okanagan,Crown Agency,136,3,133,78.312
+Regional District of Central Okanagan,Crown Provincial,865,68,797,5587.4074
+Regional District of Central Okanagan,Federal,132,116,16,191.2433
+Regional District of Central Okanagan,Local Government,2890,25,2865,4920.894
+Regional District of Central Okanagan,Untitled Provincial,494,51,443,9200.806
+Regional District of East Kootenay,Crown Agency,230,0,230,1202.2543
+Regional District of East Kootenay,Crown Provincial,7695,348,7347,230075.3928
+Regional District of East Kootenay,Federal,90,31,59,20804.7259
+Regional District of East Kootenay,Local Government,1566,2,1564,4564.2591
+Regional District of East Kootenay,Untitled Provincial,1709,127,1582,191220.9987
+Regional District of Fraser-Fort George,Crown Agency,756,9,747,4126.1464
+Regional District of Fraser-Fort George,Crown Provincial,18225,143,18082,109285.7862
+Regional District of Fraser-Fort George,Federal,96,35,61,1104.4946
+Regional District of Fraser-Fort George,Local Government,1575,2,1573,3439.7186
+Regional District of Fraser-Fort George,Untitled Provincial,4098,331,3767,393901.4841
+Regional District of Kitimat-Stikine,Crown Agency,210,7,203,247.6918
+Regional District of Kitimat-Stikine,Crown Provincial,13630,147,13483,54327.0284
+Regional District of Kitimat-Stikine,Federal,204,151,53,130.1884
+Regional District of Kitimat-Stikine,Local Government,1435,5,1430,2759.9661
+Regional District of Kitimat-Stikine,Untitled Provincial,1985,221,1764,201276.6986
+Regional District of Kootenay Boundary,Crown Agency,160,0,160,1185.9715
+Regional District of Kootenay Boundary,Crown Provincial,5336,61,5275,36641.7423
+Regional District of Kootenay Boundary,Federal,25,0,25,3.7315
+Regional District of Kootenay Boundary,Local Government,2686,5,2681,2182.0371
+Regional District of Kootenay Boundary,Untitled Provincial,858,35,823,34885.9408
+Regional District of Mount Waddington,Crown Agency,47,0,47,188.0288
+Regional District of Mount Waddington,Crown Provincial,1905,289,1616,33004.8581
+Regional District of Mount Waddington,Federal,148,122,26,14.5315
+Regional District of Mount Waddington,Local Government,285,9,276,600.7423
+Regional District of Mount Waddington,Untitled Provincial,1921,286,1635,179303.405
+Regional District of Nanaimo,Crown Agency,227,2,225,447.0153
+Regional District of Nanaimo,Crown Provincial,1176,60,1116,10473.2742
+Regional District of Nanaimo,Federal,99,19,80,1853.0527
+Regional District of Nanaimo,Local Government,2421,15,2406,4772.078
+Regional District of Nanaimo,Untitled Provincial,492,15,477,3496.0447
+Regional District of North Okanagan,Crown Agency,138,1,137,595.2869
+Regional District of North Okanagan,Crown Provincial,1352,47,1305,7585.3099
+Regional District of North Okanagan,Federal,32,5,27,386.2096
+Regional District of North Okanagan,Local Government,2187,18,2169,2370.9705
+Regional District of North Okanagan,Untitled Provincial,830,87,743,36481.2667
+Regional District of Okanagan-Similkameen,Crown Agency,173,9,164,160.8331
+Regional District of Okanagan-Similkameen,Crown Provincial,3138,254,2884,26252.9596
+Regional District of Okanagan-Similkameen,Federal,139,56,83,1602.1595
+Regional District of Okanagan-Similkameen,Local Government,2004,20,1984,3666.4876
+Regional District of Okanagan-Similkameen,Untitled Provincial,1246,221,1025,58753.4592
+Squamish-Lillooet Regional District,Crown Agency,713,77,636,3428.5769
+Squamish-Lillooet Regional District,Crown Provincial,2549,262,2287,23528.6088
+Squamish-Lillooet Regional District,Federal,120,90,30,53.154
+Squamish-Lillooet Regional District,Local Government,862,20,842,2489.2689
+Squamish-Lillooet Regional District,Untitled Provincial,1011,99,912,13408.8639
+Stikine Region,Crown Agency,26,3,23,637.8957
+Stikine Region,Crown Provincial,408,43,365,4993.7806
+Stikine Region,Federal,62,40,22,10.0378
+Stikine Region,Local Government,20,1,19,14.76
+Stikine Region,Untitled Provincial,469,46,423,17894.1509
+Strathcona Regional District,Crown Agency,113,7,106,1627.7026
+Strathcona Regional District,Crown Provincial,1135,135,1000,19621.5104
+Strathcona Regional District,Federal,133,100,33,17.8932
+Strathcona Regional District,Local Government,706,7,699,1064.6316
+Strathcona Regional District,Untitled Provincial,2094,235,1859,98788.4361
+Sunshine Coast Regional District,Crown Agency,49,2,47,128.1451
+Sunshine Coast Regional District,Crown Provincial,1063,113,950,5073.4541
+Sunshine Coast Regional District,Federal,45,40,5,2.5443
+Sunshine Coast Regional District,Local Government,561,10,551,1078.0734
+Sunshine Coast Regional District,Untitled Provincial,950,72,878,7907.3018
+Thompson-Nicola Regional District,Crown Agency,339,13,326,3043.7059
+Thompson-Nicola Regional District,Crown Provincial,5642,428,5214,55549.7785
+Thompson-Nicola Regional District,Federal,355,287,68,473.3844
+Thompson-Nicola Regional District,Local Government,1957,15,1942,3876.8677
+Thompson-Nicola Regional District,Untitled Provincial,4878,815,4063,378292.3158
+qathet Regional District,Crown Agency,29,0,29,34.7681
+qathet Regional District,Crown Provincial,495,24,471,12415.1841
+qathet Regional District,Federal,23,4,19,95.0589
+qathet Regional District,Local Government,386,0,386,977.0311
+qathet Regional District,Untitled Provincial,679,67,612,11095.8917
