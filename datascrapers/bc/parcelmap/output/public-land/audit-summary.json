@@ -1,0 +1,218 @@
+{
+  "sources": {
+    "published": {
+      "url": "https://services2.arcgis.com/NlsizNmbMFiinWw4/arcgis/rest/services/BCPLM_Apr13/FeatureServer/214",
+      "editingInfo": {
+        "lastEditDate": 1787768010465,
+        "schemaLastEditDate": 1787768007974,
+        "dataLastEditDate": 1787762105272
+      },
+      "queriedAt": "2026-09-22T19:44:30Z",
+      "count": 52384
+    },
+    "publishedCacheSha256": "34e5eaa58900a56449638b03810bbe1f114aa54ee8019a73ce9e3bd2a66410cd",
+    "parcelManifest": {
+      "dataset": "polygons",
+      "title": "ParcelMap BC Parcel Polygons",
+      "coverage": "British Columbia, province-wide",
+      "retrievedAt": "2026-09-22T19:12:22.559741+00:00",
+      "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/2f4117d9-41fc-44db-87d4-dbdb77f14086",
+      "downloadUrl": "https://pub.data.gov.bc.ca/datasets/2f4117d9-41fc-44db-87d4-dbdb77f14086/pmbc_parcel_poly_sv.zip",
+      "licence": "Open Government Licence - British Columbia",
+      "licenceUrl": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61",
+      "attribution": "ParcelMap BC, Land Title and Survey Authority of British Columbia; distributed by DataBC",
+      "sourceCrs": "epsg3005",
+      "format": "Esri File Geodatabase (ZIP)",
+      "geometryProcessing": "None; original archive preserved byte-for-byte",
+      "strataRepresentation": "One polygon per building strata plan; individual strata lot PIDs excluded",
+      "archive": {
+        "file": "source/polygons/pmbc_parcel_poly_sv.zip",
+        "bytes": 317965520,
+        "uncompressedBytes": 539863151,
+        "sha256": "b79dc1a3dec1046e17b58982cd1bdfdc2494838020e8ab263d91149f23eda2b8",
+        "lastModified": "Mon, 21 Sep 2026 08:26:12 GMT",
+        "etag": "\"12f3c4d0-65bfa00c1fedd\"",
+        "zipCrcValidated": true
+      }
+    },
+    "screenSummarySha256": "a2ab3a6792d2d0a18685a00cd85ad986f24ad71d4fa31f1f2d115ccfd9e47aa3"
+  },
+  "published_records": 52384,
+  "published_distinct_pids": 50100,
+  "classification": {
+    "retained": 51700,
+    "excluded_spatially": 457,
+    "missing_current_pid": 144,
+    "current_nonpublic_owner": 83
+  },
+  "duplicate_pids": {
+    "keys_with_multiple_rows": 2173,
+    "extra_rows_beyond_unique_pid": 2284,
+    "keys_with_exactly_same_normalized_geometry": 2103,
+    "keys_with_different_geometries": 70,
+    "keys_with_multiple_jurisdiction_roll_pairs": 277,
+    "extra_rows_beyond_pid_jurisdiction_roll_key": 1915,
+    "max_rows_per_pid": 32
+  },
+  "geometry_comparison": {
+    "compared_records": 52240,
+    "invalid_published_repaired_for_audit": 3,
+    "invalid_current_repaired_for_audit": 0,
+    "iou_at_least_0_999": 41297,
+    "iou_at_least_0_99": 49109,
+    "iou_below_0_95": 2411,
+    "iou_below_0_5": 1612,
+    "median_iou": 0.9999999998652971,
+    "minimum_iou": 0.0,
+    "published_area_covered_at_least_99pct": 49681
+  },
+  "spatial_exceptions": {
+    "records": 457,
+    "current_overlap_under_1m2": 54,
+    "current_overlap_under_0_1pct": 98,
+    "current_overlap_under_1pct": 153,
+    "current_overlap_at_least_50pct": 215,
+    "published_geometry_has_no_current_mask_intersection": 10,
+    "median_current_overlap_fraction": 0.31927469946044656,
+    "maximum_current_overlap_fraction": 1.0000000000000002
+  },
+  "ownership_disagreements": [
+    {
+      "published": "Crown provincial",
+      "current": "Private",
+      "records": 45
+    },
+    {
+      "published": "Local government",
+      "current": "Private",
+      "records": 33
+    },
+    {
+      "published": "Local government",
+      "current": "Crown Provincial",
+      "records": 8
+    },
+    {
+      "published": "Crown agency",
+      "current": "Private",
+      "records": 3
+    },
+    {
+      "published": "Federal",
+      "current": "Private",
+      "records": 2
+    },
+    {
+      "published": "Crown provincial",
+      "current": "Crown Agency",
+      "records": 1
+    },
+    {
+      "published": "Local government",
+      "current": "Crown Agency",
+      "records": 1
+    }
+  ],
+  "regional_disagreements": [
+    {
+      "published": "Northern Rockies",
+      "current": "North Coast Regional District",
+      "records": 3415
+    },
+    {
+      "published": "Central Kootenay",
+      "current": "Columbia Shuswap Regional District",
+      "records": 1924
+    },
+    {
+      "published": "Thompson-Nicola",
+      "current": "Cariboo Regional District",
+      "records": 552
+    },
+    {
+      "published": "Nanaimo",
+      "current": "Regional District of North Okanagan",
+      "records": 385
+    },
+    {
+      "published": "Kitimat-Stikine",
+      "current": "North Coast Regional District",
+      "records": 192
+    },
+    {
+      "published": "Nanaimo",
+      "current": "Columbia Shuswap Regional District",
+      "records": 150
+    },
+    {
+      "published": "Stikine Region",
+      "current": "Regional District of Kitimat-Stikine",
+      "records": 144
+    },
+    {
+      "published": "Nanaimo",
+      "current": "Cowichan Valley Regional District",
+      "records": 49
+    },
+    {
+      "published": "Kitimat-Stikine",
+      "current": "Regional District of Bulkley-Nechako",
+      "records": 48
+    },
+    {
+      "published": "Okanagan-Similkameen",
+      "current": "Regional District of Central Okanagan",
+      "records": 18
+    },
+    {
+      "published": "Metro Vancouver",
+      "current": "Fraser Valley Regional District",
+      "records": 11
+    },
+    {
+      "published": "Metro Vancouver",
+      "current": "Squamish-Lillooet Regional District",
+      "records": 6
+    },
+    {
+      "published": "Nanaimo",
+      "current": "qathet Regional District",
+      "records": 2
+    }
+  ],
+  "published_reported_area": {
+    "below_100m2": 0,
+    "100m2_to_2ha": 48857,
+    "above_2ha": 3527,
+    "missing_area": 0
+  },
+  "our_retained_source_area": {
+    "below_100m2": 31455,
+    "100m2_to_2ha": 192536,
+    "above_2ha": 80655,
+    "missing_area": 0
+  },
+  "our_retained_without_pid": 85060,
+  "published_conservancy_intersections": 54,
+  "published_actual_use": {
+    "Vacant Residential": 30058,
+    "Institutional / Civic / Recreational": 13215,
+    "Transportation / Utilities / Infrastructure": 1882,
+    "Industrial": 304,
+    "Vacant Commercial & Industrial": 2538,
+    "Residential": 2674,
+    "Commercial": 764,
+    "Multi-Family Residential": 710,
+    "Other / Mixed": 40,
+    "Agriculture / Resource": 162,
+    "n/a": 37
+  },
+  "interpretation": {
+    "snapshot_comparison": "Different snapshots: January methodology, August published service, September current parcels/masks.",
+    "iou": "Intersection area / union area of published footprint and union of current parcel polygons with the same PID. Diagnostic thresholds are not eligibility rules.",
+    "overlap": "Union of current reserve/provincial park/national park intersections, divided by whole current parcel footprint; conservancies separate.",
+    "area": "Published Area_m2 versus current source FEATURE_AREA_SQM, not a reconstruction of their assessment filters.",
+    "ownership": "Conflicting snapshots do not by themselves prove an ownership transfer.",
+    "no_rule_change": "Diagnostic audit only; baseline candidate set was not modified."
+  }
+}

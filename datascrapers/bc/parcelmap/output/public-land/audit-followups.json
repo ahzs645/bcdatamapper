@@ -1,0 +1,275 @@
+{
+  "regional_spatial_check": {
+    "published_label_disagrees_with_spatial_rd": 6972,
+    "current_label_agrees_where_published_disagrees": 6890,
+    "no_rd_polygon_at_published_interior_point": 161
+  },
+  "regional_label_pairs": [
+    {
+      "published": "Northern Rockies",
+      "spatial": "North Coast Regional District",
+      "records": 3416
+    },
+    {
+      "published": "Central Kootenay",
+      "spatial": "Columbia Shuswap Regional District",
+      "records": 1918
+    },
+    {
+      "published": "Thompson-Nicola",
+      "spatial": "Cariboo Regional District",
+      "records": 552
+    },
+    {
+      "published": "Nanaimo",
+      "spatial": "Regional District of North Okanagan",
+      "records": 388
+    },
+    {
+      "published": "Kitimat-Stikine",
+      "spatial": "North Coast Regional District",
+      "records": 192
+    },
+    {
+      "published": "Nanaimo",
+      "spatial": "Columbia Shuswap Regional District",
+      "records": 150
+    },
+    {
+      "published": "Stikine Region",
+      "spatial": "Regional District of Kitimat-Stikine",
+      "records": 144
+    },
+    {
+      "published": "Stikine Region",
+      "spatial": "Stikine Region (Unincorporated)",
+      "records": 78
+    },
+    {
+      "published": "Nanaimo",
+      "spatial": "Cowichan Valley Regional District",
+      "records": 49
+    },
+    {
+      "published": "Kitimat-Stikine",
+      "spatial": "Regional District of Bulkley-Nechako",
+      "records": 48
+    },
+    {
+      "published": "Okanagan-Similkameen",
+      "spatial": "Regional District of Central Okanagan",
+      "records": 18
+    },
+    {
+      "published": "Metro Vancouver",
+      "spatial": "Fraser Valley Regional District",
+      "records": 11
+    },
+    {
+      "published": "Metro Vancouver",
+      "spatial": "Squamish-Lillooet Regional District",
+      "records": 6
+    },
+    {
+      "published": "Nanaimo",
+      "spatial": "qathet Regional District",
+      "records": 2
+    }
+  ],
+  "regional_examples": [
+    {
+      "OBJECTID": 1004,
+      "PID": "003-025-951",
+      "published_region": "Nanaimo",
+      "spatial_regions": [
+        "Cowichan Valley Regional District"
+      ],
+      "current_region": "Cowichan Valley Regional District",
+      "iou": 0.9856035959140751
+    },
+    {
+      "OBJECTID": 1315,
+      "PID": "000-022-098",
+      "published_region": "Nanaimo",
+      "spatial_regions": [
+        "qathet Regional District"
+      ],
+      "current_region": "qathet Regional District",
+      "iou": 0.9977226418122617
+    },
+    {
+      "OBJECTID": 6631,
+      "PID": "025-640-186",
+      "published_region": "Metro Vancouver",
+      "spatial_regions": [
+        "Fraser Valley Regional District"
+      ],
+      "current_region": "Fraser Valley Regional District",
+      "iou": 0.9999999998650352
+    },
+    {
+      "OBJECTID": 13277,
+      "PID": "016-718-178",
+      "published_region": "Central Kootenay",
+      "spatial_regions": [
+        "Columbia Shuswap Regional District"
+      ],
+      "current_region": "Columbia Shuswap Regional District",
+      "iou": 0.9999999998128508
+    },
+    {
+      "OBJECTID": 16641,
+      "PID": "006-552-765",
+      "published_region": "Kitimat-Stikine",
+      "spatial_regions": [
+        "North Coast Regional District"
+      ],
+      "current_region": "North Coast Regional District",
+      "iou": 0.9999999999621552
+    },
+    {
+      "OBJECTID": 16737,
+      "PID": "005-783-143",
+      "published_region": "Kitimat-Stikine",
+      "spatial_regions": [
+        "Regional District of Bulkley-Nechako"
+      ],
+      "current_region": "Regional District of Bulkley-Nechako",
+      "iou": 0.9999999999886006
+    },
+    {
+      "OBJECTID": 16763,
+      "PID": "013-813-056",
+      "published_region": "Stikine Region",
+      "spatial_regions": [
+        "Regional District of Kitimat-Stikine"
+      ],
+      "current_region": "Regional District of Kitimat-Stikine",
+      "iou": 0.9999999999052882
+    },
+    {
+      "OBJECTID": 19829,
+      "PID": "012-257-486",
+      "published_region": "Thompson-Nicola",
+      "spatial_regions": [
+        "Cariboo Regional District"
+      ],
+      "current_region": "Cariboo Regional District",
+      "iou": 0.9999999999513811
+    },
+    {
+      "OBJECTID": 20322,
+      "PID": "001-510-100",
+      "published_region": "Nanaimo",
+      "spatial_regions": [
+        "Regional District of North Okanagan"
+      ],
+      "current_region": "Regional District of North Okanagan",
+      "iou": 0.9287250859468411
+    },
+    {
+      "OBJECTID": 20674,
+      "PID": "014-970-376",
+      "published_region": "Nanaimo",
+      "spatial_regions": [
+        "Columbia Shuswap Regional District"
+      ],
+      "current_region": "Columbia Shuswap Regional District",
+      "iou": 0.9999999998602095
+    },
+    {
+      "OBJECTID": 21397,
+      "PID": "014-955-873",
+      "published_region": "Okanagan-Similkameen",
+      "spatial_regions": [
+        "Regional District of Central Okanagan"
+      ],
+      "current_region": "Regional District of Central Okanagan",
+      "iou": 0.9655276443481521
+    },
+    {
+      "OBJECTID": 24290,
+      "PID": "014-785-439",
+      "published_region": "Northern Rockies",
+      "spatial_regions": [
+        "North Coast Regional District"
+      ],
+      "current_region": "North Coast Regional District",
+      "iou": 0.999999999866952
+    },
+    {
+      "OBJECTID": 39921,
+      "PID": "014-899-876",
+      "published_region": "Stikine Region",
+      "spatial_regions": [
+        "Stikine Region (Unincorporated)"
+      ],
+      "current_region": "Stikine Region",
+      "iou": 0.9999999999005327
+    },
+    {
+      "OBJECTID": 46591,
+      "PID": "004-996-526",
+      "published_region": "Metro Vancouver",
+      "spatial_regions": [
+        "Squamish-Lillooet Regional District"
+      ],
+      "current_region": "Squamish-Lillooet Regional District",
+      "iou": 0.9999999999953979
+    }
+  ],
+  "fabric_missing_pid_check": {
+    "requested_missing_pids": 144,
+    "found_missing_pids": 0,
+    "positive_control_pid": "024336742",
+    "positive_control_found": true,
+    "response_timestamp": "2026-09-22T19:50:10.060Z",
+    "layer": "WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW"
+  },
+  "missing_pid_spatial_check": {
+    "published_records_checked": 144,
+    "best_current_iou_at_least_0_99": 12,
+    "best_current_iou_at_least_0_95": 16,
+    "no_intersecting_current_parcel": 0,
+    "best_candidates_without_pid": 15,
+    "best_candidate_owner_types": {
+      "Private": 41,
+      "Unclassified": 5,
+      "Federal": 3,
+      "Local Government": 76,
+      "Crown Agency": 16,
+      "Untitled Provincial": 1,
+      "Crown Provincial": 2
+    },
+    "best_candidate_parcel_classes": {
+      "Subdivision": 129,
+      "Interest": 4,
+      "Building Strata": 1,
+      "Road": 8,
+      "Primary": 1,
+      "Park": 1
+    }
+  },
+  "published_footprint_checks": {
+    "spatial_exceptions_published_overlap_at_least_50pct": 216,
+    "spatial_exceptions_iou_at_least_0_99": 415,
+    "spatial_exceptions_iou_at_least_0_99_and_published_overlap_at_least_50pct": 200,
+    "private_exceptions_iou_at_least_0_99": 74,
+    "published_geometry_area_above_2ha": 3527,
+    "published_geometry_area_above_2_1ha": 3091,
+    "published_geometry_area_above_10ha": 257,
+    "published_geometry_max_area_ha": 1346.6834253451163
+  },
+  "diagnostic_candidate_filters": {
+    "retained": 304646,
+    "with_pid": 219586,
+    "within_100m2_to_2ha": 192536,
+    "with_pid_and_within_100m2_to_2ha": 152909,
+    "applied_to_baseline": false
+  },
+  "limitations": [
+    "Regional checks locate a representative interior point, not a whole-polygon region overlay; parcels spanning boundaries can differ legitimately.",
+    "A current footprint match under another PID is evidence of changed identifiers or source representation, not proof of a dated subdivision or title history.",
+    "Fabric is queried at the current date and cannot establish historical January strata membership."
+  ]
+}

@@ -57,6 +57,34 @@ are a distinct source layer not explicitly identified by UBC. Invalid geometries
 are repaired only for spatial predicates, with counts reported; the GeoPackage
 preserves original geometries. Thus it can still contain invalid source shapes.
 
+## Comparing with the published BCPLM layer
+
+The audit is separate from the public-land builder and does not change its rules:
+
+```sh
+python3 datascrapers/bc/parcelmap/fetch-bcplm-reference.py
+uv run --with pyogrio==0.13.0 --with shapely==2.1.2 python datascrapers/bc/parcelmap/audit-public-land.py
+uv run --with pyogrio==0.13.0 --with shapely==2.1.2 python datascrapers/bc/parcelmap/audit-spatial-followups.py
+uv run --with pyogrio==0.13.0 --with shapely==2.1.2 python datascrapers/bc/parcelmap/test_audit_public_land.py
+```
+
+`fetch-bcplm-reference.py` downloads the published layer with stable OBJECTID
+paging, verifies the count and uniqueness, and checks that its edit metadata did
+not change during the pull. The audit checks PID and assessment-key multiplicity,
+geometry area overlap, ownership and regional disagreement, exclusion overlap
+fractions, and size thresholds. Follow-ups independently locate published parcel
+interior points in legal RD polygons and query current Parcel Fabric for missing
+PIDs, including a known PID as a positive control. Missing PID footprints are
+also compared with current parcels through indexed spatial reads. Extracted raw
+geodatabases, reference geometry and per-record evidence remain ignored locally.
+
+Machine-readable aggregate results are `output/public-land/audit-summary.json`
+and `audit-followups.json`. `audit-report.md` is the dated narrative of the
+September 22, 2026 investigation; rerunning the scripts updates JSON evidence,
+not that narrative. `public-land-audit.ipynb` independently recomputes the key
+counts from the saved reference and exception records. Geometry overlap or
+conflicting ownership snapshots do not establish historical title changes.
+
 ## Choosing the dataset
 
 - **Polygons**: physical parcel representation; building strata are represented
