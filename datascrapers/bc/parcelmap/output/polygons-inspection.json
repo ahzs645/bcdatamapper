@@ -1,0 +1,40 @@
+{
+  "archiveSha256": "b79dc1a3dec1046e17b58982cd1bdfdc2494838020e8ab263d91149f23eda2b8",
+  "pyogrioVersion": "0.13.0",
+  "validationScope": "Archive checksum, readable geodatabase, layer count/schema/extent; no geometry repair or topology audit",
+  "layers": [
+    {
+      "name": "PMBC_PARCEL_POLY_SV",
+      "featureCount": 1733553,
+      "crs": "EPSG:3005",
+      "geometryType": "MultiPolygon",
+      "bounds": [
+        395547.39210000075,
+        367749.7115000002,
+        1845272.3126999997,
+        1714859.0494
+      ],
+      "fields": [
+        "PMBC_PP_SYSID",
+        "PARCEL_NAME",
+        "PLAN_NUMBER",
+        "PIN",
+        "PID",
+        "PID_FORMATTED",
+        "PID_NUMBER",
+        "PARCEL_STATUS",
+        "PARCEL_CLASS",
+        "OWNER_TYPE",
+        "PARCEL_START_DATE",
+        "MUNICIPALITY",
+        "REGIONAL_DISTRICT",
+        "WHEN_UPDATED",
+        "FEATURE_AREA_SQM",
+        "FEATURE_LENGTH_M",
+        "SHAPE_Length",
+        "SHAPE_Area"
+      ],
+      "driver": "OpenFileGDB"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "dataset": "polygons",
+  "title": "ParcelMap BC Parcel Polygons",
+  "coverage": "British Columbia, province-wide",
+  "retrievedAt": "2026-09-22T19:12:22.559741+00:00",
+  "catalogueUrl": "https://catalogue.data.gov.bc.ca/dataset/2f4117d9-41fc-44db-87d4-dbdb77f14086",
+  "downloadUrl": "https://pub.data.gov.bc.ca/datasets/2f4117d9-41fc-44db-87d4-dbdb77f14086/pmbc_parcel_poly_sv.zip",
+  "licence": "Open Government Licence - British Columbia",
+  "licenceUrl": "https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61",
+  "attribution": "ParcelMap BC, Land Title and Survey Authority of British Columbia; distributed by DataBC",
+  "sourceCrs": "epsg3005",
+  "format": "Esri File Geodatabase (ZIP)",
+  "geometryProcessing": "None; original archive preserved byte-for-byte",
+  "strataRepresentation": "One polygon per building strata plan; individual strata lot PIDs excluded",
+  "archive": {
+    "file": "source/polygons/pmbc_parcel_poly_sv.zip",
+    "bytes": 317965520,
+    "uncompressedBytes": 539863151,
+    "sha256": "b79dc1a3dec1046e17b58982cd1bdfdc2494838020e8ab263d91149f23eda2b8",
+    "lastModified": "Mon, 21 Sep 2026 08:26:12 GMT",
+    "etag": "\"12f3c4d0-65bfa00c1fedd\"",
+    "zipCrcValidated": true
+  }
+}
