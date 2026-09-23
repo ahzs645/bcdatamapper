@@ -24,22 +24,23 @@ It retains name, address, location notes and both file numbers. No status is
 inferred. The deterministic gzip is named by its uncompressed SHA-256; the
 manifest is replaced last so the UI does not see a partially updated product.
 
-In PGMaps, open `/misc?tab=remediation` in the development server. The Remediation
-tab offers clustered points, province-wide text search, site details and BC / Prince
-George camera shortcuts. `scripts/remediation-dev-data.ts` serves only the
-manifest and content-addressed map products; it is not active in production.
-Neither the tab nor cached data is deployed. No copy to `public/data` is required.
+In PGMaps, open `/misc?tab=remediation`. The Remediation tab offers clustered
+points, province-wide text search, site details and BC / Prince George camera
+shortcuts. In development, `scripts/remediation-dev-data.ts` serves the local
+manifest and content-addressed map product. The live test site reads the same
+map product from `https://data.map.ahmad.sh/bc/environmental-remediation/v1/`.
+The source archive and cache are not copied to PGMaps `public/data`.
 
 Validation: `python3 -m unittest discover -s datascrapers/bc/environmental-remediation -p 'test_*.py'`
 from the bcdatamapper root. The browser checks the map payload's SHA-256 and count.
 
 Source: https://catalogue.data.gov.bc.ca/dataset/environmental-remediation-sites
 
-The catalogue labels this dataset **Access Only**. This is a local research
-download, not a public deployment or redistribution package. No ParcelMap joins
-have been performed. The linked provincial copyright policy requires written
-permission for reproduction of Access Only material; public deployment is not
-enabled by this integration.
+The catalogue labels this dataset **Access Only**. The personal test site now
+serves the derived map snapshot from R2; the original source archive remains
+in private storage. No ParcelMap joins have been performed. The linked
+provincial copyright policy requires written permission for reproduction of
+Access Only material.
 
 These are site location points for known and potentially contaminated properties,
 not surveyed contamination extents or a declaration that every listed property

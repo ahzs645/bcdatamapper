@@ -46,8 +46,23 @@ of the BCPLM methodology using current full-resolution sources. See
 `output/public-land/report.md` for results, exact choices and remaining work.
 Summary JSON and the region-by-owner CSV are tracked; source masks, per-parcel
 decisions and the candidate GeoPackage stay in ignored `source/public-land/`.
-The national park mask is catalogued Access Only, so this workflow is a local
-research build and does not publish source or candidate geometries to the app.
+The national park mask is catalogued Access Only. The original research inputs
+remain local and privately backed up; the personal PGMaps test site serves a
+derived candidate PMTiles map layer from R2.
+
+Build the map layer after `parcelmap:public-land`:
+
+```sh
+uv run --with shapely --with pyproj python datascrapers/bc/parcelmap/build-public-land-pmtiles.py
+```
+
+This writes an ignored `source/public-land/public-land-candidates.pmtiles` and
+`public-land-candidates-pmtiles.json`. The builder checks its 304,646 source
+records against `output/public-land/summary.json`, reprojects to WGS84 and
+preserves the full source geometries before vector tile encoding. The current
+test release is at `https://data.map.ahmad.sh/bc/parcelmap/v1/`. Its polygons
+represent only the first ownership and reserve/park screen; they do not show
+available or housing-suitable land.
 
 Region assignment uses ParcelMap BC's existing region attribute rather than a
 new spatial join to legal district polygons; this preserves Northern Rockies and
