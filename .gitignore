@@ -72,3 +72,6 @@ datascrapers/bc/forest-map-sources/source/visual-inventory/
 
 # Province-wide ParcelMap BC File Geodatabases; retain manifests, not large archives.
 datascrapers/bc/parcelmap/source/
+
+# Versioned EDI source and normalized review data remain local pending publication.
+datascrapers/bc/early-learning/cache/
