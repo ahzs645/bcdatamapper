@@ -1,0 +1,5230 @@
+{
+  "sourceUrl": "https://www.northerndevelopment.bc.ca/state-of-the-north/",
+  "publicReportResourceKey": "0d347d38-3eef-455d-9a54-6d7de2c764ab",
+  "modelLastRefresh": "2026-04-30T16:52:00.97",
+  "pages": [
+    {
+      "pageName": "ReportSection47d12a9f65078a3523b2",
+      "title": "GDP TRENDS",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "944ef74b908b40599100",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "e4f3b382208adb2ac790",
+          "visualType": "columnChart",
+          "title": "BC GDP – Natural Resources vs. Tech and Hospitality Sectors - 5 Year Comparison",
+          "subtitle": "BC Stats",
+          "entities": [
+            "GDP_Indsutries",
+            "Measure"
+          ],
+          "fields": [
+            "TableGDP_Indsutries.Year",
+            "TableGDP_Indsutries.Industries",
+            "TableGDP_Indsutries.Type",
+            "Measure._GDPIndustries_PreviousYears"
+          ]
+        },
+        {
+          "visualId": "afa1168f16ccc82ba125",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "04c23c2d95f4ada30102",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Lable_Nodatagdpindustry"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectionc298fd1aa2d2af577492",
+      "title": "Tooltip-Rental Rates",
+      "tooltip": true,
+      "visuals": [
+        {
+          "visualId": "69d49968c500d6ee018b",
+          "visualType": "tableEx",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Housing_RentalRates_Monthly",
+            "Measure"
+          ],
+          "fields": [
+            "Housing_RentalRates_Monthly.Location",
+            "Measure._HousingRental_Aggregation",
+            "Measure._HousingRental_PreviousYear_Difference",
+            "Housing_RentalRates_Monthly.House Type"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectionb4f4e5629922c2990e6b",
+      "title": "Tooltip-Housing Median",
+      "tooltip": true,
+      "visuals": [
+        {
+          "visualId": "7e53fa677ec2ddbac94a",
+          "visualType": "tableEx",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "HousingMedian_Monthly",
+            "Measure"
+          ],
+          "fields": [
+            "HousingMedian_Monthly.Geography",
+            "Measure._HousingPrices_Aggregation",
+            "Measure._HousingPrices_PreviousYear_Difference"
+          ]
+        },
+        {
+          "visualId": "70b6ca4fdde76d340b4b",
+          "visualType": "lineChart",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "HousingMedian_Monthly",
+            "Measure"
+          ],
+          "fields": [
+            "Measure._HousingPrices_PreviousYears",
+            "HousingMedian_Monthly.Year"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectiond3ac5370cc624bb49761",
+      "title": "Tooltip-Mining",
+      "tooltip": true,
+      "visuals": [
+        {
+          "visualId": "010b7927453de7e018fa",
+          "visualType": "tableEx",
+          "title": "Mines in Operation",
+          "subtitle": null,
+          "entities": [
+            "BC_Mines"
+          ],
+          "fields": [
+            "Min(BC_Mines.Permittee)",
+            "BC_Mines.Nearest City/Town",
+            "BC_Mines.Commodities"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection806a871a605e2c200508",
+      "title": "GDP",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "bfda117d9a7179c44550",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "2c3e4c6204108b26ec6c",
+          "visualType": "columnChart",
+          "title": "BC Real GDP",
+          "subtitle": "Millions of Constant 2017 Dollars",
+          "entities": [
+            "GDPGrowth",
+            "Measure"
+          ],
+          "fields": [
+            "GDPGrowth.Year",
+            "Measure._GDPGrowth_PreviousYears",
+            "GDPGrowth.North American Industry Classification System (NAICS)"
+          ]
+        },
+        {
+          "visualId": "dee75e467508ba1aa025",
+          "visualType": "lineChart",
+          "title": "BC Real GDP Growth Rate",
+          "subtitle": "Statistics Canada Table: 36100402",
+          "entities": [
+            "GDPGrowth",
+            "Measure"
+          ],
+          "fields": [
+            "GDPGrowth.Year",
+            "Measure._GDPGrowth_PreviousYears%"
+          ]
+        },
+        {
+          "visualId": "1f17318ae0883dd8480b",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Lable_Nodatagdp"
+          ]
+        },
+        {
+          "visualId": "516e86afccd58f8f79b5",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": "GDP Outlook",
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection95772973b6725117aab7",
+      "title": "EXCHANGE RATE",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "bbf464b003637343a6ee",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "aff734a6476f13d129f6",
+          "visualType": "lineChart",
+          "title": "Exchange Rate",
+          "subtitle": "Federal Reserve Economic Data, TD and RBC Economics",
+          "entities": [
+            "Measure",
+            "Exchange Rate Historical/Forecast"
+          ],
+          "fields": [
+            "Measure._ExchangeRate-PrevYears-Actual",
+            "Measure._ExchangeRate-PrevYears-RBC",
+            "Measure._ExchangeRate-PrevYears-TD",
+            "Exchange Rate Historical/Forecast.Year-Month"
+          ]
+        },
+        {
+          "visualId": "c70e33e014480129336c",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectioncedf5a303b22c91985c9",
+      "title": "Tooltip-Housing Starts",
+      "tooltip": true,
+      "visuals": [
+        {
+          "visualId": "d6acdb724cee974986d5",
+          "visualType": "tableEx",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Housing_Stats_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "Housing_Stats_Annually.Region",
+            "Measure._Housing-Stat-PrevPeriod-Diff",
+            "Measure._HousingStat_Aggregation"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectionfe19e197dbeaea4072c3",
+      "title": "TOURISM",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "3040956c0f63bd805213",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "eaf7ba48bb155e57e386",
+          "visualType": "lineChart",
+          "title": "Total Vehicles – BC Ferries, Major Northern Routes",
+          "subtitle": null,
+          "entities": [
+            "Measure",
+            "Traffic_Ferries_Monthly"
+          ],
+          "fields": [
+            "Measure._Airport_Ferries_PreviousYears",
+            "Traffic_Ferries_Monthly.REF_DATE"
+          ]
+        },
+        {
+          "visualId": "1a438dfbaa3d874e033a",
+          "visualType": "lineChart",
+          "title": "Passenger Volume at Airports",
+          "subtitle": "Destination BC",
+          "entities": [
+            "Traffic_Airport_Monthly",
+            "Measure"
+          ],
+          "fields": [
+            "Traffic_Airport_Monthly.REF_DATE.Variation.Date Hierarchy.Year",
+            "Measure._AirportTaffic_PreviousYears",
+            "Traffic_Airport_Monthly.Geography"
+          ]
+        },
+        {
+          "visualId": "4227000c65557e17e02c",
+          "visualType": "lineChart",
+          "title": "Room Revenue Subject to MRDT",
+          "subtitle": "BC Government",
+          "entities": [
+            "Measure",
+            "TourismRevenue_Monthly"
+          ],
+          "fields": [
+            "Measure._Tourism_PreviousYears",
+            "TourismRevenue_Monthly.Year",
+            "TourismRevenue_Monthly.Region"
+          ]
+        },
+        {
+          "visualId": "b24b7f51bd1a77d94139",
+          "visualType": "lineChart",
+          "title": "Total Passengers – BC Ferries, Major Northern Routes",
+          "subtitle": null,
+          "entities": [
+            "Traffic_Ferries_Monthly",
+            "Measure"
+          ],
+          "fields": [
+            "Traffic_Ferries_Monthly.REF_DATE",
+            "Measure._Traffic_Ferries_Person_PreviousYears"
+          ]
+        },
+        {
+          "visualId": "2a11a4a025f163aef0fb",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection0b5e476e540271633ed2",
+      "title": "CLEAN ENERGY",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "c7d02e87b4513065b126",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "0295d55472dd85becbf7",
+          "visualType": "clusteredColumnChart",
+          "title": "Electrical Generating Capacity by  Region",
+          "subtitle": "BC Hydro",
+          "entities": [
+            "Measure",
+            "ElectricityGeneratingCapacity_Annually"
+          ],
+          "fields": [
+            "ElectricityGeneratingCapacity_Annually.Region",
+            "Measure._Electricity_Generating_BC%_Aggregation"
+          ]
+        },
+        {
+          "visualId": "caad5eb08061ad19521d",
+          "visualType": "pivotTable",
+          "title": "Independent Power Producers – Northern BC",
+          "subtitle": null,
+          "entities": [
+            "IPPSupplyListOperation_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "IPPSupplyListOperation_Annually.Type",
+            "Measure._IPPEnergy_ForcedData",
+            "Measure._IPPEnergyGeneration_ForcedData",
+            "Measure._IPPCount_ForcedData"
+          ]
+        },
+        {
+          "visualId": "f739ef707051027771df",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "2f38d17cbbc1e3dd6bdf",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure.Label_Electricity"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectiona0fdc54f20e5e5703cbb",
+      "title": "MINING OIL & GAS",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "3bc2911bd56cb4bdc0d0",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "d84e48b430e535044082",
+          "visualType": "map",
+          "title": "Mines in Operation",
+          "subtitle": "BC Mine Information",
+          "entities": [
+            "BC_Mines"
+          ],
+          "fields": [
+            "Min(BC_Mines.Longitude)",
+            "Min(BC_Mines.Latitude)",
+            "BC_Mines.Mine Name",
+            "BC_Mines.Mine Type",
+            "CountNonNull(BC_Mines.Operating Status)"
+          ]
+        },
+        {
+          "visualId": "f2722c939bb4684865d3",
+          "visualType": "lineChart",
+          "title": "Wells Drilled",
+          "subtitle": "BC Energy Regulator",
+          "entities": [
+            "Measure",
+            "WellsDrilled_Monthly"
+          ],
+          "fields": [
+            "Measure._WellsDrilled_PreviousYears",
+            "WellsDrilled_Monthly.REF_DATE"
+          ]
+        },
+        {
+          "visualId": "bc9f922f82b729d9a7a6",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection780d5465d0c2445c4279",
+      "title": "BUSINESSES",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "9e16d4c0c97518eafe91",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "c53497b69f2afa0dc7b4",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "444b61a2a325b1189e40",
+          "visualType": "barChart",
+          "title": "Businesses Location Chart",
+          "subtitle": "Statistics Canada Business Register",
+          "entities": [
+            "Business Count Employees",
+            "Measure"
+          ],
+          "fields": [
+            "Business Count Employees.naics_descriptions",
+            "Business Count Employees.category",
+            "Measure._Forced_Businesses"
+          ]
+        },
+        {
+          "visualId": "225bc5bb48165905ec7e",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "Business Count Employees"
+          ],
+          "fields": [
+            "Business Count Employees.Type"
+          ]
+        },
+        {
+          "visualId": "252bc940d35440ddb7ed",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "NDITRegions"
+          ],
+          "fields": [
+            "NDITRegions.NDIT Region"
+          ]
+        },
+        {
+          "visualId": "0a7174e5f6d3e5257c8b",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Lable_NodataBusinesses"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection38a5dbea3ef21fc3a5b5",
+      "title": "BANKRUPTCIES",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "ac319f4c0a12d8b2ffda",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "b67765bf8835862bd7e2",
+          "visualType": "clusteredColumnChart",
+          "title": "Consumer Bankruptcies",
+          "subtitle": "Office of the Superintendent of Bankruptcy",
+          "entities": [
+            "Measure",
+            "Bankruptcies_Quarterly_byGEO"
+          ],
+          "fields": [
+            "Measure._BankruptciesQuarter_PreviousYears",
+            "Bankruptcies_Quarterly_byGEO.Quarter",
+            "Bankruptcies_Quarterly_byGEO.Year"
+          ]
+        },
+        {
+          "visualId": "f0b277024ba5316507e3",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Bankruptcies_Quarterly_byGEO"
+          ],
+          "fields": [
+            "Bankcruptcies.Developmental Group"
+          ]
+        },
+        {
+          "visualId": "94cd5cc0b6e916264bb7",
+          "visualType": "clusteredColumnChart",
+          "title": "Business Bankruptcies",
+          "subtitle": "Office of the Superintendent of Bankruptcy",
+          "entities": [
+            "Measure",
+            "Bankruptcies_Quarterly_byGEO"
+          ],
+          "fields": [
+            "Measure._BankruptciesQuarter_PreviousYears",
+            "Bankruptcies_Quarterly_byGEO.Quarter",
+            "Bankruptcies_Quarterly_byGEO.Year"
+          ]
+        },
+        {
+          "visualId": "6a9a559cd79d35842570",
+          "visualType": "clusteredColumnChart",
+          "title": "Consumer Bankruptcies – 3-Year Trend",
+          "subtitle": "Office of the Superintendent of Bankruptcy",
+          "entities": [
+            "Measure",
+            "Bankruptcies_Range"
+          ],
+          "fields": [
+            "Measure._Bankruptcies_Range_PreviousYears",
+            "Sum(Bankruptcies_Range.Sum_)"
+          ]
+        },
+        {
+          "visualId": "49cbd8e3590eed382467",
+          "visualType": "clusteredColumnChart",
+          "title": "Business Bankruptcies – 3-Year Trend",
+          "subtitle": "Office of the Superintendent of Bankruptcy",
+          "entities": [
+            "Bankruptcies_Range",
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Bankruptcies_Range_PreviousYears",
+            "Sum(Bankruptcies_Range.Sum_)"
+          ]
+        },
+        {
+          "visualId": "b1de04f1b3858005511a",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "87f33482eebb5751588c",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Bankruptcies_Range"
+          ],
+          "fields": [
+            "Min(Bankruptcies_Range.Year)"
+          ]
+        },
+        {
+          "visualId": "04b6db0c0630db5200ee",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Bankruptcies_Range"
+          ],
+          "fields": [
+            "Min(Bankruptcies_Range.Year Range)"
+          ]
+        },
+        {
+          "visualId": "4b798c4e94171194a059",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Bankruptcies_Range"
+          ],
+          "fields": [
+            "Min(Bankruptcies_Range.Year)"
+          ]
+        },
+        {
+          "visualId": "0093694ff3d297b46f5c",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Bankruptcies_Range"
+          ],
+          "fields": [
+            "Min(Bankruptcies_Range.Year Range)"
+          ]
+        },
+        {
+          "visualId": "8bbe23a738219dd6fd9b",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Label_NodataBankruptcies"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection1b7692d558ec8075482b",
+      "title": "INCORPORATIONS",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "f26a7dc435c3909fa799",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "f6af4dd6bf78132fc28c",
+          "visualType": "columnChart",
+          "title": "Business Incorporations, by Region",
+          "subtitle": "BC Stats",
+          "entities": [
+            "Bankruptcies_Incorporation_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "Bankruptcies_Incorporation_Annually.NDIT Region",
+            "Bankruptcies_Incorporation_Annually.Year",
+            "Measure._BankruptciesIncorporation_PreviousYears"
+          ]
+        },
+        {
+          "visualId": "fe5f183ae5452c694f82",
+          "visualType": "clusteredColumnChart",
+          "title": "Business Incorporations – 3-Year Trend, Northern BC",
+          "subtitle": null,
+          "entities": [
+            "Bankruptcies_Incorporation_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "Measure._BankruptciesIncorporation_Range_PreviousYears",
+            "Bankruptcies_Incorporation_Annually.Year - Range"
+          ]
+        },
+        {
+          "visualId": "b15451ce70fd86968c7a",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "cdf20ed78ce42ab11bcc",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Label_NodataBankruptciesIncorp"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection149f31fa1575676fdf53",
+      "title": "AGRICULTURE",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "59b5e6fc5cb988387f7f",
+          "visualType": "clusteredColumnChart",
+          "title": "Crop Farms – Northern BC",
+          "subtitle": "Statistics Canada Census of Agriculture",
+          "entities": [
+            "FarmType- Active/Inactive",
+            "Measure"
+          ],
+          "fields": [
+            "FarmType- Active/Inactive.North American Industry Classification System (NAICS)",
+            "Measure._FarmType_PreviousYears",
+            "FarmType- Active/Inactive.Year"
+          ]
+        },
+        {
+          "visualId": "5fd643c9fb03907c58ed",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "cd7a6916f4c140516ec7",
+          "visualType": "clusteredColumnChart",
+          "title": "Animal Farms – Northern BC",
+          "subtitle": "Statistics Canada Census of Agriculture",
+          "entities": [
+            "Measure",
+            "FarmType- Active/Inactive"
+          ],
+          "fields": [
+            "FarmType- Active/Inactive.North American Industry Classification System (NAICS)",
+            "Measure._FarmType_PreviousYears",
+            "FarmType- Active/Inactive.Year"
+          ]
+        },
+        {
+          "visualId": "00639100d0beafcbcf43",
+          "visualType": "columnChart",
+          "title": "Crop Production – BC Total",
+          "subtitle": "Quorom Corporation",
+          "entities": [
+            "CropProduction_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "CropProduction_Annually.Year",
+            "Measure._CropProduction_PreviousYears",
+            "CropProduction_Annually.Type (groups)"
+          ]
+        },
+        {
+          "visualId": "95804a69ce929cefbcaf",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection0c243c3fc51066ae79ae",
+      "title": "EMPLOYMENT",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "3f5faee457fbdad90a78",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "9e3e6f76d6f908b0d516",
+          "visualType": "clusteredBarChart",
+          "title": "Employment by Industry",
+          "subtitle": null,
+          "entities": [
+            "Measure",
+            "Employment_RegionIndustry_Annually"
+          ],
+          "fields": [
+            "Measure._Region_Industry_PreviousYears",
+            "Employment_RegionIndustry_Annually.Hierarchy_Level2",
+            "Employment_RegionIndustry_Annually.IndustrySort",
+            "Employment_RegionIndustry_Annually.Industry Name"
+          ]
+        },
+        {
+          "visualId": "1ff77f9465122c613f85",
+          "visualType": "columnChart",
+          "title": "BC Employment – Natural Resources vs. Public and Tech Sectors - 5 Year Comparison",
+          "subtitle": null,
+          "entities": [
+            "Employment_Indutries",
+            "Measure"
+          ],
+          "fields": [
+            "Employment_Indutries.Year",
+            "Employment_Indutries.Inudstry",
+            "Employment_Indutries.Type_",
+            "Measure._Employment_Industry_PreviousYears"
+          ]
+        },
+        {
+          "visualId": "7d86efaf6ecb1a07d0dd",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "Employment_RegionIndustry_Annually"
+          ],
+          "fields": [
+            "Employment_RegionIndustry_Annually.Region Name"
+          ]
+        },
+        {
+          "visualId": "08eece3818f1ce9c55e0",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "699fac395d38377b4db4",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Region_Industry_NoData"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection68b25135d98f32426d9b",
+      "title": "UNEMPLOYMENT",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "acdf7becf6823b67de7f",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "bf2543f5db41bda005a0",
+          "visualType": "clusteredColumnChart",
+          "title": "Unemployment Rate by Quarter",
+          "subtitle": "Statistics Canada Table: 14100462",
+          "entities": [
+            "Measure",
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "LabourForceCharacteristics_Monthly"
+          ],
+          "fields": [
+            "Measure._LabourMonthly_PreviousYears_Unemploy_Weighted",
+            "LabourForceCharacteristics_Monthly_ByGEO.Quarter",
+            "LabourForceCharacteristics_Monthly_ByGEO.Year"
+          ]
+        },
+        {
+          "visualId": "5d856b28742b529b02ac",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO"
+          ],
+          "fields": [
+            "LabourForceCharacteristics_Monthly_ByGEO.GEO_Short"
+          ]
+        },
+        {
+          "visualId": "b04a8c19e96788f1f76f",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "6b9298d04b5c3d00c42a",
+          "visualType": "clusteredBarChart",
+          "title": "Unemployment Rate by Region, Annual",
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "Measure"
+          ],
+          "fields": [
+            "Measure._LabourMonthly_PreviousYears_Unemploy_Weighted",
+            "LabourForceCharacteristics_Monthly_ByGEO.Year",
+            "LabourForceCharacteristics_Monthly_ByGEO.GEO_Short"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectionb0c3ad6b763be19d955c",
+      "title": "LABOUR FORCE",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "90b71c3c363aafa6d326",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "680d12fbdd6eb00e1a91",
+          "visualType": "clusteredColumnChart",
+          "title": "Participation Rate by Quarter",
+          "subtitle": null,
+          "entities": [
+            "Measure",
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "LabourForceCharacteristics_Monthly"
+          ],
+          "fields": [
+            "Measure._LabourMonthly_PreviousYears_Part_Weighted",
+            "LabourForceCharacteristics_Monthly_ByGEO.Quarter",
+            "LabourForceCharacteristics_Monthly_ByGEO.Year"
+          ]
+        },
+        {
+          "visualId": "49252bd74f952f79da24",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO"
+          ],
+          "fields": [
+            "LabourForceCharacteristics_Monthly_ByGEO.GEO_Short"
+          ]
+        },
+        {
+          "visualId": "fd544ce4d98776b8fba1",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "a1306e4006b70d2d5866",
+          "visualType": "clusteredColumnChart",
+          "title": "Employment Rate by Quarter",
+          "subtitle": null,
+          "entities": [
+            "Measure",
+            "LabourForceCharacteristics_Monthly",
+            "LabourForceCharacteristics_Monthly_ByGEO"
+          ],
+          "fields": [
+            "Measure._LabourMonthly_PreviousYears_Employ_Weighted",
+            "LabourForceCharacteristics_Monthly_ByGEO.Quarter",
+            "LabourForceCharacteristics_Monthly_ByGEO.Year"
+          ]
+        },
+        {
+          "visualId": "8ea693e63320a509ea0e",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO"
+          ],
+          "fields": [
+            "LabourForceCharacteristics_Monthly_ByGEO.GEO_Short"
+          ]
+        },
+        {
+          "visualId": "eac7884ae59b67ba4d8e",
+          "visualType": "clusteredBarChart",
+          "title": "Participation Rate by Region, Annual",
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "Measure"
+          ],
+          "fields": [
+            "LabourForceCharacteristics_Monthly_ByGEO.Year",
+            "Measure._LabourMonthly_PreviousYears_Participation_Weighted",
+            "LabourForceCharacteristics_Monthly_ByGEO.GEO_Short"
+          ]
+        },
+        {
+          "visualId": "35569920c405aca5b7a9",
+          "visualType": "clusteredBarChart",
+          "title": "Employment Rate by Region, Annual",
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "Measure"
+          ],
+          "fields": [
+            "LabourForceCharacteristics_Monthly_ByGEO.Year",
+            "Measure._LabourMonthly_PreviousYears_Employ_Weighted",
+            "LabourForceCharacteristics_Monthly_ByGEO.GEO_Short"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectionc66e14d574e47f3690f2",
+      "title": "JOB VACANCIES",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "b7624cf3cea7d7ea3120",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "09ecdcbf13d463897047",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "JobVacancy_ByGEO"
+          ],
+          "fields": [
+            "JobVacancy_ByGEO.GEO"
+          ]
+        },
+        {
+          "visualId": "e70d5ca595d9db7759e0",
+          "visualType": "lineChart",
+          "title": "Job Vacancies by Quarter",
+          "subtitle": "⠀Statistics Canada Table: 14100398",
+          "entities": [
+            "JobVacancy_ByGEO",
+            "Measure"
+          ],
+          "fields": [
+            "JobVacancy_ByGEO.Year",
+            "JobVacancy_ByGEO.Quarter",
+            "JobVacancy_ByGEO.GEO",
+            "Measure._JobVacancy_PreviousYears"
+          ]
+        },
+        {
+          "visualId": "95e199950d21d9210087",
+          "visualType": "lineChart",
+          "title": "Job Vacancy Rate by Quarter",
+          "subtitle": "⠀Statistics Canada Table: 14100398",
+          "entities": [
+            "Measure",
+            "JobVacancy_ByGEO"
+          ],
+          "fields": [
+            "Measure.TEST",
+            "JobVacancy_ByGEO.Year",
+            "JobVacancy_ByGEO.Quarter",
+            "JobVacancy_ByGEO.GEO"
+          ]
+        },
+        {
+          "visualId": "41dc542a0b015a94c577",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSectiond23656b985f3980dc993",
+      "title": "POPULATION",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "67e05631e93c846d9e41",
+          "visualType": "clusteredColumnChart",
+          "title": "Population - Year-over-Year % Change",
+          "subtitle": "BC Stats",
+          "entities": [
+            "Measure",
+            "PopulationHistorical_ByGEO"
+          ],
+          "fields": [
+            "Measure._PopulationEstimates_PreviousYear_Difference",
+            "PopulationHistorical_ByGEO.Year",
+            "PopulationHistorical_ByGEO.Developmental"
+          ]
+        },
+        {
+          "visualId": "ccc44c3c49a2e1c38754",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "32fdc3f0d895bb9d1f54",
+          "visualType": "lineChart",
+          "title": "Population - Historical and Forecast",
+          "subtitle": "BC Stats",
+          "entities": [
+            "PopulationForecastHistory_Annually_ByGEO",
+            "Measure"
+          ],
+          "fields": [
+            "Measure._PopulationHistory_PreviousYears",
+            "PopulationForecastHistory_Annually_ByGEO.Year",
+            "PopulationForecastHistory_Annually_ByGEO.Developmental"
+          ]
+        },
+        {
+          "visualId": "9dd19dccd5ba352b5665",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "NDITRegions_ByDevelopmental"
+          ],
+          "fields": [
+            "NDITRegions_ByDevelopmental.NDIT Region"
+          ]
+        },
+        {
+          "visualId": "d37971fed65388f5d535",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "2c0ebba7c5f5a3d05e23",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Lable_NodataPop"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection601c9137afd32a1b011c",
+      "title": "POPULATION BY AGE",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "2e2681af65ac4b2d024d",
+          "visualType": "hundredPercentStackedBarChart",
+          "title": "Population by Age Group",
+          "subtitle": "BC Stats",
+          "entities": [
+            "Measure",
+            "PopulationHistorical_AgeGroup_Annually"
+          ],
+          "fields": [
+            "Measure._PopulationChange_PreviousYears",
+            "PopulationHistorical_AgeGroup_Annually.Age Group",
+            "PopulationHistorical_AgeGroup_Annually.Year"
+          ]
+        },
+        {
+          "visualId": "2ec66b02da9aa8a5ff5d",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "dbd198e9ec5593228006",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "NDITRegions"
+          ],
+          "fields": [
+            "NDITRegions.NDIT Region"
+          ]
+        },
+        {
+          "visualId": "66a7581f36ad3f79741d",
+          "visualType": "hundredPercentStackedBarChart",
+          "title": "Population Forecast by Age Group",
+          "subtitle": "BC Stats",
+          "entities": [
+            "PopulationEstimates_AgeGroup_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "PopulationEstimates_AgeGroup_Annually.Age Group",
+            "PopulationEstimates_AgeGroup_Annually.Year",
+            "Measure._PopulationEstimates_AgeGroup_ForecastedYears"
+          ]
+        },
+        {
+          "visualId": "c53121688e0d2ae4d19b",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "caccd4fb4985444c4c4d",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Lable_NodatapopAge"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection0442aef792d38fabc381",
+      "title": "MIGRATION",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "860091e3fd3a2c62d042",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "d03238f17732cb6bf43d",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "NDITRegions"
+          ],
+          "fields": [
+            "NDITRegions.Developmental Group"
+          ]
+        },
+        {
+          "visualId": "18f37b614d59b8570c16",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "53bb146821d70c0eaa1d",
+          "visualType": "clusteredBarChart",
+          "title": "Migration by Source",
+          "subtitle": "Statistics Canada Table: 17100151",
+          "entities": [
+            "PopulationChange_New",
+            "Measure"
+          ],
+          "fields": [
+            "PopulationChange_New.Components of population growth",
+            "Measure._Forced_PopulationChange"
+          ]
+        },
+        {
+          "visualId": "0b1acdd72bdcf9f004d9",
+          "visualType": "card",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Report-NoData_popChange"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection2806522dcf2ddf57a284",
+      "title": "HOUSING",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "58f45c26896c955fee8c",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "88b5864f0632093400a8",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "16ab7d9bdda820ca6507",
+          "visualType": "map",
+          "title": "Housing Price",
+          "subtitle": "CREA",
+          "entities": [
+            "HousingMedian_Monthly",
+            "Measure"
+          ],
+          "fields": [
+            "HousingMedian_Monthly.Geography",
+            "Min(HousingMedian_Monthly.Geography)",
+            "Measure._HousingPrices_Forced",
+            "Measure.Lat",
+            "Measure._HousingPrices_Long"
+          ]
+        },
+        {
+          "visualId": "6f392b0a0ba27b62d5b3",
+          "visualType": "map",
+          "title": "Housing Rental Rates",
+          "subtitle": null,
+          "entities": [
+            "Housing_RentalRates_Monthly"
+          ],
+          "fields": [
+            "Housing_RentalRates_Monthly.Location",
+            "Avg(Housing_RentalRates_Monthly.Lat)",
+            "Avg(Housing_RentalRates_Monthly.Long)",
+            "Sum(Housing_RentalRates_Monthly.Value)"
+          ]
+        },
+        {
+          "visualId": "0f3551e0ff01af1d7560",
+          "visualType": "map",
+          "title": "Housing Starts",
+          "subtitle": "CMHC",
+          "entities": [
+            "Housing_Stats_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "Housing_Stats_Annually.Region",
+            "Measure._HousingStat_Forced"
+          ]
+        },
+        {
+          "visualId": "8d738379fe473e996fab",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "1d49e728c3b99585c918",
+          "visualType": "card",
+          "title": "Prices",
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Label_NodataHousingPrices"
+          ]
+        },
+        {
+          "visualId": "806f4b62b3833cfc09e6",
+          "visualType": "card",
+          "title": "Starts",
+          "subtitle": null,
+          "entities": [
+            "Measure"
+          ],
+          "fields": [
+            "Measure._Label_NodataHousingStarts"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection5491af97342308f82d2c",
+      "title": "INCOME",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "628ad821210de1610c84",
+          "visualType": "tableEx",
+          "title": "Median Income",
+          "subtitle": null,
+          "entities": [
+            "Measure",
+            "Income"
+          ],
+          "fields": [
+            "Income.GEO",
+            "Measure._MedianIncome_PrevPeriod_Diff",
+            "Measure._Income_ForcedData"
+          ]
+        },
+        {
+          "visualId": "f8bf0f07f3536c30fae4",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "e4aa6ff2186dba8f5a37",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "NDITRegions"
+          ],
+          "fields": [
+            "NDITRegions.NDIT Region"
+          ]
+        },
+        {
+          "visualId": "67cf549016ac9d45c71f",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        },
+        {
+          "visualId": "7c38db07afb24b63b7be",
+          "visualType": "tableEx",
+          "title": "Low Income Percentage",
+          "subtitle": null,
+          "entities": [
+            "LowIncome",
+            "Measure"
+          ],
+          "fields": [
+            "LowIncome.GEO",
+            "Measure._LowIncome_ForcedData"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection7fcb3bcee03f01e0dfc5",
+      "title": "FORESTRY",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "ab3d216b8faa3b020949",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "6421adabe85067543e20",
+          "visualType": "columnChart",
+          "title": "Harvest Billings",
+          "subtitle": "BC Harvest Billings System",
+          "entities": [
+            "Measure",
+            "HarvestBillings_Monthly"
+          ],
+          "fields": [
+            "HarvestBillings_Monthly.Year",
+            "Measure._HarvestBiling_PreviousYears",
+            "HarvestBillings_Monthly.Region"
+          ]
+        },
+        {
+          "visualId": "820b69f34373abf0b1aa",
+          "visualType": "columnChart",
+          "title": "BC Softwood Lumber Exports",
+          "subtitle": "BC Stats",
+          "entities": [
+            "Measure",
+            "SoftwoodExport_New"
+          ],
+          "fields": [
+            "Measure._SoftwoodProduction_PreviousYears",
+            "SoftwoodExport_New.GEO",
+            "SoftwoodExport_New.Year"
+          ]
+        },
+        {
+          "visualId": "359117953a47fa39e372",
+          "visualType": "columnChart",
+          "title": "BC Softwood Lumber Production",
+          "subtitle": "Statistics Canada Table: 16100017",
+          "entities": [
+            "LumberProduction",
+            "Measure"
+          ],
+          "fields": [
+            "Measure._LumberProduction_PreviousYears",
+            "LumberProduction.Year",
+            "LumberProduction.Geo Name"
+          ]
+        },
+        {
+          "visualId": "4f6db0af39bf1e2d1587",
+          "visualType": "barChart",
+          "title": "Forest Products Shipped, Port of Prince Rupert",
+          "subtitle": "Port of Prince Rupert",
+          "entities": [
+            "PrinceRupertCargo_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "PrinceRupertCargo_Annually.Year",
+            "Measure._PrinceRupert_PreviousYears",
+            "PrinceRupertCargo_Annually.Cargo Name"
+          ]
+        },
+        {
+          "visualId": "db110431515951a2f2fd",
+          "visualType": "pivotTable",
+          "title": "Timber Processing Facilities",
+          "subtitle": "BC Stats",
+          "entities": [
+            "TimberProcessing_Annually",
+            "Measure"
+          ],
+          "fields": [
+            "TimberProcessing_Annually.Timber Name",
+            "TimberProcessing_Annually.Year_",
+            "Measure._ForcedData_TimberCount",
+            "Measure._ForcedData_TimberCapacity"
+          ]
+        },
+        {
+          "visualId": "83adc9cb5c5f58ebad0d",
+          "visualType": "advancedSlicerVisual",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "LabourForceCharacteristics_Monthly_ByGEO",
+            "HarvestBillings_Monthly"
+          ],
+          "fields": [
+            "HarvestBillings_Monthly.NDIT_Region"
+          ]
+        },
+        {
+          "visualId": "585b132f72a37c5e0f63",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "ReportSection",
+      "title": "NORTHERN PERSPECTIVE",
+      "tooltip": false,
+      "visuals": [
+        {
+          "visualId": "ac27374f5f179251b458",
+          "visualType": "slicer",
+          "title": "REVIEW YEAR",
+          "subtitle": null,
+          "entities": [
+            "Date"
+          ],
+          "fields": [
+            "Date.Year"
+          ]
+        },
+        {
+          "visualId": "cedd89ce2dd9f3ad782d",
+          "visualType": "PBI_CV_FFFE680D_D220_4F62_B16C_C7B5C5732654",
+          "title": null,
+          "subtitle": null,
+          "entities": [
+            "ReportNarrative"
+          ],
+          "fields": [
+            "ReportNarrative.Description"
+          ]
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "name": "Date",
+      "fields": [
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Start of Year",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "End of Year",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Start of Month",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "End of Month",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Days in Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Day",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Day Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Day of Week",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Day of Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Quarter",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Start of Quarter",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "End of Quarter",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Week of Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Week of Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Start of Week",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "End of Week",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Fiscal Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Fiscal Quarter",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Fiscal Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Day Offset",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month Offset",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year Offset",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Quarter Offset",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year-Month",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year-Month Code",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Quarter-Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year-Quarter-Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "IsFuture",
+          "dataType": 5,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "GDPGrowth",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "North American Industry Classification System (NAICS)",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Parent Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level2",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level1",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level3",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level4",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Path",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Prices",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Income",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sex",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Persons with income",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "LowIncome",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Census family type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Family type composition",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Statistics (CFLIM-AT; updated methodology)",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "LabourForceCharacteristics_Monthly",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "Labour force characteristics",
+          "dataType": 1,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "Statistics",
+          "dataType": 1,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": true
+        },
+        {
+          "name": "Quarter",
+          "dataType": 1,
+          "measure": false,
+          "hidden": true
+        }
+      ]
+    },
+    {
+      "name": "LumberProduction",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "North American Product Classification System (NAPCS)",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "COORDINATE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Parent Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level1",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level2",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level3",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level4",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Path",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Geo Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Measure",
+      "fields": [
+        {
+          "name": "_Date_Refreshed_Label",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Date_SelectedYear",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPGrowth_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourAnnually_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourAnnually_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourIndustry_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationChange_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Income_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Income_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LowIncome_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LowIncome_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourIndustry_AverageWithSUMX",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Income_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourIndustry_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPGrowth_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPGrowth_AverageWithSUMX",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_EmploymentIndustry_AverageWithSUMX",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LumberProduction_AverageWithSUMX",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LowIncome_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourAnnually_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationChange_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPGrowth_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourIndustry_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationChange_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LumberProduction_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LumberProduction_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LumberProduction_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_AgeGroup_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_AgeGroup_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_AgeGroup_ForecastedYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LowIncome_PreviousYear_Two_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Date_PreviousYears_Start",
+          "dataType": 7,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Date_PreviousYears_End",
+          "dataType": 7,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesIncorporation_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesIncorporation_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesIncorporation_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesQuarter_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesQuarter_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_FarmType_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_FarmType_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_WellsDrilled_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_WellsDrilled_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Tourism_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Tourism_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PrinceRupert_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PrinceRupert_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_SoftwoodProduction_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_SoftwoodProduction_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HarvestBilling_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HarvestBilling_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_CropProduction_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_CropProduction_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_AirportTraffic_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_AirportTaffic_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Traffic_Ferries_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Traffic_Ferries_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Electricity_Generating_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Electricity_Generating_BC%_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Electricity_Generating_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPSupply_Capacity_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPSupply_Energy_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPSupply_Capacity_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPSupply_Energy_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Traffic_Ferries_Person_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Traffic_Ferries_Person_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingStat_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingStat_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingRental_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingRental_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingPrices_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingPrices_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingStat_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingPrices_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingRental_PreviousYear_Difference",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Region_Industry_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Region_Industry_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPIndustries_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPIndustries_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_PreviousYears_PreviousYear",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationForecast_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationHistorical_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationHistory_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationForecast_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ExchangeRate__Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ExchangeRate_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_Weighted",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_PreviousYears_Weighted_All_BC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_Aggregation_BC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_PreviousYears_BC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_PreviousYears_PreviousYear_BC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationEstimates_PreviousYear_Difference_BC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_PreviousYears_Unemploy_Weighted",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_PreviousYears_Employ_Weighted",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_PreviousYears_Part_Weighted",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_PreviousYears_Weighted_Total_NorthBC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "NDIT_SelectedRegion",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_PreviousYears_Weighted",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Report_Legend_Bullet",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "NDIT_SelectedGEO_Bullet",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_GDPGrowth_PreviousYears%",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_PreviousYears_NorthernBC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_Legend",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_Legend_Colour",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_Legend_Colour_Two",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_Legend_Two",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationForecast_ForecastYear",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_JobVacancy_YAxis",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Average_3Y (Year)",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Timber_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Timber_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_TimberCapacity_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_TimberCapacity_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Employment Industries_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Employment_Industry_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Lable_Nodata",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_Income",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Lable_Nodata_LowIncome",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Migration_Aggregation",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LowIncome_ForcedData",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LowIncome_Year",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesIncorporation_Range_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Income_ForcedData",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Income_Year",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_LowIncome",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Bankruptcies_Range_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ForcedData_TimberCount",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Timber_Year",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ForcedData_TimberCapacity",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Housing-Stat-PrevPeriod",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Housing-Stat-PrevPeriod-Diff",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ExchangeRate-PrevYears-Actual",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ExchangeRate-PrevYears-TD",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_ExchangeRate-PrevYears-RBC",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Bankruptcies_YAxis",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Bankruptcies_YAxis_2",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Bankruptcies_YAxis_3",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_GDP",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Label_Nodatagdp",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Label",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_Energy",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Year_Electricity",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Label_Electricity",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Exchange-Rate-Forecast-PrevYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Bankruptcies_YAxis_4",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IppEnergy_Year",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPEnergy_ForcedData",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPSupply_Generation_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPEnergyGeneration_ForcedData",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_IPPCount_ForcedData",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Label_IPP",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_IPP",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Population_Y-Axis",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_PopulationChange_Year",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Forced_PopulationChange",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Lable_Nodata_PopChange",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_popChange",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Businesses_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Businesses_PreviousYears",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_BusinessesWithout_Employee_Aggregation",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Businesses_Year",
+          "dataType": 4,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Forced_Businesses",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_BusinessesChange",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Forced_GDPIndustries",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Lable_NodataBusinesses",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Lable_NodataPop",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Lable_NodatapopAge",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "IsYear",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Region_Industry_NoData",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_EmploymentregionIndustries",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Housing_Rental_Rates_NoData",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "Employment_Sector_QuarterLabel",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Employment_Region_QuarterLabel",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "IsYear2",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Label_Nodatagdpindustry",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Report-NoData_GDPIndustry",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_PreviousYears_Participation_Weighted",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Label_NodataBankruptcies",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Label_NodataBankruptciesIncorp",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Label_NodataHousingPrices",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_Label_NodataHousingStarts",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingStat_Forced",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingPrices_Forced",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingPrices_Lat",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_HousingPrices_Long",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        },
+        {
+          "name": "_LabourMonthly_Label",
+          "dataType": 1,
+          "measure": true,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "ReportNarrative",
+      "fields": [
+        {
+          "name": "ID",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Description",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Title",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Title Colour",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "PopulationEstimates_AgeGroup_Annually",
+      "fields": [
+        {
+          "name": "Regional District",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "PopulationHistorical_AgeGroup_Annually",
+      "fields": [
+        {
+          "name": "Regional District",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Employment_RegionIndustry_Annually",
+      "fields": [
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Inudstry",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Parent ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Path",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level1",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level2",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level3",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Level4",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Hierarchy_Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "IndustrySort",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Industry Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Bankruptcies_Incorporation_Annually",
+      "fields": [
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "NDIT Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value - 1",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value - 2",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year - Range",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesIncorporation_Range_Average",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "HarvestBillings_Monthly",
+      "fields": [
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Unit",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "NDIT_Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "PrinceRupertCargo_Annually",
+      "fields": [
+        {
+          "name": "Cargo",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Cargo Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "TourismRevenue_Monthly",
+      "fields": [
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "WellsDrilled_Monthly",
+      "fields": [
+        {
+          "name": "Wells Drilled",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Cumulative Total",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "CropProduction_Annually",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type (groups)",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "IPPSupplyListOperation_Annually",
+      "fields": [
+        {
+          "name": "Project Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "IPP/Seller",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Location",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Call Process",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Capacity (MW)",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Energy (GWh/yr)",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "NDIT Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "ElectricityGeneratingCapacity_Annually",
+      "fields": [
+        {
+          "name": "Station",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Percentage of BC Total",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Generating Capacity (MW)",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Housing_RentalRates_Monthly",
+      "fields": [
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "House Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Location",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Lat",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Long",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Forced",
+          "dataType": 5,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Housing_Stats_Annually",
+      "fields": [
+        {
+          "name": "Housing Starts - Residential - All Types",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Traffic_Airport_Monthly",
+      "fields": [
+        {
+          "name": "Geography",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Description",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Traffic_Ferries_Monthly",
+      "fields": [
+        {
+          "name": "Route",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Total Vehicles",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Total Passengers",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "NDITRegions",
+      "fields": [
+        {
+          "name": "Developmental",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Regional",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Census",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "NDIT Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Census BC",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Developmental Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Regional2",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Census - NC/NW",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "BC_Mines",
+      "fields": [
+        {
+          "name": "Mine Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Permittee",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Mine Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Commodities",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Nearest City/Town",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Operating Status",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Latitude",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Longitude",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "In Operation (Y/N/?)",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Northern BC",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "GDP_Indsutries",
+      "fields": [
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Agg",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Industries",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "JobVacancy_ByGEO",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Statistics",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sort",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Quarter",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "PopulationForecastHistory_Annually_ByGEO",
+      "fields": [
+        {
+          "name": "Age Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Regional District",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Developmental",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "NDITRegions_ByDevelopmental",
+      "fields": [
+        {
+          "name": "Sort",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "NDIT Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Developmental Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "LabourForceCharacteristics_Monthly_ByGEO",
+      "fields": [
+        {
+          "name": "Labour force characteristics",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Statistics",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sort",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Quarter",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO_Short",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "HousingMedian_Monthly",
+      "fields": [
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Geography",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Latitude",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Longitude",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "FarmType- Active/Inactive",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "North American Industry Classification System (NAICS)",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "COORDINATE",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Parent Member ID",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Source",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "TimberProcessing_Annually",
+      "fields": [
+        {
+          "name": "Timber Name",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Count",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Capacity",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Capacity Unit",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year_",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Employment_Indutries",
+      "fields": [
+        {
+          "name": "Agg",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Inudstry",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type_",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "PopulationChange_New",
+      "fields": [
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Components of population growth",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE_DISPLAY",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sex",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "UOM",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "VALUE",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Bankruptcies_Quarterly_byGEO",
+      "fields": [
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Quarter",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Source",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sort",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Developmental Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Exchange Rate Historical/Forecast",
+      "fields": [
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year-Month",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "DEXCAUS",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year-MonthCode",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Month",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Bankruptcies_Range",
+      "fields": [
+        {
+          "name": "Year",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Region",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Source",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year Range",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sum_",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value-1",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value-2",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Sort",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value-3",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year-Range",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "_BankruptciesRange_Average",
+          "dataType": 3,
+          "measure": true,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "SoftwoodExport_New",
+      "fields": [
+        {
+          "name": "GEO",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Metrics",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "REF_DATE",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "PopulationHistorical_ByGEO",
+      "fields": [
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Age Group",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Regional District",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Year",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Developmental",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "Business Count Employees",
+      "fields": [
+        {
+          "name": "Value",
+          "dataType": 3,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Type",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Date",
+          "dataType": 7,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "category",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "Geo",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "naics_descriptions",
+          "dataType": 1,
+          "measure": false,
+          "hidden": false
+        },
+        {
+          "name": "IndustrySort",
+          "dataType": 4,
+          "measure": false,
+          "hidden": false
+        }
+      ]
+    }
+  ],
+  "access": "Public publish-to-web model and read-only semantic queries; undocumented endpoint, not a stable API contract",
+  "caveats": [
+    "Report year is not observation year; series have independent reference dates.",
+    "Raw table rows are not chart measures. Chart filters, sums, averages and forecast labels need separate reproduction.",
+    "Regional labels mix NDIT service regions, economic regions, regional districts, cities, facilities, routes and BC totals.",
+    "NDIT's launch FAQ permits research reuse; retain source attribution and review underlying source terms before publishing derived products."
+  ],
+  "reuseSourceUrl": "https://www.northerndevelopment.bc.ca/news/northern-development-launches-digital-state-of-the-north-dashboard/",
+  "samples": [
+    {
+      "table": "BC_Mines",
+      "file": "bc_mines.json.gz",
+      "rows": 25,
+      "completeDistinctRows": true,
+      "hasCoordinates": true
+    },
+    {
+      "table": "IPPSupplyListOperation_Annually",
+      "file": "ippsupplylistoperation_annually.json.gz",
+      "rows": 850,
+      "completeDistinctRows": true,
+      "hasCoordinates": false
+    },
+    {
+      "table": "ElectricityGeneratingCapacity_Annually",
+      "file": "electricitygeneratingcapacity_annually.json.gz",
+      "rows": 11,
+      "completeDistinctRows": true,
+      "hasCoordinates": false
+    },
+    {
+      "table": "HousingMedian_Monthly",
+      "file": "housingmedian_monthly.json.gz",
+      "rows": 5000,
+      "completeDistinctRows": false,
+      "hasCoordinates": true
+    },
+    {
+      "table": "Traffic_Ferries_Monthly",
+      "file": "traffic_ferries_monthly.json.gz",
+      "rows": 402,
+      "completeDistinctRows": true,
+      "hasCoordinates": false
+    },
+    {
+      "table": "TourismRevenue_Monthly",
+      "file": "tourismrevenue_monthly.json.gz",
+      "rows": 687,
+      "completeDistinctRows": true,
+      "hasCoordinates": false
+    },
+    {
+      "table": "JobVacancy_ByGEO",
+      "file": "jobvacancy_bygeo.json.gz",
+      "rows": 866,
+      "completeDistinctRows": true,
+      "hasCoordinates": false
+    }
+  ]
+}

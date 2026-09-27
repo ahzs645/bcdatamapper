@@ -178,7 +178,12 @@
     "walkability:build": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-web.mjs",
     "walkability:import-supplements": "./run-in-pgmaps.sh node datascrapers/walkability/import-walkability-supplements.mjs",
     "eccc:pm25-snapshot": "./run-in-pgmaps.sh node datascrapers/eccc/build-aqmap-pm25-snapshot.mjs",
-    "walkability:build-grid-heatmap": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-grid-heatmap.mjs"
+    "walkability:build-grid-heatmap": "./run-in-pgmaps.sh node datascrapers/walkability/build-walkability-grid-heatmap.mjs",
+    "economic-regions:sync": "node datascrapers/bc/boundaries/sync-bc-economic-regions.mjs",
+    "economic-regions:validate": "uv run --python 3.12 --with shapely==2.1.2 --with pyproj==3.7.2 python datascrapers/bc/boundaries/validate-economic-regions.py",
+    "state-of-north:inventory": "python3 datascrapers/bc/state-of-north/inventory-state-of-north.py",
+    "state-of-north:samples": "python3 datascrapers/bc/state-of-north/inventory-state-of-north.py --samples",
+    "test:state-of-north": "python3 -m unittest discover -s datascrapers/bc/state-of-north -p test_*.py"
   },
   "dependencies": {
     "@mapbox/vector-tile": "^2.0.4",

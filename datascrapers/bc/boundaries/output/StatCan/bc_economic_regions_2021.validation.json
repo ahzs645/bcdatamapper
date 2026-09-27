@@ -1,0 +1,26 @@
+{
+  "features": 8,
+  "validGeometries": 8,
+  "pairsChecked": 28,
+  "polygonAreaOverlaps": 0,
+  "adjacentFeaturePairs": 12,
+  "exactSharedSegments": 6335,
+  "maxAreaChangePercent": 0.006633057633531614,
+  "areaChangesPercent": {
+    "5910": 0.0011402462319232143,
+    "5920": 0.0025683315320823574,
+    "5930": 0.0016179758104639674,
+    "5940": 0.005842593956040254,
+    "5950": 0.0010770148091365783,
+    "5960": 0.0009566443988306972,
+    "5970": 0.006633057633531614,
+    "5980": 0.003530352788261304
+  },
+  "areaComparisonCrs": "EPSG:3005",
+  "censusDivisions": 29,
+  "censusSubdivisions": 751,
+  "officialMembershipValidated": true,
+  "rawGeojsonBytes": 1330486,
+  "optimizedGeojsonBytes": 413090,
+  "gzipBytes": 154692
+}

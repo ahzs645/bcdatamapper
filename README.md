@@ -41,6 +41,8 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | Heat and shade | `heat-shade:sync` | CityPG heat/shade snapshots plus Landsat metadata | `public/data/heat-shade/` |
 | BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
 | HealthyPlan PG | `healthyplan-pg:sync`, `healthyplan-pg:sync:education`, `healthyplan-pg:sync:citypg-business` | BC Data Catalogue education CSVs, CityPG-owned business licence snapshots, OSM Overpass, and BC Address Geocoder via shared mapping utilities | `datascrapers/healthyplan-pg/output/` |
+| BC economic regions and hierarchy | `economic-regions:sync`, `economic-regions:validate` | Statistics Canada 2021 ER geometry and official SGC CD/CSD membership | `datascrapers/bc/boundaries/output/StatCan/bc_economic_regions_2021*` |
+| State of the North inventory and extraction pilots | `state-of-north:inventory`, `state-of-north:samples` | NDIT public Power BI report | `datascrapers/bc/state-of-north/output/` |
 | BC freshwater watersheds | `watersheds:sync`, `watersheds:dev`, `watersheds:50m`, `watersheds:assessment-50m`, `watersheds:named-50m` | BC Freshwater Atlas / watershed geospatial sources | `datascrapers/bc/boundaries/output/BCFWA/` |
 | BC Snow Survey administrative basins | `snow-survey-basins:sync`, `snow-survey-basins:compare` | OGL-BC Snow Survey Administrative Basin Areas | `datascrapers/bc/boundaries/output/BCSnowSurvey/` |
 | BC natural resource admin boundaries | `nr-admin:sync` | BC natural resource administrative boundary services | `public/data/boundaries/BCNRAdmin/` |
