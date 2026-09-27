@@ -48,8 +48,10 @@ use a single universal "Northern BC" polygon for every dashboard indicator.
 - Manifest, full membership hierarchy and validation report: adjacent JSON files.
 - PGMaps assembles these at `/data/boundaries/StatCan/` through its existing
   boundary sync rule. No generated public copies are committed to PGMaps.
-- Shared boundary selector: **Census boundaries → BC Economic Region (2021)**;
-  stable selection IDs are `census:economicRegion:<ERUID>`.
+- Shared boundary selector: **Economic regions → BC Economic Region (2021)**,
+  independently selectable from Census boundaries; stable selection IDs are
+  `economicRegion:economicRegion:<ERUID>`. Official census membership links
+  remain in the hierarchy JSON.
 
 ## Geometry and verification
 
