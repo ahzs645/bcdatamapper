@@ -178,6 +178,15 @@ def build():
             'Both estimates come from the 2025 release. The pandemic affected the 2020/2021 period; '
             'a lower share can reflect other income sources growing. Current boundaries are used for display.'
         ) if change is not None else 'No comparable published forestry dependency values.'
+        history = (f'{before:.1f}% in 2015; {after:.1f}% in 2020; change {change:+.1f} percentage points.'
+                   if change is not None else 'Historical dependency comparison not reported.')
+        record['profile_details'] = (
+            f'Forestry income dependency: {history} '
+            f"2020 diversity index: {display('diversity')}/100; forest vulnerability: {display('vulnerability')}/100 "
+            '(relative to other regional districts, not a probability). '
+            f"Forestry employment share: {display('forestry_lq', '× BC')} (2021 Census, by residence). "
+            'Dependency measures the share of modelled external income. Source: BC Stats 2025 LAEP release.'
+        )
         records.append(record)
     metadata = {'source': manifest, 'referenceYears': list(YEARS),
                 'units': {'incomeDependency': 'percent of basic income', 'diversity': 'index, 0–100',
