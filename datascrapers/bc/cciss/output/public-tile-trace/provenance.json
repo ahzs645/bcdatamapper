@@ -1,0 +1,106 @@
+{
+  "kind": "inferred-display-classes",
+  "authoritativeNumericData": false,
+  "layer": "NewFeas_1961_1990_ref_C4_Pl",
+  "zoom": 12,
+  "bounds": [
+    -124.8046875,
+    54.1109429427243,
+    -124.54101562500001,
+    54.265224078605655
+  ],
+  "palette": {
+    "10": [
+      0,
+      100,
+      0
+    ],
+    "20": [
+      30,
+      144,
+      255
+    ],
+    "30": [
+      238,
+      201,
+      0
+    ],
+    "40": [
+      247,
+      247,
+      247
+    ]
+  },
+  "classifier": {
+    "metric": "Euclidean sRGB",
+    "maxDistance": 60,
+    "minMargin": 20,
+    "minAlpha": 250,
+    "uncertainCode": 99,
+    "nodataCode": 0,
+    "meaning": "Heuristic thresholds, not calibrated confidence"
+  },
+  "counts": {
+    "10": 494769,
+    "20": 92592,
+    "99": 2463
+  },
+  "pixels": 589824,
+  "sources": [
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/628/1310.webp",
+      "file": "12-628-1310.webp",
+      "sha256": "779be6567f2ae3c61fa6400e5aa88d3a5224ee9101c55f527bed30ece50f0dc7"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/629/1310.webp",
+      "file": "12-629-1310.webp",
+      "sha256": "acc96f1e06a3d9ef19d6b172a62ce54d0bcf752c6242185e2b0a40b1d447e385"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/630/1310.webp",
+      "file": "12-630-1310.webp",
+      "sha256": "4eed32dd946bee2d9df86fff37dcf06ee72302f7838fc7de87d1d63db424bc02"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/628/1311.webp",
+      "file": "12-628-1311.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/629/1311.webp",
+      "file": "12-629-1311.webp",
+      "sha256": "65da0582e0658599cb9468bbc1c7af52420029b2de89790921d8733323543530"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/630/1311.webp",
+      "file": "12-630-1311.webp",
+      "sha256": "f06b3d35b9dc5245cb5733c164bbecc2819f2938ce724afff200953c412607f0"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/628/1312.webp",
+      "file": "12-628-1312.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/629/1312.webp",
+      "file": "12-629-1312.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/630/1312.webp",
+      "file": "12-630-1312.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    }
+  ],
+  "validation": {
+    "rasterRoundTrip": true,
+    "publishedGeometryRoundTrip": true,
+    "classAreaEqualsCellCount": true,
+    "checkedCells": 589824,
+    "validCells": 589824
+  },
+  "gzipBytes": 94908,
+  "features": 102,
+  "scope": "Nine zoom-12 tiles around requested location; no smoothing"
+}

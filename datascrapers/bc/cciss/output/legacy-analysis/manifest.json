@@ -1,0 +1,1759 @@
+{
+  "schema": "cciss-legacy-analysis-v1",
+  "status": "Legacy prototype; not current CCISS site-series output",
+  "source": "https://github.com/bcgov/CCISS_ShinyApp",
+  "sourcePath": "Development/OLD/spatial_app",
+  "codeValidation": {
+    "method": "Unique BGC count signatures across all BC rasters and matching PredSum.bgc rows",
+    "rasters": 37,
+    "codes": 324,
+    "changedLabels": 315,
+    "warning": "Recovered from bundled summaries; not a current CCISS codebook"
+  },
+  "reference": {
+    "file": "reference.json.gz",
+    "bytes": 36489,
+    "sha256": "d696460960cdab944dcdcd4f78e6ac87a954d89eae3514895b34df00df7c50f9"
+  },
+  "regions": [
+    {
+      "id": "100MileHouse",
+      "file": "100MileHouse.json.gz",
+      "bytes": 423397,
+      "sha256": "06af6ae6b1eb747c48567d740cb759cc0bf7043b22c0b7fe1b787f626296f8ba"
+    },
+    {
+      "id": "BC",
+      "file": "BC.json.gz",
+      "bytes": 404090,
+      "sha256": "84e79d1abb09abb97fcf970e43c22db28ac3324bc7b79e2c897b880921f807b1"
+    },
+    {
+      "id": "BuMo",
+      "file": "BuMo.json.gz",
+      "bytes": 432288,
+      "sha256": "245ab335c29a62456456114ec398395c1c73ab56bfff3680002683a2c632887e"
+    },
+    {
+      "id": "CDFCP",
+      "file": "CDFCP.json.gz",
+      "bytes": 424799,
+      "sha256": "22957c23c2ccb69d9d8f9bb2214e16645f6cf8a2b8a4345ce34e65c1f119e121"
+    },
+    {
+      "id": "HIRMP",
+      "file": "HIRMP.json.gz",
+      "bytes": 361146,
+      "sha256": "815eb3642e9adaffccddd4467d73949071e3991cdd2a503ae618d526f7484f53"
+    },
+    {
+      "id": "Nanwakolas_IRMP",
+      "file": "Nanwakolas_IRMP.json.gz",
+      "bytes": 390846,
+      "sha256": "993b2d2e301854ea46b210d666f4de2a2d42924ecf79487cfa58536f68ab01aa"
+    },
+    {
+      "id": "Nimpkish",
+      "file": "Nimpkish.json.gz",
+      "bytes": 3017,
+      "sha256": "71966031ff9bb1d58a279c75dfa0ac77446bde5d614e39cb7cf5b2f38fe5db1a"
+    },
+    {
+      "id": "Sunshine",
+      "file": "Sunshine.json.gz",
+      "bytes": 416287,
+      "sha256": "bcd37b47aa2453c5cc011547c3ce52852e23c7fe13d9015a6e5d47035cc0ef0c"
+    },
+    {
+      "id": "TFL44",
+      "file": "TFL44.json.gz",
+      "bytes": 391688,
+      "sha256": "f6b00d0c53f0609d146f77e1542300a71b086823a1e4591a50c389fc7d7635f9"
+    },
+    {
+      "id": "WilliamsLake",
+      "file": "WilliamsLake.json.gz",
+      "bytes": 473256,
+      "sha256": "89e2dadb25db1b05b0be757e80d9970227ec4502cf48465eec875a072cf761a7"
+    }
+  ],
+  "rasters": [
+    {
+      "model": "ACCESS-ESM1-5",
+      "period": "2001_2020",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 288891,
+      "sha256": "c78ab9ec6d5e8ed3841834dac4a1c088ef85a2e29a59167fa8f11f6aecf970c3",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "ACCESS-ESM1-5",
+      "period": "2021_2040",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 288836,
+      "sha256": "ed00c2a1a3e935ced0a86c8ce80a6f621d5fb7ad0ae576f2bd0bad618aaf0037",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "ACCESS-ESM1-5",
+      "period": "2041_2060",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 286859,
+      "sha256": "707b51be51949028eba27f9eba80ed963a92625894831e882439234e61f722a6",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "ACCESS-ESM1-5",
+      "period": "2061_2080",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 275773,
+      "sha256": "efb0893755399c942088270bb932839cac2261a404281badea8af647de14520b",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "ACCESS-ESM1-5",
+      "period": "2081_2100",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 274458,
+      "sha256": "19d1f07ca86e93e17d2f084124207f8eaaf268fbc45535b77826ab8d2e80c79c",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "EC-Earth3",
+      "period": "2001_2020",
+      "scenario": "ssp245",
+      "run": "r4i1p1f1",
+      "file": "BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 287192,
+      "sha256": "f53dee02943c3faa32e356e8f3cb14949c36c6330e5fa6958ba0a6cbd3dd218b",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "EC-Earth3",
+      "period": "2021_2040",
+      "scenario": "ssp245",
+      "run": "r4i1p1f1",
+      "file": "BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 290278,
+      "sha256": "f85a54013001360855889b9435b05416e47ea58007be97e4993d93f97f727d5e",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "EC-Earth3",
+      "period": "2041_2060",
+      "scenario": "ssp245",
+      "run": "r4i1p1f1",
+      "file": "BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 274333,
+      "sha256": "ffc1ebcc0a569b125e667dc174c007937038a30ec97f89d6d597f5fb70d5e381",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "EC-Earth3",
+      "period": "2061_2080",
+      "scenario": "ssp245",
+      "run": "r4i1p1f1",
+      "file": "BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 266702,
+      "sha256": "e9c4ae09911ebce4cffbefe3d0690d6a15f91b011c558ad309c041ed13cf075b",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "EC-Earth3",
+      "period": "2081_2100",
+      "scenario": "ssp245",
+      "run": "r4i1p1f1",
+      "file": "BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 263005,
+      "sha256": "d9462e4b2ae5640076a162080d481ae941ed932047266196a7b265ce2bf12a4d",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "GISS-E2-1-G",
+      "period": "2001_2020",
+      "scenario": "ssp245",
+      "run": "r2i1p3f1",
+      "file": "BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2001_2020.tif",
+      "bytes": 274268,
+      "sha256": "6c96cec4202f0f81a77aecdc1953318697a24cbf614c0113dce9df75f85f8480",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "GISS-E2-1-G",
+      "period": "2021_2040",
+      "scenario": "ssp245",
+      "run": "r2i1p3f1",
+      "file": "BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2021_2040.tif",
+      "bytes": 281922,
+      "sha256": "9e0041343afce647977dc00f5b7afb1073881a9e58c55badfbe7dec881f9462b",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "GISS-E2-1-G",
+      "period": "2041_2060",
+      "scenario": "ssp245",
+      "run": "r2i1p3f1",
+      "file": "BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2041_2060.tif",
+      "bytes": 276454,
+      "sha256": "8d46a651dd482ac387a1803ed541fc500decf7f32a5af6eef0cecff8653ad1ee",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "GISS-E2-1-G",
+      "period": "2061_2080",
+      "scenario": "ssp245",
+      "run": "r2i1p3f1",
+      "file": "BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2061_2080.tif",
+      "bytes": 270952,
+      "sha256": "04e17df730bfb41791040a49e40ec128270b3090b484552d9f94e5bc7e135b89",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "GISS-E2-1-G",
+      "period": "2081_2100",
+      "scenario": "ssp245",
+      "run": "r2i1p3f1",
+      "file": "BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2081_2100.tif",
+      "bytes": 271767,
+      "sha256": "9dd57ba3eb7dad70230ab5ead9c8a93028a911a8c413f74a7cde1e609d69a93e",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MIROC6",
+      "period": "2001_2020",
+      "scenario": "ssp245",
+      "run": "r2i1p1f1",
+      "file": "BGC.pred.MIROC6.r2i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 283265,
+      "sha256": "fa9023228363762dd909db00ce4f5571d96b36f4d754765bf790c424b3518bc1",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MIROC6",
+      "period": "2021_2040",
+      "scenario": "ssp245",
+      "run": "r2i1p1f1",
+      "file": "BGC.pred.MIROC6.r2i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 294845,
+      "sha256": "b027179157a23b9ba6bbd0c61235d70c7b42619ae2c43307f50ebe60942972e4",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MIROC6",
+      "period": "2041_2060",
+      "scenario": "ssp245",
+      "run": "r2i1p1f1",
+      "file": "BGC.pred.MIROC6.r2i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 288007,
+      "sha256": "8d050de01c4a84b29d66672f2c33423fe852bed3dcad951804f49496c0cf15fd",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MIROC6",
+      "period": "2061_2080",
+      "scenario": "ssp245",
+      "run": "r2i1p1f1",
+      "file": "BGC.pred.MIROC6.r2i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 283760,
+      "sha256": "af54fe4e3b0f14a2d9f4a777a44078bd0e9e574acc2826da17209ea8e81980fe",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MIROC6",
+      "period": "2081_2100",
+      "scenario": "ssp245",
+      "run": "r2i1p1f1",
+      "file": "BGC.pred.MIROC6.r2i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 274228,
+      "sha256": "e1d81ea0d8cacda9a7e46543de5d8b46e1c4493ad801dbbdca58e0b7f3113633",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MPI-ESM1-2-HR",
+      "period": "2001_2020",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 282802,
+      "sha256": "77a7ea67c222c9b5c48199b3844ccf1b15daa3405a25ca7ca8d1dae1cf2c925c",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MPI-ESM1-2-HR",
+      "period": "2021_2040",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 289631,
+      "sha256": "27d40d9e5793c4e4d83d52b429358155c42e87da5e394bf32d2bff02dd2896c7",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MPI-ESM1-2-HR",
+      "period": "2041_2060",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 288906,
+      "sha256": "1ec3805cde3e04a8614ce03b63b23f5d95e4ad1318981818d61cba4ba06b1ec5",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MPI-ESM1-2-HR",
+      "period": "2061_2080",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 290498,
+      "sha256": "b2b6f12b74ad81edee7392b92087a1a9d05571334fc5ce318db7ace19ac1077e",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MPI-ESM1-2-HR",
+      "period": "2081_2100",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 285196,
+      "sha256": "194841689d4619381f6845656329e8f55fca0bb6c9a2b445e2f6cb44697edf4d",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MRI-ESM2-0",
+      "period": "2001_2020",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 287998,
+      "sha256": "3b273e19bc1f6383f0ca4b9cc330e84394494f1d16d32aa01dd70a4862f20ab4",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MRI-ESM2-0",
+      "period": "2021_2040",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 292479,
+      "sha256": "d68f4a29f0b628eaca2a807ccab3c2fee0f0ebd6cd07df9c48524c2dd9e7ed6e",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MRI-ESM2-0",
+      "period": "2041_2060",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 269225,
+      "sha256": "06a69c9e922433e45e6d6783b7b5b568bb5a1b253bc0b9419b346b61b00c30d1",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MRI-ESM2-0",
+      "period": "2061_2080",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 269847,
+      "sha256": "3103608ea89332f5d333c5c98679ec654b149bc3b7de3eac9de0864db2295f5d",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "MRI-ESM2-0",
+      "period": "2081_2100",
+      "scenario": "ssp245",
+      "run": "r1i1p1f1",
+      "file": "BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 264398,
+      "sha256": "e8a19c89a86c0edf1b5afff73a03ac3d754df57e753b1a78fcf0e7dd7f5f3d41",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "Observed",
+      "period": "2001_2020",
+      "scenario": "obs",
+      "run": null,
+      "file": "BGC.pred.hist.2001_2020.tif",
+      "bytes": 276050,
+      "sha256": "4f6e95bbe45e85c83a61b0d8e0c744d6dff022f59e0f475865abdcb57bf546d4",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    },
+    {
+      "model": "Reference",
+      "period": "1961_1990",
+      "scenario": "obs",
+      "run": null,
+      "file": "BGC.pred.ref.tif",
+      "bytes": 267030,
+      "sha256": "05632fa0106e85983aa0089b52425f8b89e116555bd8080ae1a225cc1e5e4053",
+      "width": 998,
+      "height": 469,
+      "west": -139.02916666701202,
+      "north": 60.02083333285158,
+      "dx": 0.02499999999969145,
+      "dy": -0.024999999999691453
+    }
+  ],
+  "inputs": [
+    {
+      "path": "Development/OLD/spatial_app/data/levels.bgc.csv",
+      "bytes": 3942,
+      "sha256": "84ae9806200d817d2c8f1becbef33a0e40ec518cd7ae170df6e44c16b0deba20"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/SiteLookup.csv",
+      "bytes": 17813,
+      "sha256": "08ad6a8c0da1b1711899e5e8637187e47dc055b8e736ab33c1ef65684d1c9b7e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/SuitLookup.csv",
+      "bytes": 335413,
+      "sha256": "fe2161c486364719542487a85e85f14f56c5212b31cacdef62c06f504fc44c93"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Tree speciesand codes_2.0_25Aug2021.csv",
+      "bytes": 6701,
+      "sha256": "3582009742feb940763427fbf702bf8832ade9c7523dfdefd26a716315f908c0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.bgc.csv",
+      "bytes": 139170,
+      "sha256": "d998e59f976037271369be058b28a24eb3260c590745caf1220f535ecce16743"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 288891,
+      "sha256": "c78ab9ec6d5e8ed3841834dac4a1c088ef85a2e29a59167fa8f11f6aecf970c3"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 288836,
+      "sha256": "ed00c2a1a3e935ced0a86c8ce80a6f621d5fb7ad0ae576f2bd0bad618aaf0037"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 286859,
+      "sha256": "707b51be51949028eba27f9eba80ed963a92625894831e882439234e61f722a6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 275773,
+      "sha256": "efb0893755399c942088270bb932839cac2261a404281badea8af647de14520b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 274458,
+      "sha256": "19d1f07ca86e93e17d2f084124207f8eaaf268fbc45535b77826ab8d2e80c79c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 287192,
+      "sha256": "f53dee02943c3faa32e356e8f3cb14949c36c6330e5fa6958ba0a6cbd3dd218b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 290278,
+      "sha256": "f85a54013001360855889b9435b05416e47ea58007be97e4993d93f97f727d5e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 274333,
+      "sha256": "ffc1ebcc0a569b125e667dc174c007937038a30ec97f89d6d597f5fb70d5e381"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 266702,
+      "sha256": "e9c4ae09911ebce4cffbefe3d0690d6a15f91b011c558ad309c041ed13cf075b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 263005,
+      "sha256": "d9462e4b2ae5640076a162080d481ae941ed932047266196a7b265ce2bf12a4d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2001_2020.tif",
+      "bytes": 274268,
+      "sha256": "6c96cec4202f0f81a77aecdc1953318697a24cbf614c0113dce9df75f85f8480"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2021_2040.tif",
+      "bytes": 281922,
+      "sha256": "9e0041343afce647977dc00f5b7afb1073881a9e58c55badfbe7dec881f9462b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2041_2060.tif",
+      "bytes": 276454,
+      "sha256": "8d46a651dd482ac387a1803ed541fc500decf7f32a5af6eef0cecff8653ad1ee"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2061_2080.tif",
+      "bytes": 270952,
+      "sha256": "04e17df730bfb41791040a49e40ec128270b3090b484552d9f94e5bc7e135b89"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2081_2100.tif",
+      "bytes": 271767,
+      "sha256": "9dd57ba3eb7dad70230ab5ead9c8a93028a911a8c413f74a7cde1e609d69a93e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 283265,
+      "sha256": "fa9023228363762dd909db00ce4f5571d96b36f4d754765bf790c424b3518bc1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 294845,
+      "sha256": "b027179157a23b9ba6bbd0c61235d70c7b42619ae2c43307f50ebe60942972e4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 288007,
+      "sha256": "8d050de01c4a84b29d66672f2c33423fe852bed3dcad951804f49496c0cf15fd"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 283760,
+      "sha256": "af54fe4e3b0f14a2d9f4a777a44078bd0e9e574acc2826da17209ea8e81980fe"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 274228,
+      "sha256": "e1d81ea0d8cacda9a7e46543de5d8b46e1c4493ad801dbbdca58e0b7f3113633"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 282802,
+      "sha256": "77a7ea67c222c9b5c48199b3844ccf1b15daa3405a25ca7ca8d1dae1cf2c925c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 289631,
+      "sha256": "27d40d9e5793c4e4d83d52b429358155c42e87da5e394bf32d2bff02dd2896c7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 288906,
+      "sha256": "1ec3805cde3e04a8614ce03b63b23f5d95e4ad1318981818d61cba4ba06b1ec5"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 290498,
+      "sha256": "b2b6f12b74ad81edee7392b92087a1a9d05571334fc5ce318db7ace19ac1077e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 285196,
+      "sha256": "194841689d4619381f6845656329e8f55fca0bb6c9a2b445e2f6cb44697edf4d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 287998,
+      "sha256": "3b273e19bc1f6383f0ca4b9cc330e84394494f1d16d32aa01dd70a4862f20ab4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 292479,
+      "sha256": "d68f4a29f0b628eaca2a807ccab3c2fee0f0ebd6cd07df9c48524c2dd9e7ed6e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 269225,
+      "sha256": "06a69c9e922433e45e6d6783b7b5b568bb5a1b253bc0b9419b346b61b00c30d1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 269847,
+      "sha256": "3103608ea89332f5d333c5c98679ec654b149bc3b7de3eac9de0864db2295f5d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 264398,
+      "sha256": "e8a19c89a86c0edf1b5afff73a03ac3d754df57e753b1a78fcf0e7dd7f5f3d41"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ensembleMean.ensembleMean.ssp245.2001_2020.tif",
+      "bytes": 283411,
+      "sha256": "1e418cc1fbc32eac4bfb8687e67f8c4f8a1d67ac8fff373b09221337c01c708f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ensembleMean.ensembleMean.ssp245.2021_2040.tif",
+      "bytes": 292698,
+      "sha256": "7038c5aead009598fd6c2241ccd91fb9c2a3d8be7e3d1a171037aca4df8eb1fb"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ensembleMean.ensembleMean.ssp245.2041_2060.tif",
+      "bytes": 283688,
+      "sha256": "831a4c4b9429904d60256b53468e5eccd4843586d1c609c34203904968923bb6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ensembleMean.ensembleMean.ssp245.2061_2080.tif",
+      "bytes": 279832,
+      "sha256": "fec919b7fb536df2c14215ca8350805af21a631434a4bb4c89230a9f56a26f78"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ensembleMean.ensembleMean.ssp245.2081_2100.tif",
+      "bytes": 275598,
+      "sha256": "d25f0596b0412b61ed4c61ced2a968894e41595cdbf270e1af6e6c5481984eb7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.hist.2001_2020.tif",
+      "bytes": 276050,
+      "sha256": "4f6e95bbe45e85c83a61b0d8e0c744d6dff022f59e0f475865abdcb57bf546d4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ref.tif",
+      "bytes": 267030,
+      "sha256": "05632fa0106e85983aa0089b52425f8b89e116555bd8080ae1a225cc1e5e4053"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.bgc.csv",
+      "bytes": 99514,
+      "sha256": "bdd9eeaf8bc17454ecd3440de760bfbd03a38b59a267d2d234740268417b0629"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.bgc.home.csv",
+      "bytes": 33280,
+      "sha256": "a7fa640975e3cb231c07b4c85387e3606811dce44ffb620302a653990eaf40d7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.spp.B2.csv",
+      "bytes": 22378,
+      "sha256": "d9d6451920e6490a5a2cea4ad0a802e1a93230c67cdfea6d2c2b6cae5bbdfc7f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.spp.C4.csv",
+      "bytes": 23857,
+      "sha256": "370a37bbad6138eb4cf8d6a6d1139a4293a393ccea3c96ee2906814ec7f337c0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.spp.D6.csv",
+      "bytes": 23175,
+      "sha256": "9670aae7084131a63fc5e333b1a35f01b0cc964f8b6ff87dbf13cb73a26e3f00"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.spp.home.B2.csv",
+      "bytes": 20225,
+      "sha256": "19957f873dd02070970226f2b1a6ab315e707fd1a28fc0d32dc7bcdffed2e6d7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.spp.home.C4.csv",
+      "bytes": 22493,
+      "sha256": "f178129fd6e10de29f628b07dea49e0f370059a301e2c8a7eedb394893ec2b03"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.spp.home.D6.csv",
+      "bytes": 20951,
+      "sha256": "2d45d1cdae8ca1007ac1f9f37dd5b7634592a379b564bee792431e7904d1747d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.suit.B2.csv",
+      "bytes": 21960,
+      "sha256": "9d3c9a7a9c3e0ce7ef6c3c0b60dfc439bb47f44ee1970ebddf03a3c229dd7c67"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.suit.C4.csv",
+      "bytes": 23630,
+      "sha256": "ba2f8e1607d392f6079493abc1116c63e47e4b6a3b330625cea8e3cecaa4f1d2"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.suit.D6.csv",
+      "bytes": 22849,
+      "sha256": "7549ee96faae80443a2a1a48811a72d8a07a5be88b31db7e5e697e506eb17de4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.suit.home.B2.csv",
+      "bytes": 19975,
+      "sha256": "cce25d13234ca8849195100f9ffb60ab705dceb0f6aa5407146d6fab8317174d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.suit.home.C4.csv",
+      "bytes": 22227,
+      "sha256": "aded99cc77e5d991e700f7edc990968beb6094d9f1a5cb962656fb7e534c61a9"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.suit.home.D6.csv",
+      "bytes": 20720,
+      "sha256": "5a2cca4d1eee6d5025b6c35e96987fb71249e2f138d26e7d3f412d90942c6fe8"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.zone.csv",
+      "bytes": 20387,
+      "sha256": "5612839c9966f7f81f6f3c707176fe86e8944c513db903bd754ef1a346bdb22d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/PredSum.zone.home.csv",
+      "bytes": 13941,
+      "sha256": "299c3e2a4a7c90d79cf5c631d24c94d71c5eea8d6a97f0a2ffd5fb55c9783820"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/clim.meanChange.csv",
+      "bytes": 657416,
+      "sha256": "f05ce8c2f5673dc3a49fcfc933d5084f66e355add7a93bca899a128cc5d8c9e8"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/100MileHouse/clim.refMean.csv",
+      "bytes": 6574,
+      "sha256": "2b02481c2c49d19f7f71b5606e32cfdb0ef22260b36bbb7e848bf89d2fb52f34"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.bgc.csv",
+      "bytes": 139170,
+      "sha256": "d998e59f976037271369be058b28a24eb3260c590745caf1220f535ecce16743"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.bgc.home.csv",
+      "bytes": 91095,
+      "sha256": "561222f5d740a1797a059cc4bfa8ee974f927c07c9aef61195ad29ad245052f3"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.spp.B2.csv",
+      "bytes": 21794,
+      "sha256": "d48e522d75130aa1090d9f13b49b24b157ad9b856ab6c8f4c69bcaa9e7e1dc6a"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.spp.C4.csv",
+      "bytes": 22609,
+      "sha256": "a62bb0ef2af51153502b02d37a0c2a93ca912c802552e15fc2dd5ba4c4a87133"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.spp.D6.csv",
+      "bytes": 21678,
+      "sha256": "3edc2f566b1128496ff560347d399e418c161d86938ea1e83476c050c56d9036"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.spp.home.B2.csv",
+      "bytes": 20003,
+      "sha256": "5da325bda1a96c23d98d8207a96d87dee7ad8019f584726d6f9e34c557bb4893"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.spp.home.C4.csv",
+      "bytes": 20759,
+      "sha256": "6ae7321909e1fd6fccc43935d11c687fddcd6c6d603271cc9531b6b8cd7517de"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.spp.home.D6.csv",
+      "bytes": 19846,
+      "sha256": "fc811f5a11c5d18cae012739674a731c137e142a25b4fafa3b08a8fc6f890118"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.suit.B2.csv",
+      "bytes": 21205,
+      "sha256": "9ee2b13de2b02d7a45c05148a9b5fc160522ddf128a49156194fa1beb0beef9e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.suit.C4.csv",
+      "bytes": 21975,
+      "sha256": "362c7a59b0730ca1681cfc074b129d0022bf9c32cbf21567e5c87662c6e1ddc0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.suit.D6.csv",
+      "bytes": 21229,
+      "sha256": "2b7ef5c449cef56e07eab012e07070ad4657276756a4d137b8cd02f47c679dfc"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.suit.home.B2.csv",
+      "bytes": 19426,
+      "sha256": "b9f888a9578720122ce75ed657c877271e2289038eaa0bf6dc63dbca56cb7209"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.suit.home.C4.csv",
+      "bytes": 20540,
+      "sha256": "0eb68298a478ca5a276173dbadcb40f92ff324266f614c6196d04e53d6ad8cd1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.suit.home.D6.csv",
+      "bytes": 19553,
+      "sha256": "f1db57e98220f54e61f6d5723bbe35d25fce9658cbf55afd107322aebe802965"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.zone.csv",
+      "bytes": 20314,
+      "sha256": "b08db43e08a5fd9b7cf0f952994ee2c480cf25c517320380ea576eef03ad2407"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/PredSum.zone.home.csv",
+      "bytes": 14204,
+      "sha256": "97610aba0bc3e3f58ae34586b031d50fd83b6f1a164eacbadc740099c0c7f791"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/clim.meanChange.csv",
+      "bytes": 463131,
+      "sha256": "2980fdbb9cf13268c0c9a7b593f13b98c250831d5b1178c72e459796d1d0b1a9"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/clim.refMean.csv",
+      "bytes": 6173,
+      "sha256": "8234baa67f0289bbb559180d4421a3b7a64bc61a9effe77743252af1b8e14a38"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.bgc.csv",
+      "bytes": 97476,
+      "sha256": "17d61d59aa79390a16384aebd8298f8bc2d7c9c130fd037c3251d4a2fe1d17d0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.bgc.home.csv",
+      "bytes": 31731,
+      "sha256": "c114bed1d2cd2f751b14434af3200051cdd014abaa9dce97cd996d4eb7e76716"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.spp.B2.csv",
+      "bytes": 26992,
+      "sha256": "d2ee44c7463ed70fa93a1b486c8d65817309d1938083bbac0a8967de2a10aa0a"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.spp.C4.csv",
+      "bytes": 27352,
+      "sha256": "4fd0bb3de19cbe5db2f05ac9d612b154cff9e9fa7cb32658851c87f9fd1ac699"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.spp.D6.csv",
+      "bytes": 26647,
+      "sha256": "a7bc4304f30ab6c648e848f46023dae7f7e2255e412198ecfa94e31780a55c35"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.spp.home.B2.csv",
+      "bytes": 23152,
+      "sha256": "2ec35b90e9033941d190d8626d5e2158b285d4918572da271368d20768bf3677"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.spp.home.C4.csv",
+      "bytes": 24695,
+      "sha256": "d1e1a9dc9a3a3b183f148ff06aba5190a861bdf67caa96a74415c5c1b4835dd9"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.spp.home.D6.csv",
+      "bytes": 22867,
+      "sha256": "663a738bb56be0b2050cfe9470cf3137e78ec08a317f9af741983bcd8e477827"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.suit.B2.csv",
+      "bytes": 26449,
+      "sha256": "e0e69e635b3577a4136f10ac8341b5872adb64c2e0d80545a46a6c75bc400c61"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.suit.C4.csv",
+      "bytes": 26690,
+      "sha256": "61214b41e374a58fc540720027dbb36dfe0997e10ffe966746b3d489e9158d70"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.suit.D6.csv",
+      "bytes": 26104,
+      "sha256": "4e78fe57de589038fc0e47fa2cff3047d3b8261f62261046c4d947afba06ad17"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.suit.home.B2.csv",
+      "bytes": 22717,
+      "sha256": "cf8b81950d950a7ea0a76eb847a62e2efcf11a90a593e3d7b8ccdf1566b9e26d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.suit.home.C4.csv",
+      "bytes": 24351,
+      "sha256": "59ce8d89f1b8592f07019064f64cd548acc613c25b9dded2955f25d2d4e8d4ea"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.suit.home.D6.csv",
+      "bytes": 22532,
+      "sha256": "09859af0a4e581f8462d7872c1435855e31823c9974838c958c03f537a72bffe"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.zone.csv",
+      "bytes": 16398,
+      "sha256": "5862a3c279360fbd0a5b36a79a75bd1f1cd54bf1b8d3566ce6c8e18a474117b5"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/PredSum.zone.home.csv",
+      "bytes": 13287,
+      "sha256": "5a0b77406406117bc73a365b09ed8d4349ab7e427b9d424bfb197c9277a28c54"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/clim.meanChange.csv",
+      "bytes": 612272,
+      "sha256": "502368e2976fc4e7b7463575dd57359c5397458a6b916cc76622666f87c53da1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BuMo/clim.refMean.csv",
+      "bytes": 6069,
+      "sha256": "b377994a5509e22c590befd699f61e92d36f53fc9161784f62b1ba7129dc22f1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.bgc.csv",
+      "bytes": 38605,
+      "sha256": "0bd3537406d1dc7790f420ac0f343917518c2568eabcc73eaaa78dc4e7acb62a"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.bgc.home.csv",
+      "bytes": 22548,
+      "sha256": "4b07b29b45d08ec2aa75d6ffb0249388e864dde27ce773905b5eed0ad32d6ce3"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.spp.B2.csv",
+      "bytes": 26488,
+      "sha256": "9ae228cb918574bde46dc9a4b5a1cf12b31706b54dbc19194035918fa6ddca1e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.spp.C4.csv",
+      "bytes": 27077,
+      "sha256": "bd9b25bc3518dec8bd11841dad9ff763c337a11d4a8fe9530b026c41da7609ce"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.spp.D6.csv",
+      "bytes": 26759,
+      "sha256": "04d4177bca19a9bc04ebdce8b533a1d90983daa3eda4604ab5333e43f62ac524"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.spp.home.B2.csv",
+      "bytes": 24549,
+      "sha256": "d861bc33239a2c5c935d66997839c83a47e237547b655d06f03508ce592ee9a7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.spp.home.C4.csv",
+      "bytes": 24962,
+      "sha256": "9625d81a490f53cc66ccf29d5c7916b39a7e1d435a38d99c5747524dc551aef6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.spp.home.D6.csv",
+      "bytes": 24875,
+      "sha256": "dcc7c9c9aea2981be432dddff34789e71700f0c7b117006d185924439b888249"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.suit.B2.csv",
+      "bytes": 25973,
+      "sha256": "c2da82834ee55580b76986ea462541785c9335d2c94463a5e9e42cc1db43230c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.suit.C4.csv",
+      "bytes": 26566,
+      "sha256": "77702b34f7e7bdbf50edb2e6af7872e0ca74a215b97efb43895393f292d539e9"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.suit.D6.csv",
+      "bytes": 26370,
+      "sha256": "2e3121fe148c18a3f1095652dfec8668cac9fc11e1e0f50e692a421aab37f2b8"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.suit.home.B2.csv",
+      "bytes": 24131,
+      "sha256": "01e0234b07c1e1e35b63a91a0b1302c2f1e46acae0a76511f46b34c69c31af90"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.suit.home.C4.csv",
+      "bytes": 24576,
+      "sha256": "974688b3ad31c969dc92c315935401d5fc3696bca36fded3ca63569cbdd8822c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.suit.home.D6.csv",
+      "bytes": 24606,
+      "sha256": "571c7ad7497ea6a88c8ba40fdd428850c5309ee9cf07178009a035beaac01b6c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.zone.csv",
+      "bytes": 14542,
+      "sha256": "fcf5148c3f3110eaa20bba4869f1ef5704a2f64740bb992bd07de94c6520e898"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/PredSum.zone.home.csv",
+      "bytes": 10669,
+      "sha256": "fbd0591c4b2d1d816cd7dcfa8b19af889000e9f8427530294b7cbdbcafbb1907"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/clim.meanChange.csv",
+      "bytes": 619644,
+      "sha256": "1731dcc8a8eadcc53be02dc74d2d5249ac2815e12f261203577089a4848ca768"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/CDFCP/clim.refMean.csv",
+      "bytes": 6080,
+      "sha256": "dbc335440e2b936dd34e972e0db972797b0b9588e05349efb2791d2befef2fc2"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.bgc.csv",
+      "bytes": 15792,
+      "sha256": "bc99561c6466845387ca7b86f30196bc56eb7a2380ed573100c2f4bb53b3e112"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.bgc.home.csv",
+      "bytes": 10832,
+      "sha256": "67b3442ce00948a5c51241e6586e83e2339a48893b337671c9ed7e72397ba5b7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.spp.B2.csv",
+      "bytes": 22951,
+      "sha256": "c50ae483f03996bbd4dff57cc014dc8b21b27f78bba3613e99fe443ca87a8faa"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.spp.C4.csv",
+      "bytes": 23663,
+      "sha256": "77e68f0a00b1d697a1fb289583dc2321c1aa3540b9fd9de2a241cd7863348c29"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.spp.D6.csv",
+      "bytes": 22734,
+      "sha256": "e957fbafa7cff199d9c9618368d6447178c43d9968624d580864f6333f0d7e4f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.spp.home.B2.csv",
+      "bytes": 20957,
+      "sha256": "2dc2d0e52d33ff7bd238387ecf8b8ece5e855327b2048b7622e16a8d557ad980"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.spp.home.C4.csv",
+      "bytes": 21034,
+      "sha256": "01280ee59b9867f67668d784b65c6a9fc105f52958f8e3e3e3f01d0f68fcf4b2"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.spp.home.D6.csv",
+      "bytes": 20455,
+      "sha256": "ba9a0800a41b1771a60a873639eb3a7878de5197941ab6205c3c889abe6fcfd1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.suit.B2.csv",
+      "bytes": 22637,
+      "sha256": "56635fe352101563859e03e0bb348de3149ee6891112412e520f535e724821c6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.suit.C4.csv",
+      "bytes": 23390,
+      "sha256": "f6dcc75036f140f6ed993f787a5d1fe9031ddb5dd031960d4a9c612bab817076"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.suit.D6.csv",
+      "bytes": 22585,
+      "sha256": "3d4a037091688d3c3f375fa76e50c4f53b04c6f62a02e3ab8df5b440c728824a"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.suit.home.B2.csv",
+      "bytes": 20656,
+      "sha256": "199d09392c272758d950ec6da3b94995e638cc592eed5a6a583f12cf00423f4c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.suit.home.C4.csv",
+      "bytes": 20780,
+      "sha256": "cf6bead36c038811a153ba3a235d0e8f7169e44c882c0252848852b8102bed12"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.suit.home.D6.csv",
+      "bytes": 20377,
+      "sha256": "e455eab81cb3d1a4d6c6d4fe6c9fb0613247f5ca84c7c2066829078a596c238e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.zone.csv",
+      "bytes": 9561,
+      "sha256": "1f0f90f0e6241f961b8408fcf8c94cbf326b6341c7d5c8ad72eb8b314a9f7516"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/PredSum.zone.home.csv",
+      "bytes": 8915,
+      "sha256": "955c090fefbc8bbd1f21d458f0eeedd0f94f202265cd8c1908e2345880f8a1bc"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/clim.meanChange.csv",
+      "bytes": 607280,
+      "sha256": "e86b6e4e6c2c5cbdeca563dbedd184f86963c31be8e790adaf255666fc61146f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/HIRMP/clim.refMean.csv",
+      "bytes": 5997,
+      "sha256": "e0d095ae8c314381381d41d3900bf6231fb57058e7cabd0efa82501144cd0c2f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.bgc.csv",
+      "bytes": 23125,
+      "sha256": "38c3027e16e3be1f044cea7d5a60c4a5c86ec6742c4aa5da524f64c8a06948d7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.bgc.home.csv",
+      "bytes": 13611,
+      "sha256": "ce5a26b6f76ed3438aa4086d1e7e51eb5dd6ef23b40e3318c5720bd9d4652ed8"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.spp.B2.csv",
+      "bytes": 24948,
+      "sha256": "fb04d948d06250f7eeaa8b1733db373c6c5e925dc6b745c1c7d070e4f7367b74"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.spp.C4.csv",
+      "bytes": 25020,
+      "sha256": "bcf99954ce809a596da16533a3b1850ba9597bd0be0ae8f8fd619dfc4323285e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.spp.D6.csv",
+      "bytes": 25199,
+      "sha256": "f2b1e90ef8a83d7a151caf74f93cafd9c44260f09e65f693c5e2831d65d777cc"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.spp.home.B2.csv",
+      "bytes": 23758,
+      "sha256": "63c768c102702efe135254e902c4d4cf6102e43bc38e0b9692ff5b387e5e2960"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.spp.home.C4.csv",
+      "bytes": 23147,
+      "sha256": "286dc3aee8fecd5661bc1f106371cbcef0f7bcb2cbec6bc95286ed969700d5aa"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.spp.home.D6.csv",
+      "bytes": 23532,
+      "sha256": "74442a2a15b53659f89bdbace96a1563db342279da0e4af4564bfccc6af3cbd0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.suit.B2.csv",
+      "bytes": 24351,
+      "sha256": "87eec02fd85a87ea0fb534a623396ec2e60ba83ab638aea103b2091dd648a4b8"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.suit.C4.csv",
+      "bytes": 24576,
+      "sha256": "fbf079d55bf712434ebf48a5762e84fd950ae9d074dd51e3f3a6811bee7225ad"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.suit.D6.csv",
+      "bytes": 24885,
+      "sha256": "bacc7e1cca3cb58a0b3822958e33ced832afc78ed27011a614e972b2e647b411"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.suit.home.B2.csv",
+      "bytes": 23264,
+      "sha256": "4f74c92889456b750f53d0bf7f373de2180e1a5a8aa97655a5b045a51d556231"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.suit.home.C4.csv",
+      "bytes": 22862,
+      "sha256": "027f1cd0016633fb72d231713bd9e3ff490634f3e0765873508f61559612dcbe"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.suit.home.D6.csv",
+      "bytes": 23296,
+      "sha256": "806b37025b8a7cd355b7b1807f8b71b855fccd0c073ffd265b84d1c35e974c34"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.zone.csv",
+      "bytes": 10499,
+      "sha256": "debd56b8cf40c612d63ef45ff54965bcdcf9791f25a534ea9e2b6e746ebe1aee"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/PredSum.zone.home.csv",
+      "bytes": 9503,
+      "sha256": "4151797464255265c8dedf30d5b8840b39d2b41ed5432e46aca882fde274b0cf"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/clim.meanChange.csv",
+      "bytes": 610367,
+      "sha256": "85427af127a5b97bf64f64e43bf93ba9a3b49e8c4f9a692ea91df6967ff6e12c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nanwakolas_IRMP/clim.refMean.csv",
+      "bytes": 6033,
+      "sha256": "393da0ab06a35726b87d973771bc13565a093d0ecf9758ee528d3e5a4e29b3b6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Nimpkish/clim.refMean.csv",
+      "bytes": 6526,
+      "sha256": "242b579f84af6c77414c7bf49fd4db6bf02f84a7c2a1ce2f89fdc1a20ab5fc43"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.bgc.csv",
+      "bytes": 62147,
+      "sha256": "58da58ad4f4eb31caf0690e173aa10df5837b8a3517e2e30fae3a7609361ddbf"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.bgc.home.csv",
+      "bytes": 27763,
+      "sha256": "14c4a6dfdadbce700b16538a2cb239bff6b5e74fe35b865f7cdb6b56e354861f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.spp.B2.csv",
+      "bytes": 25260,
+      "sha256": "28faeab106839ba02b8f3cb55cf41bf24d772e82dbdb0fb4a84b1df81f430859"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.spp.C4.csv",
+      "bytes": 26034,
+      "sha256": "11e66fbbf8580231a9f5da9f27eddfb617f1fffa876903c20a9ce898f766f95c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.spp.D6.csv",
+      "bytes": 26025,
+      "sha256": "f6d70cf359989feaf03e94dc1f090656d22bd4843bbe40c1ab7407189af1b4e6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.spp.home.B2.csv",
+      "bytes": 23941,
+      "sha256": "8c3e19495ec083f4fd5e2e5f3418e9bc5b8b6f21aa096c3161c226ab781881b5"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.spp.home.C4.csv",
+      "bytes": 24644,
+      "sha256": "614a74d996e5925460e9254dae9f7b149047548f0fa6d1bf1646e6f64921b63b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.spp.home.D6.csv",
+      "bytes": 24566,
+      "sha256": "071e2df6c11515a4841d890ddb8890001899a1cc1bf0d026f51c4e15ab1c2590"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.suit.B2.csv",
+      "bytes": 24670,
+      "sha256": "3ca1751da8543295930ba4df20b056096dd80a15ac89d7661a11c885d0f85eec"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.suit.C4.csv",
+      "bytes": 25488,
+      "sha256": "0c3ebe56acb6190b9fb9b6c4b06226e1041417de53ff28044f489c33f72d3519"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.suit.D6.csv",
+      "bytes": 25430,
+      "sha256": "9162f1027bf17ba342a762d311e904a152787e25ea612aa6f02543527680f54d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.suit.home.B2.csv",
+      "bytes": 23452,
+      "sha256": "71a3c4e6bfc54e1de7ec07834bb5c5c08dcae08b8392f4efb9e435c72b3dd6c2"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.suit.home.C4.csv",
+      "bytes": 24145,
+      "sha256": "ef7bc980515662bab06bb4f39e648de3dfb1e52aa030ac0b453342bd3719be1c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.suit.home.D6.csv",
+      "bytes": 24125,
+      "sha256": "982f8b48d17215e9a2ad94402153943581b30d740fb5063c76543fdc03e58a5d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.zone.csv",
+      "bytes": 16193,
+      "sha256": "644c4c4f7c32e7d9d13e6952c809640ebcb9b413d919aafd3d0061a61a74bad6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/PredSum.zone.home.csv",
+      "bytes": 12441,
+      "sha256": "493e3cb83a1a7d9c969defc727cff0c3fc01b25ea4991434237c70eb3e1598a2"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/clim.meanChange.csv",
+      "bytes": 595888,
+      "sha256": "1986f9eee5e5c12671696067f21afcd3cb6889fbceefd8fd9e49f30755264c16"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/Sunshine/clim.refMean.csv",
+      "bytes": 6093,
+      "sha256": "105c3877df8b2cc03dc8cc4ac5473ea57c28ac14f62eefeb54d4085726484d55"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.bgc.csv",
+      "bytes": 22051,
+      "sha256": "a748589060bffc3a9a49768d9fc2c06cd2777f99abc130a69fdafc55188b0586"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.bgc.home.csv",
+      "bytes": 15411,
+      "sha256": "c2ab03993ab389072a64f873a0feba8fb3e71d0da6fc49de2c5faacef4c888b2"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.spp.B2.csv",
+      "bytes": 24592,
+      "sha256": "408af44aa17589fc7bdee022fb06da7c502db8178def868924c2a9657b567cb0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.spp.C4.csv",
+      "bytes": 25192,
+      "sha256": "d9020aa89cf1a6511028e82ac191a89d887c12ab8c6a14e55d362e5a91cdd418"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.spp.D6.csv",
+      "bytes": 24480,
+      "sha256": "fef762954b76bc895b087116c80f3ea81f6c33070eb70157c5907e0f7ff0a264"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.spp.home.B2.csv",
+      "bytes": 23274,
+      "sha256": "eb7420e3d5abacca649217fe65325d7a216767723f3ff304ba150a27fcacff23"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.spp.home.C4.csv",
+      "bytes": 23364,
+      "sha256": "6f91af4452adb78e597db9f74ed440a1c5753e25eb3a24f124922f3900baafb0"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.spp.home.D6.csv",
+      "bytes": 23371,
+      "sha256": "10f2f3fe73e339d47496306f916c0508fc0e13626aa9e12f3875e0c813445dee"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.suit.B2.csv",
+      "bytes": 24281,
+      "sha256": "7cbfb10a35f6184044fc838a0894f4fb447cd5675609aba62910050171240c25"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.suit.C4.csv",
+      "bytes": 24850,
+      "sha256": "df6f72be589d09234bc8a71e93902459375c50614f3833d60bbff01c1188afd3"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.suit.D6.csv",
+      "bytes": 24280,
+      "sha256": "f416630958356c9cfab83630671f138ddd9fe6d1d60b5ab031ed5ccef2c4f3cd"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.suit.home.B2.csv",
+      "bytes": 22993,
+      "sha256": "7dba6173b275755bef043330f4ab43c1926d0fe5fcca1f3b68790e3fdf3a1d2a"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.suit.home.C4.csv",
+      "bytes": 23197,
+      "sha256": "a7350d511c75c3684e2b68c928ec2d14c51465f6f82f4da9a651ce98a3b70108"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.suit.home.D6.csv",
+      "bytes": 22947,
+      "sha256": "75f8c659cf793b4217e8187149e6f8aa8e66a99eebc981ee7abb9debb94b9410"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.zone.csv",
+      "bytes": 10620,
+      "sha256": "9ec6014ffdad5ea94bad66db83f032bc85c9945ae36c576966ae43599e9945b7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/PredSum.zone.home.csv",
+      "bytes": 9491,
+      "sha256": "386f0375b2d72f314043e97bad5a834273a3d5c661122e717171cc7e739f4a9e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/clim.meanChange.csv",
+      "bytes": 612382,
+      "sha256": "f971249d5221f55f8ac9f631ace7cbc5dc7b93567bf5d6cf1b0b2f305a1594af"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/TFL44/clim.refMean.csv",
+      "bytes": 6031,
+      "sha256": "748a5689fad97f6737d6037e70d9a504aeea93bea87d82cd1b592b03501677e1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.bgc.csv",
+      "bytes": 140316,
+      "sha256": "0661938bc7ab15cef5af858512744e8ac3a706fef0fb74c56c72272101481611"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.bgc.home.csv",
+      "bytes": 51042,
+      "sha256": "7beebbd55b10dd0d952bc8702142a19435e9d14ac07507cdb838fa5e9f54692f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.spp.B2.csv",
+      "bytes": 25330,
+      "sha256": "762730e4e46bc2b5533c6bc33bcae25951ec2f5af7de96c23dac264e9326875e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.spp.C4.csv",
+      "bytes": 26354,
+      "sha256": "0397b8612f13ad8d4a41a5b31636a5fdb7f7da2f490854783cde6df6414c86e8"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.spp.D6.csv",
+      "bytes": 25871,
+      "sha256": "9928d48e6ce11e63233cdb4d7a72735a21c781d366848ed57e6813fff1d2a079"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.spp.home.B2.csv",
+      "bytes": 21866,
+      "sha256": "1dc6dd839bab3fb0e94b495f565564fa4fc3cdc6f8a213a0b05117bb982f51c4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.spp.home.C4.csv",
+      "bytes": 23566,
+      "sha256": "839df70c6052899f2d5670f15faf38382763cd48ea58cee10c9f756841cc5fec"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.spp.home.D6.csv",
+      "bytes": 22615,
+      "sha256": "7464cc60a0157778672171ef844447736e95bae5aff024a46e8194655807dfdf"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.suit.B2.csv",
+      "bytes": 24692,
+      "sha256": "3fe5b51501dc4bef7d50205f3a13443858dec434fb6ae4c6e9190ee6f2be8fae"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.suit.C4.csv",
+      "bytes": 25903,
+      "sha256": "c5f6e2672ec24cbf597196fd3b5ef3f2f90b08fa88a704435d67b7afc3f739ab"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.suit.D6.csv",
+      "bytes": 25306,
+      "sha256": "7a1f884e1e2722cd98e3797062c268881aa7824d4192651dff9b8482e9de1376"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.suit.home.B2.csv",
+      "bytes": 21205,
+      "sha256": "d4e53dc3478a3bb41e701ddfcb9705ca72077445120877dfe5334a4e3cf8dc85"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.suit.home.C4.csv",
+      "bytes": 23113,
+      "sha256": "629d7449c7bfa435f3bb0ab306dac6e6c01ded6da22aaf58732226b7c4f80c12"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.suit.home.D6.csv",
+      "bytes": 22094,
+      "sha256": "4c9a74aa18c424c2018a7171cae5fb8d46557672f1ecaa332b7a0dc1b68717a7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.zone.csv",
+      "bytes": 22469,
+      "sha256": "6be2397df07c25be8c3d63caa32d8a7c5a1b0158422ab0b28f44138abf4c8470"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/PredSum.zone.home.csv",
+      "bytes": 16727,
+      "sha256": "971a2e6e4ab9cd4e812579c5e6b07e56620738eeb16d5fb208ea7714d1b7f1ba"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/clim.meanChange.csv",
+      "bytes": 658091,
+      "sha256": "ed1bed190547114194ccf9bb088424cf1f5558640d984f36cf2ae4ff8cc02ffc"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/WilliamsLake/clim.refMean.csv",
+      "bytes": 6630,
+      "sha256": "935cef3e42ff91718e6a0f7455cd12fcb3483d91b13ec1bf6b673fabd05f152f"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 288891,
+      "sha256": "c78ab9ec6d5e8ed3841834dac4a1c088ef85a2e29a59167fa8f11f6aecf970c3"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 288836,
+      "sha256": "ed00c2a1a3e935ced0a86c8ce80a6f621d5fb7ad0ae576f2bd0bad618aaf0037"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 286859,
+      "sha256": "707b51be51949028eba27f9eba80ed963a92625894831e882439234e61f722a6"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 275773,
+      "sha256": "efb0893755399c942088270bb932839cac2261a404281badea8af647de14520b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ACCESS-ESM1-5.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 274458,
+      "sha256": "19d1f07ca86e93e17d2f084124207f8eaaf268fbc45535b77826ab8d2e80c79c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 287192,
+      "sha256": "f53dee02943c3faa32e356e8f3cb14949c36c6330e5fa6958ba0a6cbd3dd218b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 290278,
+      "sha256": "f85a54013001360855889b9435b05416e47ea58007be97e4993d93f97f727d5e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 274333,
+      "sha256": "ffc1ebcc0a569b125e667dc174c007937038a30ec97f89d6d597f5fb70d5e381"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 266702,
+      "sha256": "e9c4ae09911ebce4cffbefe3d0690d6a15f91b011c558ad309c041ed13cf075b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.EC-Earth3.r4i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 263005,
+      "sha256": "d9462e4b2ae5640076a162080d481ae941ed932047266196a7b265ce2bf12a4d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2001_2020.tif",
+      "bytes": 274268,
+      "sha256": "6c96cec4202f0f81a77aecdc1953318697a24cbf614c0113dce9df75f85f8480"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2021_2040.tif",
+      "bytes": 281922,
+      "sha256": "9e0041343afce647977dc00f5b7afb1073881a9e58c55badfbe7dec881f9462b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2041_2060.tif",
+      "bytes": 276454,
+      "sha256": "8d46a651dd482ac387a1803ed541fc500decf7f32a5af6eef0cecff8653ad1ee"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2061_2080.tif",
+      "bytes": 270952,
+      "sha256": "04e17df730bfb41791040a49e40ec128270b3090b484552d9f94e5bc7e135b89"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.GISS-E2-1-G.r2i1p3f1.ssp245.2081_2100.tif",
+      "bytes": 271767,
+      "sha256": "9dd57ba3eb7dad70230ab5ead9c8a93028a911a8c413f74a7cde1e609d69a93e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 283265,
+      "sha256": "fa9023228363762dd909db00ce4f5571d96b36f4d754765bf790c424b3518bc1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 294845,
+      "sha256": "b027179157a23b9ba6bbd0c61235d70c7b42619ae2c43307f50ebe60942972e4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 288007,
+      "sha256": "8d050de01c4a84b29d66672f2c33423fe852bed3dcad951804f49496c0cf15fd"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 283760,
+      "sha256": "af54fe4e3b0f14a2d9f4a777a44078bd0e9e574acc2826da17209ea8e81980fe"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MIROC6.r2i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 274228,
+      "sha256": "e1d81ea0d8cacda9a7e46543de5d8b46e1c4493ad801dbbdca58e0b7f3113633"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 282802,
+      "sha256": "77a7ea67c222c9b5c48199b3844ccf1b15daa3405a25ca7ca8d1dae1cf2c925c"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 289631,
+      "sha256": "27d40d9e5793c4e4d83d52b429358155c42e87da5e394bf32d2bff02dd2896c7"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 288906,
+      "sha256": "1ec3805cde3e04a8614ce03b63b23f5d95e4ad1318981818d61cba4ba06b1ec5"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 290498,
+      "sha256": "b2b6f12b74ad81edee7392b92087a1a9d05571334fc5ce318db7ace19ac1077e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MPI-ESM1-2-HR.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 285196,
+      "sha256": "194841689d4619381f6845656329e8f55fca0bb6c9a2b445e2f6cb44697edf4d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2001_2020.tif",
+      "bytes": 287998,
+      "sha256": "3b273e19bc1f6383f0ca4b9cc330e84394494f1d16d32aa01dd70a4862f20ab4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2021_2040.tif",
+      "bytes": 292479,
+      "sha256": "d68f4a29f0b628eaca2a807ccab3c2fee0f0ebd6cd07df9c48524c2dd9e7ed6e"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2041_2060.tif",
+      "bytes": 269225,
+      "sha256": "06a69c9e922433e45e6d6783b7b5b568bb5a1b253bc0b9419b346b61b00c30d1"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2061_2080.tif",
+      "bytes": 269847,
+      "sha256": "3103608ea89332f5d333c5c98679ec654b149bc3b7de3eac9de0864db2295f5d"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.MRI-ESM2-0.r1i1p1f1.ssp245.2081_2100.tif",
+      "bytes": 264398,
+      "sha256": "e8a19c89a86c0edf1b5afff73a03ac3d754df57e753b1a78fcf0e7dd7f5f3d41"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.hist.2001_2020.tif",
+      "bytes": 276050,
+      "sha256": "4f6e95bbe45e85c83a61b0d8e0c744d6dff022f59e0f475865abdcb57bf546d4"
+    },
+    {
+      "path": "Development/OLD/spatial_app/data/BC/BGC.pred.ref.tif",
+      "bytes": 267030,
+      "sha256": "05632fa0106e85983aa0089b52425f8b89e116555bd8080ae1a225cc1e5e4053"
+    },
+    {
+      "path": "Development/OLD/spatial_app/app.R",
+      "bytes": 92900,
+      "sha256": "d1510b50bc914e853e5eb62231449dd429d0a6852f450a98d7ee48d4df473e3b"
+    },
+    {
+      "path": "Development/OLD/spatial_app/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}

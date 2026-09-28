@@ -1,0 +1,744 @@
+{
+  "schema": "cciss-current-reference-manifest-v1",
+  "packageCommit": "a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce",
+  "catalogueCommit": "dacdf055cd45a6f4d6873e107a5b7615efd877cd",
+  "packageVersion": "1.0.3",
+  "deployedVersionVerified": false,
+  "tables": [
+    {
+      "table": "E1",
+      "group": "package",
+      "file": "package-E1.json.gz",
+      "rows": 30205,
+      "columns": [
+        "Source",
+        "BGC",
+        "SS_NoSpace",
+        "Edatopic",
+        "SpecialCode"
+      ],
+      "bytes": 91546,
+      "sha256": "f991b390f807671db06b1ab684ce10009c90113ed5d8548ea716cce5418680ed",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/E1.rda",
+        "sha256": "5e3a27e952a666c078dc94c9302de79cf1c16281840e9af9fb7d60d2132137a3",
+        "bytes": 28456,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "E1_Phase",
+      "group": "package",
+      "file": "package-E1_Phase.json.gz",
+      "rows": 1932,
+      "columns": [
+        "Source",
+        "BGC",
+        "SS_NoSpace",
+        "Edatopic",
+        "SpecialCode",
+        "MainUnit"
+      ],
+      "bytes": 6555,
+      "sha256": "45933a426c85ee50d07b1cfd31115afcc48ebde5eb0cad7744254250b1504d61",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/E1_Phase.rda",
+        "sha256": "f2689e7ff10a5718307b4d4d0a8c84259da0b04940023195dc57a3f59302b616",
+        "bytes": 3676,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "S1",
+      "group": "package",
+      "file": "package-S1.json.gz",
+      "rows": 15620,
+      "columns": [
+        "bgc",
+        "ss_nospace",
+        "sppsplit",
+        "feasible",
+        "spp",
+        "newfeas",
+        "mod",
+        "outrange"
+      ],
+      "bytes": 65317,
+      "sha256": "563ff53d7adbcbbb4841899d7dec17d924cbf901576fe917b8357c47768b0896",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/S1.rda",
+        "sha256": "42fe30b48fcf1a6cf919e059a5e43baadb33bb344cfb7df786f34d6caef6db28",
+        "bytes": 42241,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "R1",
+      "group": "package",
+      "file": "package-R1.json.gz",
+      "rows": 21,
+      "columns": [
+        "Type",
+        "mx",
+        "mn",
+        "Label"
+      ],
+      "bytes": 622,
+      "sha256": "4dd88bcc3e6b1a26067654fe1fb7b5fc9fd0ab2d0b69ed3a1654073aa4c080d7",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/R1.rda",
+        "sha256": "70db4d03811ddf894bf1e76d43c8f2b0b0aae4a9dcda4aa7c6ea3d9531e2e977",
+        "bytes": 493,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "F1",
+      "group": "package",
+      "file": "package-F1.json.gz",
+      "rows": 11,
+      "columns": [
+        "SuitDiff",
+        "Flag"
+      ],
+      "bytes": 438,
+      "sha256": "ca28aa271d58130d3416086eab34b7c1c7742f3fef36178c89e7693734bf16d1",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/F1.rda",
+        "sha256": "7976cbf7c54c4481f923b7ed4c1759f579568f1839bc6046f6e4633b124e9be5",
+        "bytes": 249,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "SS",
+      "group": "package",
+      "file": "package-SS.json.gz",
+      "rows": 5814,
+      "columns": [
+        "SS_NoSpace",
+        "SpecialCode",
+        "SiteSeriesLongName"
+      ],
+      "bytes": 35938,
+      "sha256": "fb270a6fc479b0623a5130bbe34498357b39c6e0ad38e0d72aaf138da4fbc223",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/SS.rda",
+        "sha256": "0cfa9b11dc610548b11fd5cd6ad4ef07e9d1a35831a3117fb68de023cbcd978b",
+        "bytes": 29854,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "N1",
+      "group": "package",
+      "file": "package-N1.json.gz",
+      "rows": 2541,
+      "columns": [
+        "SS_NoSpace",
+        "SiteSeriesLongName",
+        "RealmClass"
+      ],
+      "bytes": 13819,
+      "sha256": "b615c59734750f970ce1b76d9668045f8073df8a0a30cb7d8abe68cd812100d9",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/N1.rda",
+        "sha256": "86fb8548e25bf7dc5e6ea1f9589c23a3705f3650ea5b387d8dfc30b0f4fabb77",
+        "bytes": 12920,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "T1",
+      "group": "package",
+      "file": "package-T1.json.gz",
+      "rows": 124,
+      "columns": [
+        "Exclude",
+        "Lifeform",
+        "TreeCode",
+        "EnglishName",
+        "ScientificName",
+        "Code",
+        "Native",
+        "Notes",
+        "V9"
+      ],
+      "bytes": 3338,
+      "sha256": "877b3839282883edbdaec0aabc67db3d8c60d75b6c2bed548433311a080d0b0c",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/T1.rda",
+        "sha256": "02d25b256596f60fcc4d1c653b62c8f1b3b2da88b88e92175f05fbae9e237077",
+        "bytes": 3405,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "WNA_BGCs",
+      "group": "package",
+      "file": "package-WNA_BGCs.json.gz",
+      "rows": 417,
+      "columns": [
+        "BGC",
+        "Zone",
+        "SubzoneGroup",
+        "SubzoneColour",
+        "ZoneColour",
+        "notinTHLB",
+        "ZoneName",
+        "SubzoneName",
+        "VariantName",
+        "DataSet",
+        "State"
+      ],
+      "bytes": 8259,
+      "sha256": "ef0e0eff686deb67ae4f3fd4e930aed50ac1543c65f3ed694761524d9fdbc754",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/WNA_BGCs.rda",
+        "sha256": "369f0336b7b1b091ed197ae30eeb4fc23a721d35de55f52ab0b1eb1eecba57e1",
+        "bytes": 7405,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "BGCRegions",
+      "group": "package",
+      "file": "package-BGCRegions.json.gz",
+      "rows": 180,
+      "columns": [
+        "ZoneSubzone",
+        "Region"
+      ],
+      "bytes": 965,
+      "sha256": "35899c6113dc7d1f34ebd796f0d3b53a881a7e002c1c9ed129825435e515fdba",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/BGCRegions.rda",
+        "sha256": "8c3f41c054dec2ab24288245c6b60d4a9f00359fbf99943e41296ff7e84d5584",
+        "bytes": 805,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "models_info",
+      "group": "package",
+      "file": "package-models_info.json.gz",
+      "rows": 7,
+      "columns": [
+        "Data",
+        "Version",
+        "Date"
+      ],
+      "bytes": 513,
+      "sha256": "aff8769a286f924c8e06f98ac56d4486daf4901874d856320775034515218719",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/models_info.rda",
+        "sha256": "1b33209d0c2b5d86f52a515930150d87835bf1af963fa442011905538f357f37",
+        "bytes": 338,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "stocking_standards",
+      "group": "package",
+      "file": "package-stocking_standards.json.gz",
+      "rows": 11018,
+      "columns": [
+        "ZoneSubzone",
+        "CFRG_SS",
+        "Standard",
+        "Suitability",
+        "PreferredAcceptable",
+        "Species",
+        "Flag",
+        "Footnotes",
+        "SS_NoSpace",
+        "Region"
+      ],
+      "bytes": 60740,
+      "sha256": "f4361e89728075068bd88ba3e1b70a36a1c289a29c7c6ed8ce8383d0dba61a9e",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/stocking_standards.rda",
+        "sha256": "2c0c0b8ab3277b199587200a43357fc2653caa27b2e2f32a8b27db87823134b3",
+        "bytes": 34001,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "stocking_info",
+      "group": "package",
+      "file": "package-stocking_info.json.gz",
+      "rows": 1549,
+      "columns": [
+        "Region",
+        "ZoneSubzone",
+        "SiteSeries",
+        "SiteSeriesName",
+        "Standard",
+        "StockingTarget",
+        "StockingMINpa",
+        "StockingMINp",
+        "StockingDelay",
+        "AssessmentEarliest",
+        "AssessmentLatest",
+        "Flag",
+        "Comment"
+      ],
+      "bytes": 15878,
+      "sha256": "fe9c41d113fa501f8578cf4fb49721f4deed99efb95dfae52aa5698d5de0ab12",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/stocking_info.rda",
+        "sha256": "26a24aa016403eb0f19c60de5880b607328ead2daf0e99a5ee7a05b00f6e2289",
+        "bytes": 11316,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "stocking_height",
+      "group": "package",
+      "file": "package-stocking_height.json.gz",
+      "rows": 8071,
+      "columns": [
+        "Standard",
+        "Species",
+        "Height",
+        "Flag"
+      ],
+      "bytes": 24223,
+      "sha256": "e94bda22eeb150c800b977422d7b6aa71386cdc65fb0747807fb92f62b689684",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/stocking_height.rda",
+        "sha256": "8a9393645eae1688405740b603a866a377d957c6e438fe0c4d619754d66a8f34",
+        "bytes": 9853,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "cfrg_rules",
+      "group": "package",
+      "file": "package-cfrg_rules.json.gz",
+      "rows": 384,
+      "columns": [
+        "Spp",
+        "Feasible",
+        "PrefAcc"
+      ],
+      "bytes": 1382,
+      "sha256": "90907f4c7edca42c76eb74ea3f2ea4578a55c63721d6f5ae7acc70bf6897ac87",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/cfrg_rules.rda",
+        "sha256": "7829dac653c9cc6976257368db82e9536c802b443d48dbf91bc149742de1cffe",
+        "bytes": 668,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "footnotes",
+      "group": "package",
+      "file": "package-footnotes.json.gz",
+      "rows": 72,
+      "columns": [
+        "Remove",
+        "Revised Footnote",
+        "Restrictive Footnote",
+        "Advisory Footnote",
+        "Revised Footnote Text",
+        "Geographic Restriction",
+        "Site Condition",
+        "Pest/Disease",
+        "Administrative"
+      ],
+      "bytes": 2416,
+      "sha256": "62bba4cf59ff2192b5766c4ecd225d5b3a3969536a34d9dbf8d2ed6952b8d13b",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/footnotes.rda",
+        "sha256": "88637b1825e96c4c4380ceb9eadd6163de9faf4401e31676c01ab9de9ebf2817",
+        "bytes": 2350,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "silvics_tol",
+      "group": "package",
+      "file": "package-silvics_tol.json.gz",
+      "rows": 33,
+      "columns": [
+        "Life Form",
+        "Tree Code",
+        "Tree Species",
+        "Low Light Tolerance",
+        "Frost Tolerance",
+        "Heat Tolerance",
+        "Water Deficit Tolerance",
+        "Water Surplus Tolerance",
+        "Nitrogen Deficiency Tolerance"
+      ],
+      "bytes": 1002,
+      "sha256": "1331615ebc5634884eb3309a23b0055e33ddbcbb3ecf361f621f0799c6d54e82",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/silvics_tol.rda",
+        "sha256": "12bbd6663c2aa7d2a1525d1a9bf6778182351e3e34a8bee9527e29a07bb77cec",
+        "bytes": 857,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "silvics_resist",
+      "group": "package",
+      "file": "package-silvics_resist.json.gz",
+      "rows": 33,
+      "columns": [
+        "Life Form",
+        "Tree Code",
+        "Tree Species",
+        "Snow Resistance Class",
+        "Wind Resistance Class",
+        "Fire Risk Class",
+        "Insect Risk Class",
+        "Fungi Risk Class",
+        "Other Risk Class"
+      ],
+      "bytes": 1007,
+      "sha256": "1b70d938b30dd05378f6dd4cbc8a66eb14965d22aa03756cd2a128b06975f52a",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/silvics_resist.rda",
+        "sha256": "0466e9db35c59940599ff738dd3d6f21689f84ad47ad865583af6d2dbee5e738",
+        "bytes": 867,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "silvics_regen",
+      "group": "package",
+      "file": "package-silvics_regen.json.gz",
+      "rows": 33,
+      "columns": [
+        "Life Form",
+        "Tree Code",
+        "Tree Species",
+        "Reproduction Capacity",
+        "Seed Dissemination Capacity",
+        "Potential for Regeneration",
+        "Potential for Regeneration in the Open",
+        "Potential for Initial Growth Rate (over 5 Years)"
+      ],
+      "bytes": 990,
+      "sha256": "dddc8e684281cc0398209b70848e78f701d45cec1b291f721684f0a745f5a687",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/silvics_regen.rda",
+        "sha256": "11f53bbd7addcc75b8d9535975eb68cda03d61263f4b5d0530a6315d66932a26",
+        "bytes": 887,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "silvics_mature",
+      "group": "package",
+      "file": "package-silvics_mature.json.gz",
+      "rows": 33,
+      "columns": [
+        "Life Form",
+        "Tree Code",
+        "Tree Species",
+        "Response of Advance Regeneration to Release",
+        "Self- Pruning Capacity in Dense Stands",
+        "Crown Spatial Requirements",
+        "Light Conditions Beneath Closed-Canopy, Mature Stands",
+        "Potential Productivity",
+        "Longevity"
+      ],
+      "bytes": 1062,
+      "sha256": "0f0bc2e3eec6a95bf0e9146ceef8ae5ca7799e7e5b45a5e99ac1ec2651f52271",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/silvics_mature.rda",
+        "sha256": "de46dcb8a407bc9b4626013410c9e725a3b3eefbefcb81545b06f5386b777477",
+        "bytes": 951,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "subzones_colours_ref",
+      "group": "package",
+      "file": "package-subzones_colours_ref.json.gz",
+      "rows": 431,
+      "columns": [
+        "classification",
+        "colour"
+      ],
+      "bytes": 3813,
+      "sha256": "93b1cbc4a908d568239c7d09a037ecf56d7fd64fa5afe8d106b87e082e159e2f",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/subzones_colours_ref.rda",
+        "sha256": "794f52f03d4b5dd0298fc2379b42d90d346115afe922a78294586fe0d6f7bc84",
+        "bytes": 3208,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "zones_colours_ref",
+      "group": "package",
+      "file": "package-zones_colours_ref.json.gz",
+      "rows": 37,
+      "columns": [
+        "classification",
+        "colour"
+      ],
+      "bytes": 718,
+      "sha256": "f50b3885bf368b03aadf80d871ef272d616f32615caf7c26001c9238f4d1a2b3",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/zones_colours_ref.rda",
+        "sha256": "240d31673a7766e2be58bf27c4b24f2f377440ce4c73644dcb8665e1371ff3da",
+        "bytes": 533,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "bgc_colours_v13",
+      "group": "package",
+      "file": "package-bgc_colours_v13.json.gz",
+      "rows": 469,
+      "columns": [
+        "classification",
+        "colour"
+      ],
+      "bytes": 4110,
+      "sha256": "7689bec205dd054e70093a0d568cecef42e2e1368ded5982ee55820daf8661c7",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data/bgc_colours_v13.rda",
+        "sha256": "72fcc37047cc4de008f298aa6fe12cad2660035659ac121e2503f59318e19ebd",
+        "bytes": 3566,
+        "nativeEncodingFallback": "cp1252",
+        "conversionWarnings": [
+          "Missing constructor for R class \"data.table\". The constructor for class \"data.frame\" will be used instead."
+        ]
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "edatopic",
+      "group": "catalogue",
+      "file": "catalogue-edatopic.json.gz",
+      "rows": 32137,
+      "columns": [
+        "Source",
+        "BGC",
+        "SS_NoSpace",
+        "Edatopic"
+      ],
+      "bytes": 93114,
+      "sha256": "ab29763ec894d99620abe3e5800ba3369b560f4f7e367dfc8968cb05a6bf3145",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/dacdf055cd45a6f4d6873e107a5b7615efd877cd/tables/edatopic.csv",
+        "sha256": "30fced498a94ffdb524ffb7c3925172e6d9196086d32db3b3959ac992f4ade23",
+        "bytes": 935031,
+        "sourceEncoding": "utf-8-sig",
+        "valueEncoding": "CSV strings, including original NA markers"
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "suitability",
+      "group": "catalogue",
+      "file": "catalogue-suitability.json.gz",
+      "rows": 15620,
+      "columns": [
+        "",
+        "bgc",
+        "ss_nospace",
+        "sppsplit",
+        "suitability",
+        "spp",
+        "newsuit",
+        "mod",
+        "outrange"
+      ],
+      "bytes": 98517,
+      "sha256": "2cb59d2bddb62827d66706211c1f38746e69507413ef062e0f5a2c43d42df544",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/dacdf055cd45a6f4d6873e107a5b7615efd877cd/tables/suitability.csv",
+        "sha256": "b9b4987d38943ca86be14504e8e9a83ea6b90a4119a8379857c37818bd761ae8",
+        "bytes": 864701,
+        "sourceEncoding": "utf-8-sig",
+        "valueEncoding": "CSV strings, including original NA markers"
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "site_series",
+      "group": "catalogue",
+      "file": "catalogue-site_series.json.gz",
+      "rows": 5936,
+      "columns": [
+        "",
+        "SS_NoSpace",
+        "SiteSeriesLongName",
+        "SpecialCode",
+        "Special"
+      ],
+      "bytes": 53027,
+      "sha256": "8beb83df8a31eaa8c4c978478fddf9ea8b15305e1a88aed520f6a4c51be36ead",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/dacdf055cd45a6f4d6873e107a5b7615efd877cd/tables/site_series.csv",
+        "sha256": "6fa429dbb0e9c68fbc6f8f6bfd88eb76a27874c8369d10faf086cb18792f4649",
+        "bytes": 408615,
+        "sourceEncoding": "cp1252",
+        "valueEncoding": "CSV strings, including original NA markers"
+      },
+      "replacementCharacters": 0
+    },
+    {
+      "table": "WNA_BGCs_Info",
+      "group": "catalogue",
+      "file": "catalogue-WNA_BGCs_Info.json.gz",
+      "rows": 417,
+      "columns": [
+        "",
+        "Source",
+        "Zone",
+        "SubzoneGroup",
+        "Subzone",
+        "BGC",
+        "BGCName",
+        "ZoneName",
+        "SubzoneName",
+        "VariantName",
+        "General.Location",
+        "OldSubzoneLabel",
+        "DataSet",
+        "State",
+        "Notes",
+        "colour",
+        "ZoneColour",
+        "notinTHLB"
+      ],
+      "bytes": 13200,
+      "sha256": "6ee8ba0437e227545510c9df1c883f30a765e826e943376531fa841b2031db96",
+      "source": {
+        "url": "https://raw.githubusercontent.com/bcgov/ccissr/dacdf055cd45a6f4d6873e107a5b7615efd877cd/tables/WNA_BGCs_Info.csv",
+        "sha256": "d16d8834d0be0ddcfb2ef20683375971c24d0feb30019ec2c96b4035cf883ef3",
+        "bytes": 76526,
+        "sourceEncoding": "cp1252",
+        "valueEncoding": "CSV strings, including original NA markers"
+      },
+      "replacementCharacters": 0
+    }
+  ],
+  "compatibility": {
+    "readyForCurrentShiny": false,
+    "missingS1Columns": [
+      "BGC",
+      "Feasible",
+      "OHR",
+      "SS_NoSpace",
+      "Spp"
+    ],
+    "reason": "Pinned development S1 uses a different schema from the downloaded Shiny/ccissOutput. No column aliases or rating semantics assumed. Prediction arrays and exact site lookup are also absent."
+  },
+  "conversion": {
+    "rdata": "1.1.0",
+    "pandas": "3.0.6"
+  },
+  "missingData": [
+    "cciss_future14_array",
+    "cciss_current14",
+    "cciss_novelty14_array",
+    "bgc_attribution14",
+    "bgc14",
+    "gcm",
+    "scenario",
+    "futureperiod",
+    "run",
+    "hex_grid",
+    "bc_elevation",
+    "bec_info",
+    "bcb_hres",
+    "bc_forest_regions"
+  ]
+}

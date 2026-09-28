@@ -1,0 +1,25 @@
+{
+  "url": "https://openmaps.gov.bc.ca/geo/pub/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_ADMIN_BOUNDARIES.ADM_NR_REGIONS_SPG&outputFormat=application%2Fjson&srsName=EPSG%3A4326&count=5&CQL_FILTER=INTERSECTS%28SHAPE%2CPOINT%281212913.2239844888+995247.1229986347%29%29",
+  "nativeFilterCRS": "EPSG:3005",
+  "samplePoint": [
+    -122.7497,
+    53.9171
+  ],
+  "matched": 1,
+  "features": [
+    {
+      "id": "WHSE_ADMIN_BOUNDARIES.ADM_NR_REGIONS_SPG.Omineca Natural Resource Region",
+      "properties": {
+        "REGION_NAME": "Omineca Natural Resource Region",
+        "ORG_UNIT": "ROM",
+        "ORG_UNIT_NAME": "Omineca Natural Resource Region",
+        "FEATURE_CODE": "FM90000010",
+        "FEATURE_NAME": "Natural Resource Region",
+        "OBJECTID": 3643,
+        "SE_ANNO_CAD_DATA": null,
+        "FEATURE_AREA_SQM": 158220114550.082,
+        "FEATURE_LENGTH_M": 4525049.5768
+      }
+    }
+  ]
+}

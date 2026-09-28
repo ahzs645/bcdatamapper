@@ -1,0 +1,35 @@
+{
+  "url": "https://openmaps.gov.bc.ca/geo/pub/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY&outputFormat=application%2Fjson&srsName=EPSG%3A4326&count=5&CQL_FILTER=INTERSECTS%28GEOMETRY%2CPOINT%281212913.2239844888+995247.1229986347%29%29",
+  "nativeFilterCRS": "EPSG:3005",
+  "samplePoint": [
+    -122.7497,
+    53.9171
+  ],
+  "matched": 1,
+  "features": [
+    {
+      "id": "WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY.5192553",
+      "properties": {
+        "FEATURE_CLASS_SKEY": 435,
+        "ZONE": "SBS",
+        "SUBZONE": "mh",
+        "VARIANT": null,
+        "PHASE": null,
+        "NATURAL_DISTURBANCE": "NDT3",
+        "MAP_LABEL": "SBSmh",
+        "BGC_LABEL": "SBS mh",
+        "ZONE_NAME": "Sub-Boreal Spruce",
+        "SUBZONE_NAME": "Moist Hot",
+        "VARIANT_NAME": " ",
+        "PHASE_NAME": " ",
+        "NATURAL_DISTURBANCE_NAME": "Ecosystems with frequent stand-initiating events",
+        "FEATURE_AREA_SQM": 1082919804.9151,
+        "FEATURE_LENGTH_M": 1034792.4971,
+        "FEATURE_AREA": 1082919805,
+        "FEATURE_LENGTH": 1034792,
+        "OBJECTID": 5192553,
+        "SE_ANNO_CAD_DATA": null
+      }
+    }
+  ]
+}

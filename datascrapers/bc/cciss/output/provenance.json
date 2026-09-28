@@ -1,0 +1,27 @@
+{
+  "source": "https://thebeczone.ca/shiny/cciss/",
+  "downloadedOn": "2026-09-27",
+  "method": "Spatial Download Province",
+  "selection": {
+    "period": "1961-1990",
+    "species": "Pl",
+    "edatope": "C4"
+  },
+  "suitabilityDatabaseFilename": "FeasibilityRaw_1961_1990_C4_Pl.tif",
+  "publicMappedTileProduct": "NewFeas_1961_1990_ref_C4_Pl",
+  "equivalentToPublicMappedTiles": false,
+  "files": {
+    "historical-download-1961-1990-C4-Pl.cog.tif": {
+      "bytes": 1757256,
+      "sha256": "21e3c2dafec40494a5210c6d64de63f9ac8aa46297bbbea02836cb29ef09fcc0"
+    },
+    "historical-download-1961-1990-C4-Pl.tif": {
+      "bytes": 2888369,
+      "sha256": "b104172c84412c9046e63adb391d0c62d40523914ca4499f583343ad0649f65e"
+    },
+    "reference-bgc-1961-1990.tif": {
+      "bytes": 6939082,
+      "sha256": "e2866ad749226253c7fe54670ee9a2cbf2a3a694990f3c9acd7b99ab1ada7b80"
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "kind": "inferred-display-classes",
+  "authoritativeNumericData": false,
+  "gridReconstruction": {
+    "assumedCrs": "EPSG:4326",
+    "assumedOrigin": [
+      -139.000139,
+      60.000139
+    ],
+    "assumedStepDegrees": 0.002777777777777778,
+    "interiorFraction": 0.6,
+    "minimumClassifiedPixels": 4,
+    "minimumClassifiedCoverageAndWinningShare": 0.8,
+    "minimumObservedWinningShare": 1.0,
+    "minimumObservedClassifiedPixels": 32,
+    "cellCount": 5170,
+    "uncertainCells": 0,
+    "nodataCells": 0,
+    "extentPolicy": "Full captured cells only",
+    "originEvidence": "Archived TileJSON west/north bounds",
+    "stepEvidence": "Assumed 10 arc-seconds; fits repeated displayed edges in this pilot",
+    "tilejsonSha256": "ef7604e02ba6894e0764b765e1bd474539bb251b874c22e490dd39948c32638c",
+    "comparedClassifiedImagePixels": 575925,
+    "disagreeingClassifiedImagePixels": 0,
+    "displayPixelAgreement": 1.0,
+    "notSourceDataAccuracy": true
+  },
+  "layer": "NewFeas_1961_1990_ref_C4_Pl",
+  "zoom": 12,
+  "bounds": [
+    -124.80291677777777,
+    54.111250111111104,
+    -124.54180566666666,
+    54.26402788888888
+  ],
+  "palette": {
+    "10": [
+      0,
+      100,
+      0
+    ],
+    "20": [
+      30,
+      144,
+      255
+    ],
+    "30": [
+      238,
+      201,
+      0
+    ],
+    "40": [
+      247,
+      247,
+      247
+    ]
+  },
+  "classifier": {
+    "metric": "Euclidean sRGB",
+    "maxDistance": 60,
+    "minMargin": 20,
+    "minAlpha": 250,
+    "uncertainCode": 99,
+    "nodataCode": 0,
+    "meaning": "Heuristic thresholds, not calibrated confidence"
+  },
+  "counts": {
+    "10": 4337,
+    "20": 833
+  },
+  "rasterCells": 5170,
+  "sourceImagePixels": 589824,
+  "sources": [
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/628/1310.webp",
+      "file": "12-628-1310.webp",
+      "sha256": "779be6567f2ae3c61fa6400e5aa88d3a5224ee9101c55f527bed30ece50f0dc7"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/629/1310.webp",
+      "file": "12-629-1310.webp",
+      "sha256": "acc96f1e06a3d9ef19d6b172a62ce54d0bcf752c6242185e2b0a40b1d447e385"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/630/1310.webp",
+      "file": "12-630-1310.webp",
+      "sha256": "4eed32dd946bee2d9df86fff37dcf06ee72302f7838fc7de87d1d63db424bc02"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/628/1311.webp",
+      "file": "12-628-1311.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/629/1311.webp",
+      "file": "12-629-1311.webp",
+      "sha256": "65da0582e0658599cb9468bbc1c7af52420029b2de89790921d8733323543530"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/630/1311.webp",
+      "file": "12-630-1311.webp",
+      "sha256": "f06b3d35b9dc5245cb5733c164bbecc2819f2938ce724afff200953c412607f0"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/628/1312.webp",
+      "file": "12-628-1312.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/629/1312.webp",
+      "file": "12-629-1312.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    },
+    {
+      "url": "https://tileserver.thebeczone.ca/data/NewFeas_1961_1990_ref_C4_Pl/12/630/1312.webp",
+      "file": "12-630-1312.webp",
+      "sha256": "94761d657fcc3f00f674c8c8a6018aff07703d561a04424681a5fe3cbb1f97c5"
+    }
+  ],
+  "validation": {
+    "rasterRoundTrip": true,
+    "publishedGeometryRoundTrip": true,
+    "classAreaEqualsCellCount": true,
+    "checkedCells": 5170,
+    "validCells": 5170
+  },
+  "gzipBytes": 997,
+  "features": 3,
+  "scope": "Nine zoom-12 tiles around requested location; no smoothing"
+}

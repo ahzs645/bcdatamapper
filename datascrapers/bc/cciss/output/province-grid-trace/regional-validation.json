@@ -1,0 +1,134 @@
+{
+  "fullOutputChecks": [
+    {
+      "region": "north",
+      "cells": 4512,
+      "fullOutputMatchesRegionalReconstruction": true
+    },
+    {
+      "region": "southeast",
+      "cells": 5546,
+      "fullOutputMatchesRegionalReconstruction": true
+    },
+    {
+      "region": "island",
+      "cells": 5640,
+      "fullOutputMatchesRegionalReconstruction": true
+    },
+    {
+      "region": "prince-george",
+      "cells": 5170,
+      "fullOutputMatchesRegionalReconstruction": true
+    }
+  ],
+  "imageChecks": [
+    {
+      "region": "north",
+      "longitude": -122.7,
+      "latitude": 58.8,
+      "assumedCrs": "EPSG:4326",
+      "assumedOrigin": [
+        -139.000139,
+        60.000139
+      ],
+      "assumedStepDegrees": 0.002777777777777778,
+      "interiorFraction": 0.6,
+      "minimumClassifiedPixels": 4,
+      "minimumClassifiedCoverageAndWinningShare": 0.8,
+      "minimumObservedWinningShare": 1.0,
+      "minimumObservedClassifiedPixels": 36,
+      "cellCount": 4512,
+      "uncertainCells": 0,
+      "nodataCells": 0,
+      "extentPolicy": "Full captured cells only",
+      "originEvidence": "Archived TileJSON west/north bounds",
+      "stepEvidence": "Assumed 10 arc-seconds; fits repeated displayed edges in this pilot",
+      "tilejsonSha256": "ef7604e02ba6894e0764b765e1bd474539bb251b874c22e490dd39948c32638c",
+      "comparedClassifiedImagePixels": 570750,
+      "disagreeingClassifiedImagePixels": 0,
+      "displayPixelAgreement": 1.0,
+      "notSourceDataAccuracy": true
+    },
+    {
+      "region": "southeast",
+      "longitude": -116.0,
+      "latitude": 50.5,
+      "assumedCrs": "EPSG:4326",
+      "assumedOrigin": [
+        -139.000139,
+        60.000139
+      ],
+      "assumedStepDegrees": 0.002777777777777778,
+      "interiorFraction": 0.6,
+      "minimumClassifiedPixels": 4,
+      "minimumClassifiedCoverageAndWinningShare": 0.8,
+      "minimumObservedWinningShare": 1.0,
+      "minimumObservedClassifiedPixels": 28,
+      "cellCount": 5546,
+      "uncertainCells": 0,
+      "nodataCells": 0,
+      "extentPolicy": "Full captured cells only",
+      "originEvidence": "Archived TileJSON west/north bounds",
+      "stepEvidence": "Assumed 10 arc-seconds; fits repeated displayed edges in this pilot",
+      "tilejsonSha256": "ef7604e02ba6894e0764b765e1bd474539bb251b874c22e490dd39948c32638c",
+      "comparedClassifiedImagePixels": 569861,
+      "disagreeingClassifiedImagePixels": 0,
+      "displayPixelAgreement": 1.0,
+      "notSourceDataAccuracy": true
+    },
+    {
+      "region": "island",
+      "longitude": -125.0,
+      "latitude": 49.5,
+      "assumedCrs": "EPSG:4326",
+      "assumedOrigin": [
+        -139.000139,
+        60.000139
+      ],
+      "assumedStepDegrees": 0.002777777777777778,
+      "interiorFraction": 0.6,
+      "minimumClassifiedPixels": 4,
+      "minimumClassifiedCoverageAndWinningShare": 0.8,
+      "minimumObservedWinningShare": 1.0,
+      "minimumObservedClassifiedPixels": 28,
+      "cellCount": 5640,
+      "uncertainCells": 0,
+      "nodataCells": 1,
+      "extentPolicy": "Full captured cells only",
+      "originEvidence": "Archived TileJSON west/north bounds",
+      "stepEvidence": "Assumed 10 arc-seconds; fits repeated displayed edges in this pilot",
+      "tilejsonSha256": "ef7604e02ba6894e0764b765e1bd474539bb251b874c22e490dd39948c32638c",
+      "comparedClassifiedImagePixels": 566796,
+      "disagreeingClassifiedImagePixels": 0,
+      "displayPixelAgreement": 1.0,
+      "notSourceDataAccuracy": true
+    },
+    {
+      "region": "prince-george",
+      "longitude": -122.75,
+      "latitude": 53.9,
+      "assumedCrs": "EPSG:4326",
+      "assumedOrigin": [
+        -139.000139,
+        60.000139
+      ],
+      "assumedStepDegrees": 0.002777777777777778,
+      "interiorFraction": 0.6,
+      "minimumClassifiedPixels": 4,
+      "minimumClassifiedCoverageAndWinningShare": 0.8,
+      "minimumObservedWinningShare": 1.0,
+      "minimumObservedClassifiedPixels": 32,
+      "cellCount": 5170,
+      "uncertainCells": 0,
+      "nodataCells": 0,
+      "extentPolicy": "Full captured cells only",
+      "originEvidence": "Archived TileJSON west/north bounds",
+      "stepEvidence": "Assumed 10 arc-seconds; fits repeated displayed edges in this pilot",
+      "tilejsonSha256": "ef7604e02ba6894e0764b765e1bd474539bb251b874c22e490dd39948c32638c",
+      "comparedClassifiedImagePixels": 571933,
+      "disagreeingClassifiedImagePixels": 0,
+      "displayPixelAgreement": 1.0,
+      "notSourceDataAccuracy": true
+    }
+  ]
+}

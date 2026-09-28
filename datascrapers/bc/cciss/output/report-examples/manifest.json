@@ -1,0 +1,6 @@
+{
+  "source": "https://github.com/bcgov/ccissr/blob/a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce/data-raw/outputs/WilliamsLake_CCISS_Raw_Table.csv",
+  "sourceSha256": "1a543d01033d1f6252d1b749b063ac0ee2accadff7d0868ce34d5d41916fce62",
+  "bytes": 14063,
+  "status": "Historical published example, not calculated for the map point; original period identifiers retained."
+}

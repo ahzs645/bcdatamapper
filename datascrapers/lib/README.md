@@ -1,5 +1,9 @@
 # Polygon topology pipeline
 
+For exact class-cell polygons from an integer raster, see
+[categorical raster conversion](categorical-raster.md). That utility preserves
+native cell edges and does not simplify them.
+
 All generated, simplified polygon datasets must use
 `simplifyPolygonTopology()` from `mapshaper-topology.mjs`. The utility pins the
 Mapshaper version, simplifies in a projected CRS with metre-based tolerances,
