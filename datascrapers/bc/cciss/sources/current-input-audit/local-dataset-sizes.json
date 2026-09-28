@@ -1,0 +1,44 @@
+{
+  "measuredAt": "2026-09-28T06:20:40.622010+00:00",
+  "units": "bytes; decimal MB = bytes / 1000000",
+  "datasets": [
+    {
+      "dataset": "downloaded-legacy",
+      "path": "/Users/ahmadjalil/Downloads/CCISS_ShinyApp-main/Development/OLD/spatial_app/data",
+      "files": 5166,
+      "bytes": 488832679,
+      "tiffs": 4961,
+      "csvs": 200
+    },
+    {
+      "dataset": "browser-legacy",
+      "path": "vendor/bcdatamapper/datascrapers/bc/cciss/output/legacy-analysis",
+      "files": 46,
+      "bytes": 12887741,
+      "tiffs": 32,
+      "csvs": 0
+    },
+    {
+      "dataset": "browser-reference",
+      "path": "vendor/bcdatamapper/datascrapers/bc/cciss/output/current-reference",
+      "files": 28,
+      "bytes": 627769,
+      "tiffs": 0,
+      "csvs": 0
+    },
+    {
+      "dataset": "all-current-local-cciss-output",
+      "path": "vendor/bcdatamapper/datascrapers/bc/cciss/output",
+      "files": 862,
+      "bytes": 46937125,
+      "tiffs": 41,
+      "csvs": 0
+    }
+  ],
+  "currentFullPredictionDatasetBytes": null,
+  "notes": [
+    "Local file lengths, not allocated disk usage or network compression.",
+    "all-current-local-cciss-output includes the browser subsets and experimental rendering outputs; do not add it to those subsets.",
+    "Current full prediction arrays have not been acquired; size is unknown."
+  ]
+}
