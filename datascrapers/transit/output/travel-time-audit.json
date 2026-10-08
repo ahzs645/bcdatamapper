@@ -1,0 +1,375 @@
+{
+  "schema": "pg-travel-time-audit-v1",
+  "snapshotSha256": "e65c4e60043c446c9762b832ecc30d8169fc83d454cefa16109391388864d8a9",
+  "baselineSha256": "ef5d7a49078934aba1fc50b5236e92ab045b3a2c39dda8da32cfc0527779805d",
+  "bbox": [
+    -122.94,
+    53.78,
+    -122.59,
+    54.045
+  ],
+  "spacingMeters": 50,
+  "cols": 459,
+  "rows": 590,
+  "markerAccessMeters": 350,
+  "heatAccessMeters": 350,
+  "counts": {
+    "sampledLocations": 270810,
+    "markerAccessBefore": 57663,
+    "markerAccessAfter": 84508,
+    "heatAccessBefore": 51717,
+    "heatAccessAfter": 84508,
+    "markerHeatMismatchBefore": 5946,
+    "markerHeatMismatchAfter": 0,
+    "newlyAccessibleLocations": 26845,
+    "isolatedAccessLocations": 805
+  },
+  "components": [
+    {
+      "vertices": 15528,
+      "stops": 517,
+      "representative": [
+        -122.772339,
+        53.978888
+      ],
+      "primary": true
+    },
+    {
+      "vertices": 57,
+      "stops": 0,
+      "representative": [
+        -122.673337,
+        53.882173
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 7,
+      "stops": 0,
+      "representative": [
+        -122.680128,
+        53.88021
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 14,
+      "stops": 0,
+      "representative": [
+        -122.687703,
+        53.880197
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 3,
+      "stops": 0,
+      "representative": [
+        -122.761381,
+        53.911441
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 12,
+      "stops": 0,
+      "representative": [
+        -122.764352,
+        53.939319
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 3,
+      "stops": 0,
+      "representative": [
+        -122.779605,
+        53.902643
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 2,
+      "stops": 0,
+      "representative": [
+        -122.785493,
+        53.890307
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 2,
+      "stops": 0,
+      "representative": [
+        -122.818375,
+        53.923476
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 2,
+      "stops": 0,
+      "representative": [
+        -122.81496,
+        53.925971
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 2,
+      "stops": 0,
+      "representative": [
+        -122.810849,
+        53.938813
+      ],
+      "primary": false
+    },
+    {
+      "vertices": 2,
+      "stops": 0,
+      "representative": [
+        -122.789757,
+        53.983098
+      ],
+      "primary": false
+    }
+  ],
+  "reportedPoints": [
+    {
+      "name": "User-reported starting point",
+      "point": [
+        -122.776639,
+        53.90175
+      ],
+      "accessibleBefore": true,
+      "accessibleAfter": true,
+      "connectedToCity": true,
+      "accessMeters": 91.6
+    },
+    {
+      "name": "User-reported starting point",
+      "point": [
+        -122.779805,
+        53.902121
+      ],
+      "accessibleBefore": true,
+      "accessibleAfter": true,
+      "connectedToCity": true,
+      "accessMeters": 102.1
+    },
+    {
+      "name": "User-reported starting point",
+      "point": [
+        -122.776657,
+        53.902947
+      ],
+      "accessibleBefore": false,
+      "accessibleAfter": true,
+      "connectedToCity": true,
+      "accessMeters": 186.8
+    }
+  ],
+  "places": {
+    "checked": 135,
+    "accessibleBefore": 130,
+    "accessibleAfter": 132,
+    "residual": [
+      {
+        "name": "Forest for the World",
+        "point": [
+          -122.83928787321767,
+          53.89367236380295
+        ],
+        "accessibleBefore": false,
+        "accessibleAfter": false,
+        "connectedToCity": false,
+        "accessMeters": null
+      },
+      {
+        "name": "Forest for the World",
+        "point": [
+          -122.83581706782246,
+          53.89129799397931
+        ],
+        "accessibleBefore": false,
+        "accessibleAfter": false,
+        "connectedToCity": false,
+        "accessMeters": null
+      },
+      {
+        "name": "Forest for the Wold",
+        "point": [
+          -122.83620088300303,
+          53.8914684336485
+        ],
+        "accessibleBefore": false,
+        "accessibleAfter": false,
+        "connectedToCity": false,
+        "accessMeters": null
+      }
+    ]
+  },
+  "isolatedAccessExamples": [
+    {
+      "point": [
+        -122.76728758169935,
+        53.941919491525425
+      ],
+      "component": 5,
+      "accessMeters": 347.6
+    },
+    {
+      "point": [
+        -122.76652505446623,
+        53.941919491525425
+      ],
+      "component": 5,
+      "accessMeters": 322.6
+    },
+    {
+      "point": [
+        -122.76805010893246,
+        53.94147033898305
+      ],
+      "component": 5,
+      "accessMeters": 340.8
+    },
+    {
+      "point": [
+        -122.76728758169935,
+        53.94147033898305
+      ],
+      "component": 5,
+      "accessMeters": 307.2
+    },
+    {
+      "point": [
+        -122.76652505446623,
+        53.94147033898305
+      ],
+      "component": 5,
+      "accessMeters": 278.7
+    },
+    {
+      "point": [
+        -122.76881263616558,
+        53.94102118644068
+      ],
+      "component": 5,
+      "accessMeters": 348.5
+    },
+    {
+      "point": [
+        -122.76805010893246,
+        53.94102118644068
+      ],
+      "component": 5,
+      "accessMeters": 307.7
+    },
+    {
+      "point": [
+        -122.76728758169935,
+        53.94102118644068
+      ],
+      "component": 5,
+      "accessMeters": 270.1
+    },
+    {
+      "point": [
+        -122.76652505446623,
+        53.94102118644068
+      ],
+      "component": 5,
+      "accessMeters": 237.1
+    },
+    {
+      "point": [
+        -122.76881263616558,
+        53.940572033898306
+      ],
+      "component": 5,
+      "accessMeters": 324.0
+    },
+    {
+      "point": [
+        -122.76805010893246,
+        53.940572033898306
+      ],
+      "component": 5,
+      "accessMeters": 279.7
+    },
+    {
+      "point": [
+        -122.76728758169935,
+        53.940572033898306
+      ],
+      "component": 5,
+      "accessMeters": 237.7
+    },
+    {
+      "point": [
+        -122.76652505446623,
+        53.940572033898306
+      ],
+      "component": 5,
+      "accessMeters": 199.4
+    },
+    {
+      "point": [
+        -122.76881263616558,
+        53.94012288135593
+      ],
+      "component": 5,
+      "accessMeters": 305.8
+    },
+    {
+      "point": [
+        -122.76805010893246,
+        53.94012288135593
+      ],
+      "component": 5,
+      "accessMeters": 258.4
+    },
+    {
+      "point": [
+        -122.76728758169935,
+        53.94012288135593
+      ],
+      "component": 5,
+      "accessMeters": 212.2
+    },
+    {
+      "point": [
+        -122.76652505446623,
+        53.94012288135593
+      ],
+      "component": 5,
+      "accessMeters": 168.2
+    },
+    {
+      "point": [
+        -122.7695751633987,
+        53.93967372881356
+      ],
+      "component": 5,
+      "accessMeters": 343.1
+    },
+    {
+      "point": [
+        -122.76881263616558,
+        53.93967372881356
+      ],
+      "component": 5,
+      "accessMeters": 294.8
+    },
+    {
+      "point": [
+        -122.76805010893246,
+        53.93967372881356
+      ],
+      "component": 5,
+      "accessMeters": 245.6
+    }
+  ],
+  "failures": []
+}

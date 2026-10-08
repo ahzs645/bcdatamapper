@@ -40,6 +40,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | ICBC crashes | `icbc:sync` | ICBC Tableau crash workbook/data endpoints | `public/data/icbc/` |
 | Heat and shade | `heat-shade:sync` | CityPG heat/shade snapshots plus Landsat metadata | `public/data/heat-shade/` |
 | BC Transit GTFS | `transit:gtfs:sync` | BC Transit GTFS feed for Prince George | `public/data/transit/` and route-related CityPG road output |
+| Transit travel-time snapshot and audit | Python `datascrapers/transit/build-travel-time.py`, `audit-travel-time.py` | Retained official PG GTFS feed plus CityPG roads and walkways | `datascrapers/transit/output/prince_george_travel_time.json.gz`, `travel-time-audit.json`; see [build and reuse notes](datascrapers/transit/TRAVEL-TIME.md) |
 | HealthyPlan PG | `healthyplan-pg:sync`, `healthyplan-pg:sync:education`, `healthyplan-pg:sync:citypg-business` | BC Data Catalogue education CSVs, CityPG-owned business licence snapshots, OSM Overpass, and BC Address Geocoder via shared mapping utilities | `datascrapers/healthyplan-pg/output/` |
 | BC economic regions and hierarchy | `economic-regions:sync`, `economic-regions:validate` | Statistics Canada 2021 ER geometry and official SGC CD/CSD membership | `datascrapers/bc/boundaries/output/StatCan/bc_economic_regions_2021*` |
 | State of the North inventory and extraction pilots | `state-of-north:inventory`, `state-of-north:samples` | NDIT public Power BI report | `datascrapers/bc/state-of-north/output/` |
