@@ -9,12 +9,15 @@ Each candidate must appear as `SUBMITTED` in a fresh anonymous native `getSearch
 ```sh
 python3 snapshot.py --workers 4
 python3 snapshot.py --seed /absolute/path/to/private-export --workers 4
+python3 forms.py
 python3 -m unittest discover -s . -p 'test_*.py'
 ```
 
 Workers are bounded to 1, 2 or 4. There are no login, upload, save, delete or other mutation routes. Ordinary reads are bounded to 20 MiB; the two rich-content routes are bounded to 128 MiB because native form content may contain large inline images. No source response envelopes, cookies, credentials or private export files are written here. Network read failures are retried once; omitted fields/inventories remain explicit in the manifest. The manifest must be reviewed before deploying a partial capture.
 
 `--captured-at <ISO timestamp>` pins the metadata timestamp for reproducible rebuilds of otherwise identical source content. JSON uses stable record order, UTF-8 and compact separators. Gzip uses compression level 9 with `mtime=0`, without a source filename; identical JSON bytes produce identical compressed bytes.
+
+`forms.py` refreshes form layout metadata only. It reads the form IDs already present in the public content snapshot, freshly verifies those records remain anonymously submitted with the same form associations, and reads their definitions through anonymous `getForm.php`. It does not use the private export or recapture submission field values. The existing content gzip is checked for byte identity. A normal full `snapshot.py` capture also emits the corresponding definitions automatically.
 
 ## Output contract
 
@@ -48,6 +51,18 @@ Workers are bounded to 1, 2 or 4. There are no login, upload, save, delete or ot
 ```
 
 Native parent `-1` is a submission; other present parent values follow the original activity convention. Omitted parent metadata never implies a type. `submittedBy` is included only because it is returned publicly in the anonymous source search table; unrelated administrative identities are excluded.
+
+## Public form definitions
+
+`output/forms.json.gz` decompresses to `{schema:"nechako-public-form-definitions-v1",source,capturedAt,forms:[...]}`. Each form has `id`, `name`, `pages:[{id,label?}]`, and `nodes` in the exact source array order. Each node carries `fieldId?`, `label`, `type`, `dynamic`, `page`, `nodeRank`, `fieldRank`, `nodeType`, `nodeName?`, and `semanticType`. Numeric/string ranks retain their source types and zero values. Contiguous dynamic fields can be grouped using their native page/nodeRank; no fields are re-sorted or merged across static nodes.
+
+Semantic markers include dynamic, attachments, spatial, linked, parent, permissions, monitoring and notifications. Permission/notification markers describe the layout only: no permission assignments, recipients, histories or administrative identities are fetched or published. A dynamic `type:"label"` is a source section label; its label text remains useful even when its submission value is an empty array.
+
+`required` and curated `options` are optional and retained only when supplied for dynamic fields. Known option data keys retain false, zero and empty values; arbitrary component configuration, listeners, CSS and JavaScript are omitted. Optional source HTML `content` is structurally sanitized and embedded media bodies removed. Source page labels are retained only for known page IDs when explicitly provided. The current 11 forms supply no page labels, required flags, choice options or static HTML content; every source page is 1. The application's General/Preview tabs belong to the original submission viewer, not inferred form-page labels.
+
+The manifest adds `formCount`, `formNodeCount`, `formsCapturedAt`, a `files["forms.json.gz"]` byte/hash entry and explicit anonymous form-definition verification flags. Content capture time and the submission gzip/hash remain unchanged during a forms-only refresh.
+
+The reviewed form snapshot contains **11 forms and 134 nodes**: 82 dynamic fields and 52 static resource/layout markers. It measures **26,030 decoded JSON bytes / 2,203 gzip bytes**. The corresponding submission snapshot remains 1,465 records, 18,688 field values, 7,462,208 decoded bytes and 1,174,698 gzip bytes. Manifest timestamps and hashes identify these exact artifacts; later refreshes may change their sizes.
 
 ## Content and media handling
 

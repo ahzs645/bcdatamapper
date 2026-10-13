@@ -22,6 +22,12 @@
       "sha256": "460193c0f19e4141ad0e3eeb152a7415a5f0f5ce3d0e380a48c90dfa60950858",
       "uncompressedBytes": 7462208,
       "uncompressedSha256": "e3e888204d8c23eb564127d04901c1883d8119e65464f8b9de18de62550bed0f"
+    },
+    "forms.json.gz": {
+      "bytes": 2203,
+      "sha256": "f4857ecea00a23e9d6073800a73592ab7817cf7c3b13cf8aab9cbd9474f7afaf",
+      "uncompressedBytes": 26030,
+      "uncompressedSha256": "c35d03696d217a4f3d71d1ae3e2b0fb87ac6522215fe732d3a0610cad856d6ee"
     }
   },
   "verification": {
@@ -55,7 +61,14 @@
       "allExplicitAnonymous": true,
       "noContradictorySuccessObserved": true,
       "note": "Representative fresh responses for every used route conform. The additional explicit success:false/nonobject guard was added after this capture started; historic per-request flags were not retained."
-    }
+    },
+    "formDefinitionMethods": [
+      "getSearchResults.php",
+      "getForms.php",
+      "getForm.php"
+    ],
+    "formDefinitionsExplicitAnonymous": true,
+    "formDefinitionsScopeVerifiedAfterCapture": true
   },
   "limitations": [
     "Rich HTML is sanitized; inline media bytes are replaced with source references and SHA-256 digests, not remote URLs.",
@@ -63,5 +76,8 @@
     "Attachment/spatial-file bodies and monitoring observations are excluded.",
     "submittedBy and parentId are included only when returned anonymously; assignedTo, private drafts, permissions and administrative catalogue text are excluded.",
     "Current form definitions describe captured values; this is not an atomic historical database snapshot."
-  ]
+  ],
+  "formCount": 11,
+  "formNodeCount": 134,
+  "formsCapturedAt": "2026-10-13T00:42:03.557122+00:00"
 }

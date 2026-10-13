@@ -165,7 +165,8 @@ class SnapshotTests(unittest.TestCase):
                     attributes = [{'form_id': 9, 'form_name': 'Public form'}]
                 elif route == 'getForm.php':
                     attributes = {'nodes': [{'field_id': x, 'field_label': 'Public field', 'field_type': 'text',
-                                              'nodeInfo': {'node_is_dynamic': True}} for x in [10, 11, 12, 13]]}
+                                              'field_node_page': 1, 'field_node_rank': 0, 'field_rank': str(x-9),
+                                              'field_node_type': 2, 'nodeInfo': {'node_is_dynamic': True, 'node_name': 'dynamiccontentNode.form'}} for x in [10, 11, 12, 13]]}
                 elif route == 'GetFormStatistics.php':
                     attributes = {'rows': {'1': {'field_10': False, 'field_11': 0, 'field_12': []}}}
                 elif route == 'getFieldValue.php':

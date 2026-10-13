@@ -262,10 +262,12 @@ def capture(seed, output, workers, captured_at):
         if seed_ids is None:
             seed_ids = {str(row['submission_id']) for row in candidates}
         names = {str(r['form_id']): r['form_name'] for r in main.read('getForms.php', {})['attributes']}
-        fields, reports, omissions = {}, {}, {'seedSubmittedAbsentAnonymously': len(seed_ids - {str(r['submission_id']) for r in candidates}), 'unverifiedFields': 0, 'unverifiedInventories': 0, 'unreadableForms': 0, 'unreadableSubmissions': 0, 'bulkReportsUnavailable': 0}
+        fields, reports, definitions, omissions = {}, {}, {}, {'seedSubmittedAbsentAnonymously': len(seed_ids - {str(r['submission_id']) for r in candidates}), 'unverifiedFields': 0, 'unverifiedInventories': 0, 'unreadableForms': 0, 'unreadableSubmissions': 0, 'bulkReportsUnavailable': 0}
         for fid in sorted({str(r['form_id']) for r in candidates}, key=int):
             try:
-                fields[fid] = dynamic_fields(main.read('getForm.php', {'id': fid}))
+                definition = main.read('getForm.php', {'id': fid})
+                fields[fid] = dynamic_fields(definition)
+                definitions[fid] = definition
             except (ValueError, OSError, http.client.HTTPException):
                 omissions['unreadableForms'] += 1
                 continue
@@ -351,6 +353,9 @@ def capture(seed, output, workers, captured_at):
         output.mkdir(parents=True, exist_ok=True)
         (output / 'submissions.json.gz').write_bytes(compressed)
         (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
+        from forms import publish_forms
+        publish_forms(output, {fid: definition for fid, definition in definitions.items()
+                               if any(record['formId'] == fid for record in records)}, names, captured_at)
         print(json.dumps({'stage': 'finished', 'records': len(records), 'bytes': len(raw), 'gzipBytes': len(compressed), 'omissions': omissions}), flush=True)
     finally:
         for item in clients:
