@@ -1,0 +1,67 @@
+{
+  "schema": "nechako-public-content-manifest-v1",
+  "source": "https://nechakowatershed-portal.ca/",
+  "capturedAt": "2026-10-12T23:59:52.112413+00:00",
+  "scope": "Anonymously visible submitted records; each included field and inventory returned successfully with loggedIn:false. Private export used only for submitted ID eligibility.",
+  "recordCount": 1465,
+  "fieldCount": 18688,
+  "mediaCount": 55,
+  "attachmentCount": 124,
+  "layerCount": 1713,
+  "omissions": {
+    "seedSubmittedAbsentAnonymously": 120,
+    "unverifiedFields": 0,
+    "unverifiedInventories": 0,
+    "unreadableForms": 0,
+    "bulkReportsUnavailable": 0,
+    "unreadableSubmissions": 0
+  },
+  "files": {
+    "submissions.json.gz": {
+      "bytes": 1174698,
+      "sha256": "460193c0f19e4141ad0e3eeb152a7415a5f0f5ce3d0e380a48c90dfa60950858",
+      "uncompressedBytes": 7462208,
+      "uncompressedSha256": "e3e888204d8c23eb564127d04901c1883d8119e65464f8b9de18de62550bed0f"
+    }
+  },
+  "verification": {
+    "anonymousSearchRecordCount": 1465,
+    "seedSubmittedCount": 1585,
+    "methods": [
+      "getSearchResults.php",
+      "getForms.php",
+      "getForm.php",
+      "GetFormStatistics.php",
+      "getFieldValue.php",
+      "getSubmissionAttachments.php",
+      "getSubmissionLayers.php",
+      "getSubmissionLinkedLayers.php"
+    ],
+    "sourceLink": "Original portal requires its in-page Search/openSubmission controls; no submission deep-link URL verified.",
+    "anonymousSearchVerifiedAfterCapture": true,
+    "anonymousSearchAddedDuringCapture": 0,
+    "anonymousSearchRemovedDuringCapture": 0,
+    "seedApplied": true,
+    "seedDraftsExcluded": 82,
+    "eligibleStateAndFormVerifiedAfterCapture": true,
+    "scopeVerifiedAt": "2026-10-13T00:17:11.527825+00:00",
+    "captureEnvelopeChecks": [
+      "status:success",
+      "error absent",
+      "loggedIn:false"
+    ],
+    "postCaptureEnvelopeAudit": {
+      "routeCount": 8,
+      "allExplicitAnonymous": true,
+      "noContradictorySuccessObserved": true,
+      "note": "Representative fresh responses for every used route conform. The additional explicit success:false/nonobject guard was added after this capture started; historic per-request flags were not retained."
+    }
+  },
+  "limitations": [
+    "Rich HTML is sanitized; inline media bytes are replaced with source references and SHA-256 digests, not remote URLs.",
+    "Existing remote media URLs are references only; their bodies are not fetched.",
+    "Attachment/spatial-file bodies and monitoring observations are excluded.",
+    "submittedBy and parentId are included only when returned anonymously; assignedTo, private drafts, permissions and administrative catalogue text are excluded.",
+    "Current form definitions describe captured values; this is not an atomic historical database snapshot."
+  ]
+}
