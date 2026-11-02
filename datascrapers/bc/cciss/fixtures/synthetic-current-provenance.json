@@ -1,0 +1,8 @@
+{
+  "datasetVersion": "SYNTHETIC regression fixture; not planning data",
+  "ccissrCommit": "a6ab8ee3a714ebf4a3f41e16f04d9f58404de7ce",
+  "shinyCommit": "3d602d430d15ab74a341c63b31bbf6b1bc22ec31",
+  "source": "Hand-constructed synthetic model votes and ecological rows for independent regression checks. No real location, model, BGC or species.",
+  "versionMatched": true,
+  "synthetic": true
+}

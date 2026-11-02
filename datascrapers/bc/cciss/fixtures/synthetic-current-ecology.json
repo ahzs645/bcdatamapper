@@ -1,0 +1,88 @@
+{
+  "schema": "cciss-ecology-v1",
+  "tables": {
+    "E1": [
+      {
+        "BGC": "TESTalpha",
+        "SS_NoSpace": "TESTalpha/01",
+        "Edatopic": "C4",
+        "SpecialCode": null
+      },
+      {
+        "BGC": "TESTalpha",
+        "SS_NoSpace": "TESTalpha/01",
+        "Edatopic": "D4",
+        "SpecialCode": null
+      },
+      {
+        "BGC": "TESTbeta",
+        "SS_NoSpace": "TESTbeta/01",
+        "Edatopic": "C4",
+        "SpecialCode": null
+      },
+      {
+        "BGC": "TESTbeta",
+        "SS_NoSpace": "TESTbeta/01",
+        "Edatopic": "D4",
+        "SpecialCode": null
+      },
+      {
+        "BGC": "TESTgamma",
+        "SS_NoSpace": "TESTgamma/01",
+        "Edatopic": "C4",
+        "SpecialCode": null
+      },
+      {
+        "BGC": "TESTgamma",
+        "SS_NoSpace": "TESTgamma/01",
+        "Edatopic": "D4",
+        "SpecialCode": null
+      }
+    ],
+    "E1_Phase": [],
+    "S1": [
+      {
+        "BGC": "TESTalpha",
+        "SS_NoSpace": "TESTalpha/01",
+        "Spp": "TESTa",
+        "Feasible": 1,
+        "OHR": false
+      },
+      {
+        "BGC": "TESTalpha",
+        "SS_NoSpace": "TESTalpha/01",
+        "Spp": "TESTb",
+        "Feasible": 2,
+        "OHR": false
+      },
+      {
+        "BGC": "TESTbeta",
+        "SS_NoSpace": "TESTbeta/01",
+        "Spp": "TESTa",
+        "Feasible": 2,
+        "OHR": false
+      },
+      {
+        "BGC": "TESTbeta",
+        "SS_NoSpace": "TESTbeta/01",
+        "Spp": "TESTb",
+        "Feasible": 1,
+        "OHR": false
+      },
+      {
+        "BGC": "TESTgamma",
+        "SS_NoSpace": "TESTgamma/01",
+        "Spp": "TESTa",
+        "Feasible": 5,
+        "OHR": false
+      },
+      {
+        "BGC": "TESTgamma",
+        "SS_NoSpace": "TESTgamma/01",
+        "Spp": "TESTb",
+        "Feasible": 3,
+        "OHR": false
+      }
+    ]
+  }
+}
