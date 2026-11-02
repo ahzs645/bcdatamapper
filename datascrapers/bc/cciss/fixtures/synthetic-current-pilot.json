@@ -1,0 +1,612 @@
+{
+  "schema": "cciss-current-pilot-v1",
+  "synthetic": true,
+  "fixturePurpose": "Hand-constructed regression data only. No real site or planning recommendation.",
+  "requestValid": true,
+  "requestedSites": [
+    990000001,
+    990000002
+  ],
+  "dimensions": [
+    {
+      "array_ordinal": 1,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 2,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 3,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 4,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 5,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 6,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 7,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 8,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 9,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 10,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 11,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 12,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 13,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 14,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 15,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 16,
+      "gcm_id": 1,
+      "gcm": "TESTmodel1",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 17,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 18,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 19,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 20,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 21,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 22,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 23,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 24,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 1,
+      "scenario": "TESTscenario1",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 25,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 26,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 1,
+      "futureperiod": "2021",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 27,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 28,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 2,
+      "futureperiod": "2041",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 29,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 30,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 3,
+      "futureperiod": "2061",
+      "run_id": 2,
+      "run": "TESTrun2"
+    },
+    {
+      "array_ordinal": 31,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 1,
+      "run": "TESTrun1"
+    },
+    {
+      "array_ordinal": 32,
+      "gcm_id": 2,
+      "gcm": "TESTmodel2",
+      "scenario_id": 2,
+      "scenario": "TESTscenario2",
+      "futureperiod_id": 4,
+      "futureperiod": "2081",
+      "run_id": 2,
+      "run": "TESTrun2"
+    }
+  ],
+  "bgcCodes": [
+    {
+      "bgc_id": 1,
+      "bgc": "TESTalpha"
+    },
+    {
+      "bgc_id": 2,
+      "bgc": "TESTbeta"
+    },
+    {
+      "bgc_id": 3,
+      "bgc": "TESTgamma"
+    }
+  ],
+  "future": [
+    {
+      "siteno": 990000001,
+      "bgc_id": [
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "siteno": 990000002,
+      "bgc_id": [
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    }
+  ],
+  "observed": [
+    {
+      "siteno": 990000001,
+      "bgc_pred": "TESTalpha"
+    },
+    {
+      "siteno": 990000002,
+      "bgc_pred": "TESTalpha"
+    }
+  ],
+  "novelty": [
+    {
+      "siteno": 990000001,
+      "novelty": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ]
+    },
+    {
+      "siteno": 990000002,
+      "novelty": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ]
+    }
+  ],
+  "attribution": [
+    {
+      "siteno": 990000001,
+      "bgc": "TESTalpha"
+    },
+    {
+      "siteno": 990000002,
+      "bgc": "TESTalpha"
+    }
+  ],
+  "siteGeometry": [
+    {
+      "siteno": 990000001,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "siteno": 990000002,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

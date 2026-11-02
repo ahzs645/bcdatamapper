@@ -6,20 +6,37 @@
 -- Table names follow the downloaded Shiny app. Confirm names/columns first.
 -- This preserves arrays and explicit dimension order; it does not recompute ratings.
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY;
-WITH requested AS (
-  SELECT DISTINCT value::bigint AS siteno
-  FROM jsonb_array_elements_text(:'site_ids'::jsonb)
-  WHERE jsonb_array_length(:'site_ids'::jsonb) BETWEEN 1 AND 25
+WITH input AS (
+  SELECT :'site_ids'::jsonb AS ids
+), requested_ids AS (
+  SELECT CASE WHEN jsonb_typeof(value) = 'number' THEN CASE
+    WHEN value::text ~ '^-?[0-9]{1,16}$'
+      AND abs(value::text::numeric) <= 9007199254740991
+    THEN value::text::bigint ELSE NULL END
+    ELSE NULL
+  END AS siteno
+  FROM input CROSS JOIN LATERAL jsonb_array_elements(
+    CASE WHEN jsonb_typeof(ids) = 'array' THEN ids ELSE '[]'::jsonb END
+  ) AS requested_value(value)
+), request_validation AS (
+  SELECT count(*) BETWEEN 1 AND 25
+    AND bool_and(siteno IS NOT NULL)
+    AND count(DISTINCT siteno) = count(*) AS valid
+  FROM requested_ids
+), requested AS (
+  SELECT siteno FROM requested_ids
+  WHERE (SELECT valid FROM request_validation)
 ), dimensions AS (
   SELECT row_number() OVER (ORDER BY gcm_id, scenario_id, futureperiod_id, run_id) AS array_ordinal,
-         gcm_id, scenario_id, futureperiod_id, run_id, gcm, scenario, futureperiod, run
+         gcm_id, scenario_id, futureperiod_id, run_id, gcm, scenario,
+         futureperiod::text AS futureperiod, run
   FROM gcm CROSS JOIN scenario CROSS JOIN futureperiod CROSS JOIN run
 )
 SELECT jsonb_build_object(
   'schema', 'cciss-current-pilot-v1',
   'exportedAt', current_timestamp,
   'requestedSites', :'site_ids'::jsonb,
-  'requestValid', jsonb_array_length(:'site_ids'::jsonb) BETWEEN 1 AND 25,
+  'requestValid', (SELECT valid FROM request_validation),
   'dimensions', (SELECT jsonb_agg(to_jsonb(d) ORDER BY array_ordinal) FROM dimensions d),
   'bgcCodes', (SELECT jsonb_agg(to_jsonb(b) ORDER BY bgc_id) FROM bgc14 b),
   'future', (SELECT jsonb_agg(to_jsonb(f) ORDER BY siteno) FROM cciss_future14_array f JOIN requested USING (siteno)),
