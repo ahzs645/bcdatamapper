@@ -18,6 +18,8 @@ npm run food-health:refresh
 
 This runs the incremental scraper for Prince George and writes to `datascrapers/food-health/output/restaurants.json`. The scraper resumes from existing records and saves progress after each restaurant.
 
+`--refresh-older-than 30` re-fetches any record last fetched more than 30 days ago. Without it the scraper skips every record it already holds and only adds new premises, so existing restaurants never gain new inspections. A re-fetch merges into the stored record: geocoding and inspections the source no longer lists are kept, and a failed fetch leaves the record untouched.
+
 ## Geocode Missing Restaurant Coordinates
 
 ```bash
@@ -30,7 +32,7 @@ This uses OpenStreetMap Nominatim, skips restaurants that already have coordinat
 
 ```bash
 python3 datascrapers/food-health/healthspace_pg_restaurants.py --list-cities
-python3 datascrapers/food-health/fetch_incremental.py --city "Prince George" --output datascrapers/food-health/output/restaurants.json --delay 5
+python3 datascrapers/food-health/fetch_incremental.py --city "Prince George" --output datascrapers/food-health/output/restaurants.json --delay 5 --refresh-older-than 30
 python3 datascrapers/food-health/geocode_restaurants.py --file datascrapers/food-health/output/restaurants.json --delay 1.5
 ```
 
