@@ -11,7 +11,7 @@ const OUTPUT_DIR = path.join(ROOT, 'datascrapers/open-litter-map/output')
 const API_URL = 'https://openlittermap.com/api/points'
 const SOURCE_MAP_URL = 'https://openlittermap.com/global?lat=53.894055&lon=-122.766838&zoom=12.00'
 const USER_AGENT = 'PGMaps bcdatamapper OpenLitterMap sync (contact: https://pgmaps.ca)'
-const DEDICATION = 'This Prince George litter map is dedicated to the memory of Frank Ogiamien, whose OpenLitterMap contributions make up much of the local record.'
+const DEDICATION = 'This Prince George litter map is dedicated to the memory of Frank Ogiamien, whose OpenLitterMap contributions make up nearly all of the local record.'
 
 const args = parseArgs(process.argv.slice(2))
 const boundaryPath = args.boundary ?? DEFAULT_BOUNDARY_PATH
