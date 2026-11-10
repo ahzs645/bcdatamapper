@@ -75,4 +75,7 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
         with:
-          timeout: 1800000
+          # The action's maximum. It ignores anything larger with a warning,
+          # and cancels the deployment when the time runs out, so a timed-out
+          # publish needs a new commit: Pages will not deploy that commit again.
+          timeout: 600000

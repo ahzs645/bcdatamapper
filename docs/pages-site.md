@@ -37,6 +37,10 @@ Pages serves one version at a time: whatever the last publish built.
 - A push to `main` that touches a mapped source publishes it straight away.
 - To roll back, or to publish an exact commit, run **Publish data site** by hand
   with that commit as `ref`.
+- The deploy step allows 10 minutes, the action's maximum, and cancels the
+  deployment when they run out. The previous version stays live. Retry with a
+  new commit on `main`, not a re-run: Pages keys a deployment by the run's
+  commit and does not deploy a cancelled one again.
 - `data/version.json` records the commit and, per folder, a SHA-256 fingerprint
   over every published path and file hash. `pages/site.mjs` computes it, and
   PGMaps imports the same module: its deploy compares the live fingerprints with
