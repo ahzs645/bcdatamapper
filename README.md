@@ -69,7 +69,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | CANUE extracts and map layers | `canue:bc:*`, `canue:map-*`, `canue:pmtiles`, `canue:v2:*` | Local CANUE archives plus app boundary data | `public/data/canue/bc/`, `build/canue-*`, and external PMTiles/R2 outputs when requested |
 | Canada administrative geographies | `canada-admin:sync`, `canada-admin:overviews`, `canada-admin:validate`, `canada-admin:pmtiles:*` | Statistics Canada CSD/CD boundaries, NRCan CLSS legal lands, and provincial overlays | `datascrapers/canada/admin-geographies/output/`, generated PMTiles, and Cloudflare R2 publication catalog |
 | Census boundaries and variables | `census:sync`, `census:variables` | Statistics Canada geospatial/census vector source files | `public/data/census/` |
-| BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `public/data/bc-assessment/` |
+| BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `datascrapers/bc/assessment/output/` |
 | Northern Health food inspection data | `food-health:refresh`, `food-health:geocode`, `food-health:bc-geocoder-check` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `datascrapers/food-health/output/`, `datascrapers/food-health/cache/` |
 | BC MSP facility map | `health:msp-facilities` | BC MSP Blue Book SQLite data joined to public BC health-service provider layers and the BC Address Geocoder | `datascrapers/health/msp-facilities/output/` |
 | Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap` | CityPG layers, ICBC crashes, transit-owned stop snapshots, BC child care output, and supplemental walkability inputs | `public/data/walkability/` |
@@ -236,7 +236,10 @@ npm run bc-assessment:refresh
 ```
 
 The refresh command updates `datascrapers/bc/assessment/source/prince_george_parcels.geojson`
-and then rebuilds `public/data/bc-assessment/parcels.geojson`. It converts Esri
+and then rebuilds `datascrapers/bc/assessment/output/parcels.geojson`, which is
+committed and which PGMaps copies to `public/data/bc-assessment/`. The build
+reads the census and boundary snapshots in this repository, so rerun it and
+commit the result when those change. It converts Esri
 polygon rings into valid GeoJSON `Polygon`/`MultiPolygon` geometries and applies
 a Shapely validity repair fallback for self-intersections. The detail CSV remains
 `datascrapers/bc/assessment/source/prince_george_full.csv`; the live map layer does not
