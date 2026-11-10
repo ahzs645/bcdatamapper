@@ -1,8 +1,9 @@
 {
-  "folders": ["canada-admin", "cciss", "citypg", "drought", "forest", "network-availability"],
+  "folders": ["canada-admin", "cciss", "census", "citypg", "drought", "forest", "network-availability"],
   "mappings": [
     ["datascrapers/canada/admin-geographies/output", "canada-admin"],
     ["datascrapers/bc/cciss/output", "cciss"],
+    ["datascrapers/census/output", "census"],
     ["datascrapers/citypg/output", "citypg"],
     ["datascrapers/bc/drought/output", "drought"],
     [
