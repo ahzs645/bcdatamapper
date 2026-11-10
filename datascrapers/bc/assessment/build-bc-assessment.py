@@ -6,11 +6,15 @@ then spatial-join each property to configured study-area boundaries.
 Input:
   - datascrapers/bc/assessment/source/prince_george_parcels.geojson  (30K parcel polygons)
   - datascrapers/bc/assessment/source/prince_george_full.csv          (assessment + detail data)
-  - public/data/census/prince_george_{ct,da,db}.geo.json         (census boundaries)
-  - public/data/boundaries/*                                     (health, school, regional, watershed boundaries)
+  - datascrapers/census/output/prince_george_{ct,da,db}.geo.json     (census boundaries)
+  - datascrapers/bc/boundaries/output/{BCMoH,BC,BCFWA}/*              (health, regional, watershed boundaries)
+  - datascrapers/citypg/output-boundaries/CityPG/*                    (school catchments)
 
 Output:
-  - public/data/bc-assessment/parcels.geojson     (enriched GeoJSON with boundary IDs)
+  - datascrapers/bc/assessment/output/parcels.geojson  (enriched GeoJSON with boundary IDs)
+
+Every input and the output are in this repository, so the build needs no PGMaps
+checkout. PGMaps copies the committed output to public/data/bc-assessment.
 """
 
 import csv
@@ -26,18 +30,20 @@ from shapely import make_valid
 from shapely.strtree import STRtree
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.abspath(os.environ.get("PGMAPS_ROOT", os.path.dirname(SCRIPT_DIR)))
+# datascrapers/bc/assessment -> repository root
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
 
 SOURCE_DIR = os.path.join(SCRIPT_DIR, "source")
 
 GEOJSON_PATH = os.path.join(SOURCE_DIR, "prince_george_parcels.geojson")
 CSV_PATH = os.path.join(SOURCE_DIR, "prince_george_full.csv")
 
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, "public", "data", "bc-assessment")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "parcels.geojson")
 
-CENSUS_DIR = os.path.join(PROJECT_ROOT, "public", "data", "census")
-BOUNDARY_DIR = os.path.join(PROJECT_ROOT, "public", "data", "boundaries")
+CENSUS_DIR = os.path.join(REPO_ROOT, "datascrapers", "census", "output")
+BOUNDARY_DIR = os.path.join(REPO_ROOT, "datascrapers", "bc", "boundaries", "output")
+CITYPG_BOUNDARY_DIR = os.path.join(REPO_ROOT, "datascrapers", "citypg", "output-boundaries", "CityPG")
 BOUNDARY_LEVELS = {
     "ct": {
         "path": os.path.join(CENSUS_DIR, "prince_george_ct.geo.json"),
@@ -72,11 +78,11 @@ BOUNDARY_LEVELS = {
         "code_props": ["ADMIN_AREA_ABBREVIATION", "LGL_ADMIN_AREA_ID"],
     },
     "elementarySchoolCatchment": {
-        "path": os.path.join(BOUNDARY_DIR, "CityPG", "elementary_school_catchments.geojson"),
+        "path": os.path.join(CITYPG_BOUNDARY_DIR, "elementary_school_catchments.geojson"),
         "code_props": ["OBJECTID"],
     },
     "secondarySchoolCatchment": {
-        "path": os.path.join(BOUNDARY_DIR, "CityPG", "secondary_school_catchments.geojson"),
+        "path": os.path.join(CITYPG_BOUNDARY_DIR, "secondary_school_catchments.geojson"),
         "code_props": ["OBJECTID"],
     },
     "majorWatershed": {
