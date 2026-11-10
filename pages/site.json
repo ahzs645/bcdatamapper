@@ -1,0 +1,16 @@
+{
+  "folders": ["canada-admin", "cciss", "citypg", "drought", "forest", "network-availability"],
+  "mappings": [
+    ["datascrapers/canada/admin-geographies/output", "canada-admin"],
+    ["datascrapers/bc/cciss/output", "cciss"],
+    ["datascrapers/citypg/output", "citypg"],
+    ["datascrapers/bc/drought/output", "drought"],
+    [
+      "datascrapers/bc/forest-map-sources/output/bc_bigtree_registry.geojson",
+      "forest/big-trees/bc_bigtree_registry.geojson"
+    ],
+    ["datascrapers/bc/forest-map-sources/output/species-at-risk", "forest/species-at-risk"],
+    ["datascrapers/bc/forest-map-sources/output/visual-inventory", "forest/visual-inventory"],
+    ["datascrapers/network-availability/output", "network-availability"]
+  ]
+}

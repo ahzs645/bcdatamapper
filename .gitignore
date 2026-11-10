@@ -75,3 +75,6 @@ datascrapers/bc/parcelmap/source/
 
 # Versioned EDI source and normalized review data remain local pending publication.
 datascrapers/bc/early-learning/cache/
+
+# pages/build-site.mjs output
+/_site/
