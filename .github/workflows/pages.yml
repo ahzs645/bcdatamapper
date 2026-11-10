@@ -1,0 +1,77 @@
+name: Publish data site
+
+# Serves the folders in pages/site.json at
+# https://projects.ahmadjalil.com/bcdatamapper/data/, so PGMaps loads them
+# without copying them into its own Pages build. See docs/pages-site.md.
+#
+# Pushes to main publish the new data as soon as it lands. To roll back, or to
+# publish an exact commit, run this workflow by hand with that commit as `ref`.
+on:
+  push:
+    branches: [main]
+    # pages/build-site.mjs fails when a mapped source is missing here.
+    paths:
+      - 'pages/**'
+      - '.github/workflows/pages.yml'
+      - 'datascrapers/canada/admin-geographies/output/**'
+      - 'datascrapers/bc/cciss/output/**'
+      - 'datascrapers/citypg/output/**'
+      - 'datascrapers/bc/drought/output/**'
+      - 'datascrapers/bc/forest-map-sources/output/bc_bigtree_registry.geojson'
+      - 'datascrapers/bc/forest-map-sources/output/species-at-risk/**'
+      - 'datascrapers/bc/forest-map-sources/output/visual-inventory/**'
+      - 'datascrapers/network-availability/output/**'
+  # Pull requests build and size the site without publishing it.
+  pull_request:
+    paths:
+      - 'pages/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Commit, branch or tag to publish (default: the run's commit)"
+        required: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.ref) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      # The nested healthdata submodule holds nothing this site publishes.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Assemble the site
+        run: node pages/build-site.mjs --out _site
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 1800000

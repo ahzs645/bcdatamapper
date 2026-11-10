@@ -34,3 +34,10 @@ If the source polygons intentionally overlap, are isolated features, or are not 
 
 - `datascrapers/bc/boundaries/sync-bcer-admin-zones.mjs`
 - `datascrapers/bc/boundaries/build-dev-bc-fwa-watersheds.mjs`
+
+## Pages data site
+
+- `docs/pages-site.md` is the contract for `pages/site.json` and `.github/workflows/pages.yml`, which publish snapshot folders to `https://projects.ahmadjalil.com/bcdatamapper/data/` for PGMaps to load directly.
+- A push to `main` that changes a published source goes live in PGMaps without a PGMaps deploy. Keep published snapshots backward compatible with the PGMaps on `main`, or land the PGMaps change first.
+- Add a mapped source to the workflow's `paths` filter in the same commit; the site build fails otherwise. Never publish data with access conditions.
+- `pages/site.mjs` is imported by PGMaps. Keep it to Node built-ins and keep its exports (`readSite`, `siteFiles`, `folderFingerprints`) stable.
