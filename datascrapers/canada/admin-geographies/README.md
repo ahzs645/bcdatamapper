@@ -21,6 +21,13 @@ provincial overlay entry.
 
 ## Outputs
 
+`output/` is git-ignored and is not published anywhere. Nothing loads these
+files from a website: the app reads the PMTiles built from them, on R2. The
+snapshots were committed until 10 November 2026 (last in commit `9e14b54d`) and
+are now kept as an archive outside the repository. To work on them, either
+restore that archive into `output/` or rerun the sync, which downloads the same
+sources again.
+
 Full-detail, deterministic gzip snapshots:
 
 - `output/national/census-subdivisions-2025/provinces/*.geojson.gz`
@@ -64,9 +71,9 @@ npm run canada-admin:pmtiles
 ```
 
 The archives are generated under the ignored local directory
-`build/canada-admin-pmtiles`. The small catalog is scraper-owned output at
-`output/r2/pmtiles-catalog.json`, so PGMaps receives it through the normal
-`data:sync-from-bcdatamapper` assembly step.
+`build/canada-admin-pmtiles`. The build also writes the small catalog to
+`output/r2/pmtiles-catalog.json`; the published copy on R2 is the one the app
+reads.
 
 Publish to the repository's `maps` Cloudflare R2 bucket using the authenticated
 Wrangler v4 session:
