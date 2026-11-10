@@ -31,6 +31,11 @@ datascrapers/eccc/output/modelled-pm25-vector-tiles/
 # Generated BC DB boundary chunks are large and should be published to object storage.
 datascrapers/census/output/bc-db-chunks/
 
+# The Canada administrative geography snapshots (about 200 MB) are kept outside
+# the repository. Nothing loads them from a website: the app reads the PMTiles
+# built from them on R2. See datascrapers/canada/admin-geographies/README.md.
+datascrapers/canada/admin-geographies/output/
+
 # Generated TELUS network vector tiles are local scraper output.
 datascrapers/network/telus/output/tiles/
 
