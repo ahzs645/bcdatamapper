@@ -27,6 +27,26 @@ original continuous ramp, including alpha and clipping behaviour. Heat retains
 its original continuous 0–64 ramp. No display bins or generalized overviews are
 used. Source rasters are 249 × 97 with 12,779 valid cells apiece.
 
-Only the analytical climate surfaces are extracted. Existing PGMaps hospital,
-boundary, watershed and portal river context remains app-owned context. This
-does not duplicate every feature or print layout from the consultant archive.
+Only the analytical climate surfaces are extracted from the consultant archive.
+This does not duplicate every feature or print layout in it.
+
+## Project context layers
+
+`build-project-layers.mjs` writes the two vector layers the project shows beside
+the climate surfaces into `project-layers/`:
+
+- `echoscreen_fraser_nechako.geojson`: the Fraser and Nechako named watersheds,
+  picked by id from `datascrapers/bc/boundaries/output/BCFWA`. PGMaps publishes
+  it at `boundaries/BCFWA/`.
+- `echoscreen-northern-health-hospitals.geojson`: Northern Health's 18 hospitals
+  from the health place registry, one per point. PGMaps publishes it at `health/`.
+
+```sh
+npm run echoscreen:project-layers
+npm run test:echoscreen:project-layers
+```
+
+Both are committed. Rebuild them when the watershed shards or the registry
+change; the test fails when a committed file no longer matches its source.
+The hospitals need the nested `data-sources/healthdata` submodule, so pass
+`--watersheds-only` in a checkout without it.

@@ -43,6 +43,17 @@ shared polygon topology in metres with the pinned Mapshaper utility in
 CSD views both consume this one geometry file, so classification never changes
 the borders and neighbouring polygons cannot diverge during simplification.
 
+For maps that show only B.C.'s two-way split, the same build also writes
+`datascrapers/census/output/canada-csd/bc-north-south-dissolved.geojson`: B.C.'s
+subdivisions dissolved into one North and one South polygon, simplified for
+province zoom. `census:canada-csd` rebuilds it; to rebuild it alone:
+
+```bash
+npm run census:north-south-dissolved
+```
+
+It needs only Node and `npx`, and reads `provinces/59.geojson.gz`.
+
 ## BC DB to CHSA crosswalk
 
 Build the enriched DB crosswalk and CHSA summary from the Ministry workbook, BCCDC DBF attributes, and the BCMoH boundary index:

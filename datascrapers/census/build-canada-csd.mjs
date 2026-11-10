@@ -5,6 +5,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { gunzipSync, gzipSync } from 'node:zlib'
 import { fileURLToPath } from 'node:url'
+import { buildBcNorthSouthDissolved } from './build-bc-north-south-dissolved.mjs'
 import { classifyCsdNorthSouth, NORTH_SOUTH_CLASSIFICATION_URL } from './north-south-classification.mjs'
 
 const SERVICE_BASE = 'https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer'
@@ -280,6 +281,9 @@ async function main() {
     `Wrote ${allFeatures.length.toLocaleString()} CSDs (${northCount.toLocaleString()} North, ${southCount.toLocaleString()} South)`,
   )
   console.log(`Output: ${path.relative(process.cwd(), outputDir)}`)
+
+  // The rebuild above cleared the folder, so restore the file derived from B.C.'s chunk.
+  buildBcNorthSouthDissolved()
 }
 
 main().catch((error) => {
