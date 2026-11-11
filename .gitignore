@@ -68,9 +68,6 @@ datascrapers/bc/early-learning-boundaries/cache/
 # assessment/build artifacts. Keep the maintained inventory and converters only.
 datascrapers/climate/climatedata-ca/cache/
 
-# Full-resolution VLI download cache; reproducible compressed deployment is in output.
-datascrapers/bc/forest-map-sources/source/visual-inventory/
-
 # Province-wide ParcelMap BC File Geodatabases; retain manifests, not large archives.
 datascrapers/bc/parcelmap/source/
 

@@ -19,7 +19,6 @@ on:
       - 'datascrapers/bc/drought/output/**'
       - 'datascrapers/bc/forest-map-sources/output/bc_bigtree_registry.geojson'
       - 'datascrapers/bc/forest-map-sources/output/species-at-risk/**'
-      - 'datascrapers/bc/forest-map-sources/output/visual-inventory/**'
       - 'datascrapers/network-availability/output/**'
   # Pull requests build and size the site without publishing it.
   pull_request:
