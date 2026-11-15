@@ -2,7 +2,7 @@
 
 `build.py` extracts the four analytical rasters and embedded QGIS colour ramps
 from the verified Northern Health consultant GeoPackage (82,436,096 bytes).
-The original source is [on Drive](https://drive.google.com/file/d/1Qz7bXQbK6pjzBPF1D0uhlqQgf36LpS_l/view).
+The original source is held by the maintainer, outside this repository.
 Source SHA256 is pinned in the builder; keep the large archive outside Git.
 
 ```sh

@@ -39,7 +39,6 @@ def build(source, output):
     output.mkdir(parents=True, exist_ok=True)
     summary = {'format': 'echoscreen-climate-vectors-v1', 'source': {
         'name': source.name, 'sha256': digest, 'bytes': source.stat().st_size,
-        'url': 'https://drive.google.com/file/d/1Qz7bXQbK6pjzBPF1D0uhlqQgf36LpS_l/view',
         'projectSha256': hashlib.sha256(qgs).hexdigest(),
     }, 'layers': []}
     for layer_id, table, label, units in LAYERS:
