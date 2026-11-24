@@ -72,7 +72,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 | BC Assessment parcels | `bc-assessment:build`, `bc-assessment:refresh` | BC Assessment ArcGIS layer plus checked-in assessment source CSV | `datascrapers/bc/assessment/output/` |
 | Northern Health food inspection data | `food-health:refresh`, `food-health:geocode`, `food-health:bc-geocoder-check` | Northern Health / HealthSpace restaurant inspection pages and geocoding | `datascrapers/food-health/output/`, `datascrapers/food-health/cache/` |
 | BC MSP facility map | `health:msp-facilities` | BC MSP Blue Book SQLite data joined to public BC health-service provider layers and the BC Address Geocoder | `datascrapers/health/msp-facilities/output/` |
-| Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap` | CityPG layers, ICBC crashes, transit-owned stop snapshots, BC child care output, and supplemental walkability inputs | `public/data/walkability/` |
+| Walkability | `walkability:build`, `walkability:import-supplements`, `walkability:build-grid-heatmap`; the live heatmap's factor masks by `npm run walkability:build-factor-masks` from PGMaps | CityPG layers, ICBC crashes, transit-owned stop snapshots, BC child care output, and supplemental walkability inputs | `public/data/walkability/`, including `heatmap/factor_masks.json` (built with PGMaps' worker code; it records the SHA-256 of each source file it read, and PGMaps' tests fail when one changes) |
 
 Scraper-related documentation lives in `docs/`:
 
