@@ -36,6 +36,7 @@ commands. Scraper-owned outputs should live under `datascrapers/*/output`,
 
 | Area | Commands | Source | Main outputs |
 | --- | --- | --- | --- |
+| EcoLens climate stories | `ecolens:sync` | [BCCDC EcoLens public map](https://ecolens.ca/explore-map/) | `datascrapers/bc/ecolens/output/story-pins.geojson` |
 | City of Prince George base layers | `citypg:sync`, `citypg:business-licences:sync`, `citypg:heat-shade:sync` | City of Prince George ArcGIS services | `public/data/citypg/`, `datascrapers/citypg/source/business-licences/`, `datascrapers/citypg/source/heat-shade/` |
 | ICBC crashes | `icbc:sync` | ICBC Tableau crash workbook/data endpoints | `public/data/icbc/` |
 | Heat and shade | `heat-shade:sync` | CityPG heat/shade snapshots plus Landsat metadata | `public/data/heat-shade/` |
